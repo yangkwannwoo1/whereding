@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="boardMapper">
+	<resultMap type="Notice" id="noticeResult">
+		<result column="NOTICE_NO" property="noticeNo"/>
+		<result column="USER_ID" property="noticeWriter"/>
+		<result column="NOTICE_TITLE" property="noticeTitle"/>
+		<result column="NOTICE_CONTENT" property="noticeContent"/>
+		<result column="NOTICE_DATE" property="noticeDate"/>
+	</resultMap>
+
+
+	<select id="selectListCount" resultType="_int">
+		select 
+				count(*)
+	 	   from notice
+	 	  where status = 'Y'
+  	</select>
+  	<select id="selectList" resultMap="noticeResult">
+	  	select 
+	       NOTICE_NO
+	     , USER_ID
+	     , NOTICE_TITLE
+	     , NOTICE_CONTENT
+	     , NOTICE_DATE
+	  from notice n
+	  join member using(user_no)
+	 where n.STATUS = 'Y'
+	 order
+	    by NOTICE_NO desc
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+</mapper>

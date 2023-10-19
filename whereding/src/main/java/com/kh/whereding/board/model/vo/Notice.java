@@ -17,7 +17,8 @@ public class Notice {
 	private int userNo;
 	private String noticeTitle;
 	private String noticeContent;
-	private int count;
 	private String noticeDate;
 	private String status;
+	private String noticeWriter;
+
 }

@@ -10,7 +10,9 @@
 <body>
 	<form action="test.me" method="get">
 		
-		<a href="login.me" class="btn btn-primary">눌루</a>
+		<a href="login.me" class="btn btn-primary">로긴</a>
+		<a href="service.bo" class="btn btn-primary">고객센터</a>
+
 	</form>
 </body>
 </html>
