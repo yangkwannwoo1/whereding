@@ -1,4 +1,4 @@
-package com.kh.whereding.hall.model.vo;
+package com.kh.whereding.product.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
