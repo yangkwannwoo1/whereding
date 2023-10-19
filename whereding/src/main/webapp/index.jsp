@@ -7,15 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-잘뜨냐?
-	<form action="login.me">
-		<input type="text" name="userId">
-		<input type="text" name="userPwd">
-			
-	</form>
-	
-	
-	
-	
+되냐
 </body>
 </html>
