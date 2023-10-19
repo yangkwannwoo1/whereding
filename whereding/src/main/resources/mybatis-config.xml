@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "mybatis-3-config.dtd" >
+<configuration>
+	
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- 10/19 재성 추가 -->
+	
+	<!-- <typeAliases>
+		<typeAlias type="com.kh.spring.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.spring.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.spring.board.model.vo.Reply" alias="Reply"/>
+	</typeAliases> -->
+	<!-- 유의사항 : 미리등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야됨 -->
+	
+	<!-- <mappers>
+		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
+	</mappers> -->
+	<!-- 유의사항 : 미리 등록해두려면 해당 mapper 파일이 진짜 존재하고 있는 상태여야됨(뿐만 아니라 naemspace 까지도 지정 되어 있어야 한다.) -->
+	
+	<!-- 10/19 재성 추가 끝 -->
+	
+	
+</configuration>
