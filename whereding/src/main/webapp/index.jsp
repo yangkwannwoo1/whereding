@@ -5,8 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-되냐
+	<form action="test.me" method="get">
+		
+		<a href="login.me" class="btn btn-primary">눌루</a>
+	</form>
 </body>
 </html>
