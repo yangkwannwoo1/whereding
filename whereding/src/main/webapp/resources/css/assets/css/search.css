@@ -45,6 +45,9 @@
   }
   
   #search_table{
+    width: 1100px;
+    z-index: 99999 !important;
+    margin: 5% auto;
   }
 
   #search_title{

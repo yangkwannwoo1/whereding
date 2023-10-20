@@ -33,4 +33,9 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	@RequestMapping("memberEnrollForm.me")
+	public String memberEnrollForm() {
+		return "member/memberEnrollForm";
+	}
 }

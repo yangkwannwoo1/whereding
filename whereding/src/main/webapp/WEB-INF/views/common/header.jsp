@@ -152,7 +152,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 				<!-- 로그인 버튼 및 세션확인 -->
 				<c:choose>
 					<c:when test="${empty loginMember}">
-						<a class="login">로그인</a> / <a>회원가입</a>
+						<a class="login">로그인</a> / <a id="enroll_btn">회원가입</a>
 					</c:when>
 					<c:otherwise>
 						<script>
@@ -168,6 +168,12 @@ font-family: 'Open Sans Condensed', sans-serif;
 						alert("로그아웃 한다잉");
 					})
 				</script>	
+				
+				<script>
+					$("#enroll_btn").click(function(){
+						location.href="memberEnrollForm.me";
+					})
+				</script>
 					
 				<!-- 로그인모달~!@#!@#!@#!@# -->
 				<div id="login_container">
