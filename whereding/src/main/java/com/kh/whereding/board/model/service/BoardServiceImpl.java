@@ -92,6 +92,24 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	/**
+	 * 공지사항 새로운 내용으로 업데이트
+	 */
+	@Override
+	public int updateNoticeBoard(Notice n) {
+		int result = bDao.updateNoticeBoard(sqlSession, n);
+		return result;
+	}
+
+	/**
+	 * qna 업데이트
+	 */
+	@Override
+	public int updateQnaBoard(Qna q) {
+		int result = bDao.updateQnaBoard(sqlSession, q);
+		return result;
+	}
+
 	
 
 

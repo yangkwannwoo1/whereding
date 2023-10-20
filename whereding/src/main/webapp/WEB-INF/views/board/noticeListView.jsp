@@ -110,6 +110,7 @@
             border-color: inherit;
         }
         .notice>table>thead>tr>th{
+            text-align: center;
             background: #fff;
             border: none;
             font-size: 18px;
@@ -185,9 +186,9 @@
         </div>
         <table>
             <colgroup>
-                <col style="width:100px">
-                <col style="width:auto">
                 <col style="width:150px">
+                <col style="width:auto">
+                <col style="width:200px">
             </colgroup>
             <thead>
                 <tr>
@@ -208,7 +209,7 @@
 	
 	                        <i class="ico_camera"></i>
 	                    </td>
-	                    <td>2023.09.06</td>
+	                    <td>${n.noticeDate}</td>
 	                </tr>
                </c:forEach>
                

@@ -283,19 +283,20 @@
     </div>
 </div>
 <script>
-
     $("#list").click(()=>{
-        if(${board eq '공지사항'}){
+        if(${board eq "공지사항"}){
             location.href="notice.bo";
         }else{
             location.href="qna.bo";
         }
     })
-    $("#edit").click(()=>{
-        if(${board eq '공지사항'}){
-            location.href="noticeEdit.bo";
+</script>
+<script>
+     $("#edit").click(()=>{
+        if(${board == "공지사항"}){
+            location.href = "noticeEdit.bo?bno=${n.noticeNo}";
         }else{
-            // location.href="";
+            location.href = "qnaEdit.bo?bno=${q.qnaNo}";
         }
     })
 </script>

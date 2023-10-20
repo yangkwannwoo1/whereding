@@ -1,5 +1,8 @@
 package com.kh.whereding.board.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +19,8 @@ import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.common.template.Pagenation;
+
+import oracle.net.aso.b;
 
 @Controller
 public class BoardController {
@@ -152,5 +157,61 @@ public class BoardController {
 			session.setAttribute("alertMsg", "Q&A게시판 등록에 실패하였습니다.");
 			return "redirect:qna.bo";
 		}
+	}
+	
+	/** 공지사항 수정 폼 접근
+	 * @return
+	 */
+	@RequestMapping(value = "noticeEdit.bo")
+	public String noticeEditForm(int bno, Model model) {
+		Notice n = bService.selectNotice(bno);
+		model.addAttribute("n", n);
+		System.out.println(n);
+		model.addAttribute("board", "공지사항_수정");
+		return"board/boardEnrollForm";
+	}
+	
+	/** qna 수정 폼 접근
+	 * @return
+	 */
+	@RequestMapping(value = "qnaEdit.bo")
+	public String qnaEditForm(int bno, Model model) {
+		Qna q = bService.selectQna(bno);
+		model.addAttribute("q", q);
+		System.out.println(q);
+		model.addAttribute("board", "QnA_수정");
+		return"board/boardEnrollForm";
+	}
+	
+	/** 공지사항 수정 후
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping( value = "noticeUpdate.bo", produces = "text/html; charset=utf-8")
+	public String noticeUpadet(Notice n, HttpSession session) throws IOException {
+		System.out.println(n);
+		
+		int result = bService.updateNoticeBoard(n);
+		
+		 if(result > 0) { //수정성공 => 상세페이지 detail.bo?bno=해당게시글번호
+	         session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
+	      }else {
+	    	  session.setAttribute("alertMsg", "게시글 수정 실패하였습니다.");
+	      }
+//		 return "redirect:detail.bo?bno=" 
+		 return "redirect:noticeDetail.bo?board=" + URLEncoder.encode("공지사항", "UTF-8") + "&bno="+ n.getNoticeNo();
+
+	}
+	
+	/** qna 수정 후
+	 * @return
+	 */
+	@RequestMapping( value = "qnaUpdate.bo")
+	public String qnaUpadet(Qna q) {
+		System.out.println(q);
+		
+		int result = bService.updateQnaBoard(q);
+		
+		return "";
 	}
 }

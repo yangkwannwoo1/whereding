@@ -21,4 +21,11 @@ public interface BoardService {
 	// 3. 게시글 상세조회용 서비스
 	Notice selectNotice(int boardNo);
 	Qna selectQna(int boardNo);
+	
+	
+	// 5. 게시글 수정용 서비스
+	int updateNoticeBoard(Notice n);
+	int updateQnaBoard(Qna q);
 }
+
+

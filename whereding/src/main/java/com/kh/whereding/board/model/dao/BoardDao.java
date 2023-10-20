@@ -88,6 +88,16 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertQna", q);
 	}
 
+	public int updateNoticeBoard(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.update("boardMapper.updateNoticeBoard", n);
+	}
+
+	public int updateQnaBoard(SqlSessionTemplate sqlSession, Qna q) {
+		return sqlSession.update("boardMapper.updateQnaBoard", q);
+	}
+
+	
+
 	
 
 	
