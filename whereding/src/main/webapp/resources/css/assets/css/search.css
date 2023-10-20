@@ -1,0 +1,359 @@
+  #search_table{
+    height: 200px;
+    margin: 0;
+    width: 900px;
+    border: 1px solid black;
+    border-radius: 18px;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px #000;;
+  }
+  
+  .tabcontent thead h3{
+    padding-top: 10px;
+  }
+
+  .tabcontent thead{
+    border-bottom: 2px solid black;
+  }
+
+  .tab .btn{
+    font-weight: 700;
+  }
+
+  td:has(#availableSeat){
+    width: 220px;
+  }
+  
+  .input_area span input{
+    border: none;  
+    width: 84%;
+    height: 20px;
+    text-align: right;
+  }  
+  .input_area input[type="number"]::-webkit-outer-spin-button,
+  .input_area input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+  #search_table span{
+    display: inline-block;
+    border: 1.714px solid rgb(133, 133, 133);
+    border-radius: 2px;
+    padding: 0px 5px;
+    height: 30px;
+  }
+  
+  #search_table{
+  }
+
+  #search_title{
+    background-color: #F28123;
+    text-align: right;
+    width: 80%;
+  }
+
+  #search_title * {
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    color: white;
+    padding: 2px 1%;
+  }
+
+  .tabcontent table{
+    width: 100%;
+  }
+  
+  .mSearch td{
+    padding-top: 10px;
+  }
+
+  .mSearch td span{
+    width: 200px;
+    margin-right: 10px;  
+  }
+
+  .mSearch td span input{
+    height: 20px;
+    border: none;
+    text-align: right;
+  }
+  
+  .search *{
+    text-align: right;
+  }
+  
+  .input_area .address{
+    width: 240px;
+  }
+
+  .input_area{
+    height: 50px;
+  }
+
+  .input_area td{
+    text-align: center;
+  }
+
+  .input_area .select_area{
+    text-align: center;
+  }
+
+  #seat_avail{
+    width: 200px;
+    height: 30px;
+    margin-right: 85px;
+  }
+  
+/* 모달영역 */
+.md1 {
+  display: none;
+  position: absolute;
+  width: 770px;
+  height: 430px;
+  left: 30px;
+  top: 160px;
+  background: lightgray;
+  color: white;
+  border-radius: 5px;
+  padding: 12px 12.8px;
+  box-shadow: rgb(255, 255, 255) 1px 1px 15px;
+  z-index: 100;
+
+  background-color: #eef3fd;
+  border: black solid 1px;
+}
+
+.md1:after {
+  border-color: #eef3fd transparent;
+  border-style: solid;
+  border-width: 0 6px 8px 6.5px;
+  content: '';
+  display: block;
+  left: 75px;
+  position: absolute;
+  top: -7px;
+  width: 0;
+  z-index: 1;
+}
+.md1::before {
+  border-color: #ccc transparent;
+  border-style: solid;
+  border-width: 0 6px 8px 6.5px;
+  content: '';
+  display: block;
+  left: 75px;
+  position: absolute;
+  top: -8px;
+  width: 0;
+  z-index: 0;
+}
+
+.md2 {
+  display: none;
+  position: absolute;
+  width: 770px;
+  height: 430px;
+  left: 30px;
+  top: 160px;
+  background: lightgray;
+  color: white;
+  border-radius: 5px;
+  padding: 12px 12.8px;
+  box-shadow: rgb(255, 255, 255) 1px 1px 15px;
+
+  background-color: #eef3fd;
+  border: black solid 1px;
+
+}
+
+.md2:after {
+  /* z-index: 999; */
+  top: 65px;
+  left: 770px;
+
+  border-color: #eef3fd transparent;
+  border-style: solid;
+  border-width: 0 6px 8px 6.5px;
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  z-index: 1;
+}
+.md1::before {
+  border: 1px solid black;
+  border-color: #ccc transparent;
+  border-style: solid;
+  border-width: 0 6px 8px 6.5px;
+  content: '';
+  display: block;
+  left: 75px;
+  position: absolute;
+  top: -8px;
+  width: 0;
+  z-index: 0;
+}
+
+.allTag_area{
+  overflow-y: auto;
+  color: black;
+  background-color: #eef3fd;
+  height: 310px;
+  width: 744px;
+  padding: 10px;
+}
+.allTag_area button{
+  margin: 0px 10px 10px 0px;
+}
+
+/* 탭 스타일링 */
+* {box-sizing: border-box}
+
+/* Style the tab */
+.ltab {
+  overflow-y: scroll;
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 140px;
+  height: 300px;
+}
+
+/* Style the buttons inside the tab */
+.ltab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 10px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.ltab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.ltab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.ltabcontent {
+  background-color: white;
+  display: block;
+  transition: 0.3s;
+  font-size: 17px;
+  color: black;
+  background-color: inherit;
+  overflow-x: hidden;
+  overflow-y: auto;
+  float: left;
+  padding: 22px 16px;
+  border: 1px solid #ccc;
+  width: 81%;
+  border-left: none;
+  height: 300px;
+}
+
+/* Change background color of buttons on hover */
+.ltabcontent button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.ltabcontent button.active {
+  background-color: #ccc;
+}
+
+.ltabcontent button {
+  border-radius: 5px;
+  width: 87px;
+  height: 45px;
+  margin: 5px 10px;
+  background-color: #f1f1f1;
+}
+
+.mSearch .taglist{
+  width: auto;
+  border: none;
+}
+
+.mSearch .hover{
+  cursor: pointer;
+}
+/* .tab-content table{
+  width: 100%;
+} */
+
+.next_prev_area a{
+  margin: 0px 10px 10px 10px;
+}
+
+.find_tag button{
+  margin: 0px 10px 0px 10px !important;
+  width: 80px;
+}
+
+.close_tab {
+  position: absolute;
+  left: 720px;
+  background-color: #eef3fd;
+  border: none;
+  border-radius: 10px;
+  display:inline-block;
+  height: 28px;
+  line-height: 10px;
+} 
+.close_tab:after {
+  display: inline-block;
+  content: "\00d7";
+  font-size:20px;
+}
+
+.close_tab:hover{
+  color: red;
+}
+
+.close_tab:focus {
+  border: none;
+  outline: none;
+}
+
+.confirm_city{
+  text-align: right;
+  padding-top: 320px;
+  padding-right: 10px;
+}
+
+.confirm_tag{
+  text-align: right;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+/* 드레스 */
+.weekendYN{
+  zoom: 2.5;
+}
+
+.weekendYNArea{
+  text-align: left !important;
+  padding-left: 100px;
+}
+
+/* 태그에 호버시 이벤트 */
+.tagHover-text {
+  padding: 15px 20px;
+  background-color: #444444;
+  border-radius: 5px;
+  color: #ffffff;
+  display: none;
+}

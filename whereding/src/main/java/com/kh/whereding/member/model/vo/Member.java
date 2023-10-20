@@ -21,7 +21,8 @@ public class Member {
 	private String gender;		// 성별
 	private String phone;		// 전화번호
 	private String email;		// 이메일
-	private String gradeNo;		// 회원등급
+	private String status;		//상태
+	private int gradeNo;		// 회원등급
 	
 	
 }

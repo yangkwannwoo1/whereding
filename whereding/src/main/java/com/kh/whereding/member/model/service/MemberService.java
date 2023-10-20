@@ -4,6 +4,6 @@ import com.kh.whereding.member.model.vo.Member;
 
 public interface MemberService {
 	
-	abstract Member loginMember();
+	Member loginMember(Member m);
 	
 }

@@ -1,0 +1,161 @@
+.quick {
+    background-color: #DFCDBF;
+    text-align: center;
+    width: 86px;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: fixed;
+    font-size: 13px;
+    top: 150px;
+    right: 15px;
+}
+
+.quick * {
+    text-decoration: none;
+}
+
+.quick h4 {
+    margin: 0;
+    font-size: 12px;
+}
+
+.quick .quick_header {
+    padding: 5px;
+}
+
+.quick hr{
+    width: 70px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.quick img{
+    width: 26px;
+}
+
+.quick *{
+    color: black;
+}
+
+.quick i{
+    font-size: 20px;
+}
+
+.quick ul {
+    background-color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 0px;
+    padding: 0px; 
+    list-style-type: none;
+}
+
+.quick li{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.quick .li_top{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.quick .li_bottom{
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.quick li:hover{
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.up_arrow{
+    position: fixed;
+    top: 650px;
+    right: 60px;
+}
+
+.up_arrow :hover{
+    cursor: pointer;
+}
+
+.up_arrow img{
+    width: 40px;
+}
+
+/* 사이드바 */
+.sidebar_menu {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.sidebar_menu .close_btn img{
+    height: 25px;
+}
+
+.sidebar_menu h4{
+    margin: 5% 5%;
+}
+
+.sidebar_menu hr{
+    border: 1px solid gray;
+    width: 90%;
+}
+
+.sidebar_menu input{
+    background-color: whitesmoke;
+    border: none;
+}
+
+.sidebar_menu table{
+    width: 90%;
+    margin: 5% 5%;
+}
+
+.sidebar_menu img{
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.sidebar_menu .pCount input{
+    text-align: right;
+    width: 30px;
+}
+
+.sidebar_menu i{
+    cursor: pointer;
+}
+
+.sidebar_menu .pImg_area{
+    width: 100px;
+}
+
+/* .sidebar_menu .perPrice_area *{
+    text-align: right;
+} */
+
+.sidebar_menu .per_price{
+    background-color: whitesmoke;
+    border: none;
+    padding: 0;
+}
+
+.total_area{
+    text-align: right;
+}
+
+.basket_item{
+    zoom: 1.5;
+}
+
+.sidebar_menu .btn{
+    float: right;
+    margin: 0% 5%;
+}
+
+.sidebar_menu .finalTotal{
+    text-align: right;
+    margin: 0% 5%;
+}

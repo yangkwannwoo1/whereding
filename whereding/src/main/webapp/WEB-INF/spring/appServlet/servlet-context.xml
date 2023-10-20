@@ -22,13 +22,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.kh.whereding" />
-	
-	<!-- 10/19 재성 추가 -->
-	<interceptors>
-	 	<interceptor>
-	 		<mapping path="/mypage.me"/>
-	 		<beans:bean class="com.kh.whereding.common.interceptor.LoginInterceptor" id="loginInterceptor"/>
-	 	</interceptor>
-	 </interceptors>
-	
+
 </beans:beans>

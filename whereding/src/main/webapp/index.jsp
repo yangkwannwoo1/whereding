@@ -8,11 +8,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<form action="test.me" method="get">
-		
-		<a href="login.me" class="btn btn-primary">로긴</a>
-		<a href="service.bo" class="btn btn-primary">고객센터</a>
+	<jsp:forward page="WEB-INF/views/main.jsp"/>
 
-	</form>
+	
 </body>
 </html>

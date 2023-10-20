@@ -22,6 +22,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "service.bo")
 	public String intoService() {
+		System.out.println("되냐");
 		return "board/serviceCenter";
 	}
 	
