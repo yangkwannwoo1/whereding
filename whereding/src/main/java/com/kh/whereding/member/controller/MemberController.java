@@ -36,6 +36,7 @@ public class MemberController {
 	
 	@RequestMapping("memberEnrollForm.me")
 	public String memberEnrollForm() {
+		//2023 10 20 18:50 이후에 저장한거임!@#!@#!@#!@!#!@#!@#
 		return "member/memberEnrollForm";
 	}
 }
