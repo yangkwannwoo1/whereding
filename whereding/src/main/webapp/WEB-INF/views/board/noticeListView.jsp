@@ -219,7 +219,7 @@
         <script>
             $(function(){
                 $(".notice>table>tbody>tr").click(function(){
-                    location.href = 'noticeDetail.bo?bno=' + $(this).children(".nNo").text() +'&board=공지사항';
+                    location.href = 'noticeDetail.bo?board=공지사항&bno=' + $(this).children(".nNo").text();
                 })
             })
         </script>
@@ -258,7 +258,7 @@
 
 <script>
     $("#add").click(()=>{
-        location.href="noticeEnroll.bo";
+        location.href="noticeEnroll.bo?board=공지사항";
     })
 </script>
 </body>

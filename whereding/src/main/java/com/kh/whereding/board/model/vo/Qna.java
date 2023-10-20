@@ -19,4 +19,5 @@ public class Qna {
 	private String qnaContent;
 	private String qnaAnswer;
 	private String qnaDate;
+	private String userId;
 }

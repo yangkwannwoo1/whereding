@@ -4,6 +4,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <!-- jQuery 라이브러리 -->
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- 부트스트랩에서 제공하고 있는 스타일 -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고객센터</title>
@@ -125,6 +135,7 @@
         .btn{
             margin-top: 30px;
             margin-right: 20px;
+            float: right;
         }
         #user{
             margin-right: 20px;
@@ -158,7 +169,7 @@
             font-size: 14px;
             
         }
-        #add{
+        #list{
             width: 80px;
             height: 30px;
             color: white;
@@ -179,15 +190,10 @@
         }
         .form-control{
             border: 1px solid #a1a1a1;
+            margin:  auto;
         }
-        #QNA_TITLE{
-            width: 100%;
-            height: 30px;
+        #replyArea th{
             border: 0;
-        }
-        #QNA_CONTENT{
-            border: 0;
-            resize: none;
         }
        
     </style>
@@ -209,32 +215,89 @@
     </div>
     <div class="notice">
         <div class="title-wrap title-3 customer-center title-notice">
-            <div class="title">Q&A</div>
+            <div class="title">${board}</div>
             <div class="body">
 
-                <form action="#">
-                    <div class="body_title">
-                        <div class="real_title">
-                            <input type="text" name="QNA_TITLE" id="QNA_TITLE" placeholder="제목을 입력해 주세요.">
-                        </div>
-                        
+
+                <div class="body_title">
+                    <div class="real_title">
+                        <span>${n.noticeTitle}${q.qnaTitle}</span>
                     </div>
-                    <div class="userinfo">
-                        
+                    <div class="count">
+                        <span id="user">${n.noticeWriter}${q.userId}</span>
+                        <span id="date">${n.noticeDate}${q.qnaDate}</span>
                     </div>
-                    <div class="content">
-                        <textarea name="QNA_CONTENT" id="QNA_CONTENT" cols="111" rows="23" placeholder="Q&A 내용을 입력해주세요."></textarea>
-                    </div>
-                <div class="btn" align="right">
-                        <button type="reset" id="edit">초기화</button>
-                        <button id="add">등록</button>
                 </div>
-                </form>
+                <div class="userinfo">
+                    
+                </div>
+                <div class="content">
+                    <p>${n.noticeContent}${q.qnaContent}</p>
+                </div>
+               <div class="btn" align="right">
+                    <button id="edit">수정하기</button>
+                    <button id="delete">삭제하기</button>
+                    <button id="list">목록으로</button>
+                    <c:if test="${loginMember.userId eq 'admin'}">
+                        <button id="answer">답변하기</button>
+                    </c:if>
+               </div>
             </div>
-           
+            <c:if test="${board eq 'QnA'}">
+	            <div class="answer">
+	                <table id="replyArea" class="table" align="center">
+                        <!-- 답변이 있을 때 -->
+                        <c:if test="${not empty q.qnaAnswer}">
+                            <tr>
+                                <th >
+                                    <textarea class="form-control" cols="110" rows="10" style="resize:none; width:100%; background-color: white;" readonly>${q.qnaAnswer}</textarea>
+                                </th>
+                            </tr>
+                            <!-- <c:if test="${loginMember.userId eq 'admin'}">
+                                <tr>
+                                    <th><button>수정하기</button></th>
+                                </tr>
+                            </c:if> -->
+                        </c:if>
+                        <!-- 답변이 없는데 관리자가 로그인멤버일 때 -->
+                        <c:if test="${loginMember.userId eq 'admin'}">
+                            <form action="#">
+                                <tr>
+                                    <th colspan="2">
+                                        <textarea class="form-control" cols="110" rows="10" style="resize:none; width:100%" >답변내용 입력하시오</textarea>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addReply();">등록</button></th>
+                                </tr>
+                            </form>
+                        </c:if>
+	                       
+	                    
+	                </table>
+	            </div>
+            </c:if>
+        </div>
             
 
     </div>
 </div>
+<script>
+
+    $("#list").click(()=>{
+        if(${board eq '공지사항'}){
+            location.href="notice.bo";
+        }else{
+            location.href="qna.bo";
+        }
+    })
+    $("#edit").click(()=>{
+        if(${board eq '공지사항'}){
+            location.href="noticeEdit.bo";
+        }else{
+            // location.href="";
+        }
+    })
+</script>
 </body>
 </html>

@@ -10,6 +10,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.kh.whereding.board.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.whereding.board.model.vo.Qna" alias="Qna"/>
 	</typeAliases>
 	<!-- 유의사항 : 미리등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야됨 -->
 	
