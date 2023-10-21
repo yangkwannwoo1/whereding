@@ -53,10 +53,21 @@
 		select 
 			   *
 		  from hall
-		 where h_seat > #{wSeat}
-		   and h_rental between #{wMinPrice} and #{wMaxPrice}
-		   and h_meal between #{eatMinPrice} and #{eatMaxPrice}
+		 where h_rental between #{wMinPrice}*10000 and #{wMaxPrice}*10000
+		   and h_meal between #{eatMinPrice}*10000 and #{eatMaxPrice}*10000
 		   and h_address like #{wAddress} || '%'
+		   <if test="wSeat == 1">
+		   	and h_seat between 1 and 100
+		   </if>
+   		   <if test="wSeat == 2">
+		   	and h_seat between 101 and 300
+		   </if>
+   		   <if test="wSeat == 3">
+		   	and h_seat between 301 and 500
+		   </if>
+   		   <if test="wSeat == 4">
+		   	and h_seat > 500
+		   </if>
 	</select>
 	
 

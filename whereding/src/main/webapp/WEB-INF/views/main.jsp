@@ -188,10 +188,10 @@
                                             좌석
                                             <!-- <span id="seat_avail" style="margin-right: 80px;"><input type="number">석</span> -->
                                             <select id="seat_avail" name="wSeat">
-                                                <option value="1">100명 이하</option>
+                                                <option value="1">0명   ~ 100명</option>
                                                 <option value="2">101명 ~ 300명</option>
                                                 <option value="3">301명 ~ 500명</option>
-                                                <option value="4">500명 이상</option>
+                                                <option value="4">501명 ~ </option>
                                             </select>
                                             식대
                                             <!-- 식대 -->
