@@ -11,12 +11,17 @@
 	<typeAliases>
 		<typeAlias type="com.kh.whereding.board.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.whereding.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.whereding.product.model.vo.Dress" alias="Dress"/>
+		<typeAlias type="com.kh.whereding.product.model.vo.Hall" alias="Hall"/>
+		<typeAlias type="com.kh.whereding.product.model.vo.Makeup" alias="Makeup"/>
+		<typeAlias type="com.kh.whereding.product.model.vo.Studio" alias="Studio"/>		
 	</typeAliases>
 	<!-- 유의사항 : 미리등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야됨 -->
 	
 	<mappers>
 		<mapper resource="/mappers/board-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/main-mapper.xml"/>	
 	</mappers>
 	<!-- 유의사항 : 미리 등록해두려면 해당 mapper 파일이 진짜 존재하고 있는 상태여야됨(뿐만 아니라 naemspace 까지도 지정 되어 있어야 한다.) -->
 	
