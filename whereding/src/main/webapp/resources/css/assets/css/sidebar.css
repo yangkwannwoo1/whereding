@@ -3,18 +3,22 @@
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.7);
+    /* position: sticky; */
     position: absolute;
     left: 0;
     right: 0;
     top:0;
     display: none;
+    z-index: 1000;
 }
 .sidebar_menu{
+    z-index: 1001;
     display: none;
     width: 20%;
     height: 100%;
     background: whitesmoke;
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     top:0;
     right: -20%;
     

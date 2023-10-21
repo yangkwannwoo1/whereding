@@ -33,6 +33,11 @@
 <!-- TweenMax CDN을 통해 로드 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+<!-- quick css -->
+<link rel="stylesheet" href="resources/css/assets/css/quick.css">
+<!-- sidebar css-->
+<link rel="stylesheet" href="resources/css/assets/css/sidebar.css">
+
 <style>
 #login_container {
     position: fixed;
@@ -144,6 +149,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 </style>
 </head>
 <body>
+	<jsp:include page="quick.jsp"/>
 	<!-- header -->
 	<div class="top-header-area" id="sticker">
 		<div class="container">

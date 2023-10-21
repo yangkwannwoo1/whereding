@@ -8,6 +8,8 @@
     font-size: 13px;
     top: 150px;
     right: 15px;
+    z-index:999;
+    
 }
 
 .quick * {
@@ -86,6 +88,8 @@
 
 /* 사이드바 */
 .sidebar_menu {
+    position: fixed;
+    width: 25% !important;
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -159,3 +163,29 @@
     text-align: right;
     margin: 0% 5%;
 }
+
+/* 예약 사이드바 */
+.sidebar_menu .reservation_Total{
+    text-align: right;
+    margin: 0% 5%;
+}
+.reservation_phone{
+    margin-top: 100px;
+    text-align: left;
+}
+
+.reservation_phone h5{
+    padding-top: 10px;
+    padding-left: 5%;
+}
+
+.allCheck{
+    margin-left: 5%;
+}
+
+.side_schedule table span{
+    font-size: small;
+}
+/* tbody td{
+    padding-left: 20px;
+} */
