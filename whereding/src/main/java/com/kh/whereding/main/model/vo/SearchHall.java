@@ -20,5 +20,4 @@ public class SearchHall {
 	private int eatMinPrice;
 	private int eatMaxPrice;
 	private String wTag;
-	
 }

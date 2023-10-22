@@ -1,6 +1,13 @@
 package com.kh.whereding.main.controller;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +21,9 @@ import com.kh.whereding.main.model.vo.SearchDress;
 import com.kh.whereding.main.model.vo.SearchHall;
 import com.kh.whereding.main.model.vo.SearchMakeup;
 import com.kh.whereding.main.model.vo.SearchStudio;
-import com.kh.whereding.product.model.vo.Hall;
+import com.kh.whereding.product.model.vo.Dress;
+import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.Studio;
 
 @Controller
 public class MainController {
@@ -32,27 +41,135 @@ public class MainController {
 	};
 	
 	
-	@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
-	public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
-		System.out.println(sh);
-		//(wAddress=서울특별시 종로구,서울특별시 중구, wMinPrice=0, wMaxPrice=100, wSeat=1, eatMinPrice=0, eatMaxPrice=10, wTag=스몰웨딩,일반웨딩,하우스웨딩)
-		// 좌석수 
-		// 1 : 0   ~ 100 
-		// 2 : 101 ~ 300
-		// 3 : 100 ~ 500
-		// 4 : 500 ~ 
-		System.out.println(ss);
+//	@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
+//	public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
+//		System.out.println(sh);
+//		//(wAddress=서울특별시 종로구,서울특별시 중구, wMinPrice=0, wMaxPrice=100, wSeat=1, eatMinPrice=0, eatMaxPrice=10, wTag=스몰웨딩,일반웨딩,하우스웨딩)
+//		// 좌석수 
+//		// 1 : 0   ~ 100 
+//		// 2 : 101 ~ 300
+//		// 3 : 100 ~ 500
+//		// 4 : 500 ~ 
+//		System.out.println(ss);
+//		//(sAddress=서울특별시 동대문,서울특별시 중랑구, sMinPrice=0, sMaxPrice=100, sWeek=on, sTag=호텔웨딩,스몰웨딩)
+//		System.out.println(sd);
+//		System.out.println(sm);
+////		HashMap<String, String[]> map = new HashMap();
+////		String[] str;
+////		str = sh.getWTag().split(",");
+////		map.put("wTag",str);
+//		ArrayList<Hall> hlist = mnService.selectHallList(sh);
+////		ArrayList allList = new ArrayList();
+////		allList.add(ss);
+////		allList.add(sd);
+////		allList.add(sm);
+//		
+////			System.out.println(a);
+//		
+//		ArrayList<Studio> slist = mnService.selectStudioList(ss);
+//		ArrayList<Dress> dlist = mnService.selectDressList(sd);
+//		ArrayList<Makeup> mlist = mnService.selectMakeupList(sm);
+//		
+//		
+//		System.out.println("---------------------");
+//		for(Hall h : hlist) {
+//			System.out.println(h);			
+//		}
+//		System.out.println("---------------------");
+//		for(Studio s : slist) {
+//			System.out.println(s);			
+//		}
+//		System.out.println("---------------------");
+//		for(Dress d : dlist) {
+//			System.out.println(d);			
+//		}
+//		System.out.println("---------------------");
+//		for(Makeup m : mlist) {
+//			System.out.println(m);			
+//		}
+//		System.out.println("---------------------");
+//	}
+		@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
+		public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
+			
+			
+//			 studio 
+			HashMap<String, Object> map = new HashMap<String, Object>();
 		//(sAddress=서울특별시 동대문,서울특별시 중랑구, sMinPrice=0, sMaxPrice=100, sWeek=on, sTag=호텔웨딩,스몰웨딩)
-		System.out.println(sd);
-		System.out.println(sm);
+			ArrayList<String> salist = new ArrayList<String>();
+			ArrayList<String> stlist = new ArrayList<String>();
+			
+			salist.addAll(Arrays.asList(ss.getSAddress().split(",")));
+			stlist.addAll(Arrays.asList(ss.getSTag().split(",")));
+			
+			map.put("sAddress", salist);
+			if(ss.getSTag().equals("")) {
+				map.put("sTag", "");
+			}else {
+				map.put("sTag", stlist);
+			}
+			map.put("sMinPrice", ss.getSMinPrice());
+			map.put("sMaxPrice", ss.getSMaxPrice());
+			map.put("sWeek", ss.getSWeek());
 		
-		ArrayList<Hall> hlist = mnService.selectHallList(sh);
-		
-		
-		System.out.println(hlist);
-		System.out.println("---------------------");
-		for(Hall h : hlist) {
-			System.out.println(h);
-		}
+//		alist.clear();
+//		tlist.clear();
+//		
+		// dress
+			ArrayList<String> dalist = new ArrayList<String>();
+			ArrayList<String> dtlist = new ArrayList<String>();
+			
+			dalist.addAll(Arrays.asList(sd.getDAddress().split(",")));
+			dtlist.addAll(Arrays.asList(sd.getDTag().split(",")));
+			
+			map.put("dAddress", dalist);
+			if(sd.getDTag().equals("")) {
+				map.put("dTag", "");
+			}else {
+				map.put("dTag", dtlist);
+			}
+			map.put("dMinPrice", sd.getDMinPrice());
+			map.put("dMaxPrice", sd.getDMaxPrice());
+			map.put("dWeek", sd.getDWeek());
+			
+			
+		// makeup
+			ArrayList<String> malist = new ArrayList<String>();
+			ArrayList<String> mtlist = new ArrayList<String>();
+			
+			malist.addAll(Arrays.asList(sm.getMAddress().split(",")));
+			mtlist.addAll(Arrays.asList(sm.getMTag().split(",")));
+			System.out.println(sm);
+			map.put("mAddress", malist);
+			if(sm.getMTag().equals("")) {
+				map.put("mTag", "");
+			}else {
+				map.put("mTag", mtlist);				
+			}
+			map.put("mMinPrice", sm.getMMinPrice());
+			map.put("mMaxPrice", sm.getMMaxPrice());
+			map.put("mWeek", sm.getMWeek());
+			System.out.println(map);
+			ArrayList<Studio> slist = mnService.searchStudioList(map);
+			ArrayList<Dress> dlist = mnService.searchDressList(map);
+			ArrayList<Makeup> mlist = mnService.searchMakeupList(map);
+			
+			System.out.println("SDM");
+			System.out.println(slist);
+			System.out.println(dlist);
+			System.out.println(mlist);
+			System.out.println("---------------------------------");
+			for(Studio s : slist) {
+				System.out.println(s);
+			}
+			for(Dress d : dlist) {
+				System.out.println(d);
+			}
+			for(Makeup m : mlist) {
+				System.out.println(m);
+			}
 	}
+
+		
+
 }

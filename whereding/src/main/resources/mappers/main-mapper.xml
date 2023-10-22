@@ -23,6 +23,42 @@
 		<result column="h_unit_time" property="unitTime"></result>
 		<result column="h_week_open" property="weekOpen"></result>
 	</resultMap>
+	<resultMap type="Studio" id="studioResultSet">
+		<result column="s_code" property="stCode"></result>
+		<result column="s_enterprise" property="stEnterprise"></result>
+		<result column="s_detail" property="stDetail"></result>
+		<result column="s_price" property="stPrice"></result>
+		<result column="s_start_time" property="stStartTime"></result>
+		<result column="s_end_time" property="stEndTime"></result>
+		<result column="s_phone" property="phone"></result>
+		<result column="s_address" property="address"></result>
+		<result column="s_unit_time" property="unitTime"></result>
+		<result column="s_week_open" property="weekOpen"></result>
+	</resultMap>
+	<resultMap type="Dress" id="dressResultSet">
+		<result column="d_code" property="drCode"></result>
+		<result column="d_enterprise" property="drEnterprise"></result>
+		<result column="d_detail" property="drDetail"></result>
+		<result column="d_price" property="drPrice"></result>
+		<result column="d_start_time" property="drStartTime"></result>
+		<result column="d_end_time" property="drEndTime"></result>
+		<result column="d_phone" property="phone"></result>
+		<result column="d_address" property="address"></result>
+		<result column="d_unit_time" property="unitTime"></result>
+		<result column="d_week_open" property="weekOpen"></result>
+	</resultMap>
+	<resultMap type="Makeup" id="makeupResultSet">
+		<result column="m_code" property="maCode"></result>
+		<result column="m_enterprise" property="maEnterprise"></result>
+		<result column="m_detail" property="maDetail"></result>
+		<result column="m_price" property="maPrice"></result>
+		<result column="m_start_time" property="maStartTime"></result>
+		<result column="m_end_time" property="maEndTime"></result>
+		<result column="m_phone" property="phone"></result>
+		<result column="m_address" property="address"></result>
+		<result column="m_unit_time" property="unitTime"></result>
+		<result column="m_week_open" property="weekOpen"></result>
+	</resultMap>
 		<!-- 
 			private String wAddress;
 			private String wTag;
@@ -53,9 +89,11 @@
 		select 
 			   *
 		  from hall
+		  left join tag on(h_code = product_no)
 		 where h_rental between #{wMinPrice}*10000 and #{wMaxPrice}*10000
 		   and h_meal between #{eatMinPrice}*10000 and #{eatMaxPrice}*10000
-		   and h_address like #{wAddress} || '%'
+		   <!-- and h_address like #{wAddress} || '%'
+		   and tag_content like '%' || --> 
 		   <if test="wSeat == 1">
 		   	and h_seat between 1 and 100
 		   </if>
@@ -70,6 +108,122 @@
 		   </if>
 	</select>
 	
-
-
+	<select id="selectStudioList" resultMap="studioResultSet">
+		select 
+		       *    
+		  from studio
+		  left join tag on(s_code = product_no)
+		 where s_price between #{sMinPrice}*10000 and #{sMaxPrice}*10000
+ 		   <choose>
+ 		   	<when test="sWeek eq 'on'">
+			   and s_week_open = 'Y' 
+ 		   	</when>
+ 		   	<otherwise>
+ 		   		and s_week_open = 'N' 
+ 		   	</otherwise>
+ 		   </choose>
+	</select>
+	<select id="selectDressList" resultMap="dressResultSet">
+		select 
+		       *    
+		  from dress
+		  left join tag on(d_code = product_no)
+		 where d_price between #{dMinPrice}*10000 and #{dMaxPrice}*10000
+ 		   <choose>
+ 		   	<when test="dWeek eq 'on'">
+			   and d_week_open = 'Y' 
+ 		   	</when>
+ 		   	<otherwise>
+ 		   		and d_week_open = 'N' 
+ 		   	</otherwise>
+ 		   </choose>
+	
+	</select>
+	<select id="selectMakeupList" resultMap="makeupResultSet">
+		select 
+		       *    
+		  from makeup
+		  left join tag on(m_code = product_no)
+		 where m_price between #{mMinPrice}*10000 and #{mMaxPrice}*10000
+ 		   <choose>
+ 		   	<when test="mWeek eq 'on'">
+			   and m_week_open = 'Y' 
+ 		   	</when>
+ 		   	<otherwise>
+ 		   		and m_week_open = 'N' 
+ 		   	</otherwise>
+ 		   </choose>
+	</select>
+	
+	
+	<select id="searchStudioList" resultMap="studioResultSet">
+		select 
+		       *    
+		  from studio
+		  left join tag on(s_code = product_no)
+		 where s_price between #{sMinPrice}*10000 and #{sMaxPrice}*10000
+ 		   <choose>
+ 		   	<when test="sWeek eq 'on'">
+			   and s_week_open = 'Y' 
+ 		   	</when>
+ 		   	<otherwise>
+ 		   		and s_week_open = 'N' 
+ 		   	</otherwise>
+ 		   </choose>
+ 		   <if test="sTag!=null and sTag neq ''">
+	 		   <foreach item="arr" collection="sTag" open="and(" close=")" separator="or">
+	                  tag_content like '%'||#{arr}||'%'
+		      </foreach>
+ 		   </if>
+	      <foreach item= "arr" collection="sAddress" open="and(" close=")" separator="or">
+	      			s_address like #{arr} ||'%' 
+	      </foreach>
+	</select>
+	<select id="searchDressList" resultMap="dressResultSet">
+		select 
+		       *    
+		  from dress
+		  left join tag on(d_code = product_no)
+		 where d_price between #{dMinPrice}*10000 and #{dMaxPrice}*10000
+ 		   <choose>
+ 		   	<when test="dWeek eq 'on'">
+			   and d_week_open = 'Y' 
+ 		   	</when>
+ 		   	<otherwise>
+ 		   		and d_week_open = 'N' 
+ 		   	</otherwise>
+ 		   </choose>
+ 		   <if test="dTag!=null and dTag neq ''">
+	 		   <foreach item="arr" collection="dTag" open="and(" close=")" separator="or">
+	                  tag_content like '%'||#{arr}||'%'
+		      </foreach>
+ 		   </if>
+	      <foreach item= "arr" collection="dAddress" open="and(" close=")" separator="or">
+	      			d_address like #{arr} ||'%' 
+	      </foreach>
+	</select>
+	<select id="searchMakeupList" resultMap="makeupResultSet">
+		select 
+		       *    
+		  from makeup
+		  left join tag on(m_code = product_no)
+		 where m_price between #{mMinPrice}*10000 and #{mMaxPrice}*10000
+ 		   <choose>
+ 		   	<when test="mWeek eq 'on'">
+			   and m_week_open = 'Y' 
+ 		   	</when>
+ 		   	<otherwise>
+ 		   		and m_week_open = 'N' 
+ 		   	</otherwise>
+ 		   </choose>
+ 		   <if test="mTag!=null and !mTag.equals('')">
+	 		   <foreach item="arr" collection="mTag" open="and(" close=")" separator="or">
+	                  tag_content like '%'||#{arr}||'%'
+		      </foreach>
+ 		   </if>
+	      <foreach item= "arr" collection="mAddress" open="and(" close=")" separator="or">
+	      			m_address like #{arr} ||'%' 
+	      </foreach>
+	</select>
+	
 </mapper>

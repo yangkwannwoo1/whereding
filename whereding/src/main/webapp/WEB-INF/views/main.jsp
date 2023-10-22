@@ -202,8 +202,6 @@
                                     <tr>
                                         <input class="hidden_tag w" type="hidden" name="wTag">
                                         <td colspan="3" class="selectTagArea">
-                                            <span class="taglist"># 호텔웨딩</span>
-                                            
                                         </td>
                                         <td class="find_tag w">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
@@ -251,8 +249,6 @@
                                     <tr>
                                         <input class="hidden_tag s" type="hidden" name="sTag">
                                         <td colspan="3" class="selectTagArea">
-                                            <span class="taglist"># 호텔웨딩</span>
-                                            
                                         </td>
                                         <td class="find_tag">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
@@ -295,7 +291,7 @@
                                         <td class="weekendYNArea" colspan="4">
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" value="" name="dWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="dWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                 </label>
                                             </div>
                                         </td>
@@ -303,8 +299,6 @@
                                     <tr>
                                         <input class="hidden_tag d" type="hidden" name="dTag">
                                         <td colspan="3" class="selectTagArea">
-                                            <span class="taglist"># 호텔웨딩</span>
-                                            
                                         </td>
                                         <td class="find_tag">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
@@ -347,7 +341,7 @@
                                             <td class="weekendYNArea" colspan="4">
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" value="" nmae="mWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                        <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="mWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                     </label>
                                                 </div>
                                             </td>
@@ -355,7 +349,6 @@
                                         <tr>
                                             <input class="hidden_tag m" type="hidden" name="mTag">
                                             <td colspan="3" class="selectTagArea">
-                                                <span class="taglist"># 호텔웨딩</span>
                                             </td>
                                             <td class="find_tag">
                                                 <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
