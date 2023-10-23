@@ -157,23 +157,25 @@ font-family: 'Open Sans Condensed', sans-serif;
 
 				<!-- 로그인 버튼 및 세션확인 -->
 				<c:choose>
-					<c:when test="${empty loginMember}">
-						<a class="login">로그인</a> / <a id="enroll_btn">회원가입</a>
-					</c:when>
-					<c:otherwise>
-						<script>
-							alert("${alertMsg}");
-						</script>
+					<c:when test="${not empty loginMember}">
 						<span>${loginMember.userName}님 환영</span>
 						<a class="logout" href="logout.me"><span>로그아웃</span></a>
+						
+						
+					</c:when>
+					<c:otherwise>
+						<a class="login">로그인</a> / <a id="enroll_btn">회원가입</a>
+
+						
 					</c:otherwise>
 				</c:choose>
 					
-				<script>
-					$(".logout").click(function(){
-						alert("로그아웃 한다잉");
-					})
-				</script>	
+				<c:if test="${not empty alertMsg }">
+					<script>
+					
+					</script>
+				</c:if>
+				
 				
 				<script>
 					$("#enroll_btn").click(function(){
@@ -192,7 +194,10 @@ font-family: 'Open Sans Condensed', sans-serif;
 						<input type="text" name="userId" placeholder="id를 입력"  required> 
 						<input type="password" name="userPwd" placeholder="비밀번호 입력"  required> 
 						<button type="submit">로그인</button>
-					</form>	
+					</form>
+						
+						
+						
 						<div id="remember-container">
 							<span id="idFind">아이디 찾기</span> <span id="forgotten">비번 찾기</span>
 						</div>

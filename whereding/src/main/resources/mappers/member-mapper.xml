@@ -35,8 +35,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		       ,grade_no
 		  from member
  		 where user_id = #{userId}
- 		   and user_pwd = #{userPwd}
  		   and status = 'Y'
 	</select>
 
+	<insert id="createMember">
+		insert
+		  into member
+		  (
+		  	 user_no
+		    ,user_id
+		    ,user_pwd
+		    ,user_name
+		    ,birthday
+		    ,gender
+		    ,phone
+		    ,email
+		    ,status
+		    ,grade_no
+		  )
+	  values
+	  (
+	  	 seq_mno.nextval
+	  	,#{userId}
+	  	,#{userPwd}
+	  	,#{userName}
+	  	,to_date(#{birthDay}, 'yyMMdd')
+	  	,#{gender}
+	  	,#{phone}
+	  	,#{email}
+	  	,'Y'
+	  	,'1'
+	  )
+	</insert>
+	
+	<select id="selectUserId" resultType="_int">
+		select 
+				count(*)
+		  from member
+		 where user_id = #{userId}
+	</select>
+
 </mapper>
+
+
+
+
+
+
