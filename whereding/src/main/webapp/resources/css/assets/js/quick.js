@@ -1,42 +1,4 @@
 $(function(){
-    // 사이드 바
-    // $('.basket').on('click', function(){
-    //     console.log("나오니")
-    //     $.ajax({
-    //         url:"selectBasket.sb",
-    //         data:{
-    //             userNo:'${loginMember.userNo}'
-    //         },success:function(){
-    //             console.log("성공");
-    //         },error:function(){
-    //             console.log("장바구니 불러오기 ajax 요청 실패!");
-    //         }
-    //     })
-    //     // $('.menu_bg').show(); 
-    //     $('.side_basket').show().animate({
-    //         right:0
-    //     });  
-    //     $(".pCount input").trigger("change");
-    //     // $("html").css("overflow", "hidden")
-    // });
-
-    // $('.basket').on('click', function(){
-    //     // $('.menu_bg').show(); 
-    //     $('.side_basket').show().animate({
-    //         right:0
-    //     });  
-    //     $(".pCount input").trigger("change");
-    //     // $("html").css("overflow", "hidden")
-    // });
-    
-    // 예약 사이드 바
-    // $('.schedule').on('click', function(){
-    //     // $('.menu_bg').show(); 
-    //     $('.side_schedule').show().animate({
-    //         right:0
-    //     });  
-    //     $(".pCount input").trigger("change");
-    // });
     
     // 사이드바 닫기 
     $(document).on("click",".close_btn>a",function(){
@@ -47,15 +9,6 @@ $(function(){
         }); 
 
     })
-    // $('.close_btn>a').on('click', function(){
-    //     // $('.menu_bg').hide(); 
-    //     // $("#sticker-sticky-wrapper").attr("class", "sticky-wrapper");
-    //     $('.sidebar_menu').animate({
-    //         right: '-' + 25 + '%'
-    //     },function(){
-    //         $('.sidebar_menu').hide();
-    //     }); 
-    // });
 
     // 페이지 상단으로 이동
     $(".up_arrow").click(function(){
