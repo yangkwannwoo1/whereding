@@ -4,7 +4,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- jQuery 라이브러리 -->
+    <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- 부트스트랩에서 제공하고 있는 스타일 -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고객센터</title>
@@ -101,6 +110,7 @@
             border-color: inherit;
         }
         .notice>table>thead>tr>th{
+            text-align: center;
             background: #fff;
             border: none;
             font-size: 18px;
@@ -154,9 +164,8 @@
             height: 25px;
         }
         .btn button{
-            float: right;
             margin-top: 10px;
-            margin-right: 20px;
+            margin-left: 800px;
             width: 80px;
             height: 30px;
             background-color: #03c75a;
@@ -164,6 +173,10 @@
             border:1px solid #007033;
             font-weight: 900;
             font-size: 15px;
+        }
+        #pagingArea{
+            margin-left: 400px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -189,7 +202,7 @@
                 상품 및 굼금한 사항에 대해 문의해주시면 <br>
                 빠르게 상담받으실 수 있습니다.
             </div>
-            <br><br>
+            <br>
             <span class="dontask">웨딩관련 업체 문의는 업체쪽으로 연락주시기 바랍니다.</span>
         </div>
         <table>
@@ -208,36 +221,53 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="">
-                    <td>900</td>
-                    <td class="ta_l">
-
-                        <a href="javascript:FnBoardView('900');" class="brd_cont_text text_long" >8월 베스트 여행 후기 이벤트 당첨 발표</a>
-
-                        <i class="ico_camera"></i>
-
-                        
-                    </td>
-                    <td>2023.09.06</td>
-                    <td>2023.09.06</td>
-                    <td><button id="degi">답변대기</button></td>
-                </tr>
-                <tr class="">
-                    <td>900</td>
-                    <td class="ta_l">
-
-                        <a href="javascript:FnBoardView('900');" class="brd_cont_text text_long" >8월 베스트 여행 후기 이벤트 당첨 발표</a>
-
-                        <i class="ico_camera"></i>
-
-                        
-                    </td>
-                    <td>2023.09.06</td>
-                    <td>2023.09.06</td>
-                    <td><button id="whan">답변완료</button></td>
-                </tr>
+                <c:forEach var="q" items="${list }">
+	                <tr class="main-con">
+	                    <td class="qNo">${q.qnaNo }</td>
+	                    <td class="ta_l">
+	                        <a href="javascript:FnBoardView('900');" class="brd_cont_text text_long" >${q.qnaTitle }</a>
+	                        <i class="ico_camera"></i>
+	                    </td>
+	                    <td>2023.09.06</td>
+	                    <td>2023.09.06</td>
+	                    <c:choose>
+	                    	<c:when test="${empty q.qnaAnswer }">
+			                    <td><button id="degi">답변대기</button></td>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<td><button id="whan">답변완료</button></td>
+	                    	</c:otherwise>
+	                    </c:choose>
+	                    
+	                </tr>
+                </c:forEach>
             </tbody>
         </table>
+        <div id="pagingArea" align="center">
+            <ul class="pagination">
+                    <c:choose>
+                        <c:when test="${pi.currentPage eq 1 }">
+                            <li class="page-item disabled"><a class="page-link" href="" ><</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage - 1 }"><Previous></a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    
+                        <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+                            <li class="page-item"><a class="page-link" href="list.bo?cpage=${p }">${p }</a></li>
+                        </c:forEach>
+                        
+                        <c:choose>
+                            <c:when test="${pi.currentPage eq pi.maxPage }">
+                                <li class="page-item disabled"><a class="page-link" href="">></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage + 1 }">></a></li>
+                            </c:otherwise>
+                        </c:choose>
+            </ul>
+        </div>
         <div class="btn"  align="center">
             <button id="add">글작성</button>
         </div>
@@ -246,7 +276,14 @@
 
 <script>
     $("#add").click(()=>{
-        location.href="qnaEnroll.bo";
+        location.href="qnaEnroll.bo?board=QnA";
+    })
+</script>
+<script>
+    $(function(){
+        $(".main-con").click(function(){
+            location.href = 'qnaDetail.bo?board=QnA&bno=' + $(this).children(".qNo").text();
+        })
     })
 </script>
 </body>

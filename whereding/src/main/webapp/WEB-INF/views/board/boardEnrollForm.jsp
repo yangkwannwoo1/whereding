@@ -180,6 +180,15 @@
         .form-control{
             border: 1px solid #a1a1a1;
         }
+        #QNA_TITLE{
+            width: 100%;
+            height: 30px;
+            border: 0;
+        }
+        #QNA_CONTENT{
+            border: 0;
+            resize: none;
+        }
        
     </style>
 </head>
@@ -189,9 +198,9 @@
         <h3 id="navi_title">고객센터</h3>
         <div class="navi_tab">
             <ul id="navi_top">
-                <li><a href="#" >고객센터 홈</a></li>
-                <li><a href="#" >공지사항</a></li>
-                <li><a href="#">Q&A</a></li>
+                <li><a href="service.bo" >고객센터 홈</a></li>
+                <li><a href="notice.bo" >공지사항</a></li>
+                <li><a href="qna.bo">Q&A</a></li>
                 <li><a href="#">환불규정</a></li>
                 <li><a href="#" >배송규정</a></li>
                 <li><a href="#">기타사항</a></li>
@@ -200,65 +209,65 @@
     </div>
     <div class="notice">
         <div class="title-wrap title-3 customer-center title-notice">
-            <div class="title">Q&A</div>
+            <div class="title">${board}</div>
             <div class="body">
-
-
-                <div class="body_title">
-                    <div class="real_title">
-                        <span>웨어딩 런칭관련 소식입니다.</span>
-                    </div>
-                    <div class="count">
-                        <span id="user">아이유</span>
-                        <span id="date">2023-10-17</span>
-                    </div>
-                </div>
-                <div class="userinfo">
-                    
-                </div>
-                <div class="content">
-                    <p> 여러분들의 성원에 힘입어 웨어딩이 런칭하게 되었습니다. 앞으로도 많은 관심 부탁드립니다.</p>
-                </div>
-               <div class="btn" align="right">
-                    <button id="edit">수정하기</button>
-                    <button id="delete">삭제하기</button>
-                    <button id="list">목록으로</button>
-                    <button id="answer">답변하기</button>
-               </div>
-            </div>
-            <div class="answer">
-                <table id="replyArea" class="table" align="center">
-                    <thead>
+                <c:if test="${board eq '공지사항' }">
+                    <form action="insertNotice.bo">
+                </c:if>  
+                <c:if test="${board eq 'QnA' }">
+                    <form action="insertqna.bo">
+                </c:if> 
+                <c:if test="${board eq '공지사항_수정' }">
+                    <form action="noticeUpdate.bo" method="post">
+                </c:if>  
+                <c:if test="${board eq 'QnA_수정' }">
+                    <form action="qnaUpdate.bo" method="post">
+                </c:if>               
+                    <div class="body_title">
+                        <div class="real_title">
+                            <c:if test="${board eq '공지사항' }">
+                             <input type="text" name="noticeTitle" id="QNA_TITLE" placeholder="제목을 입력해 주세요.">
+                            </c:if>
+                            <c:if test="${board eq 'QnA' }">
+                                <input type="text" name="qnaTitle" id="QNA_TITLE" placeholder="제목을 입력해 주세요.">
+                            </c:if>
+                            <c:if test="${board eq '공지사항_수정' }">
+                                <input type="text" name="noticeTitle" id="QNA_TITLE" value="${n.noticeTitle}">
+                            </c:if>
+                            <c:if test="${board eq 'QnA_수정' }">
+                                <input type="text" name="qnaTitle" id="QNA_TITLE" value="${q.qnaTitle}">
+                            </c:if>
+                        </div>
                         
-                            <!-- <c:choose>
-                                <tr>
-                                    <c:when test="${empty loginMember }">
-                                        <th colspan="2">
-                                            <textarea class="form-control" cols="110" rows="20" style="resize:none; width:100%" readonly>알아서 하세요</textarea>
-                                        </th>
-                                        <th style="vertical-align: middle"></th>
-                                    </c:when>
-                                </tr>
-                                <tr>
-                                    <th><button>수정하기</button></th>
-                                </tr>
-                            </c:choose> -->
-                            <!-- <c:otherwise>
-                                    <tr>
-                                    <th colspan="2">
-                                        <textarea class="form-control" cols="110" rows="20" style="resize:none; width:100%" >답변내용 입력하시오</textarea>
-                                    </th>
-                                    <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addReply();">등록하기</button></th>
-                                </tr>
-                               </c:otherwise> -->
-                       
-                    </thead>
-                    <tbody>
-                       
-                    </tbody>
-                </table>
+                    </div>
+                    <div class="userinfo">
+                        
+                    </div>
+                    <div class="content">
+                    	 <c:if test="${board eq '공지사항' }">
+                            <textarea name="noticeContent" id="QNA_CONTENT" cols="111" rows="23" placeholder="Q&A 내용을 입력해주세요."></textarea>
+                        </c:if>
+                        <c:if test="${board eq 'QnA' }">
+                            <textarea name="qnaContent" id="QNA_CONTENT" cols="111" rows="23" placeholder="Q&A 내용을 입력해주세요."></textarea>
+                        </c:if>
+                        <c:if test="${board eq '공지사항_수정' }">
+                            <textarea name="noticeContent" id="QNA_CONTENT" cols="111" rows="23">${n.noticeContent}</textarea>
+                            <input type="hidden" name="noticeNo" value="${n.noticeNo}" >
+                        </c:if>
+                        <c:if test="${board eq 'QnA_수정' }">
+                            <textarea name="qnaContent" id="QNA_CONTENT" cols="111" rows="23">${q.qnaContent}</textarea>
+                            <input type="hidden" name="qnaNo" value="${q.qnaNo}" >
+                        </c:if>
+                    </div>
+                <c:if test="${board eq '공지사항_수정' }">
+                </c:if> 
+                <div class="btn" align="right">
+                        <button type="reset" id="edit">초기화</button>
+                        <button id="list">등록</button>
+                </div>
+                </form>
             </div>
-        </div>
+           
             
 
     </div>

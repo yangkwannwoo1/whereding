@@ -9,32 +9,137 @@
 		<result column="NOTICE_CONTENT" property="noticeContent"/>
 		<result column="NOTICE_DATE" property="noticeDate"/>
 	</resultMap>
+	<resultMap type="Qna" id="qnaResult">
+		<result column="QNA_NO" property="qnaNo"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="QNA_TITLE" property="qnaTitle"/>
+		<result column="QNA_CONTENT" property="qnaContent"/>
+		<result column="QNA_ANSWER" property="qnaAnswer"/>
+		<result column="QNA_DATE" property="qnaDate"/>
+		
+		     
+	</resultMap>
 
 
-	<select id="selectListCount" resultType="_int">
+	<select id="selectNoticeListCount" resultType="_int">
 		select 
 				count(*)
 	 	   from notice
 	 	  where status = 'Y'
   	</select>
-  	<select id="selectList" resultMap="noticeResult">
+  	<select id="selectQnaListCount" resultType="_int">
+		select 
+				count(*)
+	 	   from qna
+	 	  where status = 'Y'
+  	</select>
+  	<select id="selectNoticeList" resultMap="noticeResult">
 	  	select 
 	       NOTICE_NO
 	     , USER_ID
 	     , NOTICE_TITLE
 	     , NOTICE_CONTENT
-	     , NOTICE_DATE
+	     , to_char(NOTICE_DATE, 'YYYY-MM-DD') as "NOTICE_DATE"
 	  from notice n
 	  join member using(user_no)
 	 where n.STATUS = 'Y'
 	 order
 	    by NOTICE_NO desc
   	</select>
+  	<select id="selectQnaList" resultMap="qnaResult">
+  		select 
+		       QNA_NO
+		     , USER_ID
+		     , QNA_TITLE
+		     , QNA_CONTENT
+		     , QNA_ANSWER
+		     , to_char(QNA_DATE, 'YYYY-MM-DD') as "QNA_DATE"
+		  from qna q
+		  join member using(user_no)
+		 where q.STATUS = 'Y'
+  	</select>
+  	<select id="selectNotice" resultMap="noticeResult">
+		select 
+		       NOTICE_NO
+		     , USER_ID
+		     , NOTICE_TITLE
+		     , NOTICE_CONTENT
+		     , to_char(NOTICE_DATE, 'YYYY-MM-DD') as "NOTICE_DATE"
+		  from notice n
+		  join member using(user_no)
+		 where n.STATUS = 'Y'
+		   and NOTICE_NO = #{boardNo}
+		 order
+		    by NOTICE_NO desc
+  	</select>
+  	<select id="selectQna" resultMap="qnaResult">
+  	select 
+	       QNA_NO
+	     , USER_ID
+	     , QNA_TITLE
+	     , QNA_CONTENT
+	     , QNA_ANSWER
+	     , QNA_DATE
+	  from qna q
+	  join member using(user_no)
+	 where q.STATUS = 'Y'
+	   and qna_no = #{boardNo}
   	
-  	
-  	
-  	
-  	
+  	</select>
+  	<insert id="insertNotice">
+	  	insert
+		  into notice
+		     (
+		       NOTICE_NO
+		     , USER_NO
+		     , NOTICE_TITLE
+		     , NOTICE_CONTENT
+		     )
+		VALUES
+		     (
+		       seq_nbo.nextval
+		     , 1
+		     , #{noticeTitle}
+		     , #{noticeContent}
+		     )
+  	</insert>
+  	<insert id="insertQna">
+  		insert 
+		  into qna
+		     (
+		       QNA_NO
+		     , USER_NO
+		     , QNA_TITLE
+		     , QNA_CONTENT
+		     )
+		VALUES
+		     (
+		       seq_qbo.nextval
+		     , 1
+		     , #{qnaTitle}
+		     , #{qnaContent}
+		     )
+  	</insert>
+  	<update id="updateNoticeBoard">
+  	   update notice
+		  set NOTICE_TITLE = #{noticeTitle}
+		    , NOTICE_CONTENT = #{noticeContent}
+		where NOTICE_NO = #{noticeNo}
+  	</update>
+  	<update id="updateQnaBoard">
+	  	update qna
+		   set QNA_TITLE = #{qnaTitle}
+		     , QNA_CONTENT = #{qnaContent}
+		 where QNA_NO = #{qnaNo}
+  	</update>
+  	<delete id="deleteNotice">
+	  	DELETE notice
+	 	 where notice_no = #{boardNo}
+  	</delete>
+  	<delete id="qnaNotice">
+  		DELETE qna
+	 	 where qna_no = #{boardNo}
+  	</delete>
   	
   	
   	
