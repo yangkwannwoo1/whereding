@@ -13,12 +13,12 @@ import lombok.ToString;
 @ToString
 public class Notice {
 
-	private int noticeNo;
-	private int userNo;
-	private String noticeTitle;
-	private String noticeContent;
-	private String noticeDate;
-	private String status;
-	private String noticeWriter;
+	private int noticeNo;			// 공지사항 번호
+	private int userNo;				// 회원 번호
+	private String noticeTitle;		// 제목
+	private String noticeContent;	// 내용
+	private String noticeDate;		// 작성일
+	private String status;			// 삭제여부
+	private String noticeWriter;	// 회원 아이디
 
 }

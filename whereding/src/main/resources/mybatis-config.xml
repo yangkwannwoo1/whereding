@@ -10,6 +10,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.kh.whereding.board.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.whereding.board.model.vo.Qna" alias="Qna"/>
 		<typeAlias type="com.kh.whereding.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.whereding.product.model.vo.Dress" alias="Dress"/>
 		<typeAlias type="com.kh.whereding.product.model.vo.Hall" alias="Hall"/>

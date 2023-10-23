@@ -113,14 +113,22 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int deleteNotice(int boardNo) {
 		int result = bDao.deleteNotice(sqlSession,boardNo);
-		return 0;
+		return result;
 	}
 
 	@Override
 	public int deleteQna(int boardNo) {
 		int result = bDao.qnaNotice(sqlSession,boardNo);
-		return 0;
+		return result;
 	}
+
+	@Override
+	public int updateQnaAnswer(Qna q) {
+		int result = bDao.updateQnaAnswer(sqlSession, q);
+		return result;
+	}
+
+	
 
 	
 

@@ -21,5 +21,39 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.loginMember(sqlSession, m);
 		
 	}
+
+	/**
+	 * 회원 정보 변경
+	 */
+	@Override
+	public int updateMemberInfo(Member m) {
+		int result = mDao.updateMemberInfo(sqlSession,m);
+		return result;
+	}
+
+	/**
+	 * 회원 번호 변경
+	 */
+	@Override
+	public int updateMemberPwd(Member m) {
+		int result = mDao.updateMemberPwd(sqlSession,m);
+		return result;
+	}
+
+	/**
+	 * 회원 비밀번호 일치여부
+	 */
+	@Override
+	public int checkMemberPwd(Member m) {
+		int result = mDao.checkMemberPwd(sqlSession,m);
+		return result;
+	}
+
+	@Override
+	public int deleteMember(Member m) {
+		System.out.println("서비스");
+		int result = mDao.deleteMember(sqlSession,m);
+		return result;
+	}
 	
 }

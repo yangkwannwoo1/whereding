@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결혼은 웨어딩에서</title>
 <!-- title -->
 	<title>Fruitkha</title>
 

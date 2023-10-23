@@ -190,9 +190,11 @@
             resize: none;
         }
        
+        
     </style>
 </head>
 <body>
+    <jsp:include page="../common/header.jsp"/>
 <div class="outer">
     <div class="navi">
         <h3 id="navi_title">고객센터</h3>
@@ -272,5 +274,7 @@
 
     </div>
 </div>
+
+
 </body>
 </html>

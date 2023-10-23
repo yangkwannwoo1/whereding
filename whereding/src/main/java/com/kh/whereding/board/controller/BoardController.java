@@ -33,7 +33,7 @@ public class BoardController {
 	 */
 	@RequestMapping(value = "service.bo")
 	public String intoService() {
-		System.out.println("되냐");
+		
 		return "board/serviceCenter";
 	}
 	
@@ -63,7 +63,6 @@ public class BoardController {
 	 */
 	@RequestMapping(value = "noticeEnroll.bo")
 	public String enrollNotice(String board,HttpServletRequest request) {
-		System.out.println(board);
 		request.setAttribute("board", board);
 		return "board/boardEnrollForm";
 	}
@@ -147,7 +146,6 @@ public class BoardController {
 	 */
 	@RequestMapping( value = "insertqna.bo")
 	public String qnaInsert(Qna q,HttpSession session) {
-		System.out.println(q);
 		
 		int result = bService.insertQna(q);
 		
@@ -167,7 +165,6 @@ public class BoardController {
 	public String noticeEditForm(int bno, Model model) {
 		Notice n = bService.selectNotice(bno);
 		model.addAttribute("n", n);
-		System.out.println(n);
 		model.addAttribute("board", "공지사항_수정");
 		return"board/boardEnrollForm";
 	}
@@ -179,7 +176,6 @@ public class BoardController {
 	public String qnaEditForm(int bno, Model model) {
 		Qna q = bService.selectQna(bno);
 		model.addAttribute("q", q);
-		System.out.println(q);
 		model.addAttribute("board", "QnA_수정");
 		return"board/boardEnrollForm";
 	}
@@ -190,7 +186,6 @@ public class BoardController {
 	 */
 	@RequestMapping( value = "noticeUpdate.bo", produces = "text/html; charset=utf-8")
 	public String noticeUpadet(Notice n, HttpSession session) throws IOException {
-		System.out.println(n);
 		
 		int result = bService.updateNoticeBoard(n);
 		
@@ -208,7 +203,6 @@ public class BoardController {
 	 */
 	@RequestMapping( value = "qnaUpdate.bo")
 	public String qnaUpadet(Qna q, HttpSession session) {
-		System.out.println(q);
 		
 		int result = bService.updateQnaBoard(q);
 		
@@ -248,6 +242,21 @@ public class BoardController {
 	}
 	
 	
+	/** qna 답변 받아서 넘겨준다
+	 * @return
+	 */
+	@RequestMapping(value = "insertAnswer.bo")
+	public String insertAnswer(Qna q, HttpSession session) {
+		System.out.println(q.getQnaNo());
+		int result = bService.updateQnaAnswer(q);
+		
+		if(result > 0) { 
+	         session.setAttribute("alertMsg", "답변이 성공적으로 등록 되었습니다.");
+	      }else {
+	    	  session.setAttribute("alertMsg", "답변 등록에 실패하였습니다.");
+	      }
+		return "redirect:qnaDetail.bo?board=QnA&bno=" + q.getQnaNo();
+	}
 	
 	
 	

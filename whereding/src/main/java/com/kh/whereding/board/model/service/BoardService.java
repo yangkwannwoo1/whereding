@@ -29,6 +29,9 @@ public interface BoardService {
 	// 5. 게시글 수정용 서비스
 	int updateNoticeBoard(Notice n);
 	int updateQnaBoard(Qna q);
+	
+	// qna 답변 받는 서비스
+	int updateQnaAnswer(Qna q);
 }
 
 

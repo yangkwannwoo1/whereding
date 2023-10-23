@@ -159,6 +159,7 @@
     </style>
 </head>
 <body>
+    <jsp:include page="../common/header.jsp"/>
 <div class="outer">
     <div class="navi">
         <h3 id="navi_title">고객센터</h3>
@@ -175,10 +176,10 @@
         <div class="bener">
             <div class="bener_font">
                 <h1>불편사항을 빨리 찾아 해결해드리겠습니다.</h1>
-                <h2>고객센터 전화번호 : ☎ 010-2093-8684</h2>
+                <h2 style="font-size: 2em;">고객센터 전화번호 : ☎ 010-2093-8684</h2>
             </div>
             <div class="bener_font2">
-                <h2>바로가기</h2>
+                <h2 style="font-size: 2em;">바로가기</h2>
                 <br>
                 <button class="btn1">공지사항</button>
                 <button class="btn1">Q&A</button>
@@ -235,7 +236,8 @@
         </div>
     </div>
 </div>
-
+<br><br><br>
+<jsp:include page="../common/footer.jsp"/>
 <script>
     function openModal(question, answer) {
         const modal = document.getElementById("modal");
