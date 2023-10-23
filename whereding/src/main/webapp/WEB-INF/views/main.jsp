@@ -51,73 +51,39 @@
         </div>
     </div>
     <!--PreLoader Ends-->
+    <!-- carousel -->
+    <div id="demo" class="carousel slide" data-ride="carousel">
 
-	<!-- hero area -->
-	<div class="hero-area">
-		<div class="container">
-			<!-- home page slider -->
-			<div class="homepage-slider">
-				<!-- single home slider -->
-				<div class="single-homepage-slider homepage-bg-1">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12 col-lg-7 offset-lg-1 offset-xl-0">
-								<div class="hero-text">
-									<div class="hero-text-tablecell">
-										<p class="subtitle">Fresh & Organic</p>
-										<h1>Delicious Seasonal Fruits</h1>
-										<div class="hero-btns">
-											<a href="shop.html" class="boxed-btn">Fruit Collection</a>
-											<a href="contact.html" class="bordered-btn">Contact Us</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- single home slider -->
-				<div class="single-homepage-slider homepage-bg-2">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-10 offset-lg-1 text-center">
-								<div class="hero-text">
-									<div class="hero-text-tablecell">
-										<p class="subtitle">Fresh Everyday</p>
-										<h1>100% Organic Collection</h1>
-										<div class="hero-btns">
-											<a href="shop.html" class="boxed-btn">Visit Shop</a>
-											<a href="contact.html" class="bordered-btn">Contact Us</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- single home slider -->
-				<div class="single-homepage-slider homepage-bg-3">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-10 offset-lg-1 text-right">
-								<div class="hero-text">
-									<div class="hero-text-tablecell">
-										<p class="subtitle">Mega Sale Going On!</p>
-										<h1>Get December Discount</h1>
-										<div class="hero-btns">
-											<a href="shop.html" class="boxed-btn">Visit Shop</a>
-											<a href="contact.html" class="bordered-btn">Contact Us</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end hero area -->
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://incheon.wedding/wp-content/uploads/2017/06/weddinghall-lbwedding-2023-new-01-1000x667.jpg">
+          </div>
+          <div class="carousel-item">
+            <img src="https://incheon.wedding/wp-content/uploads/2019/09/weddinghall-marryvilia-2023-02.jpg" alt="Chicago" width="1100" height="500">
+          </div>
+          <div class="carousel-item">
+            <img src="https://incheon.wedding/wp-content/uploads/2019/09/weddinghall-marryvilia-2023-03.jpg" alt="New York" width="1100" height="500">
+          </div>
+        </div>
+        
+        <!-- Left and right controls -->
+        <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a> -->
+      </div>
+      
+
 
 	<!-- start main search-->
     <form action="search.mn" method="post" id="searchPlace">
@@ -136,13 +102,13 @@
                         <nav id="tab_top_area">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist" style="border: none;">
                                 <button class="nav-link active" id="nav-wedding-tab" data-bs-toggle="tab" data-bs-target="#nav-wedding" type="button" role="tab" aria-controls="nav-wedding" aria-selected="true">웨딩</button>
-                            <button class="nav-link" id="nav-studio-tab" data-bs-toggle="tab" data-bs-target="#nav-studio" type="button" role="tab" aria-controls="nav-studio" aria-selected="false">스튜디오</button>
-                            <button class="nav-link" id="nav-dress-tab" data-bs-toggle="tab" data-bs-target="#nav-dress" type="button" role="tab" aria-controls="nav-dress" aria-selected="false">드레스</button>
-                            <button class="nav-link" id="nav-makeup-tab" data-bs-toggle="tab" data-bs-target="#nav-makeup" type="button" role="tab" aria-controls="nav-makeup" aria-selected="false">메이크업</button>
-                        </div>
-                    </nav>
-                </td>
-            </tr>
+                                <button class="nav-link" id="nav-studio-tab" data-bs-toggle="tab" data-bs-target="#nav-studio" type="button" role="tab" aria-controls="nav-studio" aria-selected="false">스튜디오</button>
+                                <button class="nav-link" id="nav-dress-tab" data-bs-toggle="tab" data-bs-target="#nav-dress" type="button" role="tab" aria-controls="nav-dress" aria-selected="false">드레스</button>
+                                <button class="nav-link" id="nav-makeup-tab" data-bs-toggle="tab" data-bs-target="#nav-makeup" type="button" role="tab" aria-controls="nav-makeup" aria-selected="false">메이크업</button>
+                            </div>
+                        </nav>
+                    </td>
+                </tr>
             <tr>
                 <td>
                     <div class="tab-content" id="nav-tabContent">
@@ -358,7 +324,7 @@
                                                 <a class="btn btn-outline-warning float-left" onclick="prevTab(this);">이전</a>
                                             </td>
                                             <td colspan="2">
-                                                <a class="btn btn-outline-warning float-right" onclick="submitSearch();">검색</a>
+                                                <a class="btn btn-outline-warning float-right" onclick="submitSearch();"><li class="fas fa-search">검색</li></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -452,7 +418,7 @@
             			<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ii8+PC9zdmc+">
             			</a>
             		</div>
-            		<h3><i class="fas fa-calendar-alt"></i> 예약</h3>
+            		<h4><i class="fas fa-calendar-alt"></i> 예약</h4>
             		<hr>
             		
             		<label class="allCheck" style=" font-size: 18px;"><input type="checkbox" style="zoom: 1.5;"><span style="vertical-align:5px; margin-left: 5px;">전체선택</span></label>
@@ -656,50 +622,7 @@
 
 
 
-	<!-- features list section -->
-	<div class="list-section pt-80 pb-80">
-		<div class="container">
-			<h3>Best weding hall</h3>
-			<div class="row">
-				
-				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-					<img src="https://www.ihall.co.kr/center/pic/banquet_ent_poto/13998558121612918786.jpg" alt="">
-					<div class="list-box d-flex align-items-center">
-						<div class="content">
-							<h3>더 클래스 청담</h3>
-							<p>서울 강남구 청담동</p>
-							<p>식대비용 : 3~4만원</p>
-							<p>최대수용인원 : 450명</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-					<img src="https://www.iwedding.co.kr/center/website/ihall_img/1166679588/1166679588_img_230_0_1608692935.jpg" alt="">
-					<div class="list-box d-flex align-items-center">
-						<div class="content">
-							<h3>더컨벤션 신사</h3>
-							<p>서울 강남구 신사동</p>
-							<p>식대비용 : 4~5만원</p>
-							<p>최대수용인원 : 350명</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbaj8YWRl4TPt8n4jvQqcYGqr0RVYWliSWPsna_ifTAUQnALl5QoW3GxqYWaZMxt-tz_s&usqp=CAU" alt="">
-					<div class="list-box d-flex align-items-center">
-						<div class="content">
-							<h3>드레스가든</h3>
-							<p>서울 강남구 청담동</p>
-							<p>식대비용 : 3~5만원</p>
-							<p>최대수용인원 : 550명</p>
-						</div>
-					</div>
-				</div>
-			</div>
 
-		</div>
-	</div>
-	<!-- end features list section -->
 
 	<!-- product section -->
 	<div class="product-section mt-150 mb-150">
@@ -751,6 +674,51 @@
 		</div>
 	</div>
 	<!-- end product section -->
+
+    	<!-- features list section -->
+	<div class="list-section pt-80 pb-80">
+		<div class="container">
+			<h3 style="padding-left: 30px;">Best weding hall</h3>
+			<div class="row">
+				
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<img src="https://www.ihall.co.kr/center/pic/banquet_ent_poto/13998558121612918786.jpg" alt="">
+					<div class="list-box d-flex align-items-center">
+						<div class="content">
+							<h3>더 클래스 청담</h3>
+							<p>서울 강남구 청담동</p>
+							<p>식대비용 : 3~4만원</p>
+							<p>최대수용인원 : 450명</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<img src="https://www.iwedding.co.kr/center/website/ihall_img/1166679588/1166679588_img_230_0_1608692935.jpg" alt="">
+					<div class="list-box d-flex align-items-center">
+						<div class="content">
+							<h3>더컨벤션 신사</h3>
+							<p>서울 강남구 신사동</p>
+							<p>식대비용 : 4~5만원</p>
+							<p>최대수용인원 : 350명</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbaj8YWRl4TPt8n4jvQqcYGqr0RVYWliSWPsna_ifTAUQnALl5QoW3GxqYWaZMxt-tz_s&usqp=CAU" alt="">
+					<div class="list-box d-flex align-items-center">
+						<div class="content">
+							<h3>드레스가든</h3>
+							<p>서울 강남구 청담동</p>
+							<p>식대비용 : 3~5만원</p>
+							<p>최대수용인원 : 550명</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end features list section -->
 	
 	<jsp:include page="common/footer.jsp"/>
 

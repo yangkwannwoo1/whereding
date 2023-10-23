@@ -158,16 +158,19 @@ font-family: 'Open Sans Condensed', sans-serif;
 				<!-- 로그인 버튼 및 세션확인 -->
 				<c:choose>
 					<c:when test="${not empty loginMember}">
-						<span>${loginMember.userName}님 환영</span>
+						<c:choose>
+							<c:when test="${loginMember.gender eq 'M'}">
+								<span>🤵${loginMember.userName}님 환영</span>
+							</c:when>
+							<otherwise>
+								<span>👰${loginMember.userName}님 환영</span>
+							</otherwise>
+						</c:choose>
 						<a class="logout" href="logout.me"><span>로그아웃</span></a>
-						
-						
 					</c:when>
 					<c:otherwise>
 						<a class="login">로그인</a> / <a id="enroll_btn">회원가입</a>
-
-						
-					</c:otherwise>
+					<c:otherwise>
 				</c:choose>
 					
 				<c:if test="${not empty alertMsg }">

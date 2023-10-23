@@ -40,6 +40,11 @@
 				<a href="#" target="_blank">
 					<img src="resources/css/assets/img/talk-icon.png"><br>
 					<span>카톡상담</span>
+					<script>
+						$(".quick_kakao").click(function(){
+							location.href="http://pf.kakao.com/_xdrBTG/chat";
+						})
+					</script>
 				</a>
 			</li>
 			<hr>
@@ -152,22 +157,42 @@
 	</div>
 	<!-- 예약 사이드바 -->
 	<div class="sidebar_menu side_schedule">
-		<div class="close_btn"><a href="#">       
-			<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ii8+PC9zdmc+">
-			</a>
-		</div>
-		<h3><i class="fas fa-calendar-alt"></i> 예약</h3>
-		<hr>
-		
-		<label class="allCheck" style=" font-size: 18px;"><input type="checkbox" style="zoom: 1.5;"><span style="vertical-align:5px; margin-left: 5px;">전체선택</span></label>
-		<hr style="border: 1px solid lightgray; margin-bottom: 0px; margin-top: 0px;">
-		
-
 
 	</div>
 
 	<script>
-		(function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+		(function(){
+			var w=window;
+			if(w.ChannelIO){
+				return w.console.error("ChannelIO script included twice.");
+			}
+			var ch=function(){
+				ch.c(arguments);
+			};
+			ch.q=[];
+			ch.c=function(args){
+				ch.q.push(args);
+			};
+			w.ChannelIO=ch;
+			function l(){
+				if(w.ChannelIOInitialized){
+					return;
+				}
+				w.ChannelIOInitialized=true;
+				var s=document.createElement("script");
+				s.type="text/javascript";
+				s.async=true;
+				s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";
+				var x=document.getElementsByTagName("script")[0];
+				if(x.parentNode){x.parentNode.insertBefore(s,x);
+				}}
+				if(document.readyState==="complete"){
+					l();
+				}else{w.addEventListener("DOMContentLoaded",l);
+				w.addEventListener("load",l);
+			}
+		}
+		)();
 	  
 		ChannelIO('boot', {
 		  "pluginKey": "934a239f-155d-4a7e-a439-29e60d3ed745"
