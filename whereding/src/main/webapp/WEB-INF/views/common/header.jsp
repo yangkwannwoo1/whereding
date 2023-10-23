@@ -164,7 +164,14 @@ font-family: 'Open Sans Condensed', sans-serif;
 						<script>
 							alert("${alertMsg}");
 						</script>
-						<span>${loginMember.userName}님 환영</span>
+						<c:choose>
+							<c:when test="${loginMember.gender eq 'M'}">
+								<span>🤵${loginMember.userName}님 환영합니다.</span>
+							</c:when>
+							<c:otherwise>
+								<span>👰${loginMember.userName}님 환영합니다.</span>
+							</c:otherwise>
+						</c:choose>
 						<a class="logout" href="logout.me"><span>로그아웃</span></a>
 					</c:otherwise>
 				</c:choose>

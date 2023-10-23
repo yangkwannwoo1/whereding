@@ -1,11 +1,33 @@
   #search_table{
     height: 200px;
-    margin: 0;
-    width: 900px;
+    width: 70% !important;
     border: 1px solid black;
     border-radius: 18px;
     border-style: hidden;
-    box-shadow: 0 0 0 1px #000;;
+    box-shadow: 0 0 0 1px #000;
+    z-index: 99 !important;
+    /* margin: auto; */
+    /* margin-left: 51%; */
+    /* transform: translate(-51%, -180%); */
+    /* margin-top: 10px; */
+    position: absolute;
+    margin: 0%;
+    top: 260px;
+    /* transform: translate(-50%, -1420px); */
+    transform: translate(20%, 0%);
+  
+    background-color: white;
+    opacity: 0.9;
+  }
+
+  .list-section > .container > .row *{
+    text-align: center;
+  }
+
+  .carousel-inner img {
+    background-size: cover !important;
+    max-width: 100%;
+    height: auto;
   }
   
   .tabcontent thead h3{
@@ -42,12 +64,6 @@
     border-radius: 2px;
     padding: 0px 5px;
     height: 30px;
-  }
-  
-  #search_table{
-    width: 1100px;
-    z-index: 99999 !important;
-    margin: 5% auto;
   }
 
   #search_title{
@@ -90,6 +106,10 @@
     width: 240px;
   }
 
+  .input_area #seat_avail{
+    text-align: center;
+  }
+
   .input_area{
     height: 50px;
   }
@@ -114,8 +134,9 @@
   position: absolute;
   width: 770px;
   height: 430px;
-  left: 30px;
-  top: 160px;
+  left: 25%;
+  top: 30%;
+   /* top: 260px; */
   background: lightgray;
   color: white;
   border-radius: 5px;
@@ -127,7 +148,22 @@
   border: black solid 1px;
 }
 
-.md1:after {
+#tab_top_area .nav-tabs button{
+  border: 0px;
+  border-radius: 0px !important;
+  background-color: white !important;
+}
+#tab_top_area .nav-tabs .active{
+  background-color: #ccc !important;
+}
+#search_table{
+  /* background-color: #ccc !important; */
+}
+.tab-content *{
+  /* background-color: #ccc; */
+}
+
+/* .md1:after {
   border-color: #eef3fd transparent;
   border-style: solid;
   border-width: 0 6px 8px 6.5px;
@@ -150,15 +186,15 @@
   top: -8px;
   width: 0;
   z-index: 0;
-}
+} */
 
 .md2 {
   display: none;
   position: absolute;
   width: 770px;
   height: 430px;
-  left: 30px;
-  top: 160px;
+  left: 25%;
+  top: 30%;
   background: lightgray;
   color: white;
   border-radius: 5px;
@@ -171,8 +207,7 @@
 
 }
 
-.md2:after {
-  /* z-index: 999; */
+/* .md2:after {
   top: 65px;
   left: 770px;
 
@@ -197,7 +232,7 @@
   top: -8px;
   width: 0;
   z-index: 0;
-}
+} */
 
 .allTag_area{
   overflow-y: auto;
@@ -345,12 +380,12 @@
 
 /* 드레스 */
 .weekendYN{
-  zoom: 2.5;
+  zoom: 1.5;
 }
 
 .weekendYNArea{
-  text-align: left !important;
-  padding-left: 100px;
+  text-align: right !important;
+  padding-right: 5%;
 }
 
 /* 태그에 호버시 이벤트 */

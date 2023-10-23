@@ -23,6 +23,9 @@
     right: -20%;
     
 }
+.sidebar_menu .basket_item{
+    width: 13px;
+}
 .close_btn{
     width: 25px;
     height: 25px;
