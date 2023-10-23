@@ -22,6 +22,9 @@ public interface BoardService {
 	Notice selectNotice(int boardNo);
 	Qna selectQna(int boardNo);
 	
+	// 4. 게시글 삭제용 서비스
+	int deleteNotice(int boardNo);
+	int deleteQna(int boardNo);
 	
 	// 5. 게시글 수정용 서비스
 	int updateNoticeBoard(Notice n);

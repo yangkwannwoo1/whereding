@@ -193,12 +193,11 @@ public class BoardController {
 		
 		int result = bService.updateNoticeBoard(n);
 		
-		 if(result > 0) { //수정성공 => 상세페이지 detail.bo?bno=해당게시글번호
+		 if(result > 0) {
 	         session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
 	      }else {
 	    	  session.setAttribute("alertMsg", "게시글 수정 실패하였습니다.");
 	      }
-//		 return "redirect:detail.bo?bno=" 
 		 return "redirect:noticeDetail.bo?board=" + URLEncoder.encode("공지사항", "UTF-8") + "&bno="+ n.getNoticeNo();
 
 	}
@@ -207,11 +206,50 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping( value = "qnaUpdate.bo")
-	public String qnaUpadet(Qna q) {
+	public String qnaUpadet(Qna q, HttpSession session) {
 		System.out.println(q);
 		
 		int result = bService.updateQnaBoard(q);
 		
-		return "";
+		 if(result > 0) { 
+	         session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
+	      }else {
+	    	  session.setAttribute("alertMsg", "게시글 수정 실패하였습니다.");
+	      }
+		return "redirect:qnaDetail.bo?board=QnA&bno=" + q.getQnaNo();
 	}
+	
+	@RequestMapping(value = "noticeDelete.bo")
+	public String noticeDelete(int bno, HttpSession session) {
+
+		int result = bService.deleteNotice(bno);
+		
+		if(result > 0) { 
+	         session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+	      }else {
+	    	  session.setAttribute("alertMsg", "게시글 삭제 실패하였습니다.");
+	      }
+		return"redirect:notice.bo";
+	}
+	
+	
+	@RequestMapping(value = "qnaDelete.bo")
+	public String qnaDelete(int bno, HttpSession session) {
+
+		int result = bService.deleteQna(bno);
+		
+		if(result > 0) { 
+	         session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+	      }else {
+	    	  session.setAttribute("alertMsg", "게시글 삭제 실패하였습니다.");
+	      }
+		return"redirect:qna.bo";
+	}
+	
+	
+	
+	
+	
+	
+	
 }

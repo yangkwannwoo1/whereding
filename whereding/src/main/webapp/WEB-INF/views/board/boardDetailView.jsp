@@ -300,5 +300,14 @@
         }
     })
 </script>
+<script>
+    $("#delete").click(()=>{
+        if(${board == "공지사항"}){
+            location.href = "noticeDelete.bo?bno=${n.noticeNo}";
+        }else{
+            location.href = "qnaDelete.bo?bno=${q.qnaNo}";
+        }
+    })
+</script>
 </body>
 </html>

@@ -96,6 +96,14 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.updateQnaBoard", q);
 	}
 
+	public int deleteNotice(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.delete("boardMapper.deleteNotice", boardNo);
+	}
+
+	public int qnaNotice(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.delete("boardMapper.qnaNotice", boardNo);
+	}
+
 	
 
 	

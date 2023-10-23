@@ -132,7 +132,14 @@
 		     , QNA_CONTENT = #{qnaContent}
 		 where QNA_NO = #{qnaNo}
   	</update>
-  	
+  	<delete id="deleteNotice">
+	  	DELETE notice
+	 	 where notice_no = #{boardNo}
+  	</delete>
+  	<delete id="qnaNotice">
+  		DELETE qna
+	 	 where qna_no = #{boardNo}
+  	</delete>
   	
   	
   	
