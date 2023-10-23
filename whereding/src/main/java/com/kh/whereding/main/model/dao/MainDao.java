@@ -8,7 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.whereding.common.model.vo.HashTag;
-import com.kh.whereding.main.controller.function;
+import com.kh.whereding.gift.model.vo.Basket;
 import com.kh.whereding.main.model.vo.SearchDress;
 import com.kh.whereding.main.model.vo.SearchHall;
 import com.kh.whereding.main.model.vo.SearchMakeup;
@@ -16,6 +16,7 @@ import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.Reservation;
 import com.kh.whereding.product.model.vo.Studio;
 
 @Repository
@@ -53,6 +54,14 @@ public class MainDao {
 	}
 	public ArrayList<Makeup> searchMakeupList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
 		return (ArrayList)sqlSession.selectList("mainMapper.searchMakeupList", map);
+	}
+	
+	public ArrayList<Basket> selectBasketList(SqlSessionTemplate sqlSession, String userNo){
+		return (ArrayList)sqlSession.selectList("mainMapper.selectBasketList", userNo);
+	}
+
+	public ArrayList<Reservation> selectRsvList(SqlSessionTemplate sqlSession, String userNo){
+		return (ArrayList)sqlSession.selectList("mainMapper.selectRsvList", userNo);
 	}
 
 }

@@ -59,6 +59,22 @@
 		<result column="m_unit_time" property="unitTime"></result>
 		<result column="m_week_open" property="weekOpen"></result>
 	</resultMap>
+	<resultMap type="Basket" id="basketResultSet">
+		<result column="user_no" property="userNo"></result>
+		<result column="gift_name" property="giftName"></result>
+		<result column="gift_price" property="giftPrice"></result>
+		<result column="file_path" property="filePath"></result>
+		<result column="refNo" property="refNo"></result>
+		<result column="count" property="count"></result>
+	</resultMap>
+	<resultMap type="Reservation" id="reservationResultSet">
+		<result column="company_no" property="companyNo"></result>
+		<result column="enterprise" property="enterprise"></result>
+		<result column="address" property="address"></result>
+		<result column="phone" property="phone"></result>
+		<result column="filePath" property="filePath"></result>
+	</resultMap>
+	
 		<!-- 
 			private String wAddress;
 			private String wTag;
@@ -224,6 +240,34 @@
 	      <foreach item= "arr" collection="mAddress" open="and(" close=")" separator="or">
 	      			m_address like #{arr} ||'%' 
 	      </foreach>
+	</select>
+	<select id="selectBasketList" resultMap="basketResultSet">
+		select 
+		       user_id
+		     , gift_name
+		     , gift_price
+		     , b.count
+	         , g_file_path || '/' || g_change_name as file_path
+		  from member
+		 right join basket b using (user_no)
+		       join gift on(ref_no = gift_no) 
+               join gift_img on (gift_no = review_no)
+	  		   where user_no = #{userNo}
+	</select>
+	
+	<select id="selectRsvList" resultMap="reservationResultSet">
+		select 
+		       company_no
+		     , s_enterprise || d_enterprise || m_enterprise as enterprise 
+		     , s_address || d_address || m_address as address
+		     , s_phone || d_phone || m_phone as phone
+		     , img_path || img_1 as filepath
+		  from rsv_basket
+		  left join studio s on (company_no = s_code)
+		  left join dress d on (company_no = d_code)
+		  left join makeup m on (company_no = m_code)
+		  left join product_img on (company_no = product_no)
+		 where user_no = #{userNo}
 	</select>
 	
 </mapper>

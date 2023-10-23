@@ -25,6 +25,7 @@ public class MemberController {
 			session.setAttribute("alertMsg", "로그인 되었습니다.");
 			session.setAttribute("loginMember", loginMember);
 		}
+		System.out.println(loginMember);
 		return "redirect:/";
 	}
 	

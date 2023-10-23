@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="memberMapper">
 
 	<resultMap type="Member" id="memberResult">
+		<result column="user_no" property="userNo"/>
 		<result column="user_id" property="userId"/>
 		<result column="user_pwd" property="userPwd"/>
 		<result column="user_name" property="userName"/>
