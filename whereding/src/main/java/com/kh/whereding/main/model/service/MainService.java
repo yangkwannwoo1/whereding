@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.whereding.common.model.vo.HashTag;
+import com.kh.whereding.gift.model.vo.Basket;
 import com.kh.whereding.main.model.vo.SearchDress;
 import com.kh.whereding.main.model.vo.SearchHall;
 import com.kh.whereding.main.model.vo.SearchMakeup;
@@ -11,6 +12,7 @@ import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.Reservation;
 import com.kh.whereding.product.model.vo.Studio;
 
 public interface MainService {
@@ -36,4 +38,10 @@ public interface MainService {
 	ArrayList<Dress> searchDressList(HashMap<String, Object> map);
 //	// 메인에서 메이크업 검색
 	ArrayList<Makeup> searchMakeupList(HashMap<String, Object> map);
+
+	// 사이드바에서 장바구니 불러오기
+	ArrayList<Basket> selectBasketList(String userNo);
+
+	// 사이드바에서 장바구니 불러오기
+	ArrayList<Reservation> selectRsvList(String userNo);
 }

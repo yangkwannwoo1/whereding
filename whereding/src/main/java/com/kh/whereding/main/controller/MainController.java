@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.whereding.common.model.vo.HashTag;
+import com.kh.whereding.gift.model.vo.Basket;
 import com.kh.whereding.main.model.service.MainServiceImpl;
 import com.kh.whereding.main.model.vo.SearchDress;
 import com.kh.whereding.main.model.vo.SearchHall;
@@ -23,6 +24,7 @@ import com.kh.whereding.main.model.vo.SearchMakeup;
 import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.Reservation;
 import com.kh.whereding.product.model.vo.Studio;
 
 @Controller
@@ -170,6 +172,20 @@ public class MainController {
 			}
 	}
 
+	@ResponseBody
+	@RequestMapping(value="selectBasket.sb", produces = "application/json; charset=utf-8")
+	public String selectBasketList(String userNo) {
+//		System.out.println(userNo);
+		ArrayList<Basket> list = mnService.selectBasketList(userNo);
+	
+		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value="selectRsv.sb", produces = "application/json; charset=utf-8")
+	public String selectRsvList(String userNo) {
+		ArrayList<Reservation> list = mnService.selectRsvList(userNo);
+		return new Gson().toJson(list);
+	}
 		
 
 }
