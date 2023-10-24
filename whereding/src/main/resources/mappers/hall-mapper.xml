@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="hallMapper">
+	<resultMap type="Hall" id="hallResult">
+		<result column="h_code" property="code"/>
+		<result column="h_enterprise" property="enterprise"/>
+		<result column="h_name" property="name"/>
+		<result column="h_detail" property="detail"/>
+		<result column="h_seat" property="seat"/>
+		<result column="h_rental" property="rental"/>
+		<result column="h_restaurant_seat" property="hallSeat"/>
+		<result column="h_meal" property="meal"/>
+		<result column="h_start_time" property="startTime"/>
+		<result column="h_end_time" property="endTime"/>
+		<result column="h_phone" property="phone"/>
+		<result column="h_address" property="address"/>
+		<result column="h_unit_time" property="unitTime"/>
+		<result column="h_week_open" property="weekOpen"/>
+		<result column="tag_content" property="tagContent"/>
+		<result column="img_1" property="img1"/>
+		<result column="img_2" property="img2"/>
+		<result column="img_3" property="img3"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		select 
+				count(*)
+	 	   from hall
+  	</select>
+  	
+  	<select id="selectList" resultMap="hallResult">
+	    select 
+		       H_CODE
+		     , H_ENTERPRISE
+		     , H_ADDRESS
+		     , H_NAME
+		     , H_RENTAL
+		     , H_SEAT
+		     , H_MEAL
+		     , H_RESTAURANT_SEAT
+		  from hall
+  	</select>
+  	
+  	<insert id="insertHall">
+		insert 
+		  into hall
+		  (
+		    H_CODE
+		  , H_ENTERPRISE
+		  , H_NAME
+		  , H_DETAIL
+		  , H_SEAT
+		  , H_RENTAL
+		  , H_RESTAURANT_SEAT
+		  , H_MEAL
+		  , H_START_TIME
+		  , H_END_TIME
+		  , H_PHONE
+		  , H_ADDRESS
+		  , H_UNIT_TIME
+		  , H_WEEK_OPEN
+		  )
+	 values
+	 	  (
+	 	  	'H'||SEQ_HNO.nextval
+	 	  , #{enterprise}
+	 	  , #{name}
+	 	  , #{detail}
+	 	  , #{seat}
+	 	  , #{rental}
+	 	  , #{hallSeat}
+	 	  , #{meal}
+	 	  , #{startTime}
+	 	  , #{endTime}
+	 	  , #{phone}
+	 	  , #{address}
+	 	  , #{unitTime}
+	 	  , #{weekOpen}
+	 	  )
+	</insert>
+	
+  		
+	
+</mapper>
