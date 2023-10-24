@@ -67,7 +67,7 @@ span {
     <div class="outer">
         <h1 align="center" style="margin-top: 50px;">웨딩홀 신규등록</h1>
         <div class="enroll">
-            <form action="insert.pr" id="aaa">
+            <form action="insert.pr" id="aaa" enctype="multipart/form-data" method="post">
                 <table class="enrollForm" border="2px">
                     <tr>
                         <th>업체명</th>
@@ -127,14 +127,45 @@ span {
                 <table id="enrollForm2" border="1">
                     <tr>
                         <th width="20x">이미지1</th>
-                        <td><input type="file" name="img1" ></td>
+                        <td style="width: 150px; height: 100px;"><img src="" id="contentImg1" width="100%" height="100%" onclick="chooseFile(1)"></td>
                         <th width="20px">이미지2</th>
-                        <td><input type="file" name="img2" ></td>
+                        <td style="width: 150px; height: 100px;"><img src="" id="contentImg2" width="100%" height="100%" onclick="chooseFile(2)"></td>
                         <th width="20px">이미지3</th>
-                        <td><input type="file" name="img3" ></td>
+                        <td style="width: 150px; height: 100px;"><img src="" id="contentImg3" width="100%" height="100%" onclick="chooseFile(3)"></td>
                     </tr>
                 </table>
-               
+                <!-- <td><input type="file" name="img3" ></td> -->
+                <div id="file-area" style="display:none;">
+                    <input type="file" name="upfile" id="file1" onchange="loadImg(this, 1);">
+                    <input type="file" name="upfile" id="file2" onchange="loadImg(this, 2);">
+                    <input type="file" name="upfile" id="file3" onchange="loadImg(this, 3);">
+                </div>
+               <script>
+                    function chooseFile(i){
+                        $("#file" + i).click(); 
+                    }
+                    function loadImg(inputFile,i){
+                        if(inputFile.files.length == 1){
+                            const reader = new FileReader();
+        
+                            reader.readAsDataURL(inputFile.files[0]);
+        
+                            reader.onload = function(e){
+                                switch(i){
+                                    case 1: $("#contentImg1").attr("src", e.target.result); break;
+                                    case 2: $("#contentImg2").attr("src", e.target.result); break;
+                                    case 3: $("#contentImg3").attr("src", e.target.result); break;
+                                }
+                            }
+                        }else{	
+                            switch(i){
+                            case 1: $("#contentImg1").attr("src", null); break;
+                            case 2: $("#contentImg2").attr("src", null); break;
+                            case 3: $("#contentImg3").attr("src", null); break;
+                            }
+                        }
+                    }    
+               </script>
 
                 <div id="input-tag" style="margin-top: 10px;">
                     <span class="parent-span">

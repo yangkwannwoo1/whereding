@@ -1,5 +1,7 @@
 package com.kh.whereding.product.model.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,4 +34,5 @@ public class Hall {
 	private String img2;
 	private String img3;
 	private String tag;
+	
 }

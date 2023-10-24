@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.whereding.common.model.vo.Attachment;
+import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.product.model.dao.HallDao;
 import com.kh.whereding.product.model.vo.Hall;
@@ -22,7 +24,6 @@ public class HallServiceImpl implements HallService {
 	
 	@Override
 	public int selectListCount() {
-		
 		return hDao.selectListCount(sqlSession);
 	}
 
@@ -36,6 +37,16 @@ public class HallServiceImpl implements HallService {
 	public int insertHall(Hall h) {
 		
 		return hDao.insertHall(h, sqlSession);
+	}
+
+	@Override
+	public int insertFile(Attachment a) {
+		return hDao.insertFile(a, sqlSession);
+	}
+
+	@Override
+	public int insertTag(HashTag t) {
+		return hDao.insertTag(t, sqlSession);
 	}
 
 }
