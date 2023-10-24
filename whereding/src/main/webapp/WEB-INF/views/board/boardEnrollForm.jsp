@@ -250,7 +250,7 @@
                             <textarea name="noticeContent" id="QNA_CONTENT" cols="111" rows="23" placeholder="Q&A 내용을 입력해주세요."></textarea>
                         </c:if>
                         <c:if test="${board eq 'QnA' }">
-                            <textarea name="qnaContent" id="QNA_CONTENT" cols="111" rows="23" placeholder="Q&A 내용을 입력해주세요."></textarea>
+                            <textarea name="qnaContent" id="QNA_CONTENT" cols="111" rows="10" placeholder="Q&A 내용을 입력해주세요."></textarea>
                         </c:if>
                         <c:if test="${board eq '공지사항_수정' }">
                             <textarea name="noticeContent" id="QNA_CONTENT" cols="111" rows="23">${n.noticeContent}</textarea>
