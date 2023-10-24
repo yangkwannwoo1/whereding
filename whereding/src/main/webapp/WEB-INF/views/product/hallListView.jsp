@@ -83,7 +83,7 @@
   
   .input_area span input{
     border: none;  
-    width: 84%;
+    width: 80%;
     height: 20px;
     text-align: right;
   }  
@@ -417,6 +417,13 @@
   color: #ffffff;
   display: none;
 }
+
+.sortBtn{
+	font-size:5px;
+	width:150px;
+	border-radius: 15px;
+	margin: auto;
+}
 		
 	</style>
 
@@ -430,14 +437,6 @@
 	<br>
 	<div class="latest-news mt-150 mb-150">
 		<div class="container">
-			<div id="menu5">
-				<div>
-					<button style="float: left; margin-left: 200px; height: 50px; width: 100px; border-radius: 15px;" class="btn btn-outline-info">웨딩홀</button> 
-					<button style="margin-left: 100px; height: 50px; width: 100px; border-radius: 15px;" class="btn btn-outline-info">스튜디오</button> 
-					<button style="margin-left: 100px; height: 50px; width: 100px; border-radius: 15px;" class="btn btn-outline-info">드레스</button> 
-					<button style="margin-left: 100px; height: 50px; width: 100px; border-radius: 15px;" class="btn btn-outline-info">메이크업</button>
-				</div>
-			</div>
 			
 <!-- start main search-->
     <form action="search.mn" method="post" id="searchPlace">
@@ -693,7 +692,21 @@
         </table>
     </form>
 			
-			<br><br><br>
+			<br>
+			<h2>선택한 조건으로 검색된 정보에요^_^</h2>
+			<br>
+			<div id="menu5">
+				<div>
+					<button class="sortBtn btn btn-outline-info">웨딩홀 보기</button> 
+					<button class="sortBtn btn btn-outline-info">스튜디오 보기</button> 
+					<button class="sortBtn btn btn-outline-info">드레스 보기</button> 
+					<button class="sortBtn btn btn-outline-info">메이크업 보기</button>
+				</div>
+			</div>
+			
+	
+			
+			<h4>웨딩홀</h4>			
 			<div class="row">
 				<c:forEach var="h" items="${ list }">
 					<div class="col-lg-4 col-md-6">
@@ -896,101 +909,9 @@
 
 
 
-	<!-- product section -->
-	<div class="product-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text"></span>Wedding Collection</h3>
-						<p>Studio, Dress, MakeUp</p>
-					</div>
-				</div>
-			</div>
+	
 
-			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
-					<h3>STUDIO</h3>
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="https://cdn.imweb.me/thumbnail/20210317/1d76f943457d7.jpg" alt=""></a>
-						</div>
-						<h3>피엔스튜디오 강남점</h3>
-						<p class="product-price"><span class="address">서울 강남구 강남대로96길 19 지하1층</span></p>
-						<a href="cart.html" class="cart-btn"><img class="book-icon" src="resources/css/assets/img/booking.png"> 예약하기</a>			
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<h3>DRESS</h3>
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="https://www.qplace.kr/content/images/2021/12/8-9.jpg" alt=""></a>
-						</div>
-						<h3>로브드k</h3>
-						<p class="product-price"><span class="address">서울 강남구 도산대로 427 파모소빌딩 4층</span></p>
-						<a href="cart.html" class="cart-btn"><img class="book-icon" src="resources/css/assets/img/booking.png"> 예약하기</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<h3>MAKEUP</h3>
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="https://cdn.hkbs.co.kr/news/photo/201806/472435_238631_1557.jpg" alt=""></a>
-						</div>
-						<h3>그리다 청담</h3>
-						<p class="product-price"><span class="address">서울 강남구 도산대로75길 6 2층 그리다 청담</span></p>
-						<a href="cart.html" class="cart-btn"><img class="book-icon" src="resources/css/assets/img/booking.png"> 예약하기</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end product section -->
-
-    	<!-- features list section -->
-	<div class="list-section pt-80 pb-80">
-		<div class="container">
-			<h3 style="padding-left: 30px;">Best weding hall</h3>
-			<div class="row">
-				
-				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-					<img src="https://www.ihall.co.kr/center/pic/banquet_ent_poto/13998558121612918786.jpg" alt="">
-					<div class="list-box d-flex align-items-center">
-						<div class="content">
-							<h3>더 클래스 청담</h3>
-							<p>서울 강남구 청담동</p>
-							<p>식대비용 : 3~4만원</p>
-							<p>최대수용인원 : 450명</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-					<img src="https://www.iwedding.co.kr/center/website/ihall_img/1166679588/1166679588_img_230_0_1608692935.jpg" alt="">
-					<div class="list-box d-flex align-items-center">
-						<div class="content">
-							<h3>더컨벤션 신사</h3>
-							<p>서울 강남구 신사동</p>
-							<p>식대비용 : 4~5만원</p>
-							<p>최대수용인원 : 350명</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbaj8YWRl4TPt8n4jvQqcYGqr0RVYWliSWPsna_ifTAUQnALl5QoW3GxqYWaZMxt-tz_s&usqp=CAU" alt="">
-					<div class="list-box d-flex align-items-center">
-						<div class="content">
-							<h3>드레스가든</h3>
-							<p>서울 강남구 청담동</p>
-							<p>식대비용 : 3~5만원</p>
-							<p>최대수용인원 : 550명</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<!-- end features list section -->
+    
 	
 	<script>
        	function submitSearch(){

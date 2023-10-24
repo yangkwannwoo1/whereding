@@ -91,10 +91,9 @@ public class MainController {
 //		}
 //		System.out.println("---------------------");
 //	}
+		@ResponseBody
 		@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
-		public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
-			
-			
+		public String searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
 //			 studio 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 		//(sAddress=서울특별시 동대문,서울특별시 중랑구, sMinPrice=0, sMaxPrice=100, sWeek=on, sTag=호텔웨딩,스몰웨딩)
@@ -114,9 +113,6 @@ public class MainController {
 			map.put("sMaxPrice", ss.getSMaxPrice());
 			map.put("sWeek", ss.getSWeek());
 		
-//		alist.clear();
-//		tlist.clear();
-//		
 		// dress
 			ArrayList<String> dalist = new ArrayList<String>();
 			ArrayList<String> dtlist = new ArrayList<String>();
@@ -156,20 +152,18 @@ public class MainController {
 			ArrayList<Dress> dlist = mnService.searchDressList(map);
 			ArrayList<Makeup> mlist = mnService.searchMakeupList(map);
 			
-//			System.out.println("SDM");
-//			System.out.println(slist);
-//			System.out.println(dlist);
-//			System.out.println(mlist);
-//			System.out.println("---------------------------------");
-//			for(Studio s : slist) {
-//				System.out.println(s);
-//			}
-//			for(Dress d : dlist) {
-//				System.out.println(d);
-//			}
-//			for(Makeup m : mlist) {
-//				System.out.println(m);
-//			}
+			
+			
+			for(Studio s : slist) {
+				System.out.println(s);
+			}
+			for(Dress d : dlist) {
+				System.out.println(d);
+			}
+			for(Makeup m : mlist) {
+				System.out.println(m);
+			}
+			return new Gson().toJson("slist");
 	}
 
 	@ResponseBody
