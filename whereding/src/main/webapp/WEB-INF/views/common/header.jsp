@@ -230,8 +230,8 @@ font-family: 'Open Sans Condensed', sans-serif;
 									href="index.html">Home</a> <a href="index.html">홈</a></li>
 								<li id="main-menu-about"><a href="about.html">About</a> <a
 									href="about.html">회사소개</a></li>
-								<li id="main-menu-wedding"><a href="#">Wedding Holl</a> <a
-									href="#">웨딩홀</a></li>
+								<li id="main-menu-wedding"><a href="hList.pr">Wedding Holl</a> <a
+									href="hList.pr">웨딩홀</a></li>
 								<li id="main-menu-collection"><a href="news.html">Wedding
 										Collection</a>
 									<ul class="sub-menu">

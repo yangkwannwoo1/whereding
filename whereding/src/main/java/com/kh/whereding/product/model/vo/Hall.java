@@ -27,4 +27,9 @@ public class Hall {
 	private String address;
 	private String unitTime;
 	private String weekOpen;
+	private String tagContent;
+	private String img1;
+	private String img2;
+	private String img3;
+	private int product_no;
 }
