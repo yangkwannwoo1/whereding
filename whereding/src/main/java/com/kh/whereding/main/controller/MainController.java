@@ -42,56 +42,7 @@ public class MainController {
 //		System.out.println(list); productNo=H1, tagContent=예쁨, 감성적인, 가격이 싼), HashTag(productNo=H2, tagContent=멋있는, 갬성, 찌끄리)
 		return new Gson().toJson(list);
 	};
-	
-	
-//	@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
-//	public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
-//		System.out.println(sh);
-//		//(wAddress=서울특별시 종로구,서울특별시 중구, wMinPrice=0, wMaxPrice=100, wSeat=1, eatMinPrice=0, eatMaxPrice=10, wTag=스몰웨딩,일반웨딩,하우스웨딩)
-//		// 좌석수 
-//		// 1 : 0   ~ 100 
-//		// 2 : 101 ~ 300
-//		// 3 : 100 ~ 500
-//		// 4 : 500 ~ 
-//		System.out.println(ss);
-//		//(sAddress=서울특별시 동대문,서울특별시 중랑구, sMinPrice=0, sMaxPrice=100, sWeek=on, sTag=호텔웨딩,스몰웨딩)
-//		System.out.println(sd);
-//		System.out.println(sm);
-////		HashMap<String, String[]> map = new HashMap();
-////		String[] str;
-////		str = sh.getWTag().split(",");
-////		map.put("wTag",str);
-//		ArrayList<Hall> hlist = mnService.selectHallList(sh);
-////		ArrayList allList = new ArrayList();
-////		allList.add(ss);
-////		allList.add(sd);
-////		allList.add(sm);
-//		
-////			System.out.println(a);
-//		
-//		ArrayList<Studio> slist = mnService.selectStudioList(ss);
-//		ArrayList<Dress> dlist = mnService.selectDressList(sd);
-//		ArrayList<Makeup> mlist = mnService.selectMakeupList(sm);
-//		
-//		
-//		System.out.println("---------------------");
-//		for(Hall h : hlist) {
-//			System.out.println(h);			
-//		}
-//		System.out.println("---------------------");
-//		for(Studio s : slist) {
-//			System.out.println(s);			
-//		}
-//		System.out.println("---------------------");
-//		for(Dress d : dlist) {
-//			System.out.println(d);			
-//		}
-//		System.out.println("---------------------");
-//		for(Makeup m : mlist) {
-//			System.out.println(m);			
-//		}
-//		System.out.println("---------------------");
-//	}
+
 		@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
 		public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
 			
@@ -154,13 +105,7 @@ public class MainController {
 			ArrayList<Studio> slist = mnService.searchStudioList(map);
 			ArrayList<Dress> dlist = mnService.searchDressList(map);
 			ArrayList<Makeup> mlist = mnService.searchMakeupList(map);
-			
-//			System.out.println("SDM");
-//			System.out.println(slist);
-//			System.out.println(dlist);
-//			System.out.println(mlist);
-//			System.out.println("---------------------------------");
-//			System.out.println("---------------------");
+
 			for(Makeup m : mlist) {
 				System.out.println(m);			
 			}
