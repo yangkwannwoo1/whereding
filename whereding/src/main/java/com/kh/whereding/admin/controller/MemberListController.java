@@ -12,8 +12,6 @@ import com.kh.whereding.admin.model.service.AdminServiceImpl;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.common.template.Pagenation;
 import com.kh.whereding.member.model.vo.Member;
-import com.kh.whereding.product.model.service.HallServiceImpl;
-import com.kh.whereding.product.model.vo.Hall;
 
 @Controller
 public class MemberListController {
@@ -21,7 +19,7 @@ public class MemberListController {
 	@Autowired
 	private AdminServiceImpl AService;
 	
-	@RequestMapping("mList.ad")
+	@RequestMapping("admin.ad")
 	public ModelAndView MemberListForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv)  {
 			
