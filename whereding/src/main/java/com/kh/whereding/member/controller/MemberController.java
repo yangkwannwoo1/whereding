@@ -60,25 +60,6 @@ public class MemberController {
 		return"redirect:/";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "myPage.me")
 	public String intoMyPage() {
 		return "member/myPage";
@@ -120,15 +101,6 @@ public class MemberController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//이게 찐 회원가입ㅋ
 	@RequestMapping("createMember")
 	public String memberEnroll(Member m, HttpSession session) {
@@ -155,23 +127,3 @@ public class MemberController {
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

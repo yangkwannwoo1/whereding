@@ -161,25 +161,18 @@ font-family: 'Open Sans Condensed', sans-serif;
 								<span>${loginMember.userName}님 환영</span>
 								<a class="logout" href="logout.me"><span>로그아웃</span></a>
 					</c:when>
+
 					<c:otherwise>
-					<c:if test="${not empty alertMsg }">
-						<script>
-							// alertify.alert("${alertMsg}");
-								alert("${alertMsg}");
-						</script>
-						<c:remove var="alertMsg" scope="session"/>
-					</c:if>
-						<span>${loginMember.userName}님 환영</span>
-						<a class="logout" href="logout.me"><span>로그아웃</span></a>
+					   <a class="login">로그인</a> / <a id="enroll_btn">회원가입</a>
 					</c:otherwise>
 				</c:choose>
-					
-				<c:if test="${not empty alertMsg }">
-					<script>
-					
-					</script>
-				</c:if>
-				
+					<c:if test="${not empty alertMsg }">
+							<script>
+									alert("${alertMsg}");
+							</script>
+							<c:remove var="alertMsg" scope="session"/>
+					</c:if>
+						
 				
 				<script>
 					$("#enroll_btn").click(function(){
