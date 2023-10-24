@@ -718,7 +718,10 @@
 
 		</div>
 	</div>
+	
 	<!-- end features list section -->
+
+
 	
 	<jsp:include page="common/footer.jsp"/>
 

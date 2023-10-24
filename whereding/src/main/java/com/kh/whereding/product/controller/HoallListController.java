@@ -33,8 +33,6 @@ public class HoallListController {
 			
 			ArrayList<Hall> list = HService.selectList(pi);
 			mv.addObject("pi", pi).addObject("list", list).setViewName("product/hallListView");
-			System.out.println(pi);
-
 			return mv;
 			
 	}
