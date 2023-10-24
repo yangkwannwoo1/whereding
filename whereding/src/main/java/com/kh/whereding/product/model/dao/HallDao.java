@@ -6,6 +6,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.whereding.common.model.vo.Attachment;
+import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.product.model.vo.Hall;
 
@@ -32,6 +34,14 @@ public class HallDao {
 	public int insertHall(Hall h,SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.insert("hallMapper.insertHall", h);
+	}
+	
+	public int insertTag(HashTag t, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("hallMapper.insertTag", t);
+	}
+	
+	public int insertFile(Attachment a, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("hallMapper.insertFile", a);
 	}
 
 }

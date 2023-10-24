@@ -24,6 +24,11 @@
 		
 	</resultMap>
 	
+	<resultMap type="HashTag" id="hashTagResult">
+		<result column="product_no" property="productNo"></result>
+		<result column="tag_content" property="tagContent"></result>
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int">
 		select 
 				count(*)
@@ -79,6 +84,42 @@
 	 	  , #{unitTime}
 	 	  , #{weekOpen}
 	 	  )
+	</insert>
+	
+	<insert id="insertTag">
+		insert 
+		  into tag
+		  (
+		  	product_no
+		  , tag_content
+		  ) 
+		  values
+		  (
+		    'H' ||SEQ_HNO.CURRVAL
+		  , #{ tagContent }
+		  )
+	</insert>
+	
+	<insert id="insertFile">
+		insert 
+		  into product_img
+		  (
+		    img_no
+		  , product_No
+		  , img_Path
+		  , img_1
+		  , img_2
+		  , img_3
+		  )
+		  values
+		  (
+		    seq_img.nextval
+		  , 'H' ||SEQ_HNO.CURRVAL
+		  , #{ imgPath }
+		  , #{ img1 }
+		  , #{ img2 }
+		  , #{ img3 }
+		  )
 	</insert>
 	
   		
