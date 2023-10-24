@@ -23,6 +23,7 @@ import com.kh.whereding.main.model.vo.SearchHall;
 import com.kh.whereding.main.model.vo.SearchMakeup;
 import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
+import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
 import com.kh.whereding.product.model.vo.Reservation;
 import com.kh.whereding.product.model.vo.Studio;
@@ -94,7 +95,8 @@ public class MainController {
 		@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
 		public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
 			
-			
+			ArrayList<Hall> hlist = mnService.selectHallList(sh);
+
 //			 studio 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 		//(sAddress=서울특별시 동대문,서울특별시 중랑구, sMinPrice=0, sMaxPrice=100, sWeek=on, sTag=호텔웨딩,스몰웨딩)
@@ -114,9 +116,6 @@ public class MainController {
 			map.put("sMaxPrice", ss.getSMaxPrice());
 			map.put("sWeek", ss.getSWeek());
 		
-//		alist.clear();
-//		tlist.clear();
-//		
 		// dress
 			ArrayList<String> dalist = new ArrayList<String>();
 			ArrayList<String> dtlist = new ArrayList<String>();
@@ -161,15 +160,19 @@ public class MainController {
 //			System.out.println(dlist);
 //			System.out.println(mlist);
 //			System.out.println("---------------------------------");
-//			for(Studio s : slist) {
-//				System.out.println(s);
-//			}
-//			for(Dress d : dlist) {
-//				System.out.println(d);
-//			}
-//			for(Makeup m : mlist) {
-//				System.out.println(m);
-//			}
+//			System.out.println("---------------------");
+			for(Makeup m : mlist) {
+				System.out.println(m);			
+			}
+			for(Studio s : slist) {
+				System.out.println(s);
+			}
+			for(Dress d : dlist) {
+				System.out.println(d);
+			}
+			for(Makeup m : mlist) {
+				System.out.println(m);
+			}
 	}
 
 	@ResponseBody

@@ -123,7 +123,7 @@
 		   	and h_seat > 500
 		   </if>
 	</select>
-	
+	<!-- 
 	<select id="selectStudioList" resultMap="studioResultSet">
 		select 
 		       *    
@@ -169,7 +169,7 @@
  		   		and m_week_open = 'N' 
  		   	</otherwise>
  		   </choose>
-	</select>
+	</select> -->
 	
 	
 	<select id="searchStudioList" resultMap="studioResultSet">

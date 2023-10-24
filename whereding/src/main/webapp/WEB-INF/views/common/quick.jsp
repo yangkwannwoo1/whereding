@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -48,10 +51,19 @@
 				</a>
 			</li>
 			<hr>
-			<li class="li_bottom">	
-				<i class="fa fa-phone" aria-hidden="true"></i><br>대표문의
-				<p>02)1234<br>- 1234</p>
-			</li>
+			<c:choose>
+				<c:when test="${loginMember.gradeNo == 1}">
+					<li class="quick_admin">	
+						<i class="fa fa-gears" aria-hidden="true"></i><br>관리자모드
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="li_bottom">	
+						<i class="fa fa-phone" aria-hidden="true"></i><br>대표문의
+						<p>02)1234<br>- 1234</p>
+					</li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 	<!-- 퀵메뉴 -->

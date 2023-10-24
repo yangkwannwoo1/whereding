@@ -113,7 +113,13 @@ $(function(){
         }
     
         $(".reservation_Total").text(checkNum+"개 선택");
-    })        
+    })   
+    
+    $(document).on("click", ".quick_admin",function(){
+        location.href="admin.ad"
+    
+    })
+         
 
 })
 

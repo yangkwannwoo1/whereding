@@ -31,6 +31,5 @@ public class Hall {
 	private String img1;
 	private String img2;
 	private String img3;
-	private int product_no;
 	private String tag;
 }
