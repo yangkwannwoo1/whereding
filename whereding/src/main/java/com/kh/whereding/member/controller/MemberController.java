@@ -1,5 +1,11 @@
 package com.kh.whereding.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.whereding.gift.model.vo.GiftHistory;
+import com.kh.whereding.gift.model.vo.GiftReview;
+import com.kh.whereding.gift.model.vo.GiftReviewImg;
 import com.kh.whereding.member.model.service.MemberServiceImpl;
 import com.kh.whereding.member.model.vo.Member;
 
@@ -48,6 +58,7 @@ public class MemberController {
 		return "member/memberEnrollForm";
 	}
 	
+	// 회원탈퇴
 	@RequestMapping(value = "deleteMember.me")
 	public String deleteMember(Member m, HttpSession session) {
 		int result = mService.deleteMember(m);
@@ -60,11 +71,13 @@ public class MemberController {
 		return"redirect:/";
 	}
 	
+	// 마이페이지 진입
 	@RequestMapping(value = "myPage.me")
 	public String intoMyPage() {
 		return "member/myPage";
 	}
 	
+	// 마이페이지에서 정보 수정
 	@RequestMapping(value = "updateInfo.me")
 	public String updateMemberInfo(Member m, HttpSession session) {
 		System.out.println(m);
@@ -80,7 +93,7 @@ public class MemberController {
 		return "redirect:myPage.me";
 	}
 	
-	
+	// 비번 변경
 	@RequestMapping(value = "updateMemberPwd.me")
 	public String updateMemberPwd(Member m, HttpSession session) {
 		// 비번 일치 체크
@@ -119,11 +132,91 @@ public class MemberController {
 		}
 	}
 	
+	// 아이디중복검사
 	@ResponseBody
 	@RequestMapping("overlap.me")
 	public int overlapId(String userId) {
 		int result = mService.selectUserId(userId);
 		return result;
-		
 	}
+	
+	// 답례품 판매내역
+	@RequestMapping(value = "giftOredrList.me")
+	public String giftOrderList(Member m, HttpSession session) {
+		System.out.println(m);
+		ArrayList<GiftHistory> gh = mService.giftHistoryList(m);
+		System.out.println(gh);
+		
+		if(gh != null) {
+			session.setAttribute("gh",gh);
+			return "member/giftOredrList";
+		}else {
+			session.setAttribute("alertMsg", "목록조회에 실패하였습니다");
+			return "redirct:/";
+		}
+	}
+	
+	@RequestMapping(value = "giftReview.gf")
+	public String giftReview(GiftReview gr,Member m,MultipartFile upfile, GiftReviewImg gri, HttpSession session) {
+		int result = mService.giftReview(gr);
+		
+		if(!upfile.getOriginalFilename().equals("")) { // 이미지 있음 
+			String changeName = saveFile(upfile,session);
+			
+			gri.setOriginName(upfile.getOriginalFilename());
+			gri.setChangeName(changeName);
+			gri.setFilePath("resources/css/assets/img/giftReviewImg");
+			System.out.println(gri);
+			int result2 = mService.giftReviewImg(gri);
+			
+			if(result > 0 && result2 > 0) {
+				session.setAttribute("alertMsg", "리뷰가 등록되었습니다.");
+			}else {
+				session.setAttribute("alertMsg", "리뷰 등록 실패");
+			}
+		
+		} else { // 이미지 없음 그냥 리뷰먄
+			
+			if(result >0) {
+				session.setAttribute("alertMsg", "리뷰가 등록되었습니다.");
+			}else {
+				session.setAttribute("alertMsg", "리뷰 등록 실패");
+			}
+		}
+		
+		
+		
+		return"redirect:giftOredrList.me?userNo="+ m.getUserNo();
+	}
+	
+	
+	
+	
+	// 현재 넘어온 첨부파일 그 자체를 서버의 폴더에 저장시키는 역활
+	public String saveFile(MultipartFile upfile, HttpSession session) {
+			String originName = upfile.getOriginalFilename(); // "flower.png"
+			
+			// "20231004154607" (년월일시분초)
+			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 현재시간(포멧형식으로) 
+			int ranNum = (int)(Math.random()*90000 + 10000); // 5자리 랜덤값
+			String ext = originName.substring(originName.lastIndexOf("."));
+			
+			String changeName = "결혼은-웨어딩-" + currentTime + ranNum + ext;
+			
+			// 업로드 시키고자 하는 폴더의 물리적인 경로를 알아내기
+			String savePath = session.getServletContext().getRealPath("/resources/css/assets/img/giftReviewImg/");
+			
+			try {
+				upfile.transferTo(new File(savePath + changeName));
+				
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return changeName;
+	}
+	
+	
+	
 }

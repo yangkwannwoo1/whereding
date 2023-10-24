@@ -1,8 +1,13 @@
 package com.kh.whereding.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.whereding.gift.model.vo.GiftHistory;
+import com.kh.whereding.gift.model.vo.GiftReview;
+import com.kh.whereding.gift.model.vo.GiftReviewImg;
 import com.kh.whereding.member.model.vo.Member;
 
 @Repository
@@ -31,7 +36,16 @@ public class MemberDao {
 	}
 
 	public int deleteMember(SqlSessionTemplate sqlSession, Member m) {
-		System.out.println("디에오");
 		return sqlSession.update("memberMapper.deleteMember", m);
+	}
+	public ArrayList<GiftHistory> giftHistoryList(SqlSessionTemplate sqlSession, Member m) {
+		ArrayList<GiftHistory> gh = (ArrayList)sqlSession.selectList("giftMapper.giftHistoryList", m);
+		return gh;
+	}
+	public int giftReview(SqlSessionTemplate sqlSession, GiftReview gr) {
+		return sqlSession.insert("giftMapper.giftReview", gr);
+	}
+	public int giftReviewImg(SqlSessionTemplate sqlSession, GiftReviewImg gri) {
+		return sqlSession.insert("giftMapper.giftReviewImg", gri);
 	}
 }
