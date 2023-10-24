@@ -162,6 +162,7 @@
     </style>
 </head>
 <body>
+    <jsp:include page="../common/header.jsp"/>
 <div class="outer">
     <div class="navi">
         <h3 id="navi_title">고객센터</h3>
@@ -205,7 +206,7 @@
 	                    <td class="nNo">${n.noticeNo }</td>
 	                    <td class="ta_l">
 	
-	                        <a href="javascript:FnBoardView('900');" class="brd_cont_text text_long" >${n.noticeTitle }</a>
+	                        <a href="javascript:FnBoardView('900');" class="brd_cont_text text_long" style="color: black;" >${n.noticeTitle }</a>
 	
 	                        <i class="ico_camera"></i>
 	                    </td>
@@ -256,7 +257,7 @@
         </div>
     </div>
 </div>
-
+<jsp:include page="../common/footer.jsp"/>
 <script>
     $("#add").click(()=>{
         location.href="noticeEnroll.bo?board=공지사항";

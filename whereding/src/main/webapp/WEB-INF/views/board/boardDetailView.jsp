@@ -182,7 +182,7 @@
         .answer{
             border: 1px solid #f0f0f0;
             width: 880px;
-            height: 500px;
+            height: 280px;
             margin-top: 30px;
         }
         #replyArea{
@@ -199,6 +199,7 @@
     </style>
 </head>
 <body>
+    <jsp:include page="../common/header.jsp"/>
 <div class="outer">
     <div class="navi">
         <h3 id="navi_title">고객센터</h3>
@@ -235,12 +236,18 @@
                     <p>${n.noticeContent}${q.qnaContent}</p>
                 </div>
                <div class="btn" align="right">
-                    <button id="edit">수정하기</button>
-                    <button id="delete">삭제하기</button>
-                    <button id="list">목록으로</button>
-                    <c:if test="${loginMember.userId eq 'admin'}">
-                        <button id="answer">답변하기</button>
+                    <c:if test="${loginMember.userId eq 'admin' and board eq '공지사항'}">
+                        <button id="edit">수정하기</button>
+                        <button id="delete">삭제하기</button>
                     </c:if>
+                    <!-- <c:if test="${not empty loginMember}"> -->
+                        <c:if test="${loginMember.userId eq q.userId and board eq 'QnA'}">
+                            <button id="edit">수정하기</button>
+                            <button id="delete" style="border-radius: 0px;">삭제하기</button>
+                        </c:if>
+                    <!-- </c:if> -->
+                        <button id="list">목록으로</button>
+                    
                </div>
             </div>
             <c:if test="${board eq 'QnA'}">
@@ -260,15 +267,16 @@
                             </c:if> -->
                         </c:if>
                         <!-- 답변이 없는데 관리자가 로그인멤버일 때 -->
-                        <c:if test="${loginMember.userId eq 'admin'}">
-                            <form action="#">
+                        <c:if test="${loginMember.userId eq 'admin' and empty q.qnaAnswer}">
+                            <form action="insertAnswer.bo">
+                                <input type="hidden" name="qnaNo" value="${q.qnaNo}">
                                 <tr>
                                     <th colspan="2">
-                                        <textarea class="form-control" cols="110" rows="10" style="resize:none; width:100%" >답변내용 입력하시오</textarea>
+                                        <textarea class="form-control" name="qnaAnswer" cols="110" rows="5" style="resize:none; width:100%"  placeholder="답변 입력하싱옹"></textarea>
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addReply();">등록</button></th>
+                                    <th style="vertical-align: middle"><button class="btn btn-secondary" type="submit">등록</button></th>
                                 </tr>
                             </form>
                         </c:if>
@@ -282,6 +290,8 @@
 
     </div>
 </div>
+<br>
+<jsp:include page="../common/footer.jsp"/>
 <script>
     $("#list").click(()=>{
         if(${board eq "공지사항"}){
@@ -309,5 +319,6 @@
         }
     })
 </script>
+
 </body>
 </html>

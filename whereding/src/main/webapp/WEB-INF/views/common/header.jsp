@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>웨어딩 헤더</title>
 <!-- favicon -->
 <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
 <!-- google font -->
@@ -162,7 +162,15 @@ font-family: 'Open Sans Condensed', sans-serif;
 								<a class="logout" href="logout.me"><span>로그아웃</span></a>
 					</c:when>
 					<c:otherwise>
-						<a class="login">로그인</a> / <a id="enroll_btn">회원가입</a>
+					<c:if test="${not empty alertMsg }">
+						<script>
+							// alertify.alert("${alertMsg}");
+								alert("${alertMsg}");
+						</script>
+						<c:remove var="alertMsg" scope="session"/>
+					</c:if>
+						<span>${loginMember.userName}님 환영</span>
+						<a class="logout" href="logout.me"><span>로그아웃</span></a>
 					</c:otherwise>
 				</c:choose>
 					
@@ -249,9 +257,9 @@ font-family: 'Open Sans Condensed', sans-serif;
 									</ul> <a href="shop.html">쇼핑</a></li>
 								<li id="main-menu-community"><a href="contact.html">Community</a>
 									<ul class="sub-menu">
-										<li><a href="#">Notice</a> <a href="#">공지사항</a></li>
-										<li><a href="#">Reviews</a> <a href="#">리뷰</a></li>
-									</ul> <a href="contact.html">커뮤니티</a></li>
+										<li><a href="#">Notice</a> <a href="notice.bo">공지사항</a></li>
+										<li><a href="#">Q&A</a> <a href="qna.bo">질의응답</a></li>
+									</ul> <a href="service.bo">커뮤니티</a></li>
 								<li id="main-menu-mypge"><a href="contact.html">myPage</a>
 									<ul class="sub-menu">
 										<li><a href="contact.html">Contact</a> <a
@@ -260,7 +268,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 											href="checkout.html">체크아웃</a></li>
 										<li><a href="cart.html">Cart</a> <a href="cart.html">장바구니</a>
 										</li>
-									</ul> <a href="contact.html">마이페이지</a></li>
+									</ul> <a href="myPage.me">마이페이지</a></li>
 								<li id="main-menu-icon">
 									<div class="header-icons">
 										<a class="shopping-cart jb-title" href="cart.html"><i
@@ -334,6 +342,5 @@ font-family: 'Open Sans Condensed', sans-serif;
 						});
 	</script>
 	<br><br><br><br><br>
-
 </body>
 </html>

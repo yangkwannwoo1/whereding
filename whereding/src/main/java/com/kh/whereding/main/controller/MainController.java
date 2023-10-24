@@ -141,7 +141,7 @@ public class MainController {
 			
 			malist.addAll(Arrays.asList(sm.getMAddress().split(",")));
 			mtlist.addAll(Arrays.asList(sm.getMTag().split(",")));
-			System.out.println(sm);
+//			System.out.println(sm);
 			map.put("mAddress", malist);
 			if(sm.getMTag().equals("")) {
 				map.put("mTag", "");
@@ -151,25 +151,25 @@ public class MainController {
 			map.put("mMinPrice", sm.getMMinPrice());
 			map.put("mMaxPrice", sm.getMMaxPrice());
 			map.put("mWeek", sm.getMWeek());
-			System.out.println(map);
+//			System.out.println(map);
 			ArrayList<Studio> slist = mnService.searchStudioList(map);
 			ArrayList<Dress> dlist = mnService.searchDressList(map);
 			ArrayList<Makeup> mlist = mnService.searchMakeupList(map);
 			
-			System.out.println("SDM");
-			System.out.println(slist);
-			System.out.println(dlist);
-			System.out.println(mlist);
-			System.out.println("---------------------------------");
-			for(Studio s : slist) {
-				System.out.println(s);
-			}
-			for(Dress d : dlist) {
-				System.out.println(d);
-			}
-			for(Makeup m : mlist) {
-				System.out.println(m);
-			}
+//			System.out.println("SDM");
+//			System.out.println(slist);
+//			System.out.println(dlist);
+//			System.out.println(mlist);
+//			System.out.println("---------------------------------");
+//			for(Studio s : slist) {
+//				System.out.println(s);
+//			}
+//			for(Dress d : dlist) {
+//				System.out.println(d);
+//			}
+//			for(Makeup m : mlist) {
+//				System.out.println(m);
+//			}
 	}
 
 	@ResponseBody

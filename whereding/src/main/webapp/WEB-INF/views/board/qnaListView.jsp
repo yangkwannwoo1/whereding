@@ -181,6 +181,7 @@
     </style>
 </head>
 <body>
+    <jsp:include page="../common/header.jsp"/>
 <div class="outer">
     <div class="navi">
         <h3 id="navi_title">고객센터</h3>
@@ -225,7 +226,7 @@
 	                <tr class="main-con">
 	                    <td class="qNo">${q.qnaNo }</td>
 	                    <td class="ta_l">
-	                        <a href="javascript:FnBoardView('900');" class="brd_cont_text text_long" >${q.qnaTitle }</a>
+	                        <a href="javascript:FnBoardView('900');" class="brd_cont_text text_long" style="color: black;">${q.qnaTitle }</a>
 	                        <i class="ico_camera"></i>
 	                    </td>
 	                    <td>2023.09.06</td>
@@ -269,11 +270,11 @@
             </ul>
         </div>
         <div class="btn"  align="center">
-            <button id="add">글작성</button>
+                <button id="add">글작성</button>
         </div>
     </div>
 </div>
-
+<jsp:include page="../common/footer.jsp"/>
 <script>
     $("#add").click(()=>{
         location.href="qnaEnroll.bo?board=QnA";

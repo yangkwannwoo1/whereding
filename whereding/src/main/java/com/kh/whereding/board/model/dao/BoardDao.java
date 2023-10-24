@@ -104,6 +104,10 @@ public class BoardDao {
 		return sqlSession.delete("boardMapper.qnaNotice", boardNo);
 	}
 
+	public int updateQnaAnswer(SqlSessionTemplate sqlSession, Qna q) {
+		return sqlSession.update("boardMapper.updateQnaAnswer", q);
+	}
+
 	
 
 	

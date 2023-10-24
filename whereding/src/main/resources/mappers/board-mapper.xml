@@ -140,7 +140,11 @@
   		DELETE qna
 	 	 where qna_no = #{boardNo}
   	</delete>
-  	
+  	<update id="updateQnaAnswer">
+  		update qna
+  		   set QNA_ANSWER = #{qnaAnswer}
+  		 where QNA_NO = #{qnaNo}
+  	</update>
   	
   	
 </mapper>
