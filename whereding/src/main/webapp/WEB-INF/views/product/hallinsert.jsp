@@ -147,8 +147,9 @@ span {
                 </div>
                 <div class="sub" align="center"> 
                     <button type="reset" id="reset">초기화</button> 
-                    <button type="submit" id="submit" onclick="postSubmit();">등록</button>
+                    <input type="button" value="등록" id="postSubmit">
                 </div>
+                <input type="hidden" id="hiddenTag" name="tag">
             </form>
         </div>
     </div>
@@ -184,22 +185,25 @@ span {
                 return;
             })
 
-            $('#input-tag').append("<span clas  s='parent-span'><span>#</span><div class='tag-input-area'><input class='tag-input' type='text' maxlength='50' placeholder='태그입력'><button type='button' class='delete-tag'>x</button></div></span>");
+            $('#input-tag').append("<span class='parent-span'><span>#</span><div class='tag-input-area'><input class='tag-input' type='text' maxlength='50' placeholder='태그입력'><button type='button' class='delete-tag'>x</button></div></span>");
             $('.tag-input')[tagLength].focus();
         }
         })
 
 
         })
+        	
             // 등록하기 버튼 클릭시 폼 전송하는 함수
+            $(document).on("click","#postSubmit",function(){
+		        	let hashtag = $("#input-tag .parent-span .tag-input");
+		        	let hashlist = [];
+		        	for(i = 0 ; i < hashtag.length-1; i++){
+						hashlist.push(hashtag[i].value)
+		        	}
+		            $("#hiddenTag").val(hashlist)
+		            $("#aaa").submit();            	
+            })
             function postSubmit(){
-            	let hashtag = $(".parent-span input");
-            	let hashlist = [];
-            	for(i = 0 ; i < hashtag.length-1; i++){
-					hashlist.push(hashtag[i].value)
-            	}
-                $("#hiddenTag").val(hashlist)
-                    $("#aaa").submit();
             }
 
 </script>

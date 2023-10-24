@@ -21,6 +21,7 @@
 		<result column="img_1" property="img1"/>
 		<result column="img_2" property="img2"/>
 		<result column="img_3" property="img3"/>
+		
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">

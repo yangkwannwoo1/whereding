@@ -25,7 +25,6 @@ public class HoallListController {
 	@RequestMapping("hList.pr")
 	public ModelAndView HallListForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv)  {
-			
 
 			int listCount = HService.selectListCount();
 
@@ -47,7 +46,8 @@ public class HoallListController {
 	
 	@RequestMapping("insert.pr")
 	public String insertBoard(Hall h, HttpSession session, Model model) {
-
+		
+		System.out.println(h);
 		int result = HService.insertHall(h);
 		
 		if (result > 0) { 

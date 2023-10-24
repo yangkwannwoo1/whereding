@@ -10,6 +10,7 @@ import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.product.model.dao.HallDao;
 import com.kh.whereding.product.model.vo.Hall;
 
+
 @Service
 public class HallServiceImpl implements HallService {
 	
