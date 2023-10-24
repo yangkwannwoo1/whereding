@@ -191,10 +191,11 @@ p:last-child {
 .circle {
   width: 8vmax;
   height: 8vmax;
-  border-right: 4px solid #000;
+  border: 4px solid transparent; /* 테두리를 추가하여 원 모양 유지 */
   border-radius: 50%;
-  -webkit-animation: spinRight 800ms linear infinite;
-  animation: spinRight 800ms linear infinite;
+  background-image: url("https://w7.pngwing.com/pngs/162/746/png-transparent-flower-bouquet-wedding-invitation-floral-design-pretty-flowers-flower-arranging-decoupage-flower.png");
+  background-size: cover; /* 이미지를 원에 맞게 조정 */
+  animation: spinRight 5s linear infinite; /* 애니메이션 시간을 3초로 조정 */
 }
 
 .circle:before {

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="giftMapper">
+	
+	<resultMap type="Gift" id="giftResult">
+		<result column="gift_no" property="giftNo"/>
+		<result column="category_no" property="categoryNo"/>
+		<result column="gift_name" property="giftName"/>
+		<result column="gift_content" property="giftContent"/>
+		<result column="gift_price" property="giftPrice"/>
+		<result column="count" property="count"/>
+		<result column="img_path" property="imgPath"/>
+		<result column="img_1" property="img1"/>
+		<result column="img_2" property="img2"/>
+		<result column="img_3" property="img3"/>
+	</resultMap>
+	
+	
+	
+	<select id="selectGiftList" resultMap="giftResult">
+	select 
+        gift_no
+       ,category_no
+       ,gift_name
+       ,gift_content
+       ,gift_price
+       ,count
+       ,img_path as "img_path"
+       ,img_1 as "img_1"
+       ,img_2 as "img_2"
+       ,img_3 as "img_3"
+
+      from gift g
+      left outer join product_img p on g.gift_no=p.product_no
+      
+	</select>
+
+</mapper>
