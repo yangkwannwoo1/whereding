@@ -13,10 +13,14 @@ import lombok.ToString;
 @ToString
 public class Gift {
 	
-	private int giftNo;
+	private String giftNo;
 	private int categoryNo;
 	private String giftName;
 	private String giftContent;
-	private int price;
+	private int giftPrice;
 	private int count;
+	private String imgPath;
+	private String img1;
+	private String img2;
+	private String img3;
 }

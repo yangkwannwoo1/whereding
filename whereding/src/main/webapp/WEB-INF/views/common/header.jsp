@@ -245,9 +245,9 @@ font-family: 'Open Sans Condensed', sans-serif;
 									</ul> <a href="news.html">컬렉션</a></li>
 								<li id="main-menu-event"><a href="contact.html">Event</a> <a
 									href="contact.html">이벤트</a></li>
-								<li id="main-menu-shop"><a href="shop.html">Shop</a>
+								<li id="main-menu-shop"><a href="shop.html">Present</a>
 									<ul class="sub-menu">
-									</ul> <a href="shop.html">쇼핑</a></li>
+									</ul> <a href="giftShop.bo">답례품</a></li>
 								<li id="main-menu-community"><a href="contact.html">Community</a>
 									<ul class="sub-menu">
 										<li><a href="#">Notice</a> <a href="notice.bo">공지사항</a></li>
@@ -255,8 +255,8 @@ font-family: 'Open Sans Condensed', sans-serif;
 									</ul> <a href="service.bo">커뮤니티</a></li>
 								<li id="main-menu-mypge"><a href="contact.html">myPage</a>
 									<ul class="sub-menu">
-										<li><a href="contact.html">Contact</a> <a
-											href="contact.html">상담</a></li>
+										<li><a href="contact.html">Contact</a> 
+										<a href="contact.html">상담</a></li>
 										<li><a href="checkout.html">Check Out</a> <a
 											href="checkout.html">체크아웃</a></li>
 										<li><a href="cart.html">Cart</a> <a href="cart.html">장바구니</a>
