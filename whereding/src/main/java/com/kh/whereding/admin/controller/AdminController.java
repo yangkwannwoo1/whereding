@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.whereding.admin.model.service.AdminServiceImpl;
+import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.common.template.Pagenation;
 import com.kh.whereding.member.model.vo.Member;
@@ -112,10 +113,38 @@ public class AdminController {
 	        wb.close();
 	    }
 	   
-	   @RequestMapping("minsert.ad")
+	   @RequestMapping("mdetail.ad")
 		public String MemberInsertForm() {
 
 			return "admin/memberDetail";
+		}
+	   
+	   @RequestMapping("notice.ad")
+		public String NoticeForm() {
+
+			return "admin/notice";
+		}
+	   
+	   @RequestMapping("qna.ad")
+		public String qnaForm() {
+
+			return "admin/qna";
+		}
+	   
+	   @RequestMapping("qnaList.ad")
+		public ModelAndView qnaListForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv)  {
+			
+	
+			int listCount = AService.selectqnaCount();
+	
+			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 5);
+			
+			ArrayList<Qna> list = AService.selectqnaList(pi);
+			mv.addObject("pi", pi).addObject("list", list).setViewName("admin/qna");
+	
+			return mv;
+				
 		}
 	    
 }

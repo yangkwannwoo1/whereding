@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.whereding.admin.model.dao.AdminDao;
+import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.member.model.vo.Member;
 
@@ -36,6 +37,18 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Member> selectMemberList() {
 		
 		return aDao.selectMemberList(sqlSession);
+	}
+
+	@Override
+	public int selectqnaCount() {
+		
+		return aDao.selectqnaCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Qna> selectqnaList(PageInfo pi) {
+		
+		return aDao.selectqnaList(pi, sqlSession);
 	}
 
 }

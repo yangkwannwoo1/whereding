@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.member.model.vo.Member;
 
@@ -31,8 +32,22 @@ public class AdminDao {
 	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
 
 		return (ArrayList) sqlSession.selectList("memberMapper.selectMemberList");
+	}
+	
+	public int selectqnaCount(SqlSessionTemplate sqlSession) {
 		
+		return sqlSession.selectOne("qnaMapper.selectqnaCount");
+	}
+	
+	public ArrayList<Qna> selectqnaList(PageInfo pi,SqlSessionTemplate sqlSession){
 		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+
+		int limit = pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("qnaMapper.selectqnaList", null, rowBounds);
 	}
 
 }

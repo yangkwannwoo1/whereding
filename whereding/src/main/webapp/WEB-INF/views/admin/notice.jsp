@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>회원조회</title>
+  <title>공지사항 리스트</title>
   
 </head>
 
@@ -27,8 +27,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin.ad">HOME</a></li>
-          <li class="breadcrumb-item">회원</li>
-          <li class="breadcrumb-item active">회원정보조회</li>
+          <li class="breadcrumb-item active">공지사항</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -39,35 +38,24 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">회원 전체 조회</h5>
-              <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='list.ad'">엑셀로 보기</button><br><br>
+              <h5 class="card-title">공지사항 조회</h5>
+              <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='notice.ad'">엑셀로 보기</button><br><br>
               
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
                     <th scope="col">No</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">아이디</th>
-                    <th scope="col">회원등급</th>
-                    <th scope="col">생년월일</th>
-                    <th scope="col">성별</th>
-                    <th scope="col">전화번호</th>
-                    <th scope="col">이메일</th>
-                    <th scope="col">상세보기</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성일</th>
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="m" items="${ list }"> 
+                <c:forEach var="n" items="${ list }"> 
                   <tr>
-                    <th scope="row">${ m.userNo }</th>
+                    <th scope="row">${ n.userNo }</th>
                     <td>${ m.userName }</td>
                     <td>${ m.userId }</td>
-                    <td>${ m.gradeNo }</td>
-                    <td>${ m.birthDay }</td>
-                    <td>${ m.gender }</td>
-                    <td>${ m.phone }</td>
-                    <td>${ m.email }</td>
                     <td><button onclick="location.href='mdetail.ad'" type="button" style="border-radius: 10px;">상세보기</button></td>
                   </tr>
                 </c:forEach>

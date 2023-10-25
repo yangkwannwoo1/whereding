@@ -8,7 +8,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>회원조회</title>
+  <title>QNA 리스트</title>
   
 </head>
 
@@ -23,66 +23,76 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>회원정보조회</h1>
+      <h1>QNA 조회</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin.ad">HOME</a></li>
-          <li class="breadcrumb-item">회원</li>
-          <li class="breadcrumb-item active">회원정보조회</li>
+          <li class="breadcrumb-item active">QNA</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">회원 전체 조회</h5>
-              <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='list.ad'">엑셀로 보기</button><br><br>
-              
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">아이디</th>
-                    <th scope="col">회원등급</th>
-                    <th scope="col">생년월일</th>
-                    <th scope="col">성별</th>
-                    <th scope="col">전화번호</th>
-                    <th scope="col">이메일</th>
-                    <th scope="col">상세보기</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="m" items="${ list }"> 
-                  <tr>
-                    <th scope="row">${ m.userNo }</th>
-                    <td>${ m.userName }</td>
-                    <td>${ m.userId }</td>
-                    <td>${ m.gradeNo }</td>
-                    <td>${ m.birthDay }</td>
-                    <td>${ m.gender }</td>
-                    <td>${ m.phone }</td>
-                    <td>${ m.email }</td>
-                    <td><button onclick="location.href='mdetail.ad'" type="button" style="border-radius: 10px;">상세보기</button></td>
-                  </tr>
-                </c:forEach>
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">QNA 조회</h5>
+							<button type="button"
+								style="border-radius: 10px; width: 100px; height: 50px;"
+								onclick="location.href='notice.ad'">엑셀로 보기</button>
+							<br>
+							<br>
 
-            </div>
-          </div>
+							<!-- F.A.Q Group 1 -->
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">QNA 조회</h5>
+									<div class="accordion accordion-flush" id="faq-group-1">
+										<div class="accordion-item">
+											<h2 class="accordio n-header">
+												<button class="accordion-button sed"
+													data-bs-target="#faqsOne-1" type="button"
+													data-bs-toggle="collapse">제목</button>
+											</h2>
+											<div id="faqsOne-1" class="accordion-collapse collapse"
+												data-bs-parent="#faq-group-1">
+												<div class="accordion-body">내용</div>
+											</div>
+										</div>
+										
+										<c:forEach var="q" items="${ list }">
+											<div class="accordion-item">
+												<h2 class="accordion-header">
+													<button class="accordion-button collapsed"
+														data-bs-target="#faqsOne-${ q.qnaNo }" type="button"
+														data-bs-toggle="collapse">
+														${ q.qnaTitle } ${ q.qnaDate }
+													</button>
+												</h2>
+												<div id="faqsOne-${ q.qnaNo }" class="accordion-collapse collapse"
+													data-bs-parent="#faq-group-1">
+													<div class="accordion-body">
+													${ q.qnaContent }
+													</div>
+												</div>
+												 <button onclick="location.href='qna.ad'" type="button" style="border-radius: 10px;">상세보기</button>
+											</div>
+										</c:forEach>
 
-        </div>
-      </div>
-    </section>
-    
-    <div class="row">
+									</div>
+								</div>
+								<!-- End F.A.Q Group 1 -->
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+		</section>
+
+		<div class="row">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12 text-center">
@@ -93,18 +103,18 @@
 											<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+											<li class="page-item"><a class="page-link" href="qna.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
 										</c:otherwise>
 									</c:choose>
 									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ p }">${ p }</a></li>
+										<li class="page-item"><a class="page-link" href="qna.ad?cpage=${ p }">${ p }</a></li>
 									</c:forEach>
 									<c:choose>
 										<c:when test="${ pi.currentPage eq pi.maxPage }">
 											<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
+											<li class="page-item"><a class="page-link" href="qna.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
 										</c:otherwise>	
 									</c:choose>
 								</ul>
