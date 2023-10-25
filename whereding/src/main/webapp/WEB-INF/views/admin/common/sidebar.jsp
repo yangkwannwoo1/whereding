@@ -100,6 +100,7 @@
 
 
     </ul><!-- End Sidebar-->
+    
 
    <!-- Vendor JS Files -->
   <script src="resources/assets/vendor/apexcharts/apexcharts.min.js"></script>
