@@ -26,7 +26,6 @@ public class HoallListController {
 	public ModelAndView HallListForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv)  {
 			
-
 			int listCount = HService.selectListCount();
 
 			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 6);

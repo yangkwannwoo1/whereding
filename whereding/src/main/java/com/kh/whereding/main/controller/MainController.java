@@ -1,16 +1,12 @@
 package com.kh.whereding.main.controller;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -91,9 +87,9 @@ public class MainController {
 //		}
 //		System.out.println("---------------------");
 //	}
-		@ResponseBody
-		@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
-		public String searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
+	
+		@RequestMapping(value = "search.mn", produces = "application/json; charset=utf-8")
+		public String searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm, Model model) { 
 //			 studio 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 		//(sAddress=서울특별시 동대문,서울특별시 중랑구, sMinPrice=0, sMaxPrice=100, sWeek=on, sTag=호텔웨딩,스몰웨딩)
@@ -113,6 +109,7 @@ public class MainController {
 			map.put("sMaxPrice", ss.getSMaxPrice());
 			map.put("sWeek", ss.getSWeek());
 		
+			
 		// dress
 			ArrayList<String> dalist = new ArrayList<String>();
 			ArrayList<String> dtlist = new ArrayList<String>();
@@ -152,6 +149,7 @@ public class MainController {
 			ArrayList<Dress> dlist = mnService.searchDressList(map);
 			ArrayList<Makeup> mlist = mnService.searchMakeupList(map);
 			
+			ArrayList<Studio> sAllList = mnService.selectStudioList();
 			
 			
 			for(Studio s : slist) {
@@ -163,7 +161,11 @@ public class MainController {
 			for(Makeup m : mlist) {
 				System.out.println(m);
 			}
-			return new Gson().toJson("slist");
+			//new Gson().toJson("slist");
+			model.addAttribute("slist", slist);
+			
+			
+			return "product/sdmListView";
 	}
 
 	@ResponseBody

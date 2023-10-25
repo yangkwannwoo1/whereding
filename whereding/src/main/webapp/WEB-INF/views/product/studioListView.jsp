@@ -429,10 +429,12 @@
 
 </head>
 <body>
+	
 	<jsp:include page="../common/header.jsp"/>
 	
-	<!-- 목록시작 -->
 
+	<!-- 목록시작 -->
+	<br>
 	<div class="latest-news mt-150 mb-150">
 		<div class="container">
 			
@@ -472,11 +474,7 @@
                                             <h3>🤵Wedding Hall👰</h3>
                                         </th>
                                     </tr>
-                                    <!-- <tr>
-                                        <th colspan="4">
-                                            <p style="margin:10px;">***님께 딱 맞는 장소를 추천해드릴게요.</p>
-                                        </th>
-                                    </tr> 이원벨이 머리가 감고 댕겨라 -->
+                                    
                                 </thead>
                                 <tbody class="mSearch wedding">
                                     <!-- 검색 -->
@@ -691,30 +689,33 @@
     </form>
 			
 			<br>
-			
+			<h2>스튜디오 전체 조회 리스트</h2>
 			<br>
 			<div id="menu5">
-		
+				<div>
+					<button class="sortBtn btn btn-outline-info">웨딩홀 보기</button> 
+					<button class="sortBtn btn btn-outline-info">스튜디오 보기</button> 
+					<button class="sortBtn btn btn-outline-info">드레스 보기</button> 
+					<button class="sortBtn btn btn-outline-info">메이크업 보기</button>
+				</div>
 			</div>
-	
-
 			
-			<h4>웨딩홀</h4>			
+			<h4>스튜디오</h4>			
 			<div class="row">
-				<c:forEach var="h" items="${ list}">
+				<c:forEach var="s" items="${slist}">
 					<div class="col-lg-4 col-md-6">
 						<div class="single-latest-news">
-							<a href="${ h.img1 }">사즨</a>
+							
 							<div class="news-text-box">
-								<h3><a href="#">${ h.name }</a></h3>
-								<h3><a href="#">${ h.address }</a></h3>
+								<h3><a href="#">${ s.stEnterprise }</a></h3>
+								<h3><a href="#">${ s.stPrice }</a></h3>
 								<p class="blog-meta">
-									<span class="author"><i class="fas fa-user"></i>${ h.enterprise }</span>
+									<span class="author"><i class="fas fa-user"></i>${ s.stEnterprise }</span>
 								</p>
-								<p class="excerpt">대관비 : ${ h.rental }원</p>
+								<%-- <p class="excerpt">대관비 : ${ h.rental }원</p>
 								<p class="excerpt">수용인원 : ${ h.seat }석</p>
 								<p class="excerpt">1인당 식비 : ${ h.meal }원</p>
-								<p class="excerpt">태그 : <p># ${ h.tagContent }</p>
+								<p class="excerpt">태그 : <p># ${ h.tagContent }</p> --%>
 								<a href="#" class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
 							</div>
 						</div>
@@ -733,18 +734,18 @@
 											<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="hList.pr?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+											<li class="page-item"><a class="page-link" href="studio.bo?cpage=${ pi.currentPage - 1 }">Previous</a></li>
 										</c:otherwise>
 									</c:choose>
 									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										<li class="page-item"><a class="page-link" href="hList.pr?cpage=${ p }">${ p }</a></li>
+										<li class="page-item"><a class="page-link" href="studio.bo?cpage=${p}">${p}</a></li>
 									</c:forEach>
 									<c:choose>
 										<c:when test="${ pi.currentPage eq pi.maxPage }">
 											<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="hList.pr?cpage=${ pi.currentPage + 1 }">Next</a></li>
+											<li class="page-item"><a class="page-link" href="studio.bo?cpage=${pi.currentPage + 1}">Next</a></li>
 										</c:otherwise>	
 									</c:choose>
 								</ul>
@@ -898,13 +899,6 @@
 	
     <!-- end main search-->
 
-
-
-
-
-	
-
-    
 	
 	<script>
        	function submitSearch(){
