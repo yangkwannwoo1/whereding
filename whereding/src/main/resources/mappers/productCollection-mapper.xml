@@ -14,6 +14,11 @@
 		<result column="unit_time" property="unitTime"/>
 		<result column="week_open" property="weekOpen"/>
 		<result column="status" property="status"/>
+		<result column="img_1" property="img1"/>
+		<result column="img_2" property="img2"/>
+		<result column="img_3" property="img3"/>
+		<result column="img_path" property="imgPath"/>
+		<result column="tag_content" property="tagContent"/>
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -36,22 +41,7 @@
 	 	   </choose>
   	</select>
   	
-  	<!-- <select id="selectList" resultMap="studioResult">
-	    select 
-		      s_code
-		     ,s_enterprise
-		     ,s_detail
-		     ,s_price
-		     ,s_start_date
-		     ,s_end_date
-		     ,s_phone
-		     ,s_address
-		     ,s_unit_time
-		     ,s_week_open
-		  from studio
-  	</select> -->
   	<select id="selectList" resultMap="ProductCollectionResult">
-  			 	
 	 	   <choose>
 	 	   		<when test="category eq 'Studio'">
 				    select 
@@ -99,6 +89,77 @@
 					where m_status = 'Y'
 	 	   		</otherwise>
 	 	   </choose>
+  	</select>
+  	
+	<select id="selectBoard" resultMap="ProductCollectionResult">
+ 	   <choose>
+ 	   		<when test="category eq 'Studio'">
+				select 
+				       s_code as code
+				     , s_enterprise as enterprise
+				     , s_detail as detail
+				     , s_price as price
+				     , s_start_date as start_date
+				     , s_end_date as end_date
+				     , s_phone as phone
+				     , s_address as address
+				     , s_unit_time as unit_time
+				     , s_week_open as week_open
+				     , img_1
+				     , img_2
+				     , img_3
+				     , img_path
+				     , tag_content
+				  from studio
+				left join product_img p on (s_code = p.product_no)
+				left join tag t on (s_code = t.product_no)
+			   where s_code = #{ cno }
+ 	   		</when>
+ 	   		<when test="category eq 'Dress'">
+				select 
+				       d_code as code
+				     , d_enterprise as enterprise
+				     , d_detail as detail
+				     , d_price as price
+				     , d_start_date as start_date
+				     , d_end_date as end_date
+				     , d_phone as phone
+				     , d_address as address
+				     , d_unit_time as unit_time
+				     , d_week_open as week_open
+				     , img_1
+				     , img_2
+				     , img_3
+				     , img_path
+				     , tag_content
+				  from dress
+				left join product_img p on (d_code = p.product_no)
+				left join tag t on (d_code = t.product_no)
+			   where d_code = #{ cno }
+ 	   		</when>
+ 	   		<otherwise>
+				select 
+				       m_code as code
+				     , m_enterprise as enterprise
+				     , m_detail as detail
+				     , m_price as price
+				     , m_start_date as start_date
+				     , m_end_date as end_date
+				     , m_phone as phone
+				     , m_address as address
+				     , m_unit_time as unit_time
+				     , m_week_open as week_open
+				     , img_1
+				     , img_2
+				     , img_3
+				     , img_path
+				     , tag_content
+				  from makeup
+				left join product_img p on (m_code = p.product_no)
+				left join tag t on (m_code = t.product_no)
+			   where m_code = #{ cno }
+ 	   		</otherwise>
+ 	   </choose>
   	</select>
   	
 	

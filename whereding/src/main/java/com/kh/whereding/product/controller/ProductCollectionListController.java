@@ -1,6 +1,7 @@
 package com.kh.whereding.product.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,6 +38,30 @@ public class ProductCollectionListController {
 			
 			System.out.println(p);
 		}
+		return mv;
+	}
+	
+	@RequestMapping("detail.co")
+	public ModelAndView selectCollection(String cno, String category, ModelAndView mv) {
+		// bno에는 상세조회하고자 하는 해당 게시글 번호 담겨있음
+		
+//		System.out.println(cno);
+
+//		int result = cService.increaseCount(cno);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("cno", cno);
+		map.put("category", category);
+		
+//		if(result > 0) {
+			ProductCollection c = cService.selectBoard(map);
+			System.out.println(c);
+			mv.addObject("c", c).setViewName("product/collectionDetailView");
+//		}else {
+//			mv.addObject("errorMsg","상세조회실패").setViewName("common/errorPage");;
+//		}
+		
 		return mv;
 	}
 }

@@ -13,16 +13,20 @@ import lombok.ToString;
 @ToString
 public class ProductCollection {
 	
-	 private String code;
-	 private String enterprise;
-	 private String detail;
+	private String code;
+	private String enterprise;
+	private String detail;
     private int price;
     private String startDate;
-	 private String endDate;
-	 private String phone;
-	 private String address; 
-	 private int unitTime;
-	 private String weekOpen;
-	 private String status;
-
+	private String endDate;
+	private String phone;
+	private String address; 
+	private int unitTime;
+	private String weekOpen;
+	private String status;
+	private String img1;
+	private String img2;
+	private String img3;
+	private String imgPath;
+	private String tagContent;
 }

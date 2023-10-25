@@ -1,6 +1,7 @@
 package com.kh.whereding.product.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,13 @@ public class ProductCollectionServiceImpl implements ProductCollectionService {
 		
 		return cDao.selectCollectionList(sqlSession, pi ,category);
 	}
+
+	@Override
+	public ProductCollection selectBoard(HashMap<String, String> map) {
+		return cDao.selectBoard(sqlSession, map);
+
+	}
+	
+	
 
 }

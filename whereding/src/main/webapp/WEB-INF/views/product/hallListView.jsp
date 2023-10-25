@@ -703,7 +703,7 @@
 			<div class="row">
 				<c:forEach var="h" items="${ list}">
 					<div class="col-lg-4 col-md-6">
-						<div class="single-latest-news">
+						<div class="single-board">
 							<a href="${ h.img1 }">사즨</a>
 							<div class="news-text-box">
 								<h3><a href="#">${ h.name }</a></h3>

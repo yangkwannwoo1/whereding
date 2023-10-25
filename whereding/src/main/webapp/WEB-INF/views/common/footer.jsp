@@ -61,7 +61,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-box pages">
 						<h2 class="widget-title">찾아오시는 길</h2>
-						<img src="">
+						<img src="resources/css/assets/img/location.png">
 					</div>
 				</div>
 			</div>

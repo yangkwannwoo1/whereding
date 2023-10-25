@@ -700,10 +700,10 @@
 			
 
 			<h4>${ category }</h4>			
-			<div class="row">
+			<div class="row collectionList">
 				<c:forEach var="c" items="${clist}">
 					<div class="col-lg-4 col-md-6">
-						<div class="single-latest-news">
+						<div class="single-board">
 							
 							<div class="news-text-box">
 								<h3><a href="#">${ c.enterprise }</a></h3>
@@ -715,12 +715,20 @@
 								<p class="excerpt">수용인원 : ${ h.seat }석</p>
 								<p class="excerpt">1인당 식비 : ${ h.meal }원</p>
 								<p class="excerpt">태그 : <p># ${ h.tagContent }</p> --%>
-								<a href="#" class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+								<a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+								<input class="cno" type="hidden" value="${ c.code }">
 							</div>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+			<script>
+	            $(function(){
+	        		$(".collectionList .single-board a").click(function(){
+	        			location.href = 'detail.co?category=${ category }&cno=' + $(this).parent().find(".cno").val();
+	        		})
+	        	})
+			</script>
 
 			<div class="row">
 				<div class="container">
