@@ -6,8 +6,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.PageInfo;
+import com.kh.whereding.gift.model.vo.Basket;
 import com.kh.whereding.gift.model.vo.Gift;
 
 @Repository
