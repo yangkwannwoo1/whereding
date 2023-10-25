@@ -34,17 +34,19 @@
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <!-- ======= Sidebar ======= -->
-
+    @ -39,181 +39,46 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link" href="admin.ad">
           <i class="bi bi-grid"></i>
           <span>메뉴</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
+	
+    
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -153,6 +155,7 @@
 
       <li class="nav-item">
         <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>회원정보</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
@@ -160,17 +163,33 @@
           <li>
             <a href="멤버조회.html">
               <i class="bi bi-circle"></i><span>회원정보 조회</span>
+            <a href="mList.ad">
+              <i class="bi bi-circle"></i>
+              <span>회원정보 조회</span>
             </a>
           </li>
+        
+	        <li>
+		        <a href="minsert.ad">
+		          <i class="bi bi-circle"></i>
+		          <span>회원상세</span>
+		        </a>
+	      	</li>
         </ul>
       </li><!-- End Tables Nav -->
+       </li>
+        <!-- 회원 -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" href="notice.ad">
+          <i class="bi bi-question-circle"></i>
+          <span>공지사항</span>
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
+      </li><!-- End F.A.Q Page Nav -->
       
           <li>
             <a href="charts-echarts.html">
@@ -214,22 +233,11 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-faq.html">
+        <a class="nav-link collapsed" href="faq.ad">
           <i class="bi bi-question-circle"></i>
           <span>F.A.Q</span>
         </a>
-      </li><!-- End F.A.Q Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
+@ -233,26 +98,6 @@
         </a>
       </li><!-- End Register Page Nav -->
 
@@ -255,6 +263,8 @@
       </li><!-- End Blank Page Nav -->
 
     </ul><!-- End Sidebar-->
+
+
 
    <!-- Vendor JS Files -->
    <script src="resources/assets/vendor/apexcharts/apexcharts.min.js"></script>

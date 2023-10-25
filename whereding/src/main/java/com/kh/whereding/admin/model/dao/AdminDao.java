@@ -29,5 +29,10 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectListCount", null, rowBounds);
 	}
 	
+	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
+
+		return (ArrayList) sqlSession.selectList("memberMapper.selectMemberList");
+	}
+	
 
 }
