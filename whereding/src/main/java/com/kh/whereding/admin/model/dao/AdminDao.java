@@ -11,22 +11,28 @@ import com.kh.whereding.member.model.vo.Member;
 
 @Repository
 public class AdminDao {
-	
+
 	public int selectListCount(SqlSessionTemplate sqlSession) {
-		
-		
+
 		return sqlSession.selectOne("memberMapper.selectListCount");
 	}
-	
-	public ArrayList<Member> selectList(PageInfo pi,SqlSessionTemplate sqlSession){
-		
+
+	public ArrayList<Member> selectList(PageInfo pi, SqlSessionTemplate sqlSession) {
+
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		
+
 		int limit = pi.getBoardLimit();
-		
+
 		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		return (ArrayList) sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+	}
+
+	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
+
+		return (ArrayList) sqlSession.selectList("memberMapper.selectMemberList");
 		
-		return (ArrayList)sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+		
 	}
 
 }

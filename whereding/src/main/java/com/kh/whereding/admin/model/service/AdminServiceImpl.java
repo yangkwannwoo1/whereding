@@ -32,4 +32,10 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.selectList(pi, sqlSession);
 	}
 
+	@Override
+	public ArrayList<Member> selectMemberList() {
+		
+		return aDao.selectMemberList(sqlSession);
+	}
+
 }

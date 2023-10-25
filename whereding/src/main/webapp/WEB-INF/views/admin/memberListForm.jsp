@@ -26,7 +26,7 @@
       <h1>회원정보조회</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="main.jsp">HOME</a></li>
+          <li class="breadcrumb-item"><a href="admin.ad">HOME</a></li>
           <li class="breadcrumb-item">회원</li>
           <li class="breadcrumb-item active">회원정보조회</li>
         </ol>
@@ -40,7 +40,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">회원 전체 조회</h5>
-              
+              <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='list.ad'">엑셀로 보기</button><br><br>
               
               <!-- Table with stripped rows -->
               <table class="table datatable">
@@ -91,18 +91,18 @@
 											<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="admin.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+											<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
 										</c:otherwise>
 									</c:choose>
 									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										<li class="page-item"><a class="page-link" href="admin.ad?cpage=${ p }">${ p }</a></li>
+										<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ p }">${ p }</a></li>
 									</c:forEach>
 									<c:choose>
 										<c:when test="${ pi.currentPage eq pi.maxPage }">
 											<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="admin.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
+											<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
 										</c:otherwise>	
 									</c:choose>
 								</ul>
@@ -119,8 +119,6 @@
  	<jsp:include page="../common/footer.jsp"/>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-	
   <!-- Vendor JS Files -->
   <script src="resources/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

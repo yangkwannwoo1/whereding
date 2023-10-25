@@ -54,7 +54,7 @@
 			<c:choose>
 				<c:when test="${loginMember.gradeNo == 1}">
 					<li class="quick_admin">	
-						<i class="fa fa-gears" aria-hidden="true"></i><br>관리자모드
+						<i class="fa fa-gears" aria-hidden="true" href="admin.ad"></i><br>관리자모드
 					</li>
 				</c:when>
 				<c:otherwise>

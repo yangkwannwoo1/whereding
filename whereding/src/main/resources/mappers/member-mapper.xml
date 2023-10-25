@@ -18,8 +18,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="grade_no" property="gradeNo"/>
 	</resultMap>
 	
-	
-
 
 	<select id="loginMember" resultMap="memberResult">
 		select
@@ -122,6 +120,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          where status = 'Y'
 	</select>
 
+	<select id="selectMemberList" resultMap="memberResult">
+		select
+		        user_no
+		       ,user_id
+		       ,user_pwd
+		       ,user_name
+		       ,to_char(BIRTHDAY, 'YYYY-MM-DD') as "BIRTHDAY"
+		       ,gender
+		       ,phone
+		       ,email
+		       ,grade_no
+		  from member
+         where status = 'Y'
+	</select>
+	
 </mapper>
 
 

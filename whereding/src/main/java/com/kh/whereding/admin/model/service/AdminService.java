@@ -10,4 +10,6 @@ public interface AdminService {
 	int selectListCount();
 	
 	ArrayList<Member> selectList(PageInfo pi);
+	
+	ArrayList<Member> selectMemberList();
 }

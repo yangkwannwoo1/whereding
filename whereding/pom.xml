@@ -246,11 +246,19 @@
           <version>5.5.2</version>
       </dependency>
 		
-		
+	  <!-- 오피스 파일을 자바 언어로 읽고 쓰는 기능을 사용하기 위한 라이브러리 -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.16</version>
+		</dependency>
+
 	</dependencies>
-	
-	
-	
 	
 	
     <build>
