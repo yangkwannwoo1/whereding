@@ -99,6 +99,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  from member
 		 where user_id = #{userId}
 	</select>
+	
+	<select id="selectListCount" resultType="_int">
+		select 
+				count(*)
+		  from member
+		 where status = 'Y'
+	</select>
+	
+	<select id="selectList" resultMap="memberResult">
+		select 
+		       USER_NO
+		     , USER_NAME
+		     , USER_ID
+		     , GRADE_NO
+		     , BIRTHDAY
+		     , GENDER
+		     , PHONE
+		     , EMAIL
+		  from member
+		 where status ='Y'
+	</select>
 
 </mapper>
 

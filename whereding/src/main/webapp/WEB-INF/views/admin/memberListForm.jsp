@@ -9,28 +9,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>회원조회</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="resources/assets/img/favicon.png" rel="icon">
-  <link href="resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="resources/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="resources/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="resources/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="resources/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="resources/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="resources/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="resources/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -47,7 +26,7 @@
       <h1>회원정보조회</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="main.jsp">HOME</a></li>
+          <li class="breadcrumb-item"><a href="admin.ad">HOME</a></li>
           <li class="breadcrumb-item">회원</li>
           <li class="breadcrumb-item active">회원정보조회</li>
         </ol>
@@ -74,61 +53,22 @@
                     <th scope="col">생년월일</th>
                     <th scope="col">성별</th>
                     <th scope="col">전화번호</th>
-                    <th scope="col">댓글수</th>
-
+                    <th scope="col">이메일</th>
                   </tr>
                 </thead>
                 <tbody>
+                 <c:forEach var="m" items="${ list }">
                   <tr>
-                    <th scope="row">1</th>
-                    <td>윤재성</td>
-                    <td>user01</td>
-                    <td>회원</td>
-                    <td>2016-05-25</td>
-                    <td>신랑</td>
-                    <td>010-1234-1234</td>
-                    <td>10</td>
+                    <th scope="row">${ m.userNo }</th>
+                    <td>${ m.userName }</td>
+                    <td>${ m.userId }</td>
+                    <td>${ m.gradeNo }</td>
+                    <td>${ m.birthDay }</td>
+                    <td>${ m.gender }</td>
+                    <td>${ m.phone }</td>
+                    <td>${ m.email }</td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>양관우</td>
-                    <td>user02</td>
-                    <td>협업업체관리자</td>
-                    <td>2014-12-05</td>
-                    <td>신부</td>
-                    <td>010-1234-1234</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>이원종</td>
-                    <td>user03</td>
-                    <td>회원</td>
-                    <td>2011-08-12</td>
-                    <td>신랑</td>
-                    <td>010-1234-1234</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>김현우</td>
-                    <td>user04</td>
-                    <td>협업업체관리자</td>
-                    <td>2012-06-11</td>
-                    <td>신부</td>
-                    <td>010-1234-1234</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>kh정보교육원</td>
-                    <td>user05</td>
-                    <td>관리자</td>
-                    <td>2011-04-19</td>
-                    <td>신랑</td>
-                    <td>010-1234-1234</td>
-                    <td>10</td>
-                  </tr>
+                 </c:forEach>
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
