@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="productCollectionMapper">
+	<resultMap type="ProductCollection" id="ProductCollectionResult">
+		<result column="code" property="code"/>
+		<result column="enterprise" property="enterprise"/>
+		<result column="detail" property="detail"/>
+		<result column="price" property="price"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="phone" property="phone"/>
+		<result column="address" property="address"/>
+		<result column="unit_time" property="unitTime"/>
+		<result column="week_open" property="weekOpen"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		select 
+				count(*)
+	 	   from 
+	 	   <choose>
+	 	   		<when test="category eq 'Studio'">
+	 	  			studio
+	 	  			where s_status = 'Y'
+	 	   		</when>
+	 	   		<when test="category eq 'Dress'">
+	 	   			 dress
+	 	   			 where d_status = 'Y'
+	 	   		</when>
+	 	   		<otherwise>
+	 	   			 makeup
+	 	   			 where m_status = 'Y'
+	 	   		</otherwise>
+	 	   </choose>
+  	</select>
+  	
+  	<!-- <select id="selectList" resultMap="studioResult">
+	    select 
+		      s_code
+		     ,s_enterprise
+		     ,s_detail
+		     ,s_price
+		     ,s_start_date
+		     ,s_end_date
+		     ,s_phone
+		     ,s_address
+		     ,s_unit_time
+		     ,s_week_open
+		  from studio
+  	</select> -->
+  	<select id="selectList" resultMap="ProductCollectionResult">
+  			 	
+	 	   <choose>
+	 	   		<when test="category eq 'Studio'">
+				    select 
+					      s_code as code
+					     ,s_enterprise as enterprise
+					     ,s_detail as detail
+					     ,s_price as price
+					     ,s_start_date as start_date
+					     ,s_end_date as end_date
+					     ,s_phone as phone
+					     ,s_address as address
+					     ,s_unit_time as unit_time
+					     ,s_week_open as week_open
+					  from studio
+					where s_status = 'Y'
+	 	   		</when>
+	 	   		<when test="category eq 'Dress'">
+				    select 
+					      d_code as code
+					     ,d_enterprise as enterprise
+					     ,d_detail as detail
+					     ,d_price as price
+					     ,d_start_date as start_date
+					     ,d_end_date as end_date
+					     ,d_phone as phone
+					     ,d_address as address
+					     ,d_unit_time as unit_time
+					     ,d_week_open as week_open
+					  from dress
+					where d_status = 'Y'
+	 	   		</when>
+	 	   		<otherwise>
+				    select 
+					      m_code as code
+					     ,m_enterprise as enterprise
+					     ,m_detail as detail
+					     ,m_price as price
+					     ,m_start_date as start_date
+					     ,m_end_date as end_date
+					     ,m_phone as phone
+					     ,m_address as address
+					     ,m_unit_time as unit_time
+					     ,m_week_open as week_open
+					  from makeup
+					where m_status = 'Y'
+	 	   		</otherwise>
+	 	   </choose>
+  	</select>
+  	
+	
+</mapper>

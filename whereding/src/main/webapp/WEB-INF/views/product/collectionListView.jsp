@@ -689,28 +689,27 @@
     </form>
 			
 			<br>
-			<h2>스튜디오 전체 조회 리스트</h2>
-			<br>
-			<div id="menu5">
+<!-- 			<div id="menu5">
 				<div>
 					<button class="sortBtn btn btn-outline-info">웨딩홀 보기</button> 
 					<button class="sortBtn btn btn-outline-info">스튜디오 보기</button> 
 					<button class="sortBtn btn btn-outline-info">드레스 보기</button> 
 					<button class="sortBtn btn btn-outline-info">메이크업 보기</button>
 				</div>
-			</div>
+			</div> -->
 			
-			<h4>스튜디오</h4>			
+
+			<h4>${ category }</h4>			
 			<div class="row">
-				<c:forEach var="s" items="${slist}">
+				<c:forEach var="c" items="${clist}">
 					<div class="col-lg-4 col-md-6">
 						<div class="single-latest-news">
 							
 							<div class="news-text-box">
-								<h3><a href="#">${ s.stEnterprise }</a></h3>
-								<h3><a href="#">${ s.stPrice }</a></h3>
+								<h3><a href="#">${ c.enterprise }</a></h3>
+								<h3><a href="#">${ c.price }</a></h3>
 								<p class="blog-meta">
-									<span class="author"><i class="fas fa-user"></i>${ s.stEnterprise }</span>
+									<span class="author"><i class="fas fa-user"></i>${ c.enterprise }</span>
 								</p>
 								<%-- <p class="excerpt">대관비 : ${ h.rental }원</p>
 								<p class="excerpt">수용인원 : ${ h.seat }석</p>
@@ -734,18 +733,18 @@
 											<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="studio.bo?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+											<li class="page-item"><a class="page-link" href="selectCollectionList.bo?category=${ category }&cpage=${ pi.currentPage - 1 }">Previous</a></li>
 										</c:otherwise>
 									</c:choose>
 									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										<li class="page-item"><a class="page-link" href="studio.bo?cpage=${p}">${p}</a></li>
+										<li class="page-item"><a class="page-link" href="selectCollectionList.bo?category=${ category }&cpage=${p}">${p}</a></li>
 									</c:forEach>
 									<c:choose>
 										<c:when test="${ pi.currentPage eq pi.maxPage }">
 											<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="studio.bo?cpage=${pi.currentPage + 1}">Next</a></li>
+											<li class="page-item"><a class="page-link" href="selectCollectionList.bo?category=${ category }&cpage=${pi.currentPage + 1}">Next</a></li>
 										</c:otherwise>	
 									</c:choose>
 								</ul>
