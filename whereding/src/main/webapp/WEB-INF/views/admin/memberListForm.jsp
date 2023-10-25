@@ -40,6 +40,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">회원 전체 조회</h5>
+              <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='list.ad'">엑셀로 보기</button><br><br>
               
               
               <!-- Table with stripped rows -->
