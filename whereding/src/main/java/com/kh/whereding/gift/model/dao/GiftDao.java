@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.gift.model.vo.Gift;
+import com.kh.whereding.gift.model.vo.GiftCategory;
 
 @Repository
 public class GiftDao {
@@ -18,7 +19,15 @@ public class GiftDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("giftMapper.selectGiftList");
+		return (ArrayList)sqlSession.selectList("giftMapper.selectGiftList", null, rowBounds);
+	}
+	
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("giftMapper.selectListCount");
+	}
+	
+	public ArrayList<GiftCategory> selectCategory(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("giftMapper.selectCategoryList");
 	}
 	
 }

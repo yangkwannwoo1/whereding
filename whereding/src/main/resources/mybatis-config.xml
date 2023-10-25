@@ -19,7 +19,8 @@
 		<typeAlias type="com.kh.whereding.product.model.vo.Reservation" alias="Reservation"/>		
 		<typeAlias type="com.kh.whereding.common.model.vo.HashTag" alias="HashTag"/>				
 		<typeAlias type="com.kh.whereding.gift.model.vo.Basket" alias="Basket"/>
-		<typeAlias type="com.kh.whereding.gift.model.vo.Gift" alias="Gift"/>				
+		<typeAlias type="com.kh.whereding.gift.model.vo.Gift" alias="Gift"/>
+		<typeAlias type="com.kh.whereding.gift.model.vo.GiftCategory" alias="GiftCategory"/>			
 		<typeAlias type="com.kh.whereding.common.model.vo.Attachment" alias="Attachment"/>				
 	</typeAliases>
 	<!-- 유의사항 : 미리등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야됨 -->

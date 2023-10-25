@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.gift.model.dao.GiftDao;
 import com.kh.whereding.gift.model.vo.Gift;
+import com.kh.whereding.gift.model.vo.GiftCategory;
 
 @Service
 public class GiftServiceImpl implements GiftService{
@@ -22,6 +23,16 @@ public class GiftServiceImpl implements GiftService{
 	@Override
 	public ArrayList<Gift> selectGiftList(PageInfo pi) {
 		return gDao.selectGiftList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectListCount() {
+		return gDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<GiftCategory> selectCategoryList() {
+		return gDao.selectCategory(sqlSession);
 	} 
 	
 	

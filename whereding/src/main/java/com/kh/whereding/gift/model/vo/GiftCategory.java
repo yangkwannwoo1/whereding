@@ -11,17 +11,8 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Gift {
+public class GiftCategory {
 	
-	private String giftNo;
 	private int categoryNo;
 	private String categoryItem;
-	private String giftName;
-	private String giftContent;
-	private int giftPrice;
-	private int count;
-	private String imgPath;
-	private String img1;
-	private String img2;
-	private String img3;
 }

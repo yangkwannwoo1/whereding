@@ -6,6 +6,7 @@
 	<resultMap type="Gift" id="giftResult">
 		<result column="gift_no" property="giftNo"/>
 		<result column="category_no" property="categoryNo"/>
+		<result column="category_item" property="categoryItem"/>
 		<result column="gift_name" property="giftName"/>
 		<result column="gift_content" property="giftContent"/>
 		<result column="gift_price" property="giftPrice"/>
@@ -16,12 +17,16 @@
 		<result column="img_3" property="img3"/>
 	</resultMap>
 	
-	
+	<resultMap type="GiftCategory" id="giftCategoryResult">
+		<result column="category_no" property="categoryNo"/>
+		<result column="category_item" property="categoryItem"/>
+	</resultMap>
 	
 	<select id="selectGiftList" resultMap="giftResult">
 	select 
         gift_no
        ,category_no
+       ,category_item
        ,gift_name
        ,gift_content
        ,gift_price
@@ -33,7 +38,23 @@
 
       from gift g
       left outer join product_img p on g.gift_no=p.product_no
+      join gift_category using(category_no)
       
+    where count>0 
 	</select>
+	
+	
+	<select id="selectListCount" resultType="_int">
+		select count(*)
+		  from gift
+	</select>
+	
+	<select id="selectCategoryList" resultMap="giftCategoryResult">
+		select
+		 		category_no
+		 	   ,category_item
+		  from gift_category
+	</select>
+	
 
 </mapper>
