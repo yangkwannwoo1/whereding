@@ -236,15 +236,15 @@ font-family: 'Open Sans Condensed', sans-serif;
 								<li id="main-menu-collection"><a href="news.html">Wedding
 										Collection</a>
 									<ul class="sub-menu">
-										<li><a href="studio.bo">Studio</a> 
-											<a href="studio.bo">스튜디오</a>
+										<li><a>Studio</a> 
+											<a>스튜디오</a>
 										</li>
 										
-										<li><a href="#val?dress">Dress</a> 
-											<a href="#val?dress">드레스</a></li>
+										<li><a>Dress</a> 
+											<a>드레스</a></li>
 											
-										<li><a href="#val?makeup">MakeUp</a>
-											<a href="#val?makeup">메이크업</a>
+										<li><a>MakeUp</a>
+											<a>메이크업</a>
 										</li>
 									</ul> <a href="news.html">컬렉션</a></li>
 								<li id="main-menu-event"><a href="contact.html">Event</a> <a
@@ -337,6 +337,12 @@ font-family: 'Open Sans Condensed', sans-serif;
 										$("#login-button").fadeIn(800);
 									});
 						});
+		$("#main-menu-collection .sub-menu li a").click(
+			function(){
+				let category = $(this).prev().text();
+				location.href="selectCollectionList.bo?category=" + category;
+			}
+		)
 	</script>
 	<br><br><br><br><br>
 </body>
