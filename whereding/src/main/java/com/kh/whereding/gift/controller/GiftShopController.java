@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.common.template.Pagenation;
 import com.kh.whereding.gift.model.service.GiftServiceImpl;
@@ -26,6 +27,11 @@ public class GiftShopController {
 		ArrayList<Gift> gList = gService.selectGiftList(pi);
 		model.addAttribute("gList", gList);
 		return "gift/giftShop";
+	}
+	
+	@RequestMapping(value="basket.gi", produces = "application/json; charset=utf-8")
+	public String selectBaseketList(String userNo) {
+		ArrayList<Basket> list = gService.selectBasketList(userNo);
 	}
 	
 }
