@@ -243,8 +243,8 @@ font-family: 'Open Sans Condensed', sans-serif;
 										<li><a href="single-news.html">MakeUp</a> <a
 											href="single-news.html">메이크업</a></li>
 									</ul> <a href="news.html">컬렉션</a></li>
-								<li id="main-menu-event"><a href="contact.html">Event</a> <a
-									href="contact.html">이벤트</a></li>
+								<!--  <li id="main-menu-event"><a href="contact.html">Event</a> <a
+									href="contact.html">이벤트</a></li>  -->
 								<li id="main-menu-shop"><a href="shop.html">Present</a>
 									<ul class="sub-menu">
 									</ul> <a href="giftShop.bo">답례품</a></li>
@@ -264,15 +264,15 @@ font-family: 'Open Sans Condensed', sans-serif;
 									</ul> <a href="myPage.me">마이페이지</a></li>
 								<li id="main-menu-icon">
 									<div class="header-icons">
-										<a class="shopping-cart jb-title" href="basket.ba"><i
+										<a class="shopping-cart jb-title" href="basket.gi"><i
 											class="fas fa-shopping-cart"></i></a>
 										<div class="jb-text">
 											<p>장바구니</p>
 										</div>
-										<a class="mobile-hide search-bar-icon jb-title" href="#"><i
+										<a class="mobile-hide search-bar-icon jb-title" href="basket.rs"><i
 											class="fas fa-calendar-check"></i></a>
 										<div class="jb-text">
-											<p>장바구니</p>
+											<p>예약장바구니</p>
 										</div>
 									</div>
 
