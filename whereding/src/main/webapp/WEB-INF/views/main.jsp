@@ -342,6 +342,9 @@
        	function submitSearch(){
        		$("#searchPlace").submit();
        	}
+       	
+       	
+       		//장바구니
            $('.basket').on('click', function(){
             $.ajax({
                 url:"selectBasket.sb",
@@ -718,7 +721,10 @@
 
 		</div>
 	</div>
+	
 	<!-- end features list section -->
+
+
 	
 	<jsp:include page="common/footer.jsp"/>
 

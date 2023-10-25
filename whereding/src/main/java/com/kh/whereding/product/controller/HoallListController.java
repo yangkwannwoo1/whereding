@@ -32,15 +32,13 @@ public class HoallListController {
 	@RequestMapping("hList.pr")
 	public ModelAndView HallListForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv)  {
-
+			
 			int listCount = HService.selectListCount();
 
 			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 6);
 			
 			ArrayList<Hall> list = HService.selectList(pi);
 			mv.addObject("pi", pi).addObject("list", list).setViewName("product/hallListView");
-			System.out.println(pi);
-
 			return mv;
 			
 	}

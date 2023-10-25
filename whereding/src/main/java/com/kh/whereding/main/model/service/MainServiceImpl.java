@@ -85,6 +85,11 @@ public class MainServiceImpl implements MainService {
 		return mnDao.selectRsvList(sqlSession, userNo);
 	}
 
+	@Override
+	public ArrayList<Studio> selectStudioList() {
+		return null;
+	}
+
 
 
 	

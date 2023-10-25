@@ -44,4 +44,18 @@ public interface MainService {
 
 	// 사이드바에서 장바구니 불러오기
 	ArrayList<Reservation> selectRsvList(String userNo);
+	
+	// 헤더에서 스튜디오 눌렀을때 전체 불러오기
+	ArrayList<Studio> selectStudioList();
+	
 }
+
+
+
+
+
+
+
+
+
+

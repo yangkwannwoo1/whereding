@@ -21,11 +21,9 @@ public class GiftShopController {
 	@RequestMapping("giftShop.bo")
 	public String giftList(Model model) {
 //		int listCount = bService.selectListCount();
-		
 		PageInfo pi = Pagenation.getPageInfo(5, 10, 10, 5);
 		
 		ArrayList<Gift> gList = gService.selectGiftList(pi);
-		System.out.println(gList);
 		model.addAttribute("gList", gList);
 		return "gift/giftShop";
 	}

@@ -236,12 +236,16 @@ font-family: 'Open Sans Condensed', sans-serif;
 								<li id="main-menu-collection"><a href="news.html">Wedding
 										Collection</a>
 									<ul class="sub-menu">
-										<li><a href="news.html">Studio</a> <a href="news.html">스튜디오</a>
+										<li><a href="studio.bo">Studio</a> 
+											<a href="studio.bo">스튜디오</a>
 										</li>
-										<li><a href="single-news.html">Dress</a> <a
-											href="single-news.html">드레스</a></li>
-										<li><a href="single-news.html">MakeUp</a> <a
-											href="single-news.html">메이크업</a></li>
+										
+										<li><a href="#val?dress">Dress</a> 
+											<a href="#val?dress">드레스</a></li>
+											
+										<li><a href="#val?makeup">MakeUp</a>
+											<a href="#val?makeup">메이크업</a>
+										</li>
 									</ul> <a href="news.html">컬렉션</a></li>
 								<li id="main-menu-event"><a href="contact.html">Event</a> <a
 									href="contact.html">이벤트</a></li>
