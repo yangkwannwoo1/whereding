@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.product.model.dao.ProductCollectionDao;
+import com.kh.whereding.product.model.vo.CollectionReview;
 import com.kh.whereding.product.model.vo.ProductCollection;
 
 
@@ -35,6 +36,12 @@ public class ProductCollectionServiceImpl implements ProductCollectionService {
 	@Override
 	public ProductCollection selectBoard(HashMap<String, String> map) {
 		return cDao.selectBoard(sqlSession, map);
+
+	}
+
+	@Override
+	public ArrayList<CollectionReview> selectReviewList(String cno) {
+		return cDao.selectReviewList(sqlSession, cno);
 
 	}
 	

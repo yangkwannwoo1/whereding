@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.whereding.common.model.vo.PageInfo;
+import com.kh.whereding.product.model.vo.CollectionReview;
 import com.kh.whereding.product.model.vo.ProductCollection;
 
 @Repository
@@ -32,6 +33,10 @@ public class ProductCollectionDao {
 	
 	public ProductCollection selectBoard(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 		return sqlSession.selectOne("productCollectionMapper.selectBoard", map);
+	}
+	
+	public ArrayList<CollectionReview> selectReviewList(SqlSessionTemplate sqlSession, String cno){
+		return (ArrayList)sqlSession.selectList("productCollectionMapper.selectReviewList", cno);
 	}
 
 }
