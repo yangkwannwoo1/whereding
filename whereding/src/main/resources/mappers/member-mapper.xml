@@ -185,7 +185,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  from member
 		 where user_id = #{userId}
 	</select>
-
+	<select id="consultingList" resultMap="consultingResult"> select CS_NO , PRODUCT_NO , USER_NO , CS_CONTENT , CS_DATE , START_TIME , END_TIME from consulting where user_no = #{userNo} and status = 'Y' </select>
+	<select id="consultingHall" resultMap="hallResult"> select H_CODE , H_ENTERPRISE , H_NAME , H_DETAIL , H_SEAT , H_RENTAL , H_RESTAURANT_SEAT , H_MEAL , H_START_TIME , H_END_TIME , H_PHONE , H_ADDRESS , H_UNIT_TIME , H_WEEK_OPEN , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE" , start_time , REVIEW_NO , cs_no , IMG_1 , IMG_PATH from hall left join consulting c on (H_CODE = c.PRODUCT_NO) left join review using (cs_no) left join PRODUCT_IMG im on (H_CODE = im.PRODUCT_NO) where h_code = #{productNo} and H_STATUS = 'Y' </select>
+	<select id="consultingStudio" resultMap="studioResult"> select S_CODE , S_ENTERPRISE , S_DETAIL , S_PRICE , S_START_DATE , S_END_DATE , S_PHONE , S_ADDRESS , S_UNIT_TIME , S_WEEK_OPEN , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE" , start_time , REVIEW_NO , cs_no , IMG_1 , IMG_PATH FROM STUDIO left join consulting c on (s_CODE = c.PRODUCT_NO) left join review using (cs_no) left join PRODUCT_IMG im on (s_CODE = im.PRODUCT_NO) WHERE S_CODE = #{productNo} AND S_STATUS = 'Y' </select>
+	<select id="consultingDress" resultMap="dressResult"> SELECT D_CODE , D_ENTERPRISE , D_DETAIL , D_PRICE , D_START_DATE , D_END_DATE , D_PHONE , D_ADDRESS , D_UNIT_TIME , D_WEEK_OPEN , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE" , start_time , REVIEW_NO , cs_no , IMG_1 , IMG_PATH FROM DRESS left join consulting c on (d_CODE = c.PRODUCT_NO) left join review using (cs_no) left join PRODUCT_IMG im on (d_CODE = im.PRODUCT_NO) WHERE D_CODE = #{productNo} AND D_STATUS = 'Y' </select>
+	<select id="consultingMakeup" resultMap="makeupResult"> SELECT M_CODE , M_ENTERPRISE , M_DETAIL , M_PRICE , M_START_DATE , M_END_DATE , M_PHONE , M_ADDRESS , M_UNIT_TIME , M_WEEK_OPEN , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE" , start_time , REVIEW_NO , cs_no , IMG_1 , IMG_PATH FROM makeup left join consulting c on (m_CODE = c.PRODUCT_NO) left join review using (cs_no) left join PRODUCT_IMG im on (m_CODE = im.PRODUCT_NO) WHERE M_CODE = #{productNo} AND M_STATUS = 'Y' </select>
+	<insert id="consultingReview"> insert into review ( REVIEW_NO , CS_NO , RV_CONTENT , RV_SCORE ) values ( SEQ_RVNO.NEXTVAL , #{csNo} , #{content} , #{score} ) </insert>
+	<insert id="consultingReviewImg"> insert into consulting_img ( REVIEW_NO , CS_ORIGIN_NAME , CS_CHANGE_NAME , CS_FILE_PATH ) values ( SEQ_RVNO.CURRVAL , #{csOriginName} , #{csChangeName} , #{csFilePath} ) </insert>
 </mapper>
 
 
