@@ -21,6 +21,19 @@
 		<result column="tag_content" property="tagContent"/>
 	</resultMap>
 	
+		<resultMap type="CollectionReview" id="CollectionReviewResult">
+		<result column="review_no" property="reviewNo"/>
+		<result column="cs_no" property="csNo"/>
+		<result column="rv_content" property="rvContent"/>
+		<result column="rv_score" property="rvScore"/>
+		<result column="create_date" property="createDate"/>
+		<result column="user_name" property="userName"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="filepath" property="filePath"/>
+	
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int">
 		select 
 				count(*)
@@ -161,6 +174,25 @@
  	   		</otherwise>
  	   </choose>
   	</select>
+  	
+	<select id="selectReviewList" resultMap="CollectionReviewResult">
+		select
+			   r.review_no
+             , r.cs_no
+			 , rv_content
+             , rv_score
+			 , to_char(create_date,'YYYY-MM-DD') as "create_date"
+             , user_name
+             , cs_change_name as change_name
+             , cs_file_path || cs_origin_name as filepath
+          from review r
+          join consulting c on (r.cs_no = c.cs_no)
+          join member m on (c.user_no = m.user_no)
+          left join consulting_img i on (r.review_no = i.review_no)
+		 where product_no = #{ cno }
+		 order by review_no desc
+	</select>
+  	
   	
 	
 </mapper>

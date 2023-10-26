@@ -1,0 +1,37 @@
+.w3-row-padding *{
+    display: inline-block;
+}
+
+
+.hr_style{
+    border-bottom: 2px solid #cecece !important;
+}
+
+.w3-content{
+    border-right: 2px dotted #cecece;
+}
+
+.w3-content img{
+    margin: auto;
+}
+
+.tag-section{
+    margin-top: 1%;
+    border-top: 1px solid #cecece;
+}
+
+.instaimg .col-lg-3{
+    text-align: center;
+    padding: 0% 3%;
+}
+.instaimg .col-lg-3 img{
+    width: 275px;
+    height: 275px;
+    border: 1px solid black;
+}
+.instaimg .row{
+    margin: 0% 1%;
+    border: 1px solid black;
+    padding: 2%;
+    border-radius: 5px;
+}
