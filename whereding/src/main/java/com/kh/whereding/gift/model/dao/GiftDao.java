@@ -13,13 +13,13 @@ import com.kh.whereding.gift.model.vo.GiftCategory;
 @Repository
 public class GiftDao {
 
-	public ArrayList<Gift> selectGiftList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Gift> selectGiftList(SqlSessionTemplate sqlSession, PageInfo pi, int categoryNo){
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
-		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("giftMapper.selectGiftList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("giftMapper.selectGiftList", categoryNo, rowBounds);
+		
 	}
 	
 	public int selectListCount(SqlSessionTemplate sqlSession) {
@@ -28,6 +28,10 @@ public class GiftDao {
 	
 	public ArrayList<GiftCategory> selectCategory(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("giftMapper.selectCategoryList");
+	}
+	
+	public ArrayList<Gift> categorySearch(SqlSessionTemplate sqlSession, int categoryNo){
+		return (ArrayList)sqlSession.selectList("giftMapper.categorySearch", categoryNo);
 	}
 	
 }

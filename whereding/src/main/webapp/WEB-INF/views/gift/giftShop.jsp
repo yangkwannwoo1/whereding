@@ -47,6 +47,7 @@
 		border-radius: 7px;
 		
 	}
+
 </style>
 </head>
 <body>
@@ -117,32 +118,78 @@
 						<ul>
 							<h2>답례품 카테고리</h2>
 							<c:forEach var="g" items="${categoryList}">
-								<li data-filter="${g.categoryNo}">${g.categoryItem}</li>								
-								<script>
-								console.log(${g.categoryNo});
-								</script>
+								<li class="categoryNo">${g.categoryItem}
+									<input class="hiddenVal" type="hidden" value="${g.categoryNo}"/>
+								</li>								
+
 							</c:forEach>
 							
-							<li data-filter="1">ㅎㅇ</li>
-							<li data-filter="2">쿠킼</li>
-							<li data-filter="3">수건</li>
-							<li data-filter="4">몰라</li>
-							<li data-filter="5">인직</li>
+								<script>
+								$(function() {
+								    $(".categoryNo").click(function() {
+								        let categoryNo = $(this).find(".hiddenVal").val();
+
+								        $.ajax({
+								            url: "categorySearch.do",
+								            data: {
+								                categoryNo: categoryNo
+								            },
+								            success: function(data) {
+								                console.log(data);
+								                let html = "";
+								                $(".product-lists").empty();
+								                $(".product-lists").css("height", "1300px");
+								                $(".pagination").empty();
+								                for (let i = 0; i < data.length; i++) {
+								                    let gift = data[i];
+								                    html += '<div class="col-lg-4 col-md-6 text-center">';
+								                    html += '<div class="single-product-item">';
+								                    html += '<div class="product-image">';
+								                    html += '<a href="single-product.html"> <img src="' + gift.imgPath + '/' + gift.img1 + '" alt="' + gift.img1 + '" />';
+								                    html += '</a>';
+								                    html += '<h3>' + gift.giftName + '</h3>';
+								                    html += '<p class="product-price">';
+								                    html += '<span>' + gift.giftContent + '</span>';
+								                    html += '</p>';
+								                    html += '<p>';
+								                    let formattedPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(gift.giftPrice);
+								                    html += '<p>' + formattedPrice + '</p>';
+								                    html += '</p>';
+								                    html += '<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i>상세보기</a>';
+								                    html += '</div>';
+								                    html += '</div>';
+								                    html += '</div>';
+								                }  
+								                $(".product-lists").append(html);
+								            },
+								            error: function() {
+								                console.log("AJAX 실패 ㅋ");
+								            }
+								        });
+								    });
+								});
+								</script>
+						
 						</ul>
 						
 						<c:if test="${not empty loginMember.gradeNo && loginMember.gradeNo eq '2'}">
-							<button class="giftReg">답례품 등록</button>
+							<button class="giftReg" onclick="giftReg();">답례품 등록</button>
 						</c:if>
+						
+						<script>
+						function giftReg(){
+							location.href="giftRegForm.bo";
+						}
+						</script>
+						
 					</div>
 						
 				</div>
 			</div>
 
-
 			<div class="row product-lists">
-
-				<c:forEach var="g" items="${gList}">
-					<div class="col-lg-4 col-md-6 text-center strawberry">
+				<c:forEach var="g" items="${gList}"> 
+					<div class="col-lg-4 col-md-6 text-center">
 						<div class="single-product-item">
 							<div class="product-image">
 								<a href="single-product.html"> <img

@@ -10,7 +10,9 @@ public interface GiftService {
 	
 	abstract int selectListCount();
 	
-	abstract ArrayList<Gift> selectGiftList(PageInfo pi);
+	abstract ArrayList<Gift> selectGiftList(PageInfo pi,int categoryNo);
 	
 	abstract ArrayList<GiftCategory> selectCategoryList();
+	
+	abstract ArrayList<Gift> categorySearch(int categoryNo);
 }

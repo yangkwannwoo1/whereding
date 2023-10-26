@@ -21,8 +21,8 @@ public class GiftServiceImpl implements GiftService{
 	private GiftDao gDao;
 
 	@Override
-	public ArrayList<Gift> selectGiftList(PageInfo pi) {
-		return gDao.selectGiftList(sqlSession, pi);
+	public ArrayList<Gift> selectGiftList(PageInfo pi,int categoryNo) {
+		return gDao.selectGiftList(sqlSession, pi,categoryNo);
 	}
 
 	@Override
@@ -33,6 +33,11 @@ public class GiftServiceImpl implements GiftService{
 	@Override
 	public ArrayList<GiftCategory> selectCategoryList() {
 		return gDao.selectCategory(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Gift> categorySearch(int categoryNo) {
+		return gDao.categorySearch(sqlSession,categoryNo);
 	} 
 	
 	
