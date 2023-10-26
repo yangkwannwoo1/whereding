@@ -16,8 +16,14 @@
 		<result column="QNA_CONTENT" property="qnaContent"/>
 		<result column="QNA_ANSWER" property="qnaAnswer"/>
 		<result column="QNA_DATE" property="qnaDate"/>
-		
-		     
+	</resultMap>
+	<resultMap type="CollaboRation" id="collaboResult">
+		<result column="CP_NO" property="cpNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="CP_TITLE" property="cpTitle"/>
+		<result column="CP_CONTENT" property="cpContent"/>
+		<result column="CP_DATE" property="cpDate"/>
 	</resultMap>
 
 
@@ -27,12 +33,19 @@
 	 	   from notice
 	 	  where status = 'Y'
   	</select>
+  	<select id="selectCollaboListCount" resultType="_int">
+  		select 
+				count(*)
+	 	   from COLLABORATION_CP
+	 	  where status = 'Y'
+  	</select>
   	<select id="selectQnaListCount" resultType="_int">
 		select 
 				count(*)
 	 	   from qna
 	 	  where status = 'Y'
   	</select>
+  	
   	<select id="selectNoticeList" resultMap="noticeResult">
 	  	select 
 	       NOTICE_NO
@@ -57,6 +70,20 @@
 		  from qna q
 		  join member using(user_no)
 		 where q.STATUS = 'Y'
+  	</select>
+  	<select id="selectCollaboList" resultMap="collaboResult">
+  		select 
+	       CP_NO
+	     , USER_ID
+	     , user_no
+	     , CP_TITLE
+	     , CP_CONTENT
+	     , to_char(CP_DATE, 'YYYY-MM-DD') as "CP_DATE"
+	  from COLLABORATION_CP cc
+	  join member using(user_no)
+	 where cc.status = 'Y'
+	 order
+	    by cp_no desc
   	</select>
   	<select id="selectNotice" resultMap="noticeResult">
 		select 
@@ -86,6 +113,19 @@
 	   and qna_no = #{boardNo}
   	
   	</select>
+  	<select id="selectCollabo" resultMap="collaboResult">
+  	select 
+	       CP_NO
+	     , USER_ID
+	     , user_no
+	     , CP_TITLE
+	     , CP_CONTENT
+	     , to_char(CP_DATE, 'YYYY-MM-DD') as "CP_DATE"
+	  from COLLABORATION_CP cc
+	  join member using(user_no)
+	 where cc.status = 'Y'
+	   and cp_no = #{boardNo}
+  	</select>
   	<insert id="insertNotice">
 	  	insert
 		  into notice
@@ -101,6 +141,25 @@
 		     , 1
 		     , #{noticeTitle}
 		     , #{noticeContent}
+		     )
+  	</insert>
+  	<insert id="insertCollabo">
+  		insert
+		  into COLLABORATION_CP
+		     (
+		       CP_NO
+		     , USER_NO
+		     , CP_TITLE
+		     , CP_CONTENT
+		     , CP_DATE
+		     )
+		values
+		     (
+		       SEQ_CPNO.NEXTVAL
+		     , #{userNo}
+		     , #{cpTitle}
+		     , #{cpContent}
+		     , sysdate
 		     )
   	</insert>
   	<insert id="insertQna">

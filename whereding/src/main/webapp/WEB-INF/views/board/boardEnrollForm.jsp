@@ -219,12 +219,18 @@
                 <c:if test="${board eq 'QnA' }">
                     <form action="insertqna.bo">
                 </c:if> 
+                <c:if test="${board eq '협업업체_신청' }">
+                    <form action="insertCollabo.bo">
+                </c:if> 
                 <c:if test="${board eq '공지사항_수정' }">
                     <form action="noticeUpdate.bo" method="post">
                 </c:if>  
                 <c:if test="${board eq 'QnA_수정' }">
                     <form action="qnaUpdate.bo" method="post">
-                </c:if>               
+                </c:if>    
+                <c:if test="${board eq '협업업체_신청_수정' }">
+                    <form action="collaboUpdate.bo" method="post">
+                </c:if>             
                     <div class="body_title">
                         <div class="real_title">
                             <c:if test="${board eq '공지사항' }">
@@ -233,11 +239,17 @@
                             <c:if test="${board eq 'QnA' }">
                                 <input type="text" name="qnaTitle" id="QNA_TITLE" placeholder="제목을 입력해 주세요.">
                             </c:if>
+                            <c:if test="${board eq '협업업체_신청' }">
+                                <input type="text" name="cpTitle" id="QNA_TITLE" placeholder="제목을 입력해 주세요.">
+                            </c:if>
                             <c:if test="${board eq '공지사항_수정' }">
                                 <input type="text" name="noticeTitle" id="QNA_TITLE" value="${n.noticeTitle}">
                             </c:if>
                             <c:if test="${board eq 'QnA_수정' }">
                                 <input type="text" name="qnaTitle" id="QNA_TITLE" value="${q.qnaTitle}">
+                            </c:if>
+                            <c:if test="${board eq '협업업체_신청_수정' }">
+                                <input type="text" name="cpTitle" id="QNA_TITLE" value="${cr.qnaTitle}">
                             </c:if>
                         </div>
                         
@@ -252,12 +264,19 @@
                         <c:if test="${board eq 'QnA' }">
                             <textarea name="qnaContent" id="QNA_CONTENT" cols="111" rows="10" placeholder="Q&A 내용을 입력해주세요."></textarea>
                         </c:if>
+                        <c:if test="${board eq '협업업체_신청' }">
+                            <textarea name="cpContent" id="cpContent" cols="111" rows="10" placeholder="Q&A 내용을 입력해주세요."></textarea>
+                        </c:if>
                         <c:if test="${board eq '공지사항_수정' }">
                             <textarea name="noticeContent" id="QNA_CONTENT" cols="111" rows="23">${n.noticeContent}</textarea>
                             <input type="hidden" name="noticeNo" value="${n.noticeNo}" >
                         </c:if>
                         <c:if test="${board eq 'QnA_수정' }">
                             <textarea name="qnaContent" id="QNA_CONTENT" cols="111" rows="23">${q.qnaContent}</textarea>
+                            <input type="hidden" name="qnaNo" value="${q.qnaNo}" >
+                        </c:if>
+                        <c:if test="${board eq '협업업체_신청_수정' }">
+                            <textarea name="cpContent" id="QNA_CONTENT" cols="111" rows="23">${cr.cpContent}</textarea>
                             <input type="hidden" name="qnaNo" value="${q.qnaNo}" >
                         </c:if>
                     </div>

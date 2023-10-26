@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.whereding.board.model.vo.CollaboRation;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
@@ -21,7 +22,9 @@ public class BoardDao {
 	public int selectNoticeListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectNoticeListCount");
 	}
-	
+	public int selectCollaboListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.selectCollaboListCount");
+	}
 	public int selectQnaListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectQnaListCount");
 	}
@@ -50,7 +53,12 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.selectQnaList", null, rowBounds);
 	}
-	
+	public ArrayList<CollaboRation> selectCollaboList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectCollaboList", null, rowBounds);
+	}
 	
 	/** 공지사항 상세보기
 	 * @param sqlSession
@@ -70,6 +78,9 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.selectQna", boardNo);
 	}
 	
+	public CollaboRation selectCollabo(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectCollabo", boardNo);
+	}
 	/** 공지사항 등록
 	 * @param sqlSession
 	 * @param n
@@ -107,6 +118,13 @@ public class BoardDao {
 	public int updateQnaAnswer(SqlSessionTemplate sqlSession, Qna q) {
 		return sqlSession.update("boardMapper.updateQnaAnswer", q);
 	}
+	public int insertCollabo(SqlSessionTemplate sqlSession, CollaboRation cr) {
+		return sqlSession.update("boardMapper.insertCollabo", cr);
+	}
+	
+	
+
+	
 
 	
 

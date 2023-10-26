@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.whereding.board.model.service.BoardServiceImpl;
+import com.kh.whereding.board.model.vo.CollaboRation;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
@@ -57,6 +58,23 @@ public class BoardController {
 		return "board/noticeListView";
 	}
 	
+	
+	@RequestMapping(value = "collabo.bo")
+	public String collaboCompany(@RequestParam(value = "cpage", defaultValue = "1")int currentPage, HttpServletRequest request) {
+		
+		int listCount = bService.selectCollaboListCount();
+		System.out.println(listCount);
+		
+		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<CollaboRation> list = bService.selectCollaboList(pi);
+		
+		request.setAttribute("pi", pi);
+		request.setAttribute("list", list);
+		
+		return "board/collaboListView";
+	}
+	
 	/** 공지사항 등록 페이지
 	 * @param request
 	 * @return
@@ -83,7 +101,16 @@ public class BoardController {
 		
 		return"board/boardDetailView";
 	}
-	
+	@RequestMapping(value = "collaboDetail.bo")
+	public String collaboDetailView(String board,int bno,HttpServletRequest request) {
+		
+		CollaboRation cr = bService.selectCollabo(bno);
+		
+		request.setAttribute("board", board);
+		request.setAttribute("cr", cr);
+		
+		return"board/boardDetailView";
+	}
 	@RequestMapping(value = "qnaDetail.bo")
 	public String qnaDetailView(String board,int bno,HttpServletRequest request) {
 		
@@ -140,6 +167,11 @@ public class BoardController {
 		return "board/boardEnrollForm";
 	}
 	
+	@RequestMapping(value = "collaboEnroll.bo")
+	public String collaboEnroll(String board, HttpServletRequest request) {
+		request.setAttribute("board", board);
+		return "board/boardEnrollForm";
+	}
 	/** qna 등록 후
 	 * @param n
 	 * @return
@@ -158,6 +190,17 @@ public class BoardController {
 		}
 	}
 	
+	@RequestMapping(value = "insertCollabo.bo")
+	public String collaboInsert(CollaboRation cr, HttpSession session) {
+		int result = bService.insertCollabo(cr);
+		
+		if(result >0) {
+			session.setAttribute("alertMsg", "협렵업체 신청 게시판 정상적으로 등록되었습니다.");
+		}else {
+			session.setAttribute("alertMsg", "협력업체 신청 게시판 등록에 실패하였습니다.");
+		}
+		return "redirect:collabo.bo";
+	}
 	/** 공지사항 수정 폼 접근
 	 * @return
 	 */
@@ -178,6 +221,14 @@ public class BoardController {
 		model.addAttribute("q", q);
 		model.addAttribute("board", "QnA_수정");
 		return"board/boardEnrollForm";
+	}
+	
+	@RequestMapping(value = "collaboEdit.bo")
+	public String collaboEditForM(int bno, Model model) {
+		CollaboRation cr = bService.selectCollabo(bno);
+		model.addAttribute("cr", cr);
+		model.addAttribute("board", "협업업체_신청_수정");
+		return "board.boardEnrollForm";
 	}
 	
 	/** 공지사항 수정 후
