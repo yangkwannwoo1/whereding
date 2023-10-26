@@ -7,10 +7,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.whereding.common.model.vo.Attachment;
+import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.product.model.dao.ProductCollectionDao;
-import com.kh.whereding.product.model.vo.CollectionReview;
 import com.kh.whereding.product.model.vo.ProductCollection;
+import com.kh.whereding.product.model.vo.ProductCollectionReview;
 
 
 @Service
@@ -40,10 +42,28 @@ public class ProductCollectionServiceImpl implements ProductCollectionService {
 	}
 
 	@Override
-	public ArrayList<CollectionReview> selectReviewList(String cno) {
+	public ArrayList<ProductCollectionReview> selectReviewList(String cno) {
 		return cDao.selectReviewList(sqlSession, cno);
 
 	}
+
+	@Override
+	public int insertProductCollection(ProductCollection c) {
+		return cDao.insertProductCollection(c, sqlSession);
+
+	}
+
+	@Override
+	public int insertFile(Attachment a) {
+		return cDao.insertFile(a, sqlSession);
+
+	}
+
+	@Override
+	public int insertTag(HashTag t) {
+		return cDao.insertTag(t, sqlSession);
+	}
+
 	
 	
 

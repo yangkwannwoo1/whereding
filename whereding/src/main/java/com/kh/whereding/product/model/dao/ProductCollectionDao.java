@@ -7,9 +7,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.whereding.common.model.vo.Attachment;
+import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.common.model.vo.PageInfo;
-import com.kh.whereding.product.model.vo.CollectionReview;
 import com.kh.whereding.product.model.vo.ProductCollection;
+import com.kh.whereding.product.model.vo.ProductCollectionReview;
 
 @Repository
 public class ProductCollectionDao {
@@ -35,8 +37,20 @@ public class ProductCollectionDao {
 		return sqlSession.selectOne("productCollectionMapper.selectBoard", map);
 	}
 	
-	public ArrayList<CollectionReview> selectReviewList(SqlSessionTemplate sqlSession, String cno){
+	public ArrayList<ProductCollectionReview> selectReviewList(SqlSessionTemplate sqlSession, String cno){
 		return (ArrayList)sqlSession.selectList("productCollectionMapper.selectReviewList", cno);
+	}
+	
+	public int insertProductCollection(ProductCollection c,SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("productCollectionMapper.insertProductCollection", c);
+	}
+	
+	public int insertTag(HashTag t, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("productCollectionMapper.insertTag", t);
+	}
+	
+	public int insertFile(Attachment a, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("productCollectionMapper.insertFile", a);
 	}
 
 }

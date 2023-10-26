@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class HashTag {
 
+	private String category;
 	private String productNo;
 	private String tagContent;
 }

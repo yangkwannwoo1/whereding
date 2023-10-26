@@ -290,7 +290,7 @@
 	
     	function selectReplyList(){ // 해당 게시글에 딸린 댓글리스트 조회용 ajax
 			$.ajax({
-				url:"rlist.co",
+				url:"crList.bo",
 				data:{cno:'${ c.code }'},
 				success:function(list){
 					console.log(list);

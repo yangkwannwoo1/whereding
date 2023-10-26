@@ -21,7 +21,7 @@
 		<result column="tag_content" property="tagContent"/>
 	</resultMap>
 	
-		<resultMap type="CollectionReview" id="CollectionReviewResult">
+		<resultMap type="ProductCollectionReview" id="ProductCollectionReviewResult">
 		<result column="review_no" property="reviewNo"/>
 		<result column="cs_no" property="csNo"/>
 		<result column="rv_content" property="rvContent"/>
@@ -31,8 +31,14 @@
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
 		<result column="filepath" property="filePath"/>
-	
 	</resultMap>
+	
+	<resultMap type="HashTag" id="hashTagResult">
+		<result column="product_no" property="productNo"></result>
+		<result column="tag_content" property="tagContent"></result>
+	</resultMap>
+	
+	
 	
 	<select id="selectListCount" resultType="_int">
 		select 
@@ -175,7 +181,7 @@
  	   </choose>
   	</select>
   	
-	<select id="selectReviewList" resultMap="CollectionReviewResult">
+	<select id="selectReviewList" resultMap="ProductCollectionReviewResult">
 		select
 			   r.review_no
              , r.cs_no
@@ -192,6 +198,133 @@
 		 where product_no = #{ cno }
 		 order by review_no desc
 	</select>
+	
+	<insert id="insertProductCollection">
+ 	   <choose>
+ 	   		<when test="category eq 'Studio'">
+				insert 
+				  into studio
+				  (
+				    S_CODE
+				  , S_ENTERPRISE
+				  , S_DETAIL
+				  , S_price
+				  , S_START_DATE
+				  , S_END_DATE
+				  , S_PHONE
+				  , S_ADDRESS
+				  , S_UNIT_TIME
+				  , S_WEEK_OPEN
+				  )
+			 values
+			 	  (
+			 	  'S'||SEQ_SNO.NEXTVAL
+ 	   		</when>
+ 	   		<when test="category eq 'Dress'">
+				insert 
+				  into Dress
+				  (
+				    D_CODE
+				  , D_ENTERPRISE
+				  , D_DETAIL
+				  , D_price
+				  , D_START_DATE
+				  , D_END_DATE
+				  , D_PHONE
+				  , D_ADDRESS
+				  , D_UNIT_TIME
+				  , D_WEEK_OPEN
+				  )
+			 values
+			 	  (
+			 	  'D'||SEQ_DNO.NEXTVAL
+ 	   		</when>
+ 	   		<otherwise>
+				insert 
+				  into makeup
+				  (
+				    M_CODE
+				  , M_ENTERPRISE
+				  , M_DETAIL
+				  , M_price
+				  , M_START_DATE
+				  , M_END_DATE
+				  , M_PHONE
+				  , M_ADDRESS
+				  , M_UNIT_TIME
+				  , M_WEEK_OPEN
+				  )
+			 values
+			 	  (
+			 	  'M'||SEQ_MKNO.NEXTVAL
+ 	   		</otherwise>
+ 	   </choose>
+	 	  , #{enterprise}
+	 	  , #{detail}
+	 	  , #{price}
+	 	  , #{startDate}
+	 	  , #{endDate}
+	 	  , #{phone}
+	 	  , #{address}
+	 	  , #{unitTime}
+	 	  , #{weekOpen}
+	 	  )
+  	</insert>
+  	
+	<insert id="insertTag">
+		insert 
+		  into tag
+		  (
+		  	product_no
+		  , tag_content
+		  ) 
+		  values
+		  (
+ 	   <choose>
+ 	   		<when test="category eq 'Studio'">
+			    'S' ||SEQ_SNO.CURRVAL
+ 	   		</when>
+ 	   		<when test="category eq 'Dress'">
+			    'D' ||SEQ_DNO.CURRVAL
+ 	   		</when>
+ 	   		<otherwise>
+			    'M' ||SEQ_MKNO.CURRVAL
+ 	   		</otherwise>
+ 	   </choose>
+		  , #{ tagContent }
+		  )
+  	</insert>
+	<insert id="insertFile">
+		insert 
+		  into product_img
+		  (
+		    img_no
+		  , product_No
+		  , img_Path
+		  , img_1
+		  , img_2
+		  , img_3
+		  )
+		  values
+		  (
+		    seq_img.nextval
+ 	   <choose>
+ 	   		<when test="category eq 'Studio'">
+			  , 'S' ||SEQ_SNO.CURRVAL
+ 	   		</when>
+ 	   		<when test="category eq 'Dress'">
+			  , 'D' ||SEQ_DNO.CURRVAL
+ 	   		</when>
+ 	   		<otherwise>
+			  , 'M' ||SEQ_MKNO.CURRVAL
+ 	   		</otherwise>
+ 	   </choose>
+		  , #{ imgPath }
+		  , #{ img1 }
+		  , #{ img2 }
+		  , #{ img3 }
+		  )
+  	</insert>
   	
   	
 	

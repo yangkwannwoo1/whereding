@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class ProductCollection {
 	
+	private String category;
 	private String code;
 	private String enterprise;
 	private String detail;
@@ -28,5 +29,7 @@ public class ProductCollection {
 	private String img2;
 	private String img3;
 	private String imgPath;
+	private String tag;
 	private String tagContent;
+
 }

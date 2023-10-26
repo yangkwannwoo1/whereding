@@ -481,7 +481,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 		$("#main-menu-collection .sub-menu li a").click(
 			function(){
 				let category = $(this).prev().text();
-				location.href="selectCollectionList.bo?category=" + category;
+				location.href="cList.bo?category=" + category;
 			}
 		)
 	</script>

@@ -24,7 +24,7 @@ import com.kh.whereding.product.model.service.HallServiceImpl;
 import com.kh.whereding.product.model.vo.Hall;
 
 @Controller
-public class HallListController {
+public class HallController {
 	
 	@Autowired
 	private HallServiceImpl HService;
@@ -47,7 +47,7 @@ public class HallListController {
 	@RequestMapping("enrollForm.pr")
 	public String enrollForm() {
 
-		return "product/hallinsert";
+		return "product/hallEnrollForm";
 	}
 	
 	@RequestMapping("insert.pr")
@@ -125,7 +125,7 @@ public class HallListController {
 		String savePath = session.getServletContext().getRealPath("/resources/css/assets/img/products/");
 		
 			try {
-				upfile.transferTo(new File(savePath + changeName));
+				upfile.transferTo(new File(savePath + originName));
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

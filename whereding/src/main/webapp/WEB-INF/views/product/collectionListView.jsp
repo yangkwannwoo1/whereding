@@ -698,8 +698,16 @@
 				</div>
 			</div> -->
 			
-
-			<h4>${ category }</h4>			
+			<div style="">
+				<span style="font-size: 30px; font-weight: 700; font-size: 30px">${ category }</span>	
+				<input class="enroll_collection btn btn-warning float-right" type="button" value="업체등록" style="height:40px;">		
+			</div>
+			<script>
+				$(".enroll_collection").click(function(){
+					location.href="cEnrollForm.bo";
+				})
+			
+			</script>
 			<div class="row collectionList">
 				<c:forEach var="c" items="${clist}">
 					<div class="col-lg-4 col-md-6">
@@ -725,7 +733,7 @@
 			<script>
 	            $(function(){
 	        		$(".collectionList .single-board a").click(function(){
-	        			location.href = 'detail.co?category=${ category }&cno=' + $(this).parent().find(".cno").val();
+	        			location.href = 'cDetail.bo?category=${ category }&cno=' + $(this).parent().find(".cno").val();
 	        		})
 	        	})
 			</script>
@@ -741,18 +749,18 @@
 											<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="selectCollectionList.bo?category=${ category }&cpage=${ pi.currentPage - 1 }">Previous</a></li>
+											<li class="page-item"><a class="page-link" href="cList.bo?category=${ category }&cpage=${ pi.currentPage - 1 }">Previous</a></li>
 										</c:otherwise>
 									</c:choose>
 									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										<li class="page-item"><a class="page-link" href="selectCollectionList.bo?category=${ category }&cpage=${p}">${p}</a></li>
+										<li class="page-item"><a class="page-link" href="cList.bo?category=${ category }&cpage=${p}">${p}</a></li>
 									</c:forEach>
 									<c:choose>
 										<c:when test="${ pi.currentPage eq pi.maxPage }">
 											<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="selectCollectionList.bo?category=${ category }&cpage=${pi.currentPage + 1}">Next</a></li>
+											<li class="page-item"><a class="page-link" href="cList.bo?category=${ category }&cpage=${pi.currentPage + 1}">Next</a></li>
 										</c:otherwise>	
 									</c:choose>
 								</ul>

@@ -764,7 +764,7 @@
             <br>
             <div id="menu5">
                 <span style="font-weight: 700; font-size: 30px;">웨딩홀</span>
-                <button type="button" onclick="location.href='enrollForm.pr'" id="insertposts" style="height:40px">글 등록</button>
+                <button type="button" onclick="location.href='enrollForm.pr'" id="insertposts" style="height:40px">업체등록</button>
             </div>
             <br>
             <div class="row">

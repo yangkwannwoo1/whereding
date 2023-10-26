@@ -21,5 +21,6 @@ public class Attachment {
 	private String img2;
 	private String img3;
 	private String changeName;
+	private String category;
 	
 }
