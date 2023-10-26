@@ -3,6 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="memberMapper">
 
 	<resultMap type="Member" id="memberResult">
@@ -17,7 +18,92 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="status" property="status"/>
 		<result column="grade_no" property="gradeNo"/>
 	</resultMap>
-	
+	<resultMap type="Consulting" id="consultingResult">
+		<result column="CS_NO" property="csNo"/>
+		<result column="PRODUCT_NO" property="productNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="CS_CONTENT" property="scContent"/>
+		<result column="CS_DATE" property="csDate"/>
+		<result column="START_TIME" property="startTime"/>
+		<result column="END_TIME" property="endTime"/>
+		
+	</resultMap>
+	<resultMap type="Hall" id="hallResult">
+		<result column="H_CODE" property="code"/>
+		<result column="H_ENTERPRISE" property="enterprise"/>
+		<result column="H_NAME" property="name"/>
+		<result column="H_DETAIL" property="detail"/>
+		<result column="H_SEAT" property="seat"/>
+		<result column="H_RENTAL" property="rental"/>
+		<result column="H_RESTAURANT_SEAT" property="hallSeat"/>
+		<result column="H_MEAL" property="meal"/>
+		<result column="H_START_TIME" property="startTime"/>
+		<result column="H_END_TIME" property="endTime"/>
+		<result column="H_PHONE" property="phone"/>
+		<result column="H_ADDRESS" property="address"/>
+		<result column="H_UNIT_TIME" property="unitTime"/> 
+		<result column="H_WEEK_OPEN" property="weekOpen"/>
+		<result column="CS_DATE" property="csDate"/>
+		<result column="start_time" property="csStartTime"/>
+		<result column="REVIEW_NO" property="reviewNo"/>
+		<result column="cs_no" property="csNo"/>
+		<result column="IMG_1" property="img1"/>
+		<result column="IMG_PATH" property="imgPath"/>
+	</resultMap>
+	<resultMap type="Studio" id="studioResult">
+		<result column="S_CODE" property="stCode"/>
+		<result column="S_ENTERPRISE" property="stEnterprise"/>
+		<result column="S_DETAIL" property="stDetail"/>
+		<result column="S_PRICE" property="stPrice"/>
+		<result column="S_START_DATE" property="stStartDate"/>
+		<result column="S_END_DATE" property="stEndDate"/>
+		<result column="S_PHONE" property="phone"/>
+		<result column="S_ADDRESS" property="address"/>
+		<result column="S_UNIT_TIME" property="unitTime"/>
+		<result column="S_WEEK_OPEN" property="weekOpen"/>
+		<result column="CS_DATE" property="csDate"/>
+		<result column="start_time" property="csStartTime"/>
+		<result column="REVIEW_NO" property="reviewNo"/>
+		<result column="cs_no" property="csNo"/>
+		<result column="IMG_1" property="img1"/>
+		<result column="IMG_PATH" property="imhPath"/>
+	</resultMap>
+	<resultMap type="Dress" id="dressResult">
+		<result column="D_CODE" property="drCode"/>
+		<result column="D_ENTERPRISE" property="drEnterprise"/>
+		<result column="D_DETAIL" property="drDetail"/>
+		<result column="D_PRICE" property="drPrice"/>
+		<result column="D_START_DATE" property="drStartDate"/>
+		<result column="D_END_DATE" property="drEndDate"/>
+		<result column="D_PHONE" property="phone"/>
+		<result column="D_ADDRESS" property="address"/>
+		<result column="D_UNIT_TIME" property="unitTime"/>
+		<result column="D_WEEK_OPEN" property="weekOpen"/>
+		<result column="CS_DATE" property="csDate"/>
+		<result column="start_time" property="csStartTime"/>
+		<result column="REVIEW_NO" property="reviewNo"/>
+		<result column="cs_no" property="csNo"/>
+		<result column="IMG_1" property="img1"/>
+		<result column="IMG_PATH" property="imhPath"/>
+	</resultMap>
+	<resultMap type="Makeup" id="makeupResult">
+		<result column="M_CODE" property="maCode"/>
+		<result column="M_ENTERPRISE" property="maEnterprise"/>
+		<result column="M_DETAIL" property="maDetail"/>
+		<result column="M_PRICE" property="maPrice"/>
+		<result column="M_START_DATE" property="maStartDate"/>
+		<result column="M_END_DATE" property="maEndDate"/>
+		<result column="M_PHONE" property="phone"/>
+		<result column="M_ADDRESS" property="address"/>
+		<result column="M_UNIT_TIME" property="unitTime"/>
+		<result column="M_WEEK_OPEN" property="weekOpen"/>
+		<result column="CS_DATE" property="csDate"/>
+		<result column="start_time" property="csStartTime"/>
+		<result column="REVIEW_NO" property="reviewNo"/>
+		<result column="cs_no" property="csNo"/>
+		<result column="IMG_1" property="img1"/>
+		<result column="IMG_PATH" property="imhPath"/>
+	</resultMap>
 	
 
 
@@ -99,7 +185,160 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  from member
 		 where user_id = #{userId}
 	</select>
-
+	<select id="consultingList" resultMap="consultingResult">
+	   select
+			  CS_NO
+			, PRODUCT_NO
+			, USER_NO
+			, CS_CONTENT
+			, CS_DATE
+			, START_TIME
+			, END_TIME
+		 from consulting
+		where user_no = #{userNo}
+		  and status = 'Y'
+	</select>
+	 
+	
+	<select id="consultingHall" resultMap="hallResult">
+	select 
+	        H_CODE
+	      , H_ENTERPRISE
+	      , H_NAME
+	      , H_DETAIL
+	      , H_SEAT
+	      , H_RENTAL
+	      , H_RESTAURANT_SEAT
+	      , H_MEAL
+	      , H_START_TIME
+	      , H_END_TIME
+	      , H_PHONE
+	      , H_ADDRESS
+	      , H_UNIT_TIME
+	      , H_WEEK_OPEN
+	      , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE"
+	   	  , start_time
+	   	  , REVIEW_NO
+	   	  , cs_no
+	      , IMG_1
+	      , IMG_PATH
+	   from hall
+	   left join consulting c on (H_CODE = c.PRODUCT_NO)
+   left join review  using (cs_no)
+   left join PRODUCT_IMG im on (H_CODE = im.PRODUCT_NO)
+	  where h_code = #{productNo}
+	    and H_STATUS = 'Y'
+	    
+	</select>
+	<select id="consultingStudio" resultMap="studioResult">
+	select
+	       S_CODE
+	     , S_ENTERPRISE
+	     , S_DETAIL
+	     , S_PRICE
+	     , S_START_DATE
+	     , S_END_DATE
+	     , S_PHONE
+	     , S_ADDRESS
+	     , S_UNIT_TIME
+	     , S_WEEK_OPEN
+	     , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE"
+		 , start_time
+		 , REVIEW_NO
+		 , cs_no
+	     , IMG_1
+	     , IMG_PATH
+	  FROM STUDIO
+	 left join consulting c on (s_CODE = c.PRODUCT_NO)
+  left join review using (cs_no)
+  left join PRODUCT_IMG im on (s_CODE = im.PRODUCT_NO)
+	 WHERE S_CODE = #{productNo}
+	   AND S_STATUS = 'Y'
+	</select>
+	<select id="consultingDress" resultMap="dressResult">
+	SELECT 
+	       D_CODE
+	     , D_ENTERPRISE
+	     , D_DETAIL
+	     , D_PRICE
+	     , D_START_DATE
+	     , D_END_DATE
+	     , D_PHONE
+	     , D_ADDRESS
+	     , D_UNIT_TIME
+	     , D_WEEK_OPEN
+	     , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE"
+	     , start_time
+	     , REVIEW_NO
+	     , cs_no
+	     , IMG_1
+	     , IMG_PATH
+	  FROM DRESS  
+	 left join consulting c on (d_CODE = c.PRODUCT_NO)
+  left join review using (cs_no)
+  left join PRODUCT_IMG im on (d_CODE = im.PRODUCT_NO)
+	 WHERE D_CODE = #{productNo}
+	   AND D_STATUS = 'Y'
+	</select>
+	<select id="consultingMakeup" resultMap="makeupResult">
+	SELECT 
+	       M_CODE
+	     , M_ENTERPRISE
+	     , M_DETAIL
+	     , M_PRICE
+	     , M_START_DATE
+	     , M_END_DATE
+	     , M_PHONE
+	     , M_ADDRESS
+	     , M_UNIT_TIME
+	     , M_WEEK_OPEN
+	     , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE"
+	     , start_time
+	     , REVIEW_NO
+	     , cs_no
+		 , IMG_1
+	     , IMG_PATH
+	   FROM makeup
+	 left join consulting c on (m_CODE = c.PRODUCT_NO)
+	  left join review using (cs_no)
+	  left join PRODUCT_IMG im on (m_CODE = im.PRODUCT_NO)
+	 WHERE M_CODE = #{productNo}
+	   AND M_STATUS = 'Y'
+	</select>
+	<insert id="consultingReview">
+	insert  
+	  into review
+	     (
+	       REVIEW_NO
+	     , CS_NO
+	     , RV_CONTENT
+	     , RV_SCORE
+	     )
+	values
+	     (
+	       SEQ_RVNO.NEXTVAL
+	     , #{csNo}
+	     , #{content}
+	     , #{score}
+	     )
+	</insert>
+	<insert id="consultingReviewImg">
+	insert
+	  into consulting_img
+	     (
+	       REVIEW_NO
+	     , CS_ORIGIN_NAME
+	     , CS_CHANGE_NAME
+	     , CS_FILE_PATH
+	     )
+	values
+	     (
+	       SEQ_RVNO.CURRVAL
+	     , #{csOriginName}
+	     , #{csChangeName}
+	     , #{csFilePath}
+	     )
+	 </insert>
 	
 	
 	

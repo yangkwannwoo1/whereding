@@ -363,28 +363,39 @@
                 <ul class="category">
                     <li>마이페이지</li>
                     <li>
-                        <a href="#">
-                            <i class="fas fa-home" data-tab="tab-1"></i> 쇼핑
+                        <a href="giftOredrList.me?userNo=${loginMember.userNo}">
+                            <i class="fas fa-home"data-tab="tab-1"> </i> 쇼핑
+                            </i>
                         </a>
                         <ul>
-                            <li><a href="giftOredrList.me" style="color: white;">결제내역 / 배송조회</a></li>
-                            <li><a href="#" style="color: white;">상담예약 확인목록</a></li>
+                            <li>
+                                <a href="giftOredrList.me?userNo=${loginMember.userNo}" style="color: white;">결제내역 / 배송조회</a>
+                            </li>
+                            <li>
+                                <a href="reserveList.me?userNo=${loginMember.userNo}" style="color: white;">상담예약 확인목록</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">
                             <i class="fas fa-laptop" data-tab="tab-2"></i> my 혜택
+                            </i>
                         </a>
                         <ul>
-                            <li><a href="#" style="color: white;">쿠폰 보유내역</a></li>
+                            <li>
+                                <a href="#" style="color: white;">쿠폰 보유내역</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="myPage.me">
                             <i class="fas fa-utensils" data-tab="tab-4"></i> my정보
+                            </i>
                         </a>
                         <ul>
-                            <li><a href="myPage.me" style="color: white;">내정보조회</a></li>
+                            <li>
+                                <a href="myPage.me" style="color: white;">내정보조회</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -417,7 +428,18 @@
 	                                    </div>
 	                                </td>
 	                                <td class="content_td2">
-	                                    <button class="refund_btn">배송조회</button>
+                                        <form action="http://info.sweettracker.co.kr/tracking/4" method="post" target="_blank" >
+                                            <div class="form-group">
+                                              <input type="hidden" class="form-control" id="t_key" name="t_key" value="5RrBazXfHPynrdGyvioSMQ">
+                                            </div>
+                                            <div class="form-group">
+                                              <input type="hidden" class="form-control" name="t_code" id="t_code" value="04">
+                                            </div>
+                                            <div class="form-group">
+                                              <input type="hidden" class="form-control" name="t_invoice" id="t_invoice" value="616407195675">
+                                            </div>
+                                            <button type="submit" class="cancel_btn">배송 조회</button>
+                                        </form>
 	                                    <button class="cancel_btn">결제취소</button>
 	                                </td>
 	                            </tr>

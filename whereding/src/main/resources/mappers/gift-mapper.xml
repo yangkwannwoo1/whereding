@@ -55,9 +55,9 @@
 		     , USER_NO
 		     , BUYMETHOD_NO
 		     , PAYMENT_NO
-		     , CATEGORY_NO
+		     , h.CATEGORY_NO
 		     , to_char(h.CREATE_DATE, 'YYYY-MM-DD') as "h.CREATE_DATE"
-		     , PIECE
+		     , GIFT_PRICE
 		     , GIFT_NAME
 		     , GIFT_CONTENT
 		     , IMG_1

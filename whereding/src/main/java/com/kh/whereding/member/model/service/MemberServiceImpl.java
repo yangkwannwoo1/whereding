@@ -10,7 +10,14 @@ import com.kh.whereding.gift.model.vo.GiftHistory;
 import com.kh.whereding.gift.model.vo.GiftReview;
 import com.kh.whereding.gift.model.vo.GiftReviewImg;
 import com.kh.whereding.member.model.dao.MemberDao;
+import com.kh.whereding.member.model.vo.Consulting;
+import com.kh.whereding.member.model.vo.ConsultingReviewImg;
 import com.kh.whereding.member.model.vo.Member;
+import com.kh.whereding.member.model.vo.Review;
+import com.kh.whereding.product.model.vo.Dress;
+import com.kh.whereding.product.model.vo.Hall;
+import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.Studio;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -88,5 +95,47 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public ArrayList<Consulting> consultingList(Member m) {
+		ArrayList<Consulting> cs = mDao.consultingList(sqlSession,m);
+		return cs;
+	}
+
+	@Override
+	public Hall consultingHall(String productNo) {
+		return mDao.consultingHall(sqlSession, productNo);
+	}
+
+	@Override
+	public Studio consultingStudio(String productNo) {
+		return mDao.consultingStudio(sqlSession, productNo);
+	}
+
+	@Override
+	public Dress consultingDress(String productNo) {
+		return mDao.consultingDress(sqlSession, productNo);
+	}
+
+	@Override
+	public Makeup consultingMakeup(String productNo) {
+		return mDao.consultingMakeup(sqlSession, productNo);
+	}
+
+	@Override
+	public int consultingReview(Review rv) {
+		int result = mDao.consultingReview(sqlSession, rv);
+		return result;
+	}
+
+	@Override
+	public int consultingReviewImg(ConsultingReviewImg rvi) {
+		int result = mDao.consultingReviewImg(sqlSession, rvi);
+		return result;
+	}
+
+	
+	
+
+	
 	
 }

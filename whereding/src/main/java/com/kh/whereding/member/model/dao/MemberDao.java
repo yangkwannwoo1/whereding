@@ -8,7 +8,14 @@ import org.springframework.stereotype.Repository;
 import com.kh.whereding.gift.model.vo.GiftHistory;
 import com.kh.whereding.gift.model.vo.GiftReview;
 import com.kh.whereding.gift.model.vo.GiftReviewImg;
+import com.kh.whereding.member.model.vo.Consulting;
+import com.kh.whereding.member.model.vo.ConsultingReviewImg;
 import com.kh.whereding.member.model.vo.Member;
+import com.kh.whereding.member.model.vo.Review;
+import com.kh.whereding.product.model.vo.Dress;
+import com.kh.whereding.product.model.vo.Hall;
+import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.Studio;
 
 @Repository
 public class MemberDao {
@@ -47,5 +54,27 @@ public class MemberDao {
 	}
 	public int giftReviewImg(SqlSessionTemplate sqlSession, GiftReviewImg gri) {
 		return sqlSession.insert("giftMapper.giftReviewImg", gri);
+	}
+	public ArrayList<Consulting> consultingList(SqlSessionTemplate sqlSession, Member m) {
+		ArrayList<Consulting> cs = (ArrayList)sqlSession.selectList("memberMapper.consultingList", m);
+		return cs;
+	}
+	public Hall consultingHall(SqlSessionTemplate sqlSession, String productNo) {
+		return sqlSession.selectOne("memberMapper.consultingHall", productNo);
+	}
+	public Studio consultingStudio(SqlSessionTemplate sqlSession, String productNo) {
+		return sqlSession.selectOne("memberMapper.consultingStudio", productNo);
+	}
+	public Dress consultingDress(SqlSessionTemplate sqlSession, String productNo) {
+		return sqlSession.selectOne("memberMapper.consultingDress", productNo);
+	}
+	public Makeup consultingMakeup(SqlSessionTemplate sqlSession, String productNo) {
+		return sqlSession.selectOne("memberMapper.consultingMakeup", productNo);
+	}
+	public int consultingReview(SqlSessionTemplate sqlSession, Review rv) {
+		return sqlSession.insert("memberMapper.consultingReview", rv);
+	}
+	public int consultingReviewImg(SqlSessionTemplate sqlSession, ConsultingReviewImg rvi) {
+		return sqlSession.insert("memberMapper.consultingReviewImg", rvi);
 	}
 }

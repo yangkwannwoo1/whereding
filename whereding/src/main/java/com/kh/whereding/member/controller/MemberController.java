@@ -19,8 +19,19 @@ import com.kh.whereding.gift.model.vo.GiftHistory;
 import com.kh.whereding.gift.model.vo.GiftReview;
 import com.kh.whereding.gift.model.vo.GiftReviewImg;
 import com.kh.whereding.member.model.service.MemberServiceImpl;
+import com.kh.whereding.member.model.vo.Consulting;
+import com.kh.whereding.member.model.vo.ConsultingReviewImg;
 import com.kh.whereding.member.model.vo.Member;
+import com.kh.whereding.member.model.vo.Review;
+import com.kh.whereding.product.model.vo.Dress;
+import com.kh.whereding.product.model.vo.Hall;
+import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.Studio;
 
+/**
+ * @author user1
+ *
+ */
 @Controller
 public class MemberController {
 	
@@ -156,37 +167,109 @@ public class MemberController {
 		}
 	}
 	
+	// 상담예약내역
+	@RequestMapping(value = "reserveList.me")
+	public String reserveListView(Member m, HttpSession session) {
+		ArrayList<Consulting> cs = mService.consultingList(m);
+		ArrayList ha = new ArrayList();
+		ArrayList st = new ArrayList();
+		ArrayList dr = new ArrayList();
+		ArrayList mu = new ArrayList();
+	
+		
+		for(Consulting cst : cs) {
+			Hall hal = mService.consultingHall(cst.getProductNo());
+			Studio studi = mService.consultingStudio(cst.getProductNo());
+			Dress dres = mService.consultingDress(cst.getProductNo());
+			Makeup make = mService.consultingMakeup(cst.getProductNo());
+			
+			if(hal != null) {
+				ha.add(hal);
+			}
+			if(studi != null) {
+				st.add(studi);
+			}
+			if(dres != null) {
+				dr.add(dres);
+			}
+			if(make != null) {
+				mu.add(make);
+			}
+		}
+
+		if(ha != null || st != null || dr != null || mu != null) {
+			session.setAttribute("hall",ha);
+			session.setAttribute("studio",st);
+			session.setAttribute("dress",dr);
+			session.setAttribute("makeup",mu);
+			session.setAttribute("cs",cs);
+			
+			return "member/reserveList";
+		}else {
+			session.setAttribute("alertMsg", "목록조회에 실패하였습니다");
+			return "redirct:/";
+		}
+	}
+	
 	@RequestMapping(value = "giftReview.gf")
 	public String giftReview(GiftReview gr,Member m,MultipartFile upfile, GiftReviewImg gri, HttpSession session) {
 		int result = mService.giftReview(gr);
-		
 		if(!upfile.getOriginalFilename().equals("")) { // 이미지 있음 
 			String changeName = saveFile(upfile,session);
-			
 			gri.setOriginName(upfile.getOriginalFilename());
 			gri.setChangeName(changeName);
-			gri.setFilePath("resources/css/assets/img/giftReviewImg");
+			gri.setFilePath("resources/css/assets/img/ReviewImg");
 			System.out.println(gri);
 			int result2 = mService.giftReviewImg(gri);
-			
 			if(result > 0 && result2 > 0) {
 				session.setAttribute("alertMsg", "리뷰가 등록되었습니다.");
 			}else {
 				session.setAttribute("alertMsg", "리뷰 등록 실패");
 			}
-		
 		} else { // 이미지 없음 그냥 리뷰먄
-			
 			if(result >0) {
 				session.setAttribute("alertMsg", "리뷰가 등록되었습니다.");
 			}else {
 				session.setAttribute("alertMsg", "리뷰 등록 실패");
 			}
 		}
-		
-		
-		
-		return"redirect:giftOredrList.me?userNo="+ m.getUserNo();
+		return"redirect:reserveList.me?userNo="+ m.getUserNo();
+	}
+	
+	
+	/** 예매내역 리뷰 달고
+	 * @param rv
+	 * @param m
+	 * @param upfile
+	 * @param rvi
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "consultingReview.me")
+	public String consultingReview(Review rv,Member m,MultipartFile upfile, ConsultingReviewImg rvi, HttpSession session) {
+		System.out.println("rv :"+rv);
+		System.out.println("rvi :"+rvi);
+		int result = mService.consultingReview(rv);
+		if(!upfile.getOriginalFilename().equals("")) { // 이미지 있음 
+			String changeName = saveFile(upfile,session);
+			rvi.setCsOriginName(upfile.getOriginalFilename());
+			rvi.setCsChangeName(changeName);
+			rvi.setCsFilePath("resources/css/assets/img/ReviewImg");
+			
+			int result2 = mService.consultingReviewImg(rvi);
+			if(result > 0 && result2 > 0) {
+				session.setAttribute("alertMsg", "리뷰가 등록되었습니다.");
+			}else {
+				session.setAttribute("alertMsg", "리뷰 등록 실패");
+			}
+		} else { // 이미지 없음 그냥 리뷰먄
+			if(result >0) {
+				session.setAttribute("alertMsg", "리뷰가 등록되었습니다.");
+			}else {
+				session.setAttribute("alertMsg", "리뷰 등록 실패");
+			}
+		}
+		return"redirect:reserveList.me?userNo="+ m.getUserNo();
 	}
 	
 	
@@ -204,7 +287,7 @@ public class MemberController {
 			String changeName = "결혼은-웨어딩-" + currentTime + ranNum + ext;
 			
 			// 업로드 시키고자 하는 폴더의 물리적인 경로를 알아내기
-			String savePath = session.getServletContext().getRealPath("/resources/css/assets/img/giftReviewImg/");
+			String savePath = session.getServletContext().getRealPath("/resources/css/assets/img/ReviewImg/");
 			
 			try {
 				upfile.transferTo(new File(savePath + changeName));

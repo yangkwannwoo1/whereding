@@ -247,7 +247,7 @@
                         마이페이지
                     </li>
                         <li>
-                            <a href="#">
+                            <a href="giftOredrList.me?userNo=${loginMember.userNo}">
                                 <i class="fas fa-home"data-tab="tab-1"> </i> 쇼핑
                                 </i>
                             </a>
@@ -256,7 +256,7 @@
                                     <a href="giftOredrList.me?userNo=${loginMember.userNo}" style="color: white;">결제내역 / 배송조회</a>
                                 </li>
                                 <li>
-                                    <a href="#" style="color: white;">상담예약 확인목록</a>
+                                    <a href="reserveList.me?userNo=${loginMember.userNo}" style="color: white;">상담예약 확인목록</a>
                                 </li>
                             </ul>
                         </li>
@@ -272,7 +272,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="myPage.me">
                                 <i class="fas fa-utensils" data-tab="tab-4"></i> my정보
                                 </i>
                             </a>
