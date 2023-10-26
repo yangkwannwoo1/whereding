@@ -12,6 +12,9 @@
 		<typeAlias type="com.kh.whereding.board.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.whereding.board.model.vo.Qna" alias="Qna"/>
 		<typeAlias type="com.kh.whereding.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.whereding.member.model.vo.Consulting" alias="Consulting"/>
+		<typeAlias type="com.kh.whereding.member.model.vo.ConsultingReviewImg" alias="ConsultingReviewImg"/>
+		<typeAlias type="com.kh.whereding.member.model.vo.Review" alias="Review"/>
 		<typeAlias type="com.kh.whereding.product.model.vo.Dress" alias="Dress"/>
 		<typeAlias type="com.kh.whereding.product.model.vo.Hall" alias="Hall"/>
 		<typeAlias type="com.kh.whereding.product.model.vo.Makeup" alias="Makeup"/>
@@ -21,6 +24,7 @@
 		<typeAlias type="com.kh.whereding.common.model.vo.HashTag" alias="HashTag"/>				
 		<typeAlias type="com.kh.whereding.gift.model.vo.Basket" alias="Basket"/>
 		<typeAlias type="com.kh.whereding.gift.model.vo.Gift" alias="Gift"/>				
+		<typeAlias type="com.kh.whereding.gift.model.vo.GiftHistory" alias="GiftHistory"/>				
 		<typeAlias type="com.kh.whereding.common.model.vo.Attachment" alias="Attachment"/>
 						
 	</typeAliases>

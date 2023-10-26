@@ -12,6 +12,18 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Studio {
+/*
+S_CODE
+S_ENTERPRISE
+S_DETAIL
+S_PRICE
+S_START_DATE
+S_END_DATE
+S_PHONE
+S_ADDRESS
+S_UNIT_TIME
+S_WEEK_OPEN
+ */
 	private String stCode;
 	private String stEnterprise;
 	private String stDetail;
@@ -22,4 +34,10 @@ public class Studio {
 	private String address;
 	private int unitTime;
 	private String weekOpen;
+	private String csDate;
+	private String csStartTime;
+	private int reviewNo;
+	private int csNo;
+	private String img1;
+	private String imgPath;
 }

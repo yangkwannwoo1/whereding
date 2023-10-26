@@ -15,7 +15,20 @@
 		<result column="img_2" property="img2"/>
 		<result column="img_3" property="img3"/>
 	</resultMap>
-	
+	<resultMap type="GiftHistory" id="giftHistoryResult">
+		<result column="GHIS_NO" property="ghisNo"/>
+		<result column="GIFT_NO" property="guftNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="BUYMETHOD_NO" property="butMethodNo"/>
+		<result column="PAYMENT_NO" property="paymentNo"/>
+		<result column="PIECE" property="piece"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="GIFT_NAME" property="giftName"/>
+		<result column="GIFT_CONTENT" property="giftContent"/>
+		<result column="IMG_1" property="img1"/>
+		<result column="IMG_PATH" property="imgPath"/>
+		<result column="GRIV_NO" property="grivNo"/>
+	</resultMap>
 	
 	
 	<select id="selectGiftList" resultMap="giftResult">
@@ -35,5 +48,59 @@
       left outer join product_img p on g.gift_no=p.product_no
       
 	</select>
-
+	<select id="giftHistoryList" resultMap="giftHistoryResult">
+		select 
+		       GHIS_NO
+		     , GIFT_NO
+		     , USER_NO
+		     , BUYMETHOD_NO
+		     , PAYMENT_NO
+		     , h.CATEGORY_NO
+		     , to_char(h.CREATE_DATE, 'YYYY-MM-DD') as "h.CREATE_DATE"
+		     , GIFT_PRICE
+		     , GIFT_NAME
+		     , GIFT_CONTENT
+		     , IMG_1
+		     , IMG_PATH
+		     , GRIV_NO
+		  from gift_history h
+		  join gift using (GIFT_NO)
+		  left JOIN product_img ON (GIFT_NO = PRODUCT_NO)
+		  left join gift_review using (GHIS_NO)
+		 where user_no = #{userNo}
+	</select>
+	<insert id="giftReview">
+	 INSERT 
+	   into gift_review
+	      (
+	        GRIV_NO
+	      , GHIS_NO
+	      , GRIV_CONTENT
+	      , GRIV_GRADE
+	      )
+	 values
+	      (
+	        seq_griv.nextval
+	      , #{ghisNo}
+	      , #{grivContent}
+	      , #{grivGrade}
+	      )
+	</insert>
+	<insert id="giftReviewImg">
+		insert
+		  into gift_img
+		     (
+		       REVIEW_NO
+		     , G_ORIGIN_NAME
+		     , G_CHANGE_NAME
+		     , G_FILE_PATH
+		     )
+		values
+		     (
+		       seq_griv.CURRVAL
+		     , #{originName}
+		     , #{changeName}
+		     , #{filePath}
+		     )
+	</insert>
 </mapper>

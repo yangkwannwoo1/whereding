@@ -247,16 +247,16 @@
                         마이페이지
                     </li>
                         <li>
-                            <a href="#">
+                            <a href="giftOredrList.me?userNo=${loginMember.userNo}">
                                 <i class="fas fa-home"data-tab="tab-1"> </i> 쇼핑
                                 </i>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="#" style="color: white;">주문목록 / 배송조회</a>
+                                    <a href="giftOredrList.me?userNo=${loginMember.userNo}" style="color: white;">결제내역 / 배송조회</a>
                                 </li>
                                 <li>
-                                    <a href="#" style="color: white;">상담예약 확인목록</a>
+                                    <a href="reserveList.me?userNo=${loginMember.userNo}" style="color: white;">상담예약 확인목록</a>
                                 </li>
                             </ul>
                         </li>
@@ -272,7 +272,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="myPage.me">
                                 <i class="fas fa-utensils" data-tab="tab-4"></i> my정보
                                 </i>
                             </a>
@@ -353,7 +353,7 @@
                                     <td><input type="text" name="phone" onKeyup = "addHypen(this);" value="${loginMember.phone}"></td>
                                 </tr>
                                 <tr>
-                                    <th height="50">이메일 ${loginMember.userNo} </th>
+                                    <th height="50">이메일</th>
                                     <td><input type="email" name="email" value="${loginMember.email}" placeholder="@ 포함해서 입력"></td>
                                 </tr>
                                 
