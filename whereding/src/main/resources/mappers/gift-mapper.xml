@@ -60,6 +60,7 @@
 		     , GIFT_PRICE
 		     , GIFT_NAME
 		     , GIFT_CONTENT
+		     , piece
 		     , IMG_1
 		     , IMG_PATH
 		     , GRIV_NO

@@ -259,11 +259,12 @@ font-family: 'Open Sans Condensed', sans-serif;
 									</ul> <a href="service.bo">커뮤니티</a></li>
 								<li id="main-menu-mypge"><a href="contact.html">myPage</a>
 									<ul class="sub-menu">
-										<li><a href="contact.html">Contact</a> 
-										<a href="contact.html">상담</a></li>
-										<li><a href="checkout.html">Check Out</a> <a
-											href="checkout.html">체크아웃</a></li>
-										<li><a href="cart.html">Cart</a> <a href="cart.html">장바구니</a>
+										<li><a href="giftOredrList.me?userNo=${loginMember.userNo}">Payment History</a> 
+										<a href="giftOredrList.me?userNo=${loginMember.userNo}">결제내역/배송조회</a></li>
+										<li><a href="reserveList.me?userNo=${loginMember.userNo}">Consultation Reservation</a> <a
+											href="reserveList.me?userNo=${loginMember.userNo}">상담예약 내역</a></li>
+										<li><a href="myPage.me">My Information</a> <a 
+											href="myPage.me">나의 정보</a>
 										</li>
 									</ul> <a href="myPage.me">마이페이지</a></li>
 								<li id="main-menu-icon">
