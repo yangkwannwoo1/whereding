@@ -35,5 +35,35 @@
       left outer join product_img p on g.gift_no=p.product_no
       
 	</select>
+	
+	<select id="adminGiftCount" resultType="_int">
+		 select 
+				count(*)
+	 	   from gift
+  	</select>
+	
+	
+	<select id="adminGiftList" resultMap="giftResult">
+		select 
+        gift_no
+       ,category_no
+       ,gift_name
+       ,gift_content
+       ,gift_price
+       ,count
+       ,img_path as "img_path"
+       ,img_1 as "img_1"
+       ,img_2 as "img_2"
+       ,img_3 as "img_3"
+
+      from gift g
+      left outer join product_img p on g.gift_no=p.product_no
+	</select>
+	
+	<select id="selectGiftCount" resultType="_int">
+		 select 
+				count(*)
+	 	   from gift
+	</select>
 
 </mapper>

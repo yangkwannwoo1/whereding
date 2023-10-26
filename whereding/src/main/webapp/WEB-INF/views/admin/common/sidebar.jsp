@@ -74,24 +74,16 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="qna.ad">
           <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
+          <span>Q.N.A</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="giftsale.ad">
           <i class="bi bi-envelope"></i>
-          <span>Contact</span>
+          <span>답례품 목록</span>
         </a>
       </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
-      </li><!-- End Register Page Nav -->
-
 
     </ul><!-- End Sidebar-->
 

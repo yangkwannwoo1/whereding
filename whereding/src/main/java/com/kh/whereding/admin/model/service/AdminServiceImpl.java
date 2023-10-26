@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.whereding.admin.model.dao.AdminDao;
+import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
+import com.kh.whereding.common.model.vo.VisitCountVO;
+import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
 
 @Service
@@ -40,15 +43,66 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int selectqnaCount() {
+	public int adminQnaCount() {
 		
-		return aDao.selectqnaCount(sqlSession);
+		return aDao.adminQnaCount(sqlSession);
 	}
 
 	@Override
-	public ArrayList<Qna> selectqnaList(PageInfo pi) {
+	public ArrayList<Qna> adminQnaList(PageInfo pi) {
 		
-		return aDao.selectqnaList(pi, sqlSession);
+		return aDao.adminQnaList(pi, sqlSession);
+	}
+
+	@Override
+	public int adminNoticeCount() {
+		
+		return aDao.adminNoticeCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Notice> adminnoticeList(PageInfo pi) {
+		
+		return aDao.adminnoticeList(pi, sqlSession);
+	}
+
+	@Override
+	public ArrayList<Gift> adminGiftList(PageInfo pi) {
+		
+		return aDao.adminGiftList(pi, sqlSession);
+	}
+
+	@Override
+	public int adminGiftCount() {
+		
+		return aDao.adminGiftCount(sqlSession);
+	}
+
+	@Override
+	public int selectOneCount() {
+		
+		return aDao.selectOneCount(sqlSession);
+	}
+
+	@Override
+	public int selectGiftCount() {
+
+		return aDao.selectGiftCount(sqlSession);
+	}
+
+	@Override
+	public int insertVisitCount() {
+		return aDao.selectvisitCount(sqlSession);
+	}
+
+	@Override
+	public int updateVisitCount() {
+		return aDao.selectvisitCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<VisitCountVO> selectVisitCount() {
+		return aDao.selectVisitCount(sqlSession);
 	}
 
 }

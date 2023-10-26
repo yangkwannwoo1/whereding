@@ -3,6 +3,7 @@ package com.kh.whereding.admin.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -12,14 +13,19 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.whereding.admin.model.service.AdminServiceImpl;
+import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
+import com.kh.whereding.common.model.vo.VisitCountVO;
 import com.kh.whereding.common.template.Pagenation;
+import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
 
 @Controller
@@ -29,11 +35,27 @@ public class AdminController {
 	private AdminServiceImpl AService;
 	
 	@RequestMapping("admin.ad")
-	public String DaskBoardForm() {
+	public String DaskBoardForm(Model model) {
 
-		return "admin/daskboard";
-	}
+		// 총 회원수
+		int count = AService.selectOneCount();
+
+		model.addAttribute("selectOneCount", count);
+		
+		// 총 판매량 
+		int count1 = AService.selectGiftCount();
+
+		model.addAttribute("selectGiftCount", count1);
+		
+		 // 전체 방문자 수
+		ArrayList<VisitCountVO> selectvisitCount = AService.selectVisitCount();
+		
+		model.addAttribute("selectvisitCount", selectvisitCount);
+		return "/admin/daskboard";
+		}
+
 	
+
 	@RequestMapping("mList.ad")
 	public ModelAndView MemberListForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv)  {
@@ -118,33 +140,55 @@ public class AdminController {
 
 			return "admin/memberDetail";
 		}
-	   
-	   @RequestMapping("notice.ad")
-		public String NoticeForm() {
-
-			return "admin/notice";
-		}
-	   
-	   @RequestMapping("qna.ad")
-		public String qnaForm() {
-
+ 
+	   /** qna 리스트 페이지
+		 * @return
+		 */
+		@RequestMapping(value = "qna.ad")
+		public String selectqnaListForm(@RequestParam(value = "cpage", defaultValue = "1")int currentPage, HttpServletRequest request) {
+			int listCount = AService.adminQnaCount();
+			
+			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 10);
+			
+			ArrayList<Qna> qnalist = AService.adminQnaList(pi);
+			
+			request.setAttribute("pi", pi);
+			request.setAttribute("qnalist", qnalist);
 			return "admin/qna";
 		}
-	   
-	   @RequestMapping("qnaList.ad")
-		public ModelAndView qnaListForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
-			ModelAndView mv)  {
-			
-	
-			int listCount = AService.selectqnaCount();
-	
-			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 5);
-			
-			ArrayList<Qna> list = AService.selectqnaList(pi);
-			mv.addObject("pi", pi).addObject("list", list).setViewName("admin/qna");
-	
-			return mv;
+		
+		//공지사항 리스트 페이지
+		@RequestMapping("notice.ad")
+		public ModelAndView AdminNoticeForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+				ModelAndView mv)  {
+				
+
+				int listCount = AService.adminNoticeCount();
+
+				PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 5);
+				
+				ArrayList<Notice> NoticeList = AService.adminnoticeList(pi);
+				mv.addObject("pi", pi).addObject("NoticeList", NoticeList).setViewName("admin/notice");
+
+				return mv;
 				
 		}
+		// 답례품 판매목록
+		@RequestMapping("giftsale.ad")
+		public String giftListForm(@RequestParam(value = "cpage", defaultValue = "1")int currentPage, HttpServletRequest request) {
+			int listCount = AService.adminGiftCount();
+			
+			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 10);
+			
+			ArrayList<Gift> gList = AService.adminGiftList(pi);
+			
+			request.setAttribute("pi", pi);
+			request.setAttribute("gList", gList);
+			return "admin/gift";
+		}
+		
+		
+		
+	
 	    
 }

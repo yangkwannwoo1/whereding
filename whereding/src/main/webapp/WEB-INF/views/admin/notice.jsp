@@ -38,7 +38,6 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">공지사항 조회</h5>
               <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='notice.ad'">엑셀로 보기</button><br><br>
               
               <!-- Table with stripped rows -->
@@ -47,16 +46,19 @@
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">제목</th>
+                    <th scope="col">내용</th>
                     <th scope="col">작성일</th>
+                    <th scope="col">상세보기</th>
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="n" items="${ list }"> 
+                <c:forEach var="n" items="${ NoticeList }"> 
                   <tr>
-                    <th scope="row">${ n.userNo }</th>
-                    <td>${ m.userName }</td>
-                    <td>${ m.userId }</td>
-                    <td><button onclick="location.href='mdetail.ad'" type="button" style="border-radius: 10px;">상세보기</button></td>
+                    <th scope="row">${ n.noticeNo }</th>
+                    <td>${ n.noticeTitle }</td>
+                    <td>${ n.noticeContent }</td>
+                    <td>${ n.noticeDate }</td>
+                    <td><button onclick="location.href='noticeEnroll.bo'" type="button" style="border-radius: 10px;">상세보기</button></td>
                   </tr>
                 </c:forEach>
                 </tbody>
@@ -81,18 +83,18 @@
 											<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+											<li class="page-item"><a class="page-link" href="notice.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
 										</c:otherwise>
 									</c:choose>
 									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ p }">${ p }</a></li>
+										<li class="page-item"><a class="page-link" href="notice.ad?cpage=${ p }">${ p }</a></li>
 									</c:forEach>
 									<c:choose>
 										<c:when test="${ pi.currentPage eq pi.maxPage }">
 											<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
 										</c:when>
 										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
+											<li class="page-item"><a class="page-link" href="notice.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
 										</c:otherwise>	
 									</c:choose>
 								</ul>

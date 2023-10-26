@@ -27,7 +27,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="admin.ad">HOME</a></li>
-          <li class="breadcrumb-item active">QNA</li>
+          <li class="breadcrumb-item active">Q.N.A</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -38,10 +38,9 @@
 
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">QNA 조회</h5>
 							<button type="button"
 								style="border-radius: 10px; width: 100px; height: 50px;"
-								onclick="location.href='notice.ad'">엑셀로 보기</button>
+								onclick="location.href='qna.ad'">엑셀로 보기</button>
 							<br>
 							<br>
 
@@ -50,25 +49,15 @@
 								<div class="card-body">
 									<h5 class="card-title">QNA 조회</h5>
 									<div class="accordion accordion-flush" id="faq-group-1">
-										<div class="accordion-item">
-											<h2 class="accordio n-header">
-												<button class="accordion-button sed"
-													data-bs-target="#faqsOne-1" type="button"
-													data-bs-toggle="collapse">제목</button>
-											</h2>
-											<div id="faqsOne-1" class="accordion-collapse collapse"
-												data-bs-parent="#faq-group-1">
-												<div class="accordion-body">내용</div>
-											</div>
-										</div>
 										
-										<c:forEach var="q" items="${ list }">
+										
+										<c:forEach var="q" items="${ qnalist }">
 											<div class="accordion-item">
 												<h2 class="accordion-header">
 													<button class="accordion-button collapsed"
 														data-bs-target="#faqsOne-${ q.qnaNo }" type="button"
 														data-bs-toggle="collapse">
-														${ q.qnaTitle } ${ q.qnaDate }
+														제목${ q.qnaTitle } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일:${ q.qnaDate }
 													</button>
 												</h2>
 												<div id="faqsOne-${ q.qnaNo }" class="accordion-collapse collapse"
@@ -76,8 +65,8 @@
 													<div class="accordion-body">
 													${ q.qnaContent }
 													</div>
+												 <button onclick="location.href='qnaEnroll.bo'" type="button" style="border-radius: 10px;">상세보기</button>
 												</div>
-												 <button onclick="location.href='qna.ad'" type="button" style="border-radius: 10px;">상세보기</button>
 											</div>
 										</c:forEach>
 

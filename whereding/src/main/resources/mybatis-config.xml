@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.whereding.gift.model.vo.Basket" alias="Basket"/>
 		<typeAlias type="com.kh.whereding.gift.model.vo.Gift" alias="Gift"/>				
 		<typeAlias type="com.kh.whereding.common.model.vo.Attachment" alias="Attachment"/>				
+		<typeAlias type="com.kh.whereding.common.model.vo.VisitCountVO" alias="Visit"/>				
 	</typeAliases>
 	<!-- 유의사항 : 미리등록해두려면 해당 클래스가 진짜 존재하고 있는 상태여야됨 -->
 	
@@ -31,7 +32,7 @@
 		<mapper resource="/mappers/gift-mapper.xml"/>		
 		<mapper resource="/mappers/hall-mapper.xml"/>
 		<mapper resource="/mappers/studio-mapper.xml"/>
-		<mapper resource="/mappers/qna-mapper.xml"/>
+		<mapper resource="/mappers/visit-mapper.xml"/>
 	</mappers>
 	<!-- 유의사항 : 미리 등록해두려면 해당 mapper 파일이 진짜 존재하고 있는 상태여야됨(뿐만 아니라 naemspace 까지도 지정 되어 있어야 한다.) -->
 	

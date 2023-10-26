@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="visitMapper">
+
+		<resultMap type="Visit" id="VisitResult">
+			<result column="s_code" property="regDate"/>
+			<result column="s_enterprise" property="visitCount"/>
+		</resultMap>
+		
+		
+    <insert id="insertVisitCount" resultType="_int">
+       INSERT 
+       	 INTO VISIT
+            (
+              REG_DATE
+            , VISIT_COUNT
+            )
+       VALUES
+           (
+             SYSDATE
+           , 1
+           );
+    </insert>
+
+    <update id="updateVisitCount" resultType="_int">
+        UPDATE
+	            VISIT
+	        SET
+	            VISIT_COUNT = VISIT.VISIT_COUNT + 1
+	        WHERE
+	            REG_DATE = TO_DATE(SYSDATE, 'yy-mm-dd')
+    </update>
+
+    <select id="selectVisitCount" resultMap="VisitResult">
+        SELECT
+            REG_DATE, VISIT_COUNT
+        FROM
+            VISIT
+        where
+            REG_DATE = TO_DATE(SYSDATE, 'yy-mm-dd')
+    </select>
+</mapper>

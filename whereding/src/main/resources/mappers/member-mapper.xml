@@ -135,6 +135,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          where status = 'Y'
 	</select>
 	
+	<select id="selectOneCount" resultType="_int">
+		select 
+			   count(*)
+		  from member
+	</select>
+	
+	<select id="selectvisitCount" resultType="_int">
+		select 
+				count(*) 
+		  from visit
+	</select>
+	
 </mapper>
 
 
