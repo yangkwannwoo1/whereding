@@ -20,6 +20,7 @@
 		<typeAlias type="com.kh.whereding.product.model.vo.Makeup" alias="Makeup"/>
 		<typeAlias type="com.kh.whereding.product.model.vo.Studio" alias="Studio"/>		
 		<typeAlias type="com.kh.whereding.product.model.vo.ProductCollection" alias="ProductCollection"/>		
+		<typeAlias type="com.kh.whereding.product.model.vo.CollectionReview" alias="CollectionReview"/>		
 		<typeAlias type="com.kh.whereding.product.model.vo.Reservation" alias="Reservation"/>		
 		<typeAlias type="com.kh.whereding.common.model.vo.HashTag" alias="HashTag"/>				
 		<typeAlias type="com.kh.whereding.gift.model.vo.Basket" alias="Basket"/>
