@@ -24,7 +24,7 @@ import com.kh.whereding.product.model.service.HallServiceImpl;
 import com.kh.whereding.product.model.vo.Hall;
 
 @Controller
-public class HoallListController {
+public class HallListController {
 	
 	@Autowired
 	private HallServiceImpl HService;
@@ -38,6 +38,7 @@ public class HoallListController {
 			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 6);
 			
 			ArrayList<Hall> list = HService.selectList(pi);
+			System.out.println(list);
 			mv.addObject("pi", pi).addObject("list", list).setViewName("product/hallListView");
 			return mv;
 			
@@ -75,7 +76,7 @@ public class HoallListController {
 				String originName = saveFile(upfile[i], session);
 				
 				
-				at.setImgPath("/resources/css/assets/img/products/");
+				at.setImgPath("resources/css/assets/img/products/");
 				at.setProductNo(h.getCode());
 				at.setOriginName(originName);
 				if(i==0) {

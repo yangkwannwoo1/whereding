@@ -21,6 +21,7 @@
 		<result column="img_1" property="img1"/>
 		<result column="img_2" property="img2"/>
 		<result column="img_3" property="img3"/>
+		<result column="file_path" property="imgPath"/>
 		
 	</resultMap>
 	
@@ -36,7 +37,7 @@
   	</select>
   	
   	<select id="selectList" resultMap="hallResult">
-	    select 
+		select 
 		       H_CODE
 		     , H_ENTERPRISE
 		     , H_ADDRESS
@@ -45,7 +46,11 @@
 		     , H_SEAT
 		     , H_MEAL
 		     , H_RESTAURANT_SEAT
+		     , img_path || img_1 as file_path
+		     , tag_content
 		  from hall
+		  left join product_img i on (h_code = i.product_no)
+		  left join tag t on (h_code = t.product_no)
   	</select>
   	
   	<insert id="insertHall">
