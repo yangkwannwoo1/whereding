@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.common.template.Pagenation;
 import com.kh.whereding.product.model.service.ProductCollectionServiceImpl;
+import com.kh.whereding.product.model.vo.CollectionReview;
 import com.kh.whereding.product.model.vo.ProductCollection;
 
 @Controller
@@ -64,4 +65,13 @@ public class ProductCollectionListController {
 		
 		return mv;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "rlist.co", produces = "application/json; charset=utf-8")
+	public String ajaxcReviewList(String cno) {
+		ArrayList<CollectionReview> list = cService.selectReviewList(cno);
+		return new Gson().toJson(list);
+	}
+	
+	
 }
