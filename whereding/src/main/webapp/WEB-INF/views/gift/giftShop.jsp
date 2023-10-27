@@ -172,9 +172,9 @@
 						
 						</ul>
 						
-						<c:if test="${not empty loginMember.gradeNo && loginMember.gradeNo eq '2'}">
+						<%-- <c:if test="${not empty loginMember.gradeNo && loginMember.gradeNo eq '2'}"> --%>
 							<button class="giftReg" onclick="giftReg();">답례품 등록</button>
-						</c:if>
+						<%-- </c:if> --%>
 						
 						<script>
 						function giftReg(){
@@ -192,9 +192,7 @@
 					<div class="col-lg-4 col-md-6 text-center">
 						<div class="single-product-item">
 							<div class="product-image">
-								<a href="single-product.html"> <img
-									src="${g.imgPath}/${g.img1}" alt="${g.img1}" />
-								</a>
+								<img src="${g.imgPath}/${g.img1}" alt="${g.img1}" />
 							</div>
 							<h3>${g.giftName}</h3>
 							<p class="product-price">

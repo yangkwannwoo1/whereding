@@ -34,4 +34,8 @@ public class GiftDao {
 		return (ArrayList)sqlSession.selectList("giftMapper.categorySearch", categoryNo);
 	}
 	
+	public int insertGift(SqlSessionTemplate sqlSession, Gift gift) {
+		return sqlSession.insert("giftMapper.insertGift", gift);
+	}
+	
 }

@@ -43,6 +43,7 @@
 	    	<if test="categoryNo != 0">
 	    		and category_no = #{categoryNo}
 	    	</if>
+	    	order by gift_no desc
 	</select>
 	
 	
@@ -78,7 +79,50 @@
       
     where count>0 
       and category_no = #{categoryNo}
-				
 	</select>
+	
+	<insert id="insertGift">
+		insert all	 
+	 into gift(
+		  		gift_no
+		  	   ,category_no
+		  	   ,gift_name
+		  	   ,gift_content
+		  	   ,gift_price
+		  	   ,count
+		  	   )
+		values(
+				'G'||seq_gbo.nextval
+				,#{categoryNo}
+				,#{giftName}
+				,#{giftContent}
+				,#{giftPrice}
+				,#{count}
+			  )
+      <if test="imgPath != null">
+      into product_img(
+      					 img_no
+      					,product_no
+      					,img_1
+      					,img_2
+      					,img_3
+      					,img_path
+      				  )
+      			values(
+      					 seq_img.nextval
+      					,'G'||seq_gbo.currval
+      					,#{img1}
+      					,#{img2}
+      					,#{img3}
+      					,#{imgPath}
+      			)
+      </if>
+      select 1 from dual
+	</insert>
 
 </mapper>
+
+
+
+
+

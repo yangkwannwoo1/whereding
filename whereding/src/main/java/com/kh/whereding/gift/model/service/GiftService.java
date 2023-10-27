@@ -15,4 +15,6 @@ public interface GiftService {
 	abstract ArrayList<GiftCategory> selectCategoryList();
 	
 	abstract ArrayList<Gift> categorySearch(int categoryNo);
+	
+	abstract int insertGift(Gift gift);
 }

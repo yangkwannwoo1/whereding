@@ -38,6 +38,11 @@ public class GiftServiceImpl implements GiftService{
 	@Override
 	public ArrayList<Gift> categorySearch(int categoryNo) {
 		return gDao.categorySearch(sqlSession,categoryNo);
+	}
+
+	@Override
+	public int insertGift(Gift gift) {
+		return gDao.insertGift(sqlSession, gift);
 	} 
 	
 	

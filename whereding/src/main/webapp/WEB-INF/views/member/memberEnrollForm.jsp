@@ -15,6 +15,9 @@
 <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- 카카오 로그인 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <style>
 
         .logo_div{
@@ -298,7 +301,32 @@
                         <option value="F">신부</option>
                     </select>
                 </div>
-                    <a class="social btn btn-warning">카카오로 가입하기</a> <br>
+                    <a class="social btn btn-warning" onclick="kakaoLogin();">카카오로 가입하기</a> <br>
+                    
+                    <script>
+                    	Kakao.init('bb694f7fac67300cb1cee4c96ec94ade'); //발급받은 키 중 javascript키를 사용해준다.
+                    	console.log(Kakao.isInitialized());
+                    	
+                    	function kakaoLogin() {
+                    	    Kakao.Auth.login({
+                    	      success: function (response) {
+                    	        Kakao.API.request({
+                    	          url: '/v2/user/me',
+                    	          success: function (response) {
+                    	        	  console.log(response)
+                    	          },
+                    	          fail: function (error) {
+                    	            console.log(error)
+                    	          },
+                    	        })
+                    	      },
+                    	      fail: function (error) {
+                    	        console.log(error)
+                    	      },
+                    	    })
+                    	  }
+                    </script>
+                    
                     <a class="social btn btn-success">네이버로 가입하기</a> <br>
                     <a class="social btn btn-primary">Google로 가입하기</a>
                 
