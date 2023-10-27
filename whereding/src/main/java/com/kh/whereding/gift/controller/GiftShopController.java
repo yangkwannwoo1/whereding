@@ -99,6 +99,14 @@ public class GiftShopController {
 		return "redirect:giftShop.bo";
 	}
 	
+	@RequestMapping("giftDetail.gi")
+	public String giftDetail(@RequestParam("giftNo") String giftNo, Model model) {
+		System.out.println(giftNo);
+		Gift gift = gService.selectGiftDetail(giftNo);
+		model.addAttribute("gift", gift);
+		System.out.println(gift.getImgPath()+gift.getImg1());
+		return "gift/giftDetail";
+	}
 	
 }
 

@@ -202,12 +202,19 @@
 								<fmt:formatNumber value="${g.giftPrice}" type="number"
 									pattern="#,###원" />
 							</p>
-							<a href="cart.html" class="cart-btn"><i
-								class="fas fa-shopping-cart"></i>상세보기</a>
+							<a class="cart-btn" onclick="test('${g.giftNo}');">
+								<i class="fas fa-shopping-cart"></i>
+							상세보기</a>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+			
+			<script>
+				function test(giftNo){
+					location.href="giftDetail.gi?giftNo=" + giftNo;
+				}
+			</script>
 
 
 <!-- 231025 페이징처리 한다잉 -->
