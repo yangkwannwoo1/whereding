@@ -63,7 +63,7 @@ public class BoardController {
 	public String collaboCompany(@RequestParam(value = "cpage", defaultValue = "1")int currentPage, HttpServletRequest request) {
 		
 		int listCount = bService.selectCollaboListCount();
-		System.out.println(listCount);
+//		System.out.println(listCount);
 		
 		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 10);
 		
@@ -192,6 +192,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "insertCollabo.bo")
 	public String collaboInsert(CollaboRation cr, HttpSession session) {
+		System.out.println("cr :"+cr);
 		int result = bService.insertCollabo(cr);
 		
 		if(result >0) {
@@ -212,6 +213,7 @@ public class BoardController {
 		return"board/boardEnrollForm";
 	}
 	
+	
 	/** qna 수정 폼 접근
 	 * @return
 	 */
@@ -228,7 +230,7 @@ public class BoardController {
 		CollaboRation cr = bService.selectCollabo(bno);
 		model.addAttribute("cr", cr);
 		model.addAttribute("board", "협업업체_신청_수정");
-		return "board.boardEnrollForm";
+		return "board/boardEnrollForm";
 	}
 	
 	/** 공지사항 수정 후
@@ -247,6 +249,20 @@ public class BoardController {
 	      }
 		 return "redirect:noticeDetail.bo?board=" + URLEncoder.encode("공지사항", "UTF-8") + "&bno="+ n.getNoticeNo();
 
+	}
+	
+	@RequestMapping( value = "collaboUpdate.bo", produces = "text/html; charset=utf-8")
+	public String noticeUpadet(CollaboRation cr, HttpSession session) throws IOException {
+		System.out.println("cr :"+cr);
+		int result = bService.updateCollaboBoard(cr);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
+		}else {
+			session.setAttribute("alertMsg", "게시글 수정 실패하였습니다.");
+		}
+		return "redirect:collaboDetail.bo?board=" + URLEncoder.encode("협업업체_신청", "UTF-8") + "&bno="+ cr.getCpNo();
+		
 	}
 	
 	/** qna 수정 후
@@ -277,7 +293,18 @@ public class BoardController {
 	      }
 		return"redirect:notice.bo";
 	}
-	
+	@RequestMapping(value = "collaboDelete.bo")
+	public String collaboDelete(int bno, HttpSession session) {
+		
+		int result = bService.deleteCollabo(bno);
+		
+		if(result > 0) { 
+	         session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+	      }else {
+	    	  session.setAttribute("alertMsg", "게시글 삭제 실패하였습니다.");
+	      }
+		return"redirect:collabo.bo";
+	}
 	
 	@RequestMapping(value = "qnaDelete.bo")
 	public String qnaDelete(int bno, HttpSession session) {
@@ -298,7 +325,7 @@ public class BoardController {
 	 */
 	@RequestMapping(value = "insertAnswer.bo")
 	public String insertAnswer(Qna q, HttpSession session) {
-		System.out.println(q.getQnaNo());
+//		System.out.println(q.getQnaNo());
 		int result = bService.updateQnaAnswer(q);
 		
 		if(result > 0) { 

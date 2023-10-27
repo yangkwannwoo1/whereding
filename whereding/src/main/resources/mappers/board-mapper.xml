@@ -174,7 +174,7 @@
 		VALUES
 		     (
 		       seq_qbo.nextval
-		     , 1
+		     , #{userNo}
 		     , #{qnaTitle}
 		     , #{qnaContent}
 		     )
@@ -191,6 +191,12 @@
 		     , QNA_CONTENT = #{qnaContent}
 		 where QNA_NO = #{qnaNo}
   	</update>
+  	<update id="updateCollaboBoard">
+  		update COLLABORATION_CP
+  		   set CP_TITLE = #{cpTitle}
+			 , CP_CONTENT = #{cpContent}
+		 where CP_NO = #{cpNo}
+  	</update>
   	<delete id="deleteNotice">
 	  	DELETE notice
 	 	 where notice_no = #{boardNo}
@@ -198,6 +204,10 @@
   	<delete id="qnaNotice">
   		DELETE qna
 	 	 where qna_no = #{boardNo}
+  	</delete>
+  	<delete id="deleteCollabo">
+  		delete COLLABORATION_CP
+  		where CP_NO = #{cpNo}
   	</delete>
   	<update id="updateQnaAnswer">
   		update qna

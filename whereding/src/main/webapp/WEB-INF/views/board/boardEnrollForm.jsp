@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>고객센터</title>
+    <title>게시판 수정 및 등록</title>
     <style>
         a{
             text-decoration: none;
@@ -242,6 +242,12 @@
                             <c:if test="${board eq '협업업체_신청' }">
                                 <input type="text" name="cpTitle" id="QNA_TITLE" placeholder="제목을 입력해 주세요.">
                             </c:if>
+                            <c:if test="${board eq 'QnA' }">
+                                <input type="hidden" name="userNo" value="${loginMember.userNo}">
+                            </c:if>
+                            <c:if test="${board eq '협업업체_신청' }">
+                                <input type="hidden" name="userNo" value="${loginMember.userNo}">
+                            </c:if>
                             <c:if test="${board eq '공지사항_수정' }">
                                 <input type="text" name="noticeTitle" id="QNA_TITLE" value="${n.noticeTitle}">
                             </c:if>
@@ -249,7 +255,7 @@
                                 <input type="text" name="qnaTitle" id="QNA_TITLE" value="${q.qnaTitle}">
                             </c:if>
                             <c:if test="${board eq '협업업체_신청_수정' }">
-                                <input type="text" name="cpTitle" id="QNA_TITLE" value="${cr.qnaTitle}">
+                                <input type="text" name="cpTitle" id="QNA_TITLE" value="${cr.cpTitle}">
                             </c:if>
                         </div>
                         
@@ -259,25 +265,25 @@
                     </div>
                     <div class="content">
                     	 <c:if test="${board eq '공지사항' }">
-                            <textarea name="noticeContent" id="QNA_CONTENT" cols="111" rows="23" placeholder="Q&A 내용을 입력해주세요."></textarea>
+                            <textarea name="noticeContent" id="QNA_CONTENT" cols="110" rows="13" placeholder="Q&A 내용을 입력해주세요."></textarea>
                         </c:if>
                         <c:if test="${board eq 'QnA' }">
-                            <textarea name="qnaContent" id="QNA_CONTENT" cols="111" rows="10" placeholder="Q&A 내용을 입력해주세요."></textarea>
+                            <textarea name="qnaContent" id="QNA_CONTENT" cols="110" rows="13" placeholder="Q&A 내용을 입력해주세요."></textarea>
                         </c:if>
                         <c:if test="${board eq '협업업체_신청' }">
-                            <textarea name="cpContent" id="cpContent" cols="111" rows="10" placeholder="Q&A 내용을 입력해주세요."></textarea>
+                            <textarea name="cpContent" id="cpContent" cols="110" rows="13" placeholder="협업업체 신청 내용을 입력해주세요.[연락처 필수!]"></textarea>
                         </c:if>
                         <c:if test="${board eq '공지사항_수정' }">
-                            <textarea name="noticeContent" id="QNA_CONTENT" cols="111" rows="23">${n.noticeContent}</textarea>
+                            <textarea name="noticeContent" id="QNA_CONTENT" cols="110" rows="13">${n.noticeContent}</textarea>
                             <input type="hidden" name="noticeNo" value="${n.noticeNo}" >
                         </c:if>
                         <c:if test="${board eq 'QnA_수정' }">
-                            <textarea name="qnaContent" id="QNA_CONTENT" cols="111" rows="23">${q.qnaContent}</textarea>
+                            <textarea name="qnaContent" id="QNA_CONTENT" cols="110" rows="13">${q.qnaContent}</textarea>
                             <input type="hidden" name="qnaNo" value="${q.qnaNo}" >
                         </c:if>
                         <c:if test="${board eq '협업업체_신청_수정' }">
-                            <textarea name="cpContent" id="QNA_CONTENT" cols="111" rows="23">${cr.cpContent}</textarea>
-                            <input type="hidden" name="qnaNo" value="${q.qnaNo}" >
+                            <textarea name="cpContent" id="QNA_CONTENT" cols="110" rows="13">${cr.cpContent}</textarea>
+                            <input type="hidden" name="cpNo" value="${cr.cpNo}" >
                         </c:if>
                     </div>
                 <c:if test="${board eq '공지사항_수정' }">

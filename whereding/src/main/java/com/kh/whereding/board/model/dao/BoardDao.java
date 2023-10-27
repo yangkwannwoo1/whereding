@@ -121,6 +121,12 @@ public class BoardDao {
 	public int insertCollabo(SqlSessionTemplate sqlSession, CollaboRation cr) {
 		return sqlSession.update("boardMapper.insertCollabo", cr);
 	}
+	public int updateCollaboBoard(SqlSessionTemplate sqlSession, CollaboRation cr) {
+		return sqlSession.update("boardMapper.updateCollaboBoard", cr);
+	}
+	public int deleteCollabo(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.delete("boardMapper.deleteCollabo", boardNo); 
+	}
 	
 	
 

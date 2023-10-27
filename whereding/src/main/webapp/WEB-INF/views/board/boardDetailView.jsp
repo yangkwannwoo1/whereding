@@ -16,7 +16,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>고객센터</title>
+    <title>게시판 상세보기</title>
     <style>
         a{
             text-decoration: none;
@@ -66,6 +66,7 @@
             height: 1000px;
             /* border: 1px solid red; */
             margin-left: 40px;
+            background-color: white;
         }
         .berner {
             width: 880px;

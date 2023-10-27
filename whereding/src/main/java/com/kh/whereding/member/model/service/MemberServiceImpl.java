@@ -133,6 +133,13 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public int ReviewCount(Member m) {
+		int result = mDao.ReviewCount(sqlSession, m);
+		return result;
+	}
+
+	
 	
 	
 

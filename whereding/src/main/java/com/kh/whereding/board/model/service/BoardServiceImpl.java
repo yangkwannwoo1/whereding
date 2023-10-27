@@ -145,6 +145,16 @@ public class BoardServiceImpl implements BoardService {
 		int result = bDao.updateQnaAnswer(sqlSession, q);
 		return result;
 	}
+	@Override
+	public int updateCollaboBoard(CollaboRation cr) {
+		int result = bDao.updateCollaboBoard(sqlSession, cr);
+		return result;
+	}
+	@Override
+	public int deleteCollabo(int boardNo) {
+		int result = bDao.deleteCollabo(sqlSession,boardNo);
+		return result;
+	}
 	
 	
 	
