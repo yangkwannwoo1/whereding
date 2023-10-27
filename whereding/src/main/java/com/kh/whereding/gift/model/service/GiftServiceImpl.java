@@ -46,10 +46,7 @@ public class GiftServiceImpl implements GiftService{
 		return gDao.insertGift(sqlSession, gift);
 	} 
 	
-	@Override
-	public ArrayList<Basket> selectBasketList(String userNo) {
-		return gDao.selectBasketList(sqlSession, userNo);
-	}
+	
 	
 	
 }

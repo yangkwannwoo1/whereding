@@ -245,19 +245,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    	  )
 		
 	</insert>
-	<insert id="consultingReviewImg"> 
-		insert 
-		into consulting_img 
-			( 
-			REVIEW_NO 
-			, CS_ORIGIN_NAME 
-			, CS_CHANGE_NAME 
-			, CS_FILE_PATH 
-			) values ( 
-			SEQ_RVNO.CURRVAL 
-			, #{csOriginName} 
-			, #{csChangeName} 
-			, #{csFilePath} ) </insert>
+	
 	<select id="ReviewCount">
 		select count(*)
 		from REVIEW
