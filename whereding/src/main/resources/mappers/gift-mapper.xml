@@ -6,6 +6,7 @@
 	<resultMap type="Gift" id="giftResult">
 		<result column="gift_no" property="giftNo"/>
 		<result column="category_no" property="categoryNo"/>
+		<result column="category_item" property="categoryItem"/>
 		<result column="gift_name" property="giftName"/>
 		<result column="gift_content" property="giftContent"/>
 		<result column="gift_price" property="giftPrice"/>
@@ -14,6 +15,11 @@
 		<result column="img_1" property="img1"/>
 		<result column="img_2" property="img2"/>
 		<result column="img_3" property="img3"/>
+	</resultMap>
+	
+	<resultMap type="GiftCategory" id="giftCategoryResult">
+		<result column="category_no" property="categoryNo"/>
+		<result column="category_item" property="categoryItem"/>
 	</resultMap>
 	<resultMap type="GiftHistory" id="giftHistoryResult">
 		<result column="GHIS_NO" property="ghisNo"/>
@@ -35,6 +41,7 @@
 	select 
         gift_no
        ,category_no
+       ,category_item
        ,gift_name
        ,gift_content
        ,gift_price
@@ -46,8 +53,88 @@
 
       from gift g
       left outer join product_img p on g.gift_no=p.product_no
-      
+      join gift_category using(category_no)
+    where count>0
+	    	<if test="categoryNo != 0">
+	    		and category_no = #{categoryNo}
+	    	</if>
+	    	order by gift_no desc
 	</select>
+	
+	
+	<select id="selectListCount" resultType="_int">
+		select count(*)
+		  from gift
+	</select>
+	
+	<select id="selectCategoryList" resultMap="giftCategoryResult">
+		select
+		 		category_no
+		 	   ,category_item
+		  from gift_category
+	</select>
+	
+	<select id="categorySearch" resultMap="giftResult">
+		select 
+        gift_no
+       ,category_no
+       ,category_item
+       ,gift_name
+       ,gift_content
+       ,gift_price
+       ,count
+       ,img_path as "img_path"
+       ,img_1 as "img_1"
+       ,img_2 as "img_2"
+       ,img_3 as "img_3"
+
+      from gift g
+      left outer join product_img p on g.gift_no=p.product_no
+      join gift_category using(category_no)
+      
+    where count>0 
+      and category_no = #{categoryNo}
+	</select>
+	
+	<insert id="insertGift">
+		insert all	 
+	 into gift(
+		  		gift_no
+		  	   ,category_no
+		  	   ,gift_name
+		  	   ,gift_content
+		  	   ,gift_price
+		  	   ,count
+		  	   )
+		values(
+				'G'||seq_gbo.nextval
+				,#{categoryNo}
+				,#{giftName}
+				,#{giftContent}
+				,#{giftPrice}
+				,#{count}
+			  )
+      <if test="imgPath != null">
+      into product_img(
+      					 img_no
+      					,product_no
+      					,img_1
+      					,img_2
+      					,img_3
+      					,img_path
+      				  )
+      			values(
+      					 seq_img.nextval
+      					,'G'||seq_gbo.currval
+      					,#{img1}
+      					,#{img2}
+      					,#{img3}
+      					,#{imgPath}
+      			)
+      </if>
+      select 1 from dual
+	</insert>
+
 	<select id="giftHistoryList" resultMap="giftHistoryResult">
 		select 
 		       GHIS_NO
@@ -105,3 +192,8 @@
 		     )
 	</insert>
 </mapper>
+
+
+
+
+

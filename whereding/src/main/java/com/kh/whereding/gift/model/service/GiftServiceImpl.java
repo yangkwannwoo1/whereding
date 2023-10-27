@@ -10,6 +10,7 @@ import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.gift.model.dao.GiftDao;
 import com.kh.whereding.gift.model.vo.Basket;
 import com.kh.whereding.gift.model.vo.Gift;
+import com.kh.whereding.gift.model.vo.GiftCategory;
 
 @Service
 public class GiftServiceImpl implements GiftService{
@@ -21,8 +22,28 @@ public class GiftServiceImpl implements GiftService{
 	private GiftDao gDao;
 
 	@Override
-	public ArrayList<Gift> selectGiftList(PageInfo pi) {
-		return gDao.selectGiftList(sqlSession, pi);
+	public ArrayList<Gift> selectGiftList(PageInfo pi,int categoryNo) {
+		return gDao.selectGiftList(sqlSession, pi,categoryNo);
+	}
+
+	@Override
+	public int selectListCount() {
+		return gDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<GiftCategory> selectCategoryList() {
+		return gDao.selectCategory(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Gift> categorySearch(int categoryNo) {
+		return gDao.categorySearch(sqlSession,categoryNo);
+	}
+
+	@Override
+	public int insertGift(Gift gift) {
+		return gDao.insertGift(sqlSession, gift);
 	} 
 	
 	@Override
