@@ -11,6 +11,7 @@
 	<typeAliases>
 		<typeAlias type="com.kh.whereding.board.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.whereding.board.model.vo.Qna" alias="Qna"/>
+		<typeAlias type="com.kh.whereding.board.model.vo.CollaboRation" alias="CollaboRation"/>
 		<typeAlias type="com.kh.whereding.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.whereding.member.model.vo.Consulting" alias="Consulting"/>
 		<typeAlias type="com.kh.whereding.member.model.vo.ConsultingReviewImg" alias="ConsultingReviewImg"/>

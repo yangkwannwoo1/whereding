@@ -24,5 +24,5 @@ public class Member {
 	private String status;		//상태
 	private int gradeNo;		// 회원등급
 	private String newPwd;		// 변경할 비밀번호
-	
+	private String productNo;
 }

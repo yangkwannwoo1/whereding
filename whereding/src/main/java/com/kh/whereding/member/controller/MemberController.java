@@ -183,6 +183,12 @@ public class MemberController {
 			Dress dres = mService.consultingDress(cst.getProductNo());
 			Makeup make = mService.consultingMakeup(cst.getProductNo());
 			
+//			m.setProductNo(cst.getProductNo());
+//			int result1 = mService.ReviewCount(m);
+//			
+//			if(result1 >0 ) {
+//				
+//			}
 			if(hal != null) {
 				ha.add(hal);
 			}
@@ -248,14 +254,16 @@ public class MemberController {
 	@RequestMapping(value = "consultingReview.me")
 	public String consultingReview(Review rv,Member m,MultipartFile upfile, ConsultingReviewImg rvi, HttpSession session) {
 		System.out.println("rv :"+rv);
-		System.out.println("rvi :"+rvi);
 		int result = mService.consultingReview(rv);
+		
+		
 		if(!upfile.getOriginalFilename().equals("")) { // 이미지 있음 
 			String changeName = saveFile(upfile,session);
 			rvi.setCsOriginName(upfile.getOriginalFilename());
 			rvi.setCsChangeName(changeName);
 			rvi.setCsFilePath("resources/css/assets/img/ReviewImg");
 			
+			System.out.println("vri : "+ rvi);
 			int result2 = mService.consultingReviewImg(rvi);
 			if(result > 0 && result2 > 0) {
 				session.setAttribute("alertMsg", "리뷰가 등록되었습니다.");

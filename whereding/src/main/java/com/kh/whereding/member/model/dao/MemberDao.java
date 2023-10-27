@@ -59,6 +59,8 @@ public class MemberDao {
 		ArrayList<Consulting> cs = (ArrayList)sqlSession.selectList("memberMapper.consultingList", m);
 		return cs;
 	}
+	
+	
 	public Hall consultingHall(SqlSessionTemplate sqlSession, String productNo) {
 		return sqlSession.selectOne("memberMapper.consultingHall", productNo);
 	}
@@ -71,10 +73,18 @@ public class MemberDao {
 	public Makeup consultingMakeup(SqlSessionTemplate sqlSession, String productNo) {
 		return sqlSession.selectOne("memberMapper.consultingMakeup", productNo);
 	}
+	
+	
 	public int consultingReview(SqlSessionTemplate sqlSession, Review rv) {
 		return sqlSession.insert("memberMapper.consultingReview", rv);
 	}
 	public int consultingReviewImg(SqlSessionTemplate sqlSession, ConsultingReviewImg rvi) {
 		return sqlSession.insert("memberMapper.consultingReviewImg", rvi);
 	}
+	
+	public int ReviewCount(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.ReviewCount", m);
+	}
+	
+	
 }

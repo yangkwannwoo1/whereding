@@ -56,6 +56,9 @@ public interface MemberService {
 	// Makeup 상품 담아오는
 	Makeup consultingMakeup(String productNo);
 	
+	int ReviewCount(Member m);
+	
+	
 	
 	
 }

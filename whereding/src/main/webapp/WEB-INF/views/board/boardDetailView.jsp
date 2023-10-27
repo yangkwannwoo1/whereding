@@ -16,7 +16,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>고객센터</title>
+    <title>게시판 상세보기</title>
     <style>
         a{
             text-decoration: none;
@@ -66,6 +66,7 @@
             height: 1000px;
             /* border: 1px solid red; */
             margin-left: 40px;
+            background-color: white;
         }
         .berner {
             width: 880px;
@@ -222,18 +223,18 @@
 
                 <div class="body_title">
                     <div class="real_title">
-                        <span>${n.noticeTitle}${q.qnaTitle}</span>
+                        <span>${n.noticeTitle}${q.qnaTitle}${cr.cpTitle}</span>
                     </div>
                     <div class="count">
-                        <span id="user">${n.noticeWriter}${q.userId}</span>
-                        <span id="date">${n.noticeDate}${q.qnaDate}</span>
+                        <span id="user">${n.noticeWriter}${q.userId}${cr.userId}</span>
+                        <span id="date">${n.noticeDate}${q.qnaDate}${cr.cpDate}</span>
                     </div>
                 </div>
                 <div class="userinfo">
                     
                 </div>
                 <div class="content">
-                    <p>${n.noticeContent}${q.qnaContent}</p>
+                    <p>${n.noticeContent}${q.qnaContent}${cr.cpContent}</p>
                 </div>
                <div class="btn" align="right">
                     <c:if test="${loginMember.userId eq 'admin' and board eq '공지사항'}">
@@ -241,7 +242,7 @@
                         <button id="delete">삭제하기</button>
                     </c:if>
                     <!-- <c:if test="${not empty loginMember}"> -->
-                        <c:if test="${loginMember.userId eq q.userId and board eq 'QnA'}">
+                        <c:if test="${loginMember.userId eq q.userId or loginMember.userId eq cr.userId }">
                             <button id="edit">수정하기</button>
                             <button id="delete" style="border-radius: 0px;">삭제하기</button>
                         </c:if>
@@ -296,8 +297,10 @@
     $("#list").click(()=>{
         if(${board eq "공지사항"}){
             location.href="notice.bo";
-        }else{
+        }else if(${board eq "QnA"}){
             location.href="qna.bo";
+        }else{
+            location.href="collabo.bo";
         }
     })
 </script>
@@ -305,8 +308,10 @@
      $("#edit").click(()=>{
         if(${board == "공지사항"}){
             location.href = "noticeEdit.bo?bno=${n.noticeNo}";
-        }else{
+        }else if(${board eq "QnA"}){
             location.href = "qnaEdit.bo?bno=${q.qnaNo}";
+        }else{
+            location.href = "collaboEdit.bo?bno=${cr.cpNo}";
         }
     })
 </script>
@@ -314,8 +319,10 @@
     $("#delete").click(()=>{
         if(${board == "공지사항"}){
             location.href = "noticeDelete.bo?bno=${n.noticeNo}";
-        }else{
+        }else if(${board eq "QnA"}){
             location.href = "qnaDelete.bo?bno=${q.qnaNo}";
+        }else{
+            location.href = "collaboDelete.bo?bno=${cr.cpNo}";
         }
     })
 </script>
