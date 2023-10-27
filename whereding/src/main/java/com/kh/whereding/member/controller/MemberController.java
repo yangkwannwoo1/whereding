@@ -5,13 +5,18 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,6 +58,22 @@ public class MemberController {
 			session.setAttribute("alertMsg", "로그인 실패하였습니다.");
 		}
 		System.out.println(loginMember);
+		return "redirect:/";
+	}
+	
+	//카카오 로그인
+	@RequestMapping("kakaoLogin.me")
+	public String kakaoLogin(String kakaoInput, HttpSession session) {
+		Member m = new Member();
+		m.setUserId(kakaoInput);
+		
+		Member loginMember = mService.loginMember(m);
+		if(loginMember != null) {
+			session.setAttribute("alertMsg", "로그인 되었습니다.");
+			session.setAttribute("loginMember", loginMember);
+		}else {
+			session.setAttribute("alertMsg", "로그인 실패하였습니다.");
+		}
 		return "redirect:/";
 	}
 	
@@ -141,6 +162,39 @@ public class MemberController {
 			session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");
 			return "redirect:/";
 		}
+	}
+	
+//	@ResponseBody
+//	@RequestMapping(value = "socialEnroll.do" , method = RequestMethod.POST)
+//	public String socialEnroll(@RequestBody Map<String, Object> requestData) {
+//		String id = (String) requestData.get("id");
+//	    String name = (String) requestData.get("name");
+//	    String email = (String) requestData.get("email");
+//		return null;
+//	}
+	
+	//소셜회원가입@!#@!#
+	@RequestMapping(value = "socialEnroll.do")
+	public String socialEnroll(String kakaoId, String kakaoNickname, String kakaoEmail, HttpSession session) {
+		System.out.println("여기 되긴되냐?");
+		String id = kakaoId;
+		System.out.println(id);
+		
+		Member member = new Member();
+		
+		member.setUserId(kakaoId);
+		member.setUserName(kakaoNickname);
+		member.setEmail(kakaoEmail);
+		
+		int result = mService.createSocialMember(member);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "정상적으로 회원가입 되었습니다.");
+			return "redirect:/";
+		}else {
+			session.setAttribute("alertMsg", "회원가입 실패되었습니다.");
+			return "redirect:/";
+		}
+		
 	}
 	
 	// 아이디중복검사

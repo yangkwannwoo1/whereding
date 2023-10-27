@@ -81,6 +81,9 @@ public class MemberDao {
 	public int consultingReviewImg(SqlSessionTemplate sqlSession, ConsultingReviewImg rvi) {
 		return sqlSession.insert("memberMapper.consultingReviewImg", rvi);
 	}
+	public int createSocialMember(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.insert("memberMapper.createSocialMember", member);
+	}
 	
 	public int ReviewCount(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.ReviewCount", m);

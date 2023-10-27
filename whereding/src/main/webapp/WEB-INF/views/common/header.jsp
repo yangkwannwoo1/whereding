@@ -37,7 +37,8 @@
 <link rel="stylesheet" href="resources/css/assets/css/quick.css">
 <!-- sidebar css-->
 <link rel="stylesheet" href="resources/css/assets/css/sidebar.css">
-
+<!-- 카카오 로그인 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <style>
 #login_container {
     position: fixed;
@@ -146,6 +147,9 @@ font-family: 'Open Sans Condensed', sans-serif;
 	background: white;
 	border: 1px gray;
 }
+#kakaoLogin{
+	background:yellow;
+}
 </style>
 </head>
 <body>
@@ -194,10 +198,46 @@ font-family: 'Open Sans Condensed', sans-serif;
 					</form>
 						
 						
-						
 						<div id="remember-container">
 							<span id="idFind">아이디 찾기</span> <span id="forgotten">비번 찾기</span>
 						</div>
+					
+				
+						<button id = "kakaoLogin" onclick="kakaoLogin();">
+							<img src="https://careerly.co.kr/_next/static/images/img_symbol-kakao-b1fe6197135e5beead71b1a90f8e2b7d.png" width="100px"; height="50px";>
+						</button>
+						<form action="kakaoLogin.me" method="post" id="kakaoCheck">
+							<input type="hidden" id="kakaoInput" name="kakaoInput"/>
+						</form>
+						
+						<!-- 카카오 로그인 -> 아이디있는지 검사 -->
+						<script>
+                    	Kakao.init('bb694f7fac67300cb1cee4c96ec94ade'); //발급받은 키 중 javascript키를 사용해준다.
+                    	console.log(Kakao.isInitialized());
+                    	
+                    	function kakaoLogin() {
+                    	    Kakao.Auth.login({
+                    	      success: function (response) {
+                    	        Kakao.API.request({
+                    	          url: '/v2/user/me',
+                    	          success: function (response) {
+                    	        	  const id = response.id;
+                    	        	  $("#kakaoInput").val(id);
+                    	        	  
+                    	        	  $("#kakaoCheck").submit();
+                    	        	  
+                    	          },
+                    	          fail: function (error) {
+                    	            console.log(error)
+                    	          },
+                    	        })
+                    	      },
+                    	      fail: function (error) {
+                    	        console.log(error)
+                    	      },
+                    	    })
+                    	  }
+                    </script>
 					
 				</div>
 

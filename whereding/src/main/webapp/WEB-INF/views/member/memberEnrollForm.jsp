@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -303,6 +304,8 @@
                 </div>
                     <a class="social btn btn-warning" onclick="kakaoLogin();">카카오로 가입하기</a> <br>
                     
+                  
+                    
                     <script>
                     	Kakao.init('bb694f7fac67300cb1cee4c96ec94ade'); //발급받은 키 중 javascript키를 사용해준다.
                     	console.log(Kakao.isInitialized());
@@ -313,7 +316,19 @@
                     	        Kakao.API.request({
                     	          url: '/v2/user/me',
                     	          success: function (response) {
-                    	        	  console.log(response)
+                    	        	  const id = response.id;
+                    	        	  const name = response.properties.nickname;
+                    	        	  const email = response.kakao_account.email;
+                    	        	  console.log(id +"나여깄어@!#!@#@!#");
+                    	        	  console.log(email +"여기어디냐");
+                    	        	  console.log(name +"나여깄어@!#!@#@!#");
+                    	        	  
+                    	        	  $("#kakaoId").val(id);
+                    	        	  $("#kakaoNickname").val(name);
+                    	        	  $("#kakaoEmail").val(email);
+                    	        	  
+                    	        	  $("#kakaoSubmit").submit();
+                    	        	  
                     	          },
                     	          fail: function (error) {
                     	            console.log(error)
@@ -327,6 +342,7 @@
                     	  }
                     </script>
                     
+                    
                     <a class="social btn btn-success">네이버로 가입하기</a> <br>
                     <a class="social btn btn-primary">Google로 가입하기</a>
                 
@@ -338,11 +354,14 @@
             </div>
             </div>
            
-        </div>
-      
-      	
       	
     </form>
+    
+      <form action="socialEnroll.do" id="kakaoSubmit" method="post">
+	                    <input type="hidden" id="kakaoId" name="kakaoId"/>
+	                    <input type="hidden" id="kakaoNickname" name="kakaoNickname"/>
+	                    <input type="hidden" id="kakaoEmail" name="kakaoEmail"/>
+      </form>
 
     <script>
         function selectMovie(value){
