@@ -101,6 +101,8 @@
 			width: auto;
 			height: 20px;
 		}
+
+
 	</style>
 </head>
 <body>
@@ -130,16 +132,16 @@
 
 	<!-- single article section -->
 	<div class="main">
-		<table style="width: 1200px;">
+		<table style="width: 1200px; border-collapse: separate;">
 			<tr>
 				<th colspan="2">
 					<h2 style="padding: 0% 2%;" class="hr_style"> Studio</h2>
 				</th>
 			</tr>
 			<tr>
-				<td rowspan="3" style="width: 60%;">
+				<td rowspan="3" style="width: 60%; vertical-align: top; border-right: 2px dotted #cecece;">
 					<br>
-					<div class="w3-content" style="width:100%; padding: 3%;">
+					<div class="w3-content" style="width:700px; padding: 3%; text-align: center; vertical-align: top;">
 						<img class="mySlides" src="${ c.imgPath }${ c.img1 }" style="width:auto; height: 600px;">
 						<img class="mySlides" src="${ c.imgPath }${ c.img2 }" style="width:auto; height: 600px;display:none">
 						<img class="mySlides" src="${ c.imgPath }${ c.img3 }" style="width:auto; height: 600px;display:none">
@@ -161,7 +163,7 @@
 					</div>
 
 				</td>
-				<td style="padding: 0% 2%; height: 220px;">
+				<td style="padding: 0% 2%; height: 220px; border: 0px">
 					<br>
 					<h2 style="font-weight: 700;">
 						${c.enterprise }
@@ -178,8 +180,63 @@
 			<tr>
 				<td style="width: 40%; padding: 0% 2%; vertical-align: text-top;">
 
+					<div style="font-size: large; margin:5% auto;">${ c.detail }</div>
+					<div id="map" style="width:100%;height:400px; border: 2px solid black; border-radius: 10px; margin: 2% auto;">
+					
+					</div>
+					
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b886c1f0a0359c5d351f5484b7fce9d&libraries=services"></script>
+					<script>
+					var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
+					    mapOption = {
+					        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+					        level: 3, // 지도의 확대 레벨
+					        draggable: true
+					    };  
+					
+					// 지도 생성    
+					var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-					<div style="font-size: large; margin-top: 5%;">${ c.detail }</div>
+					// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+					var mapTypeControl = new kakao.maps.MapTypeControl();	
+
+					// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+					// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+					map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+					
+					// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+					var zoomControl = new kakao.maps.ZoomControl();
+					map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+					// 주소-좌표 변환
+					var geocoder = new kakao.maps.services.Geocoder();
+					
+					// 주소로 좌표를 검색합니다
+					geocoder.addressSearch('${ c.address }', function(result, status) {
+
+					    // 정상적으로 검색이 완료됐으면 
+					     if (status === kakao.maps.services.Status.OK) {
+
+					        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+					        // 결과값으로 받은 위치를 마커로 표시합니다
+					        var marker = new kakao.maps.Marker({
+					            map: map,
+					            position: coords
+					        });
+
+					        // 인포윈도우로 장소에 대한 설명을 표시합니다
+					        var infowindow = new kakao.maps.InfoWindow({
+					            content: '<div style="width:150px;text-align:center;padding:6px 0;">${ c.enterprise }</div>'
+					        });
+					        infowindow.open(map, marker);
+
+					        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+					        map.setCenter(coords);
+					    } 
+					}); 
+					
+					</script>
 				</td>
 			</tr>
 			<tr>
@@ -194,7 +251,9 @@
 						<ul style="margin: 0; padding: 0%;">
 							<c:set var="tag" value="${fn:split(c.tagContent,',')}" />
 							<c:forEach var="it" items="${tag}" varStatus="g">
+								<c:if test="${not empty it }">
 								<li><a href="single-news.html"># ${ it }</a></li>
+								</c:if>
 							</c:forEach>
 						</ul>
 					</div>
