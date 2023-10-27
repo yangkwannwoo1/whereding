@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <style>
-  .container{
+  .containergDetail{
     
     width: 1000px;
     height: 800px;
@@ -91,12 +91,46 @@
   	font-weight:bold;
   	display:none;
   }
-</style>
+  #like_area *{
+    position: absolute;
+  }
+  #basket_area *{
+  	position: absolute;
+  	
+  }
+
+  #like_area img:hover{
+  	cursor: pointer;
+  }
+
+  /* 좋아요 바운스 */
+  @-webkit-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
+    40% {-webkit-transform: translateY(-30px) }
+    60% {-webkit-transform: translateY(-20px);}
+  } 
+  @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-30px);}
+      60% {transform: translateY(-20px);}
+  } 
+  .bounce {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-name: bounce;
+      animation-name: bounce;
+  }
+  #heart_basket_area>div{
+  	display: inline-block;
+  }
+  </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="container">
+<jsp:include page="../common/header.jsp"/>
+
+<div class="containergDetail">
         
         
         <div>
@@ -189,20 +223,128 @@
 
                 </li>
             </ul>
+            <div id="heart_basket_area">
+                <div id="like_area" style="width: 50px; height: 50px;">
+                  <img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px;">
+                  <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px; display: none;">
+                </div>
+                <div id="basket_area" style="width: 50px; height: 50px;">
+                  <img class="gbasket basket_off" src="resources/css/assets/img/cart_n.png" id="bnn" style="height: 40px;">
+                  <img class="gbasket basket_on bounce" src="resources/css/assets/img/cart_y.png" id="byy" style="height: 40px; display: none;">
+                </div>
+            </div>
             <div class="buy_area">
                 <button class="btn btn-secondary buy_btn" style="line-height:10px;" disabled >구매하기</button>
-                <a class="btn btn-primary cart_btn"></a>
-                <a class="btn btn-primary like_btn"></a>
                 <button onclick="back();">이전으로</button>
                 
                 <script>
                 	function back(){
                 		history.back();
                 	}
+                    element1 = document.getElementById("nn");
+                    element2 = document.getElementById("yy");
+                    element3 = document.getElementById("bnn");
+                    element4 = document.getElementById("byy");
+
+                    element1.addEventListener("click", function(e) {
+                      e.preventDefault;
+                  
+                      element1.classList.remove("bounce");
+                  
+                      element1.offsetWidth = element1.offsetWidth;
+                  
+                      element1.classList.add("bounce");
+                    }, false);
+
+                    element2.addEventListener("click", function(e) {
+                      e.preventDefault;
+                  
+                      element2.classList.remove("bounce");
+                  
+                      element2.offsetWidth = element2.offsetWidth;
+                  
+                      element2.classList.add("bounce");
+                    }, false);
+                    
+                    element3.addEventListener("click", function(e) {
+                      e.preventDefault;
+                  
+                      element3.classList.remove("bounce");
+                  
+                      element3.offsetWidth = element3.offsetWidth;
+                  
+                      element3.classList.add("bounce");
+                    }, false);
+                    
+                    element4.addEventListener("click", function(e) {
+                      e.preventDefault;
+                  
+                      element4.classList.remove("bounce");
+                  
+                      element4.offsetWidth = element4.offsetWidth;
+                  
+                      element4.classList.add("bounce");
+                    }, false);
+
+
+                  $(document).on("click",".glike",function(){
+                	  
+                    console.log($(this).attr("id"))
+                	  if($(this).attr("id")=="yy"){
+                      // 좋아요 없어짐
+                		  $("#yy").css("display","none");
+                		  $("#nn").css("display","");
+                	  }else{
+                      // 좋아요 생김
+                		  $("#yy").css("display","");
+                		  $("#nn").css("display","none");
+                    }
+                    $.ajax({
+                      url:"glike.bo",
+                      data:{
+                        greatNo:'${ gift.giftNo }',
+                        userNo:'${ loginMember.userNo }',
+                        status:$(this).attr("id") 
+                      },success:function(data){
+                    	  
+                      },error:function(){
+                        console.log("좋아요 ajax 요청 실패!")
+                      }
+                    })
+                  })
+                  
+                  
+                  $(document).on("click",".gbasket",function(){
+                	  
+                    console.log($(this).attr("id"))
+                	  if($(this).attr("id")=="byy"){
+                      // 좋아요 없어짐
+                		  $("#byy").css("display","none");
+                		  $("#bnn").css("display","");
+                	  }else{
+                      // 좋아요 생김
+                		  $("#byy").css("display","");
+                		  $("#bnn").css("display","none");
+	                    }
+	                    $.ajax({
+	                      url:"gbasket.bo",
+	                      data:{
+	                        greatNo:'${ gift.giftNo }',
+	                        userNo:'${ loginMember.userNo }',
+	                        status:$(this).attr("id") 
+	                      },success:function(data){
+	                    	  
+	                      },error:function(){
+	                        console.log("장바구니 불러오기 ajax 요청 실패!")
+	                      }
+                    	})
+                  	})
                 </script>
             </div>
         </div>
 
     </div>
+ 	<jsp:include page="../common/footer.jsp"/>
+    
 </body>
 </html>

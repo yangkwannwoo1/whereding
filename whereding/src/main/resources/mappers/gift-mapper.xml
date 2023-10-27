@@ -23,7 +23,7 @@
 	</resultMap>
 	<resultMap type="GiftHistory" id="giftHistoryResult">
 		<result column="GHIS_NO" property="ghisNo"/>
-		<result column="GIFT_NO" property="guftNo"/>
+		<result column="GIFT_NO" property="giftNo"/>
 		<result column="USER_NO" property="userNo"/>
 		<result column="BUYMETHOD_NO" property="butMethodNo"/>
 		<result column="PAYMENT_NO" property="paymentNo"/>
