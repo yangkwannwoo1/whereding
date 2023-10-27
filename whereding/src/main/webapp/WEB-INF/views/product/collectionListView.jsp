@@ -8,6 +8,8 @@
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<c:set var="path" value="${pageContext.request.contextPath}"/>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 	<!-- title -->
 	<title>웨딩홀 목록</title>
 
@@ -424,6 +426,10 @@
 	border-radius: 15px;
 	margin: auto;
 }
+
+.news-text-box:hover{
+    cursor: pointer;
+}
 		
 	</style>
 
@@ -704,7 +710,7 @@
 			</div>
 			<script>
 				$(".enroll_collection").click(function(){
-					location.href="cEnrollForm.bo";
+					location.href="cEnrollForm.bo?category=" + '${ category }';
 				})
 			
 			</script>
@@ -714,15 +720,18 @@
 						<div class="single-board">
 							
 							<div class="news-text-box">
+                                <img src="${ c.imgPath }" style="width: 300px; height: 200px; margin-bottom: 3%; border-radius: 10px;">
 								<h3><a href="#">${ c.enterprise }</a></h3>
-								<h3><a href="#">${ c.price }</a></h3>
+								<p><i class="fas fa-map-marker-alt"> ${ c.address }</i></p>
+								<p class="price_won"><i class="fas fa-won">${ c.price }</i></p>
 								<p class="blog-meta">
-									<span class="author"><i class="fas fa-user"></i>${ c.enterprise }</span>
+									<span class="author">
+                                        <c:set var="tag" value="${fn:split(c.tagContent,',')}" />
+                                        <c:forEach var="it" items="${tag}" varStatus="g">
+                                            <span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ${ it }</span>
+                                        </c:forEach>
+                                    </span>
 								</p>
-								<%-- <p class="excerpt">대관비 : ${ h.rental }원</p>
-								<p class="excerpt">수용인원 : ${ h.seat }석</p>
-								<p class="excerpt">1인당 식비 : ${ h.meal }원</p>
-								<p class="excerpt">태그 : <p># ${ h.tagContent }</p> --%>
 								<a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
 								<input class="cno" type="hidden" value="${ c.code }">
 							</div>
@@ -732,7 +741,15 @@
 			</div>
 			<script>
 	            $(function(){
-	        		$(".collectionList .single-board a").click(function(){
+                    let price = $(".collectionList .news-text-box .price_won .fa-won");
+                    
+                    for(let i = 0; i < price.length; i++){
+                        $(price[i]).text($(price[i]).text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원")
+                        
+                    }
+
+
+	        		$(".collectionList .single-board").click(function(){
 	        			location.href = 'cDetail.bo?category=${ category }&cno=' + $(this).parent().find(".cno").val();
 	        		})
 	        	})
@@ -753,7 +770,14 @@
 										</c:otherwise>
 									</c:choose>
 									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										<li class="page-item"><a class="page-link" href="cList.bo?category=${ category }&cpage=${p}">${p}</a></li>
+                                        <c:choose>
+                                            <c:when test="${ pi.currentPage eq p }">
+                                                <li class="page-item disabled"><a class="page-link" href="cList.bo?category=${ category }&cpage=${p}">${p}</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li class="page-item"><a class="page-link" href="cList.bo?category=${ category }&cpage=${p}">${p}</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
 									</c:forEach>
 									<c:choose>
 										<c:when test="${ pi.currentPage eq pi.maxPage }">
@@ -763,6 +787,16 @@
 											<li class="page-item"><a class="page-link" href="cList.bo?category=${ category }&cpage=${pi.currentPage + 1}">Next</a></li>
 										</c:otherwise>	
 									</c:choose>
+                                    <script>
+                                        $(function(){
+
+                                            $(".page-link").click(function(e){
+                                                console.log(e);
+                                                $(e).parent().attr("class","page-item active");
+                                            })
+                                            
+                                        })
+                                    </script>
 								</ul>
 							</div>
 						</div>

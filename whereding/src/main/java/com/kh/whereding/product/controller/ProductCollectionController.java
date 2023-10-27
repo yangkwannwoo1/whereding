@@ -84,6 +84,7 @@ public class ProductCollectionController {
 	@RequestMapping("cEnrollForm.bo")
 	public ModelAndView CollectionEnrollForm(String category, ModelAndView mv) {
 		// /WEB-INF/views/board/boardEnrollForm.jsp
+		System.out.println(category);
 		mv.addObject("category", category).setViewName("product/collectionEnrollForm");
 		return mv;
 	}
@@ -141,7 +142,7 @@ public class ProductCollectionController {
 
 		if (result1 * result2 * result3 > 0) { 
 			session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-			return "redirect:cList.bo";
+			return "redirect:cList.bo?category=" + c.getCategory();
 
 		} else { 
 			model.addAttribute("errorMsg", "게시글 등록이 실패했습니다.");

@@ -74,7 +74,11 @@
 					     ,s_address as address
 					     ,s_unit_time as unit_time
 					     ,s_week_open as week_open
+					     ,tag_content
+					     ,img_path || img_1 as img_path 
 					  from studio
+					  left join tag t on (s_code = t.product_no)
+					  left join product_img i on (s_code = i.product_no)
 					where s_status = 'Y'
 	 	   		</when>
 	 	   		<when test="category eq 'Dress'">
@@ -89,7 +93,11 @@
 					     ,d_address as address
 					     ,d_unit_time as unit_time
 					     ,d_week_open as week_open
+					     ,tag_content
+					     ,img_path || img_1 as img_path 
 					  from dress
+					  left join tag on (d_code = product_no) 
+					  left join product_img i on (d_code = i.product_no)
 					where d_status = 'Y'
 	 	   		</when>
 	 	   		<otherwise>
@@ -104,7 +112,11 @@
 					     ,m_address as address
 					     ,m_unit_time as unit_time
 					     ,m_week_open as week_open
+					     ,tag_content
+					     ,img_path || img_1 as img_path 
 					  from makeup
+					  left join tag on (m_code = product_no) 
+					  left join product_img i on (m_code = i.product_no)
 					where m_status = 'Y'
 	 	   		</otherwise>
 	 	   </choose>

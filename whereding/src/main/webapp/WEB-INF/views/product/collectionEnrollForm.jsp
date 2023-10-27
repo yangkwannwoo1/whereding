@@ -57,6 +57,16 @@
 	font-size: 22px;
 	font-weight: 600;
 }
+
+.img_area img{
+    margin: 0px 20px;
+}
+
+.img_area td span{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0px 64px;
+}
 /* 해시태그 관련 끝 */
 </style>
 </head>
@@ -74,11 +84,24 @@
 	                            <select id="category" name="category" style="width:14%; margin: 0; height: 40px; text-align: center; font-size: 20px">
 	                            	<option>Studio</option>
 	                            	<option>Dress</option>
-	                            	<option>Makeup</option>
+	                            	<option>MakeUp</option>
 	                            </select>
                             	<input type="text" class="inp1" name="enterprise" id="enterprise" placeholder="웨어딩" required style="width:85%; height: 40px;font-size: 20px">
                             </td>
                         </tr>
+                        <script>
+                        	$(function(){
+                        		console.log('${ category }')
+                        		let $opt = $("#category option");
+                        		for(let i = 0; i < $($opt).length; i++){
+                        				console.log($($opt[i]).val())
+                        			if($($opt[i]).val() == '${ category }'){
+										$($opt[i]).prop("selected",true);
+                        			}
+                        			
+                        		}
+                        	})
+                        </script>
                         <tr>
                             <th>상세내용</th>
                             <td colspan="5"><textarea name="detail" rows="20" id="detail" placeholder="아이리스홀은 교회구조의 웨딩홀로 높은 층고와 고급스러운 나무재질 인테리어로 우아하고 아름다운 웨딩을 치를 수 있는 고품격 웨딩홀 입니다" style="width:100%; resize: none; margin: 0;"></textarea></td>
@@ -121,12 +144,38 @@
                 </table>
                 <div style="text-align: center; border: 2px solid black; width: 1000px; margin: 20px auto; padding: 20px;">
                     <div class="img_area">
-                        이미지1
-                        <img src="" id="contentImg1" width="150px" height="100px" onclick="chooseFile(1)">
-                        이미지2
-                        <img src="" id="contentImg2" width="150px" height="100px" onclick="chooseFile(2)">
-                        이미지3
-                        <img src="" id="contentImg3" width="150px" height="100px" onclick="chooseFile(3)">
+                        <table style="margin: auto;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="" id="contentImg1" width="150px" height="100px" onclick="chooseFile(1)">
+                                    </td>
+                                    <td>
+                                        <img src="" id="contentImg2" width="150px" height="100px" onclick="chooseFile(2)">
+                                    </td>
+                                    <td>
+                                        <img src="" id="contentImg3" width="150px" height="100px" onclick="chooseFile(3)">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span>
+                                            대표사진
+                                        </span>
+                                    </td>                                    
+                                    <td>
+                                        <span>
+                                            사진1
+                                        </span>
+                                    </td>                                    
+                                    <td>
+                                        <span>
+                                            사진2
+                                        </span>
+                                    </td>                                    
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- <td><input type="file" name="img3" ></td> -->
                     <div id="file-area" style="display:none;">

@@ -192,8 +192,7 @@
 				<td colspan="2">
 					<div class="tag-section" style="padding: 1%;">
 						<ul style="margin: 0; padding: 0%;">
-							<c:set var="tag"
-								value="${fn:split(c.tagContent,',')}" />
+							<c:set var="tag" value="${fn:split(c.tagContent,',')}" />
 							<c:forEach var="it" items="${tag}" varStatus="g">
 								<li><a href="single-news.html"># ${ it }</a></li>
 							</c:forEach>
