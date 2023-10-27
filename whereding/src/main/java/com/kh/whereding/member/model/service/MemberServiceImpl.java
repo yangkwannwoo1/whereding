@@ -133,6 +133,11 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override
+	public int createSocialMember(Member member) {
+		return mDao.createSocialMember(sqlSession, member);
+	}
+
 	
 	
 

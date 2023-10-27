@@ -192,6 +192,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="consultingMakeup" resultMap="makeupResult"> SELECT M_CODE , M_ENTERPRISE , M_DETAIL , M_PRICE , M_START_DATE , M_END_DATE , M_PHONE , M_ADDRESS , M_UNIT_TIME , M_WEEK_OPEN , to_char(CS_DATE, 'YYYY-MM-DD') as "CS_DATE" , start_time , REVIEW_NO , cs_no , IMG_1 , IMG_PATH FROM makeup left join consulting c on (m_CODE = c.PRODUCT_NO) left join review using (cs_no) left join PRODUCT_IMG im on (m_CODE = im.PRODUCT_NO) WHERE M_CODE = #{productNo} AND M_STATUS = 'Y' </select>
 	<insert id="consultingReview"> insert into review ( REVIEW_NO , CS_NO , RV_CONTENT , RV_SCORE ) values ( SEQ_RVNO.NEXTVAL , #{csNo} , #{content} , #{score} ) </insert>
 	<insert id="consultingReviewImg"> insert into consulting_img ( REVIEW_NO , CS_ORIGIN_NAME , CS_CHANGE_NAME , CS_FILE_PATH ) values ( SEQ_RVNO.CURRVAL , #{csOriginName} , #{csChangeName} , #{csFilePath} ) </insert>
+	
+	<insert id="createSocialMember">
+		insert 
+		  into member
+			 (
+			 	user_no
+			   ,user_id
+			   ,user_pwd
+			   ,user_name
+			   ,birthday
+			   ,gender
+			   ,phone
+			   ,email
+			   ,status
+			   ,grade_no
+			 )
+	    values(
+	   		 	seq_mno.nextval
+	   		   ,#{userId}
+	   		   ,#{userId}
+	   		   ,#{userName}
+	   		   ,null
+	   		   ,null
+	   		   ,null
+	   		   ,#{email}
+	   		   ,'Y'
+	   		   ,1
+	    	  )
+		
+	</insert>
 </mapper>
 
 

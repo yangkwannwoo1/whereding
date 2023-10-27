@@ -16,6 +16,9 @@ import com.kh.whereding.product.model.vo.Studio;
 
 public interface MemberService {
 	
+	//소셜 회원가입 서비스
+	abstract int createSocialMember(Member member);
+	
 	// 로그인 서비스
 	Member loginMember(Member m);
 	
