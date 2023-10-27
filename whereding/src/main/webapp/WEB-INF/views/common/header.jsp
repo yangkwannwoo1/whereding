@@ -256,6 +256,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 									<ul class="sub-menu">
 										<li><a href="#">Notice</a> <a href="notice.bo">공지사항</a></li>
 										<li><a href="#">Q&A</a> <a href="qna.bo">질의응답</a></li>
+										<li><a href="#">Application for partner</a> <a href="collabo.bo">협력업체 신청</a></li>
 									</ul> <a href="service.bo">커뮤니티</a></li>
 								<li id="main-menu-mypge"><a href="contact.html">myPage</a>
 									<ul class="sub-menu">
