@@ -191,6 +191,27 @@
 		     , #{filePath}
 		     )
 	</insert>
+	
+	<select id="selectGiftDetail" resultMap="giftResult">
+	select 
+        gift_no
+       ,category_no
+       ,category_item
+       ,gift_name
+       ,gift_content
+       ,gift_price
+       ,count
+       ,img_path as "img_path"
+       ,img_1 as "img_1"
+       ,img_2 as "img_2"
+       ,img_3 as "img_3"
+
+      from gift g
+      left outer join product_img p on g.gift_no=p.product_no
+      join gift_category using(category_no)
+    where count>0    	
+    and gift_no = #{giftNo}
+	</select>
 </mapper>
 
 

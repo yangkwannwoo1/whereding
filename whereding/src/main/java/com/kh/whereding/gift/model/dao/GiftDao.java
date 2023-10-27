@@ -42,6 +42,9 @@ public class GiftDao {
 	public ArrayList<Basket> selectBasketList(SqlSessionTemplate sqlSession, String userNo){
 		return (ArrayList)sqlSession.selectList("basketMapper.selectBasketList", userNo);
 	}
+	public Gift selectGiftDetail(SqlSessionTemplate sqlSession, String giftNo) {
+		return sqlSession.selectOne("giftMapper.selectGiftDetail", giftNo);
+	}
 	
 	
 }

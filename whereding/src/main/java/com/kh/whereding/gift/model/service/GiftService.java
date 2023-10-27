@@ -18,4 +18,6 @@ public interface GiftService {
 	abstract ArrayList<Gift> categorySearch(int categoryNo);
 	
 	abstract int insertGift(Gift gift);
+	
+	abstract Gift selectGiftDetail(String giftNo);
 }

@@ -134,11 +134,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int createSocialMember(Member member) {
-		return mDao.createSocialMember(sqlSession, member);
-	}
-
-	@Override
 	public int ReviewCount(Member m) {
 		int result = mDao.ReviewCount(sqlSession, m);
 		return result;
