@@ -7,7 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.whereding.common.model.vo.PageInfo;
-import com.kh.whereding.gift.model.vo.Basket;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.gift.model.vo.GiftCategory;
 
@@ -39,9 +38,6 @@ public class GiftDao {
 		return sqlSession.insert("giftMapper.insertGift", gift);
 	}
 	
-	public ArrayList<Basket> selectBasketList(SqlSessionTemplate sqlSession, String userNo){
-		return (ArrayList)sqlSession.selectList("basketMapper.selectBasketList", userNo);
-	}
 	public Gift selectGiftDetail(SqlSessionTemplate sqlSession, String giftNo) {
 		return sqlSession.selectOne("giftMapper.selectGiftDetail", giftNo);
 	}

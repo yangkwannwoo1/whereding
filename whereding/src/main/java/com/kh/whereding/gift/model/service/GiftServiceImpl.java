@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.gift.model.dao.GiftDao;
-import com.kh.whereding.gift.model.vo.Basket;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.gift.model.vo.GiftCategory;
 

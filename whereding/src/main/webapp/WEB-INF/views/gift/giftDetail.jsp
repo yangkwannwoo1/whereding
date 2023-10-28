@@ -74,8 +74,10 @@
     
   }
   #count_option{
-    width: 25px;
-    height: 20px;
+    width: 50px;
+    height: 30px;
+    padding: 0px;
+    text-align:center;
     line-height: 20px;
   }
   .count_up{
@@ -122,6 +124,34 @@
   }
   #heart_basket_area>div{
   	display: inline-block;
+  }
+
+  /* 토스트메시지 */
+  .notification-container {
+    background: rgba(215, 79, 0, 0.85);
+    border-radius: 10px;
+    padding: 15px 20px;
+    opacity: 0;
+    visibility: none;
+    transition: all 1s ease-in-out;
+    text-align: center;
+    width: 250px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    position: fixed;
+  }
+  
+  .notification-container.show {
+    opacity: 1;
+    visibility: visible;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   </style>
 <script
@@ -189,10 +219,8 @@
                 </li>
                 <li>
                     <p> 수량
-                        <input type="text" name="count_option" id="count_option" onchange="test();">
+                        <input type="number" name="count_option" id="count_option" min="0" value="0" onchange="test();">
                         <!-- 수량 up down 버튼임 -->
-                        <a class="count_up"><img src="https://img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif" width="24px" height="12px"></a>
-                        <a class="count_down"><img src="https://img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif" width="24px" height="12px"></a>
                     <span id="buyFalseSpan">재고가 부족하여 구매할수 없습니다. 재고를 확인해주랑꼐</span>                        
                     </p>
                     
@@ -215,7 +243,6 @@
                     		$(".buy_btn").attr("disabled", false);
                     		$("#buyFalseSpan").css("display", "none");
                     	}
-                    	console.log(value);
                     }
                     </script>
                     
@@ -229,8 +256,7 @@
                   <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px; display: none;">
                 </div>
                 <div id="basket_area" style="width: 50px; height: 50px;">
-                  <img class="gbasket basket_off" src="resources/css/assets/img/cart_n.png" id="bnn" style="height: 40px;">
-                  <img class="gbasket basket_on bounce" src="resources/css/assets/img/cart_y.png" id="byy" style="height: 40px; display: none;">
+                  <img class="gbasket basket" src="resources/css/assets/img/cart_n.png" id="basketbtn" style="height: 40px;">
                 </div>
             </div>
             <div class="buy_area">
@@ -243,8 +269,7 @@
                 	}
                     element1 = document.getElementById("nn");
                     element2 = document.getElementById("yy");
-                    element3 = document.getElementById("bnn");
-                    element4 = document.getElementById("byy");
+                    element3 = document.getElementById("basketbtn");
 
                     element1.addEventListener("click", function(e) {
                       e.preventDefault;
@@ -275,16 +300,6 @@
                   
                       element3.classList.add("bounce");
                     }, false);
-                    
-                    element4.addEventListener("click", function(e) {
-                      e.preventDefault;
-                  
-                      element4.classList.remove("bounce");
-                  
-                      element4.offsetWidth = element4.offsetWidth;
-                  
-                      element4.classList.add("bounce");
-                    }, false);
 
 
                   $(document).on("click",".glike",function(){
@@ -304,7 +319,6 @@
                       data:{
                         greatNo:'${ gift.giftNo }',
                         userNo:'${ loginMember.userNo }',
-                        status:$(this).attr("id") 
                       },success:function(data){
                     	  
                       },error:function(){
@@ -315,25 +329,24 @@
                   
                   
                   $(document).on("click",".gbasket",function(){
-                	  
+                	
+                	console.log($("#count_option").val())
                     console.log($(this).attr("id"))
-                	  if($(this).attr("id")=="byy"){
-                      // 좋아요 없어짐
-                		  $("#byy").css("display","none");
-                		  $("#bnn").css("display","");
-                	  }else{
-                      // 좋아요 생김
-                		  $("#byy").css("display","");
-                		  $("#bnn").css("display","none");
-	                    }
-	                    $.ajax({
+
+                    $.ajax({
 	                      url:"gbasket.bo",
 	                      data:{
-	                        greatNo:'${ gift.giftNo }',
+	                    	count:$("#count_option").val(),
+	                        refNo:'${ gift.giftNo }',
 	                        userNo:'${ loginMember.userNo }',
-	                        status:$(this).attr("id") 
 	                      },success:function(data){
-	                    	  
+                          console.log(data)
+                          if(data == 'NNNNY'){
+                            $("#notification-container p").text("장바구니에 담겼습니다.")
+                          }else{
+                            $("#notification-container p").text("잠시 후에 다시 이용해주세요.")                            
+                          }
+                          showNotification()
 	                      },error:function(){
 	                        console.log("장바구니 불러오기 ajax 요청 실패!")
 	                      }
@@ -341,10 +354,25 @@
                   	})
                 </script>
             </div>
+            <div class="notification-container" id="notification-container">
+              <p>You have already entered the letter</p>
+            </div>
         </div>
-
     </div>
+    <script>
+      const notification = document.getElementById('notification-container')
+
+      // Show notification
+      const showNotification = () => {
+        notification.classList.add('show')
+        setTimeout(() => {
+          notification.classList.remove('show')
+        }, 2000)
+      }
+
+    </script>
  	<jsp:include page="../common/footer.jsp"/>
     
+
 </body>
 </html>

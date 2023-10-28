@@ -1,4 +1,4 @@
-package com.kh.whereding.gift.model.vo;
+package com.kh.whereding.common.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,10 +12,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Basket {
-	private int userNo;
+	private String userNo;
 	private String giftName;
 	private int giftPrice;
 	private String filePath;
-	private int refNo;
-	private int count;
+	private String refNo;
+	private String count;
 }

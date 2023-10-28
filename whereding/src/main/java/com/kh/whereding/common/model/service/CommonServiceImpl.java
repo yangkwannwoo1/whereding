@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.whereding.common.model.dao.CommonDao;
+import com.kh.whereding.common.model.vo.Basket;
 import com.kh.whereding.common.model.vo.Great;
 
 @Service
@@ -31,5 +32,28 @@ public class CommonServiceImpl implements CommonService{
 		return cDao.deleteLike(sqlSession,g);
 	}
 	
-	
+//	@Override
+//	public int checkGiftStock(Basket b) {
+//		return cDao.checkGiftStock(sqlSession, b);
+//	}
+
+	@Override
+	public int checkBasket(Basket b) {
+		return cDao.checkBasket(sqlSession, b);
+	}
+
+	@Override
+	public int updateBasket(Basket b) {
+		return cDao.updateBasket(sqlSession, b);
+	}
+
+	@Override
+	public int insertBasket(Basket b) {
+		return cDao.insertBasket(sqlSession, b);
+	}
+
+	@Override
+	public int deleteBasket(Basket b) {
+		return cDao.deleteBasket(sqlSession, b);
+	}
 }
