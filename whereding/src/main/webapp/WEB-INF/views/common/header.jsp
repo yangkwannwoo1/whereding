@@ -39,7 +39,29 @@
 <link rel="stylesheet" href="resources/css/assets/css/sidebar.css">
 <!-- 카카오 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+<!-- 글씨체 -->
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+
 <style>
+@font-face {
+    font-family: 'TheJamsil';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.ttf') format("truetype");
+    font-display: swap;
+}
+*{
+    font-family: 'TheJamsil';
+    /* font-family: 'IBM Plex Sans KR', sans-serif; */
+}
+
+
 #login_container {
     position: fixed;
     top: 50%;
@@ -310,7 +332,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 									</ul> <a href="myPage.me">마이페이지</a></li>
 								<li id="main-menu-icon">
 									<div class="header-icons">
-										<a class="shopping-cart jb-title" href="basket.gi"><i
+										<a class="shopping-cart jb-title" href="basket.ba"><i
 											class="fas fa-shopping-cart"></i></a>
 										<div class="jb-text">
 											<p>장바구니</p>
@@ -345,7 +367,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 	     $.ajax({
 	         url:"selectBasket.sb",
 	         data:{
-	             userNo:'${loginMember.userNo}'
+	             userNo:${loginMember.userNo}
 	         },success:function(list){
 	         	let value = ""
 	         	for(let i in list){

@@ -242,17 +242,18 @@
 	      </foreach>
 	</select>
 	<select id="selectBasketList" resultMap="basketResultSet">
-		select 
-		       user_id
-		     , gift_name
-		     , gift_price
-		     , b.count
-	         , g_file_path || '/' || g_change_name as file_path
-		  from member
-		 right join basket b using (user_no)
-		       join gift on(ref_no = gift_no) 
-               join gift_img on (gift_no = review_no)
-	  		   where user_no = #{userNo}
+		select
+               user_id
+             , b.user_no
+             , gift_name
+             , gift_price
+             , b.count
+             , img_path || '/' || img_1 as file_path
+          from gift
+          left join basket b on (gift_no = ref_no)
+          left join product_img on (gift_no = product_no)
+          left join member m on (b.user_no = m.user_no)
+         where b.user_no = #{user_no}
 	</select>
 	
 	<select id="selectRsvList" resultMap="reservationResultSet">

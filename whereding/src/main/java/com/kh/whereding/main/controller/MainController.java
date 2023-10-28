@@ -118,9 +118,9 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value="selectBasket.sb", produces = "application/json; charset=utf-8")
 	public String selectBasketList(String userNo) {
-//		System.out.println(userNo);
+		System.out.println(userNo);
 		ArrayList<Basket> list = mnService.selectBasketList(userNo);
-	
+		
 		return new Gson().toJson(list);
 	}
 	@ResponseBody

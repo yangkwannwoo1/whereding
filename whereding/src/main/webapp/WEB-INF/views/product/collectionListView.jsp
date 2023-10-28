@@ -728,7 +728,14 @@
 									<span class="author">
                                         <c:set var="tag" value="${fn:split(c.tagContent,',')}" />
                                         <c:forEach var="it" items="${tag}" varStatus="g">
-                                            <span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ${ it }</span>
+                                            <c:choose>
+                                                <c:when test="${not empty it }">
+                                                    <span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ${ it }</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span style="font-size: 14px; color: black; font-weight: 600; opacity: 1; opacity: 0;"> empty</span>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </c:forEach>
                                     </span>
 								</p>
