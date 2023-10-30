@@ -245,6 +245,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    	  )
 		
 	</insert>
+	
+	<insert id="createNaverMember">
+		insert 
+		  into member
+			 (
+			 	user_no
+			   ,user_id
+			   ,user_pwd
+			   ,user_name
+			   ,birthday
+			   ,gender
+			   ,phone
+			   ,email
+			   ,status
+			   ,grade_no
+			 )
+	    values(
+	   		 	seq_mno.nextval
+	   		   ,#{userId}
+	   		   ,#{userPwd}
+	   		   ,#{userName}
+	   		   ,to_date(#{birthDay}, 'yyMMdd')
+	   		   ,#{gender}
+	   		   ,#{phone}
+	   		   ,#{email}
+	   		   ,'Y'
+	   		   ,1
+	    	  )
+		       
+	</insert>
 
 	<select id="ReviewCount">
 		select count(*)
@@ -253,6 +283,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where PRODUCT_NO = #{productNo}
          and user_no = #{userNo}
 	</select>
+	
+	<select id="countCheck" resultType="_int">
+		select count(*)
+		  from member
+		 where user_id = #{userId}
+	</select>
+		    
 
 </mapper>
 

@@ -18,6 +18,7 @@ public interface MemberService {
 	
 	//소셜 회원가입 서비스
 	abstract int createSocialMember(Member member);
+	abstract int createNaverMember(Member m);
 	
 	// 로그인 서비스
 	Member loginMember(Member m);
@@ -61,6 +62,8 @@ public interface MemberService {
 	
 	int ReviewCount(Member m);
 	
+	// 네이버 로그인
+	Member selectNaverUser(String userId);
 	
 	
 	

@@ -178,7 +178,9 @@
         }
         .social{
         	width:43%;
-        	height:10%;
+        	height:17%;
+        	line-height:44px;
+        	font-size:20px;
         }
         #overlapId{
         	float:right;
@@ -343,8 +345,30 @@
                     </script>
                     
                     
-                    <a class="social btn btn-success">네이버로 가입하기</a> <br>
-                    <a class="social btn btn-primary">Google로 가입하기</a>
+                    <a class="social btn btn-success" id="naver_login">네이버로 가입하기</a> <br>
+                    
+                    <script>
+                    	$("#naver_login").click(function(){
+                    		 $.ajax({
+                 		        type: "GET",
+                 		        url: "createState.me",
+                 		        success: function(state) {
+                 		            var clientId = "by2SkrFNRCAcBUVgh7MX";
+                 		            var redirectUri = "http://localhost:8009/whereding/naverEnroll.do"; 
+                 		            var naverLoginUrl = "https://nid.naver.com/oauth2.0/authorize"
+                 		                + "?client_id=" + clientId
+                 		                + "&response_type=code"
+                 		                + "&redirect_uri=" + redirectUri
+                 		                + "&state=" + state;
+                 		
+                 		            
+                 		            window.location.href = naverLoginUrl;
+                 		        },error:function(){
+                 		        	console.log("ajax실패띠");
+                 		        }
+                 		    });
+                    	})
+                    </script>
                 
             </div>
 

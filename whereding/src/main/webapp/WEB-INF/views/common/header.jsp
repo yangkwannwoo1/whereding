@@ -232,6 +232,33 @@ font-family: 'Open Sans Condensed', sans-serif;
 							<input type="hidden" id="kakaoInput" name="kakaoInput"/>
 						</form>
 						
+						<button id = "naverLogin" onclick="naverLogin();">
+							<img src="https://image.edaily.co.kr/images/Photo/files/NP/S/2014/04/PS14040100352.jpg" width="100px"; height="50px";>
+						</button>
+						
+						<script>
+							function naverLogin(){
+									console.log("되냐");
+		                    		 $.ajax({
+		                 		        type: "GET",
+		                 		        url: "createState.me",
+		                 		        success: function(state) {
+		                 		            var clientId = "by2SkrFNRCAcBUVgh7MX";
+		                 		            var redirectUri = "http://localhost:8009/whereding/naverEnroll.do"; 
+		                 		            var naverLoginUrl = "https://nid.naver.com/oauth2.0/authorize"
+		                 		                + "?client_id=" + clientId
+		                 		                + "&response_type=code"
+		                 		                + "&redirect_uri=" + redirectUri
+		                 		                + "&state=" + state;
+		                 		            
+		                 		            window.location.href = naverLoginUrl;
+		                 		        },error:function(){
+		                 		        	console.log("ajax실패띠");
+		                 		        }
+		                 		    })
+							}
+						</script>
+						
 						<!-- 카카오 로그인 -> 아이디있는지 검사 -->
 						<script>
                     	Kakao.init('bb694f7fac67300cb1cee4c96ec94ade'); //발급받은 키 중 javascript키를 사용해준다.
