@@ -312,8 +312,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 								<!--  <li id="main-menu-event"><a href="contact.html">Event</a> <a
 									href="contact.html">이벤트</a></li>  -->
 								<li id="main-menu-shop"><a href="shop.html">Present</a>
-									<ul class="sub-menu">
-									</ul> <a href="giftShop.bo">답례품</a></li>
+									<a href="giftShop.bo">답례품</a></li>
 								<li id="main-menu-community"><a href="contact.html">Community</a>
 									<ul class="sub-menu">
 										<li><a href="#">Notice</a> <a href="notice.bo">공지사항</a></li>

@@ -388,6 +388,30 @@
 	                      }
                     	})
                   	})
+                  	
+                  	$(function(){
+                  		$.ajax({
+                  			url:"chklike.bo",
+                  			data:{
+                  				greatNo:'${ gift.giftNo }',
+                  				userNo:'${ loginMember.userNo }'
+                  			},success:function(data){
+                  				let value = "";
+                  				if(data == 'NNNYY'){
+                            	  value = `<img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px;">
+                                      <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px; display: none;">`
+                  				}else{
+                              	  value = `<img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px; display: none;">
+                                      <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px;">`	
+                  				}
+                  				$("#like_area").html(value);
+                  				console.log(data)
+                  				
+                  			},error:function(){
+                  				console.log("ajax 좋아요 확인 실패")
+                  			}
+                  		})
+                  	})
                 </script>
             </div>
             <div class="notification-container" id="notification-container">
