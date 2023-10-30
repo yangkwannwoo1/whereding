@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-    .popup {
+.popup {
   display: none;
   position: fixed;
   top: 0;
@@ -15,24 +15,41 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1;
+  z-index: 9999; /* 높은 우선 순위 값 */
 }
+
 
 .popup-content {
   position: absolute;
   width: 400px;
-  height: 500px;
+  height: 530px;
   top: 50%;
-  left: 50%;
+  left: 35%;
   transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 20px;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-#closeButton{
+.popup-content2 {
+  position: absolute;
+  width: 400px;
+  height: 530px;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#closeButton1{
     cursor: pointer;
 }
+#closeButton2{
+    cursor: pointer;
+}
+
 </style>
 <title>결혼은 웨어딩에서</title>
 <!-- title -->
@@ -614,36 +631,84 @@
 		</div>
 	</div>
 	
-	<div id="popup" class="popup">
-        <div class="popup-content">
-          <!-- 모달 팝업 콘텐츠 -->
-          <span class="close" id="closeButton">&times;</span>
-          <br><br>
-          <img src="resources/images/모달로 띄울 내용.png" alt="">
-          <br><br>
-          <label><input type="checkbox" id="disablePopup"> 일주일간 안보기</label>
-        </div>
-      </div>
+	 <!-- 모달 팝업 -->
+<div id="popup" class="popup">
+    <!-- 첫 번째 모달 팝업 컨텐츠 -->
+    <div class="popup-content" id="content1">
+      <span class="close" id="closeButton1">&times;</span>
+      <br><br>
+      <img src="resources/images/모달로 띄울 내용.png" alt="">
+      <br><br>
+      <label><input type="checkbox" id="disablePopup1"> 일주일간 안보기</label>
+    </div>
+  
+    <!-- 두 번째 모달 팝업 컨텐츠 -->
+    <div class="popup-content2" id="content2">
+      <span class="close" id="closeButton2">&times;</span>
+      <br>
+      <img src="resources/images/협력업체 모집.png" alt="">
+      <br><br>
+      <label><input type="checkbox" id="disablePopup2"> 일주일간 안보기</label>
+    </div>
+  </div>
+  
+  <script>
+    // 모달 열기 함수
+    function openModal() {
+      var modal = document.getElementById('popup');
+      modal.style.display = 'block';
+    }
+  
+    // 모달 닫기 함수
+    function closeModal() {
+      var modal = document.getElementById('popup');
+      modal.style.display = 'none';
+    }
+  
+    // 쿠키를 확인하여 모달 팝업을 표시합니다.
+    if (document.cookie.indexOf('disablePopup1=true') === -1 && document.cookie.indexOf('disablePopup2=true') === -1) {
+      openModal();
+    } else if (document.cookie.indexOf('disablePopup1=true') === -1) {
+      openModal();
+      document.getElementById('content2').style.display = 'none';
+    } else if (document.cookie.indexOf('disablePopup2=true') === -1) {
+      openModal();
+      document.getElementById('content1').style.display = 'none';
+    }
+  
+    // 첫 번째 모달 팝업 닫기
+    document.getElementById('closeButton1').addEventListener('click', function () {
+      document.getElementById('content1').style.display = 'none';
+  
+      // disablePopup1 체크박스 상태 저장
+      if (document.getElementById('disablePopup1').checked) {
+        var date = new Date();
+        date.setDate(date.getDate() + 7); // 7일 동안 쿠키 유지
+        document.cookie = 'disablePopup1=true; expires=' + date.toUTCString();
+      }
       
-        <script>
-            document.getElementById('closeButton').addEventListener('click', function () {
-            document.getElementById('popup').style.display = 'none';
-            });
-
-            // 일주일간 안보기를 처리
-            document.getElementById('disablePopup').addEventListener('change', function () {
-            if (this.checked) {
-                // 쿠키를 사용하여 팝업을 일주일 동안 숨깁니다.
-                // document.cookie = 'disablePopup=true; max-age=' + 60 * 60 * 24 * 7;
-            }
-            });
-
-            // 쿠키를 확인하여 팝업을 표시합니다.
-            if (document.cookie.indexOf('disablePopup=true') === -1) {
-            document.getElementById('popup').style.display = 'block';
-            }
-
-        </script>
+      // 첫 번째 모달을 닫았을 때 모두 닫히는지 확인
+        if (document.getElementById('content2').style.display === 'none') {
+        closeModal();
+        }
+    });
+  
+    // 두 번째 모달 팝업 닫기
+    document.getElementById('closeButton2').addEventListener('click', function () {
+      document.getElementById('content2').style.display = 'none';
+  
+      // disablePopup2 체크박스 상태 저장
+      if (document.getElementById('disablePopup2').checked) {
+        var date = new Date();
+        date.setDate(date.getDate() + 7); // 7일 동안 쿠키 유지
+        document.cookie = 'disablePopup2=true; expires=' + date.toUTCString();
+      }
+       // 두 번째 모달을 닫았을 때 모두 닫히는지 확인
+        if (document.getElementById('content1').style.display === 'none') {
+        closeModal();
+        }
+    });
+  </script>
 	
 	<jsp:include page="common/footer.jsp"/>
 
