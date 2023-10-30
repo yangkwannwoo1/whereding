@@ -35,8 +35,9 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" style="margin: 150px;">
 
               <img src="resources/assets/img/slide2.png" alt="Profile" class="rounded-circle">
-              <h2>admin</h2>
-              <h3>회원</h3>
+              <input type="hidden" name="userNo" value="${ m.userNo }">
+              <h2>${ m.userName }</h2>
+              <h3>${ m.gradeNo }</h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -68,12 +69,12 @@
 
                 <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form action="update.ad" method="post">
                     <input type="hidden" value="userNo"/>
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">아이디</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="$admin" disabled>
+                        <input name="fullName" type="text" class="form-control" id="fullName" value="${ m.userId }" disabled>
                       </div>
                     </div>
 
@@ -87,52 +88,80 @@
                     <div class="row mb-3">
                       <label for="name" class="col-md-4 col-lg-3 col-form-label">이름</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" name="$admin" class="form-control">
+                        <input type="text" name="userName" class="form-control" value="${ m.userName }">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="birthday" class="col-md-4 col-lg-3 col-form-label">생년월일</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="date" name="$2023-10-25" class="form-control" placeholder="생년월일 8자리 [ex)230824]">
+                        <input type="date" name="birthDay" class="form-control" placeholder="생년월일 8자리 [ex)230824]" value="${ m.birthDay }">
                       </div>
                     </div>
 
-                    <div class="row mb-3">
-                      <label for="gender" class="col-md-4 col-lg-3 col-form-label">신랑 / 신부</label>
-                      <div class="col-md-8 col-lg-9">
-                        <select name="gender" class="form-control">
-                          <option value="M">신랑</option>
-                          <option value="F">신부</option>
-                      </select>
-                      </div>
-                    </div>
+                   <label for=""> &nbsp; Gender : </label> &nbsp;&nbsp;
+                   <input type="radio" name="gender" id="Male" value="M">
+                   <label for="Male">신랑</label> &nbsp;&nbsp;
+                   <input type="radio" name="gender" id="Female" value="F">
+                   <label for="Female">신부</label><br>
+                   
+                  	<c:if test="${ not empty m.gender }">
+                  		<script>
+                  			$(function(){
+                  				$(".form-group input[value=${ m.gender }]").attr("checked", true);
+                  			})
+                  		</script>
+                  	</c:if>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">전화번호</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" placeholder="휴대폰 번호 [010-1234-5678]" onKeyup = "addHypen(this);">
+                        <input name="phone" type="text" class="form-control" id="Phone" placeholder="휴대폰 번호 [010-1234-5678]" onKeyup = "addHypen(this);" value="${ m.phone }">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">이메일</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="kh@example.com">
+                        <input name="email" type="email" class="form-control" id="Email" value="${ m.email }">
                       </div>
                     </div>
 
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">회원정보변경</button> &nbsp;
-                      <button  type="reset"class="btn btn-danger">추방시키기</button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteForm">회원추방</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
+                  
+                  <div class="modal" id="deleteForm">
+       <div class="modal-dialog">
+           <div class="modal-content">
+           
+               <!-- Modal Header -->
+               <div class="modal-header">
+               <h4 class="modal-title">회원탈퇴</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               </div>
+               
+               <!-- Modal body -->
+               <div class="modal-body" align="center">
+               
+                   <form action="delete.ad" method="post">
+                          
+                       <button type="submit" class="btn btn-danger">추방시키기</button>
+                   </form>
+
+               </div>
+               
+           </div>
+       </div>
+   </div>
 
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- 비밀번호변경 Form -->
-                  <form>
+                  <form action="update.ad" method="post">
 
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">현재 Password</label>
@@ -169,7 +198,6 @@
           </div>
 
         </div>
-      </div>
     </section>
 
   </main><!-- End #main -->

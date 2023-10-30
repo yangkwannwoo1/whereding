@@ -129,6 +129,13 @@ public class MainController {
 		ArrayList<Reservation> list = mnService.selectRsvList(userNo);
 		return new Gson().toJson(list);
 	}
+	
+	@RequestMapping("/")
+	public String Main() {
+	    //일 방문자수 ++ - 02.19
+		mnService.addVisit();		
+	    return ("common/start");
+	}
 		
 
 }

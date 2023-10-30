@@ -215,5 +215,39 @@
   		 where QNA_NO = #{qnaNo}
   	</update>
   	
+  	<select id="adminQnaCount" resultType="_int">
+		select
+				count(*)
+		  from qna
+		 where status = 'Y'
+	</select>
+
+	<select id="adminQnaList" resultMap="qnaResult">
+	   SELECT
+			  QNA_NO
+			, QNA_TITLE
+			, QNA_CONTENT
+			, QNA_ANSWER
+			, to_char(QNA_DATE, 'YYYY-MM-DD') as QNA_DATE
+         FROM QNA
+        WHERE STATUS = 'Y'
+	</select>
+  	
+  	<select id="adminNoticeCount" resultType="_int">
+		select 
+				count(*)
+	 	   from notice
+	 	  where status = 'Y'
+  	</select>
+  	
+  	<select id="adminnoticeList" resultMap="noticeResult">
+		select 
+		       NOTICE_NO
+		     , NOTICE_TITLE
+		     , NOTICE_CONTENT
+		     , to_char(NOTICE_DATE, 'YYYY-MM-DD') as "NOTICE_DATE"
+		  from notice 
+  	</select>
+  	
   	
 </mapper>

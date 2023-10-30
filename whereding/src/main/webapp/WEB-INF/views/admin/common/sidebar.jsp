@@ -39,18 +39,18 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link" href="admin.ad">
+        <a class="nav-link collapsed" href="admin.ad">
           <i class="bi bi-grid"></i>
           <span>메뉴</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
-	
-    
+      
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>회원정보</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" href="mList.ad">
+          <i class="bi bi-layout-text-window-reverse"></i><span>회원정보 조회</span>
         </a>
+        <!--  
+        <i class="bi bi-chevron-down ms-auto"></i>
         <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
          
           <li>
@@ -59,14 +59,8 @@
               <span>회원정보 조회</span>
             </a>
           </li>
-        
-	        <li>
-		        <a href="minsert.ad">
-		          <i class="bi bi-circle"></i>
-		          <span>회원상세</span>
-		        </a>
-	      	</li>
         </ul>
+        -->
        </li>
         <!-- 회원 -->
 
@@ -78,26 +72,18 @@
       </li><!-- End F.A.Q Page Nav -->
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="faq.ad">
+        <a class="nav-link collapsed" href="qna.ad">
           <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
+          <span>Q.N.A</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="giftsale.ad">
           <i class="bi bi-envelope"></i>
-          <span>Contact</span>
+          <span>답례품 목록</span>
         </a>
       </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
-      </li><!-- End Register Page Nav -->
-
 
     </ul><!-- End Sidebar-->
     

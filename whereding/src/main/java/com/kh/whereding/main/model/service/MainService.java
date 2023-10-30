@@ -45,6 +45,9 @@ public interface MainService {
 	// 헤더에서 스튜디오 눌렀을때 전체 불러오기
 //	ArrayList<Studio> selectStudioList();
 	
+	// 방문자 수 증가
+	void addVisit();
+	
 }
 
 
