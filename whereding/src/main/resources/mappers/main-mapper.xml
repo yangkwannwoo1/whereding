@@ -249,6 +249,7 @@
              , gift_price
              , b.count
              , img_path || '/' || img_1 as file_path
+             , ref_no
           from gift
           left join basket b on (gift_no = ref_no)
           left join product_img on (gift_no = product_no)

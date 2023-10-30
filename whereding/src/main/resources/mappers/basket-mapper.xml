@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="basketMapper">
+	
+	<resultMap type="Basket" id="basketResultSet">
+		<result column="user_no" property="userNo"></result>
+		<result column="user_name" property="userName"></result>
+		<result column="gift_name" property="giftName"></result>
+		<result column="gift_price" property="giftPrice"></result>
+		<result column="file_path" property="filePath"></result>
+		<result column="ref_no" property="refNo"></result>
+		<result column="count" property="count"></result>
+		<result column="gift_content" property="giftContent"></result>
+		<result column="category_Item" property="categoryItem"></result>
+	</resultMap>
+	
+	<resultMap type="Coupon" id="CouponResultSet">
+		<result column="coupon_no" property="couponNo"></result>
+		<result column="user_no" property="userNo"></result>
+		<result column="coupon_content" property="couponContent"></result>
+		<result column="coupon_value" property="couponValue"></result>
+		<result column="start_coupon" property="startCoupon"></result>
+		<result column="end_coupon" property="endCoupon"></result>
+	</resultMap>
+	
+		<select id="selectBasketList" resultMap="basketResultSet">
+		select
+               user_id
+             , user_name
+             , b.user_no
+             , gift_name
+             , gift_price
+             , b.count
+             , img_path || '/' || img_1 as file_path
+             , ref_no
+             , gift_content
+             , c.category_item
+          from gift g
+          left join basket b on (gift_no = ref_no)
+          left join product_img on (gift_no = product_no)
+          left join member m on (b.user_no = m.user_no)
+          left join gift_category c on (g.category_no = c.category_no)
+         where b.user_no = #{ userNo }
+	</select>
+	
+	<delete id="deleteBasket" parameterType="Basket">
+		delete 
+		  from basket
+	   <foreach item="arr" collection="delRef" open="where (ref_no = " close=")" separator="or ref_no =">
+              #{arr}
+      </foreach>
+           and user_no = #{ userNo }
+	</delete>
+  	
+  	<select id="selectCouponList" resultMap="CouponResultSet">
+  		select 
+		       c.coupon_no
+		     , user_no
+		     , coupon_content
+		     , coupon_value
+		     , start_coupon
+		     , end_coupon
+		  from user_coupon u
+		  left join coupon c on (u.coupon_no = c.coupon_no)
+		 where user_no = #{ userNo }
+		   and status = 'Y'
+  	</select>
+  	
+</mapper>

@@ -110,6 +110,9 @@
   	position: absolute;
   	
   }
+  #basket_area img:hover{
+    cursor: pointer;
+  }
 
   #like_area img:hover{
   	cursor: pointer;
@@ -150,11 +153,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+    z-index: -999;
     position: fixed;
   }
   
   .notification-container.show {
+    z-index: 999;
     opacity: 1;
     visibility: visible;
 
@@ -162,6 +166,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
   }
   #giftDelete{
   	color:white;
@@ -386,7 +391,7 @@
                 </script>
             </div>
             <div class="notification-container" id="notification-container">
-              <p>You have already entered the letter</p>
+              <p></p>
             </div>
         </div>
     </div>

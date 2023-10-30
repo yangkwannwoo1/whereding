@@ -13,13 +13,14 @@ $(document).on("click",".cart__list .all_Check",function(){
     }
 })
 
+
 // check 박스 클릭시
 $(document).on("change",".cart__list .check__it",function(){  
     var checked = $(this).prop('checked');
 
-    console.log($(this).closest("tr").find(".total").text())
-    let price = $(this).closest("tr").find(".total").text().replace(/,/g, '');
-    console.log(price)
+    console.log($(this).closest("tr").find(".total").text())    // 56000
+    let price = $(this).closest("tr").find(".total").text().replace(/,/g, '');  // 56,000
+    $(this).closest("tr").find(".total").text(price)
     if(checked){
         $(this).closest("tr").css("backgroundColor", "lightgray");
     }else{
@@ -46,10 +47,10 @@ $(document).on("change",".cart__list .count_btn",function(){
 })
 
 $(document).on("change",".cart__list .check__it",function(){
-
-    // console.log($(".side_schedule .basket_item:checked").length)
+        // console.log($(".side_schedule .basket_item:checked").length)
     // console.log($(".side_schedule .basket_item").length)
     let checkNum = $(".cart__list .check__it:checked").length;
+    console.log("체크된개수")
     console.log(checkNum)
     if(checkNum ==$(".check__it").length){
         $(".cart__list .all_Check").prop("checked",true)
