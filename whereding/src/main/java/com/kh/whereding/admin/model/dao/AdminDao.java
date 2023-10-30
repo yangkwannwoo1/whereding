@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
-import com.kh.whereding.common.model.vo.VisitCountVO;
+import com.kh.whereding.admin.model.vo.VisitCountVO;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
 
@@ -105,10 +105,30 @@ public class AdminDao {
     	return sqlSession.update("visitCountMapper.updateVisitCount");
     }
 
-    public ArrayList<VisitCountVO> selectVisitCount(SqlSessionTemplate sqlSession) {
+    public int selectVisitCount(SqlSessionTemplate sqlSession) {
     	
-    	return (ArrayList)sqlSession.selectList("visitCountMapper.selectVisitCount");
+    	return sqlSession.selectOne("visitMapper.selectvisitCount");
     }
+    
+    public int updateMember(Member m, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("memberMapper.updateMember", m);
+	}
+	
+	public int deleteMember(String userId,SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("memberMapper.deleteMember", userId);
+	}
+	
+	public Member adminMember(SqlSessionTemplate sqlSession,Member m) {
+			
+		return sqlSession.selectOne("memberMapper.adminMember", m);
+	}
+	
+	public Member detailMember(int id, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.detailMember", id);
+	}
 
 
 

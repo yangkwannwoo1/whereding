@@ -4,12 +4,12 @@
 <mapper namespace="visitMapper">
 
 		<resultMap type="Visit" id="VisitResult">
-			<result column="s_code" property="regDate"/>
-			<result column="s_enterprise" property="visitCount"/>
+			<result column="REG_DATE" property="regDate"/>
+			<result column="VISIT_COUNT" property="visitCount"/>
 		</resultMap>
 		
 		
-    <insert id="insertVisitCount" resultType="_int">
+    <insert id="insertVisitCount">
        INSERT 
        	 INTO VISIT
             (
@@ -23,7 +23,7 @@
            );
     </insert>
 
-    <update id="updateVisitCount" resultType="_int">
+    <update id="updateVisitCount">
         UPDATE
 	            VISIT
 	        SET
@@ -32,12 +32,10 @@
 	            REG_DATE = TO_DATE(SYSDATE, 'yy-mm-dd')
     </update>
 
-    <select id="selectVisitCount" resultMap="VisitResult">
+    <select id="selectvisitCount" resultType="_int">
         SELECT
-            REG_DATE, VISIT_COUNT
+            VISIT_COUNT
         FROM
             VISIT
-        where
-            REG_DATE = TO_DATE(SYSDATE, 'yy-mm-dd')
     </select>
 </mapper>

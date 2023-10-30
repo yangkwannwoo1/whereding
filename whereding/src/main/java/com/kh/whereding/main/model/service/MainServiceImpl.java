@@ -90,6 +90,13 @@ public class MainServiceImpl implements MainService {
 		return null;
 	}
 
+	@Override
+	public void addVisit() {
+		
+		mnDao.addVisit(sqlSession);
+		
+	}
+
 
 
 	

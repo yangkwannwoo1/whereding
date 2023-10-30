@@ -147,6 +147,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  from visit
 	</select>
 	
+	<select id="detailMember" resultMap="memberResult">
+		select
+		        user_no
+		       ,user_id
+		       ,user_pwd
+		       ,user_name
+		       ,birthday
+		       ,gender
+		       ,phone
+		       ,email
+		       ,status
+		       ,grade_no
+		  from member
+ 		 where user_id = #{userId}
+ 		   and status = 'Y'
+	</select>
+	
+	<select id="adminMember" resultMap="memberResult">
+		insert
+		  into member
+		  (
+		  	 user_no
+		    ,user_id
+		    ,user_pwd
+		    ,user_name
+		    ,birthday
+		    ,gender
+		    ,phone
+		    ,email
+		    ,status
+		    ,grade_no
+		  )
+	  values
+	  (
+	  	 seq_mno.nextval
+	  	,#{userId}
+	  	,#{userPwd}
+	  	,#{userName}
+	  	,to_date(#{birthDay}, 'yyMMdd')
+	  	,#{gender}
+	  	,#{phone}
+	  	,#{email}
+	  	,'Y'
+	  	,'1'
+	  )
+	</select>
+	
 </mapper>
 
 

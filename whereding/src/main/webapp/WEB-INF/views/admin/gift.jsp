@@ -28,7 +28,6 @@
       </nav>
     </div><!-- End Page Title -->
 
-              <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='notice.ad'">엑셀로 보기</button><br><br>
               
               <!-- products -->
 	<div class="product-section mt-150 mb-150">

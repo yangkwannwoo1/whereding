@@ -63,5 +63,14 @@ public class MainDao {
 	public ArrayList<Reservation> selectRsvList(SqlSessionTemplate sqlSession, String userNo){
 		return (ArrayList)sqlSession.selectList("mainMapper.selectRsvList", userNo);
 	}
+	
+	public void addVisit(SqlSessionTemplate sqlSession) {
+		
+		if(sqlSession.selectOne("visitMapper.selectvisitCount") == null){
+			sqlSession.insert("visitMapper.insertVisitCount");
+		}
+		else sqlSession.update("visitMapper.updateVisitCount");
+		
+	}
 
 }

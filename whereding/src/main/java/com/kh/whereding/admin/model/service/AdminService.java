@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
-import com.kh.whereding.common.model.vo.VisitCountVO;
+import com.kh.whereding.admin.model.vo.VisitCountVO;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
 
@@ -44,9 +44,18 @@ public interface AdminService {
 
     int updateVisitCount();
 
-    static ArrayList<VisitCountVO> selectVisitCount() {
-		return null;
-	}
-	
+    int selectVisitCount();
+    
+    //로그인 서비스(select)
+ 	Member adminMember(Member m);
+ 	
+ 	// 상세
+ 	Member detailMember(int id);
+    
+    //정보수정 서비스(update)
+ 	int updateMember(Member m);
+ 	
+ 	// 회원탈퇴 서비스(update)
+ 	int deleteMember(String userId);
 	
 }

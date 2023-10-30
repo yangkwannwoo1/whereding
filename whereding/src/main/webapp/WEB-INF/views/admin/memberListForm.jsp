@@ -68,7 +68,7 @@
                     <td>${ m.gender }</td>
                     <td>${ m.phone }</td>
                     <td>${ m.email }</td>
-                    <td><button onclick="location.href='mdetail.ad'" type="button" style="border-radius: 10px;">상세보기</button></td>
+                    <td><button onclick="location.href='mdetail.ad?userNo=${m.userNo}'" type="button" style="border-radius: 10px;">상세보기</button></td>
                   </tr>
                 </c:forEach>
                 </tbody>

@@ -38,7 +38,6 @@
 
           <div class="card">
             <div class="card-body">
-              <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='notice.ad'">엑셀로 보기</button><br><br>
               
               <!-- Table with stripped rows -->
               <table class="table datatable">
@@ -54,11 +53,11 @@
                 <tbody>
                 <c:forEach var="n" items="${ NoticeList }"> 
                   <tr>
-                    <th scope="row">${ n.noticeNo }</th>
+                    <th class="bno">${ n.noticeNo }</th>
                     <td>${ n.noticeTitle }</td>
                     <td>${ n.noticeContent }</td>
                     <td>${ n.noticeDate }</td>
-                    <td><button onclick="location.href='noticeEnroll.bo'" type="button" style="border-radius: 10px;">상세보기</button></td>
+                    <td><button onclick="location.href ='notice.bo?'" type="button" style="border-radius: 10px;">상세보기</button></td>
                   </tr>
                 </c:forEach>
                 </tbody>
@@ -72,6 +71,7 @@
       </div>
     </section>
     
+    		
     <div class="row">
 				<div class="container">
 					<div class="row">

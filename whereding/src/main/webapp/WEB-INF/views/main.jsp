@@ -43,7 +43,6 @@
 </head>
 <body>
 	<jsp:include page="common/header.jsp"/>
-	
 	<!--PreLoader-->
     <div class="loader">
         <div class="loader-inner">

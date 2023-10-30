@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,7 +24,7 @@ import com.kh.whereding.admin.model.service.AdminServiceImpl;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
-import com.kh.whereding.common.model.vo.VisitCountVO;
+import com.kh.whereding.admin.model.vo.VisitCountVO;
 import com.kh.whereding.common.template.Pagenation;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
@@ -48,7 +49,7 @@ public class AdminController {
 		model.addAttribute("selectGiftCount", count1);
 		
 		 // 전체 방문자 수
-		ArrayList<VisitCountVO> selectvisitCount = AService.selectVisitCount();
+		int selectvisitCount = AService.selectVisitCount();
 		
 		model.addAttribute("selectvisitCount", selectvisitCount);
 		return "/admin/daskboard";
@@ -187,8 +188,49 @@ public class AdminController {
 			return "admin/gift";
 		}
 		
+		//회원상세페이지
+		@RequestMapping("/detail.ad")
+		public String detail(int id, Model model) {
+			
+			Member m = AService.detailMember(id);
+			
+			model.addAttribute("m", m);
+			
+			return "admin/memberDetail";
+		}
+
+		// 회원수정
+		@RequestMapping("update.ad")
+		public String updateMember(Member m, Model model, HttpSession session) {
+			
+			int result = AService.updateMember(m);
+			
+			if(result > 0){
+				session.setAttribute("adminMember", AService.adminMember(m));
+				
+				session.setAttribute("alertMsg", "성공적으로 회원정보 변경되었쏘.");
+				
+				return "redirect:memberDetail";
+				
+			}else { 
+				
+				model.addAttribute("errorMsg", "회원정보 변경 실패가 되었소.");
+				return "common/errorPage";
+			}
+		}
 		
 		
-	
-	    
+		@RequestMapping("delete.ad")
+		public String deleteMember(String userId, HttpSession session, Model model) {
+			
+				int result = AService.deleteMember(userId);
+				
+					session.removeAttribute("loginMember");
+					
+					session.setAttribute("alertMsg", "성공적으로 탈퇴");
+					
+					return "redirect:/";
+					
+		}
 }
+			

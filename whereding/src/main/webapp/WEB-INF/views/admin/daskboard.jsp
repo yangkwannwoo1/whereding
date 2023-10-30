@@ -87,94 +87,8 @@
               </div>
             </div><!-- 매출 end -->
 
-            <!--  답례품 판매 -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-
-                
-                <div class="card-body">
-                  <h5 class="card-title">답례품 판매<span>| Today</span></h5>
-
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">카테고리</th>
-                        <th scope="col">제품</th>
-                        <th scope="col">가격</th>
-                        <th scope="col">수량</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">#1</a></th>
-                        <td>와인</td>
-                        <td><a href="#" class="text-primary">숙성 100년산 와인</a></td>
-                        <td>300원</td>
-                        <td><span class="badge bg-success">1</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#10</a></th>
-                        <td>스팸</td>
-                        <td><a href="#" class="text-primary">유니크한 스팸</a></td>
-                        <td>100원</td>
-                        <td><span class="badge bg-warning">5</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#100</a></th>
-                        <td>자동차</td>
-                        <td><a href="#" class="text-primar">개 비싸버린 우라칸</a></td>
-                        <td>500원</td>
-                        <td><span class="badge bg-danger">3</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
-
-            <!-- 최고 답례품 판매 -->
-            <div class="col-12">
-              <div class="card top-selling overflow-auto">
-
-                <div class="card-body pb-0">
-                  <h5 class="card-title">최고 답례품 판매내역<span>| Today</span></h5>
-
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">제품</th>
-                        <th scope="col">가격</th>
-                        <th scope="col">수량</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="#" class="text-primary fw-bold">우라칸</a></td>
-                        <td>10000원</td>
-                        <td class="fw-bold">5개</td>
-                      </tr>
-                      <tr>
-                        <td><a href="#" class="text-primary fw-bold">우라칸</a></td>
-                        <td>10000원</td>
-                        <td class="fw-bold">5개</td>
-                      </tr>
-                      <tr>
-                        <td><a href="#" class="text-primary fw-bold">우라칸</a></td>
-                        <td>10000원</td>
-                        <td class="fw-bold">5개</td>
-                      </tr>
-                    
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div>
-            <!-- 답례품 판매내역 -->
+           
+            
 
           </div>
         </div>
@@ -221,7 +135,7 @@
                     </div>
                     <div class="ps-3">
                       <h6>${ selectGiftCount } 개</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">증가</span>
+                      <span class="text-success small pt-1 fw-bold">1%</span> <span class="text-muted small pt-2 ps-1">증가</span>
 
                     </div>
                   </div>
@@ -245,7 +159,7 @@
                     </div>
                     <div class="ps-3">
                       <h6>${ selectvisitCount } 명</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">감소</span>
+                      <span class="text-danger small pt-1 fw-bold">1%</span> <span class="text-muted small pt-2 ps-1">증가</span>
 
                     </div>
                   </div>
@@ -255,68 +169,6 @@
 
             </div>
             <!-- 총 방문자 수 끝 -->
-
-          <!-- 많이 방문한 웹사이트 순 -->
-          <div class="card">
-           
-            <div class="card-body pb-0">
-              <h5 class="card-title">많이 방문한 웹사이트<span>| Today</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: '조회수',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: '네이버'
-                        },
-                        {
-                          value: 735,
-                          name: '구글'
-                        },
-                        {
-                          value: 580,
-                          name: '토스'
-                        },
-                        {
-                          value: 484,
-                          name: '카카오'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- 웹사이트 순 -->
 
           
 

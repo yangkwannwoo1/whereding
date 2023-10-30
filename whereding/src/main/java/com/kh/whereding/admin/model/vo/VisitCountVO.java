@@ -1,4 +1,4 @@
-package com.kh.whereding.common.model.vo;
+package com.kh.whereding.admin.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

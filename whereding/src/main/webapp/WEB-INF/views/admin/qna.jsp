@@ -38,9 +38,6 @@
 
 					<div class="card">
 						<div class="card-body">
-							<button type="button"
-								style="border-radius: 10px; width: 100px; height: 50px;"
-								onclick="location.href='qna.ad'">엑셀로 보기</button>
 							<br>
 							<br>
 
@@ -65,7 +62,7 @@
 													<div class="accordion-body">
 													${ q.qnaContent }
 													</div>
-												 <button onclick="location.href='qnaEnroll.bo'" type="button" style="border-radius: 10px;">상세보기</button>
+												 <button onclick="location.href='qna.bo'" type="button" style="border-radius: 10px;">상세보기</button>
 												</div>
 											</div>
 										</c:forEach>

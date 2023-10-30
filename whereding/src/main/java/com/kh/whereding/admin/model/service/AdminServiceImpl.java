@@ -10,7 +10,7 @@ import com.kh.whereding.admin.model.dao.AdminDao;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
-import com.kh.whereding.common.model.vo.VisitCountVO;
+import com.kh.whereding.admin.model.vo.VisitCountVO;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
 
@@ -101,8 +101,35 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<VisitCountVO> selectVisitCount() {
+	public int selectVisitCount() {
 		return aDao.selectVisitCount(sqlSession);
+	}
+
+	@Override
+	public int updateMember(Member m) {
+		
+		return aDao.updateMember(m, sqlSession);
+	}
+
+	@Override
+	public int deleteMember(String userId) {
+		
+		return aDao.deleteMember(userId, sqlSession);
+	}
+
+	@Override
+	public Member adminMember(Member m) {
+		
+		Member adminMember = aDao.adminMember(sqlSession, m);
+		
+		return adminMember;
+	}
+
+	@Override
+	public Member detailMember(int id) {
+
+		return aDao.detailMember(id, sqlSession);
+	
 	}
 
 }
