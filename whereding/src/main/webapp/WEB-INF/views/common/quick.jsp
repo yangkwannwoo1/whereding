@@ -52,7 +52,7 @@
 			</li>
 			<hr>
 			<c:choose>
-				<c:when test="${loginMember.gradeNo == 1}">
+				<c:when test="${loginMember.gradeNo == 3}">
 					<li class="quick_admin">	
 						<i class="fa fa-gears" aria-hidden="true" href="admin.ad"></i><br>관리자모드
 					</li>
