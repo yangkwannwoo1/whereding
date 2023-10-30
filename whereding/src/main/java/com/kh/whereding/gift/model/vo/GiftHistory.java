@@ -40,5 +40,6 @@ public class GiftHistory {
 	private String img1; 		// 1번 이미지
 	private String imgPath; 	// 이미지경로
 	private int grivNo;		// 리뷰 작성여부용 리뷰 번호
+	private String giftNo;
 	
 }
