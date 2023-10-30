@@ -2,6 +2,7 @@ package com.kh.whereding.common.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,9 +17,16 @@ public class CommonController {
 	private CommonServiceImpl cService;
 	
 	@ResponseBody
+	@RequestMapping("chklike.bo")
+	public String ajaxchkLike(Great g) {
+		int checkLike = cService.checkLike(g);			
+		return checkLike > 0 ? "NNNYY" : "NNNNN";
+	}
+	
+	@ResponseBody
 	@RequestMapping("glike.bo")
 	public String ajaxLike(Great g) {
-		
+		System.out.println(g);
 		int checkLike = cService.checkLike(g);			
 		int result = 0;
 		if(checkLike > 0) {
