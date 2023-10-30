@@ -41,6 +41,9 @@ public class GiftDao {
 	public Gift selectGiftDetail(SqlSessionTemplate sqlSession, String giftNo) {
 		return sqlSession.selectOne("giftMapper.selectGiftDetail", giftNo);
 	}
+	public int deleteGift(SqlSessionTemplate sqlSession, String giftNo) {
+		return sqlSession.update("giftMapper.deleteGift", giftNo);
+	}
 	
 	
 }

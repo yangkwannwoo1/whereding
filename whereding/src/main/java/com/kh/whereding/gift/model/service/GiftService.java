@@ -19,4 +19,6 @@ public interface GiftService {
 	abstract int insertGift(Gift gift);
 	
 	abstract Gift selectGiftDetail(String giftNo);
+	
+	abstract int deleteGift(String giftNo);
 }

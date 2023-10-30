@@ -49,6 +49,11 @@ public class GiftServiceImpl implements GiftService{
 	public Gift selectGiftDetail(String giftNo) {
 		return gDao.selectGiftDetail(sqlSession, giftNo);
 	}
+
+	@Override
+	public int deleteGift(String giftNo) {
+		return gDao.deleteGift(sqlSession, giftNo);
+	}
 	
 	
 }

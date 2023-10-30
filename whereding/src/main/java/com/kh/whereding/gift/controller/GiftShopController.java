@@ -108,6 +108,18 @@ public class GiftShopController {
 		return "gift/giftDetail";
 	}
 	
+	@RequestMapping("giftDelete.gd")
+	public String giftDelete(@RequestParam("giftNo") String giftNo, HttpSession session) {
+		int result = gService.deleteGift(giftNo);
+		
+		if(result>0) {
+			session.setAttribute("alertMsg", "상품이 삭제되었습니다");
+		}else {
+			session.setAttribute("alertMsg", "상품삭제가 실패되었습니다.");
+		}
+		return "redirect:/giftShop.bo";
+	}
+	
 }
 
 

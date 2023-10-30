@@ -55,6 +55,7 @@
       left outer join product_img p on g.gift_no=p.product_no
       join gift_category using(category_no)
     where count>0
+      and status = 'Y'
 	    	<if test="categoryNo != 0">
 	    		and category_no = #{categoryNo}
 	    	</if>
@@ -94,6 +95,7 @@
       
     where count>0 
       and category_no = #{categoryNo}
+      and status='Y'      
 	</select>
 	
 	<insert id="insertGift">
@@ -105,6 +107,7 @@
 		  	   ,gift_content
 		  	   ,gift_price
 		  	   ,count
+		  	   ,status
 		  	   )
 		values(
 				'G'||seq_gbo.nextval
@@ -113,6 +116,7 @@
 				,#{giftContent}
 				,#{giftPrice}
 				,#{count}
+				,'Y'
 			  )
       <if test="imgPath != null">
       into product_img(
@@ -210,8 +214,15 @@
       left outer join product_img p on g.gift_no=p.product_no
       join gift_category using(category_no)
     where count>0    	
+      and status='Y'
     and gift_no = #{giftNo}
 	</select>
+	
+	<update id="deleteGift">
+		update gift
+		   set status = 'N'
+		 where gift_no = #{giftNo}
+	</update>
 </mapper>
 
 

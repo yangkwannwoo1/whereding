@@ -46,14 +46,24 @@
     display: inline-block;
   }
   .buy_area{
-    width: 100%;
+    width: 500px;
   }
   .buy_btn{
     width: 220px;
     height: 50px;
     line-height: 40px;
-    background-color: #f28123;
+    background-color: #6c757d;
     border: 1px solid gray;
+  }
+  #back_btn{
+  	width: 220px;
+    height: 50px;
+    line-height: 40px;
+    background-color: #999;
+    border: 1px solid gray;
+    border-radius:3px;
+    color:white;
+    
   }
   .cart_btn, .like_btn{
     width: 70px;
@@ -153,6 +163,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  #giftDelete{
+  	color:white;
+  	background-color:red;
+  	border:1px solid gray;
+  	margin:5px;
+  }
   </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -219,29 +235,28 @@
                 </li>
                 <li>
                     <p> 수량
-                        <input type="number" name="count_option" id="count_option" min="0" value="0" onchange="test();">
+                        <input type="number" name="count_option" id="count_option" min="0" value="0" onchange="amount();">
                         <!-- 수량 up down 버튼임 -->
                     <span id="buyFalseSpan">재고가 부족하여 구매할수 없습니다. 재고를 확인해주랑꼐</span>                        
                     </p>
                     
                     <!-- 수량 직접입력할 경우 (텍스트에 직접 숫자입력 -->
                     <script>
-                   /*  $("#count_option").on("change", function(){
-                        let value = $(this).val();
-                        console.log(value);
-                    }); */
-                    function test(){
+                    function amount(){
                     	let buyCount = $("#count_option").val();
                     	let stock = ${gift.count}
                     	console.log(buyCount);
                     	console.log(stock);
                     	
+                    	
                     	if(buyCount>stock){
                     		$("#buyFalseSpan").css("display", "block");
-                    		$(".buy_btn").attr("disabled", true);
+                    		$(".buy_btn").attr("disabled", true).html("구매하기");
                     	}else{
                     		$(".buy_btn").attr("disabled", false);
                     		$("#buyFalseSpan").css("display", "none");
+                    		let formattedPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(${gift.giftPrice}* buyCount);
+                    		$(".buy_btn").html(formattedPrice + " 원 결제하기").css("background", "#f28123");
                     	}
                     }
                     </script>
@@ -259,9 +274,25 @@
                   <img class="gbasket basket" src="resources/css/assets/img/cart_n.png" id="basketbtn" style="height: 40px;">
                 </div>
             </div>
+            
+            <%-- <c:if test="${not empty loginMember && loginMember.gradeNo eq '3' }"> --%>
+            	<button id = "giftDelete" onclick="giftDelete('${gift.giftNo}');">상품삭제하기</button>
+            <%-- </c:if> --%>
+            
+            <script>
+	            	function giftDelete(giftNo){
+	            		let flag = confirm("상품을 삭제하시겠습니까?");	            		
+	            		
+	            		if(flag == true){
+	            			console.log(giftNo);
+	            			location.href="giftDelete.gd?giftNo="+giftNo;
+	            		}
+	            	}
+            </script>
+            
             <div class="buy_area">
+                <button onclick="back();" id="back_btn">이전으로</button>
                 <button class="btn btn-secondary buy_btn" style="line-height:10px;" disabled >구매하기</button>
-                <button onclick="back();">이전으로</button>
                 
                 <script>
                 	function back(){

@@ -137,6 +137,7 @@
 								            success: function(data) {
 								                console.log(data);
 								                let html = "";
+								                
 								                $(".product-lists").empty();
 								                $(".product-lists").css("height", "1300px");
 								                $(".pagination").empty();
@@ -155,12 +156,14 @@
 								                    let formattedPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(gift.giftPrice);
 								                    html += '<p>' + formattedPrice + '</p>';
 								                    html += '</p>';
-								                    html += '<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i>상세보기</a>';
+								                    html += '<a href="giftDetail.gi?giftNo='+ gift.giftNo +'" class="cart-btn"><i class="fas fa-shopping-cart"></i>상세보기</a>';
 								                    html += '</div>';
 								                    html += '</div>';
 								                    html += '</div>';
 								                }  
 								                $(".product-lists").append(html);
+								                
+								              
 								            },
 								            error: function() {
 								                console.log("AJAX 실패 ㅋ");
@@ -172,9 +175,9 @@
 						
 						</ul>
 						
-						<%-- <c:if test="${not empty loginMember.gradeNo && loginMember.gradeNo eq '2'}"> --%>
+						<c:if test="${not empty loginMember.gradeNo && loginMember.gradeNo eq '3'}">
 							<button class="giftReg" onclick="giftReg();">답례품 등록</button>
-						<%-- </c:if> --%>
+						</c:if>
 						
 						<script>
 						function giftReg(){
@@ -192,7 +195,14 @@
 					<div class="col-lg-4 col-md-6 text-center">
 						<div class="single-product-item">
 							<div class="product-image">
-								<img src="${g.imgPath}/${g.img1}" alt="${g.img1}" />
+								<c:choose>
+									<c:when test="${not empty g.imgPath}">
+										<img src="${g.imgPath}/${g.img1}" alt="${g.img1}" />
+									</c:when>
+									<c:otherwise>
+										<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSblKjjCbR5l32OqvtAmhj4beLNfLOAtyRdvlPg1O6F&s" />
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<h3>${g.giftName}</h3>
 							<p class="product-price">
@@ -202,7 +212,7 @@
 								<fmt:formatNumber value="${g.giftPrice}" type="number"
 									pattern="#,###원" />
 							</p>
-							<a class="cart-btn" onclick="test('${g.giftNo}');">
+							<a class="cart-btn" onclick="giftDetail('${g.giftNo}');">
 								<i class="fas fa-shopping-cart"></i>
 							상세보기</a>
 						</div>
@@ -211,7 +221,7 @@
 			</div>
 			
 			<script>
-				function test(giftNo){
+				function giftDetail(giftNo){
 					location.href="giftDetail.gi?giftNo=" + giftNo;
 				}
 			</script>
