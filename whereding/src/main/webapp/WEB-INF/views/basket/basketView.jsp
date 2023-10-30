@@ -16,7 +16,7 @@
 
     <section class="cart">
         <div class="cart__information">
-            	<h2>${ list[0].userName }님의 장바구니</h2>
+            	<h2>${ loginMember.userName }님의 장바구니</h2>
             <ul>
                 <li>가격, 옵션 등 정보가 변경된 경우 주문이 불가할 수 있습니다.</li>
                 <li>오늘출발 상품은 판매자 설정 시점에 따라 오늘출발 여부가 변경될 수 있으니 주문 시 꼭 다시 확인해 주시기 바랍니다.</li>
@@ -29,7 +29,7 @@
             </table>
         </form>
         <div class="cart__mainbtns">
-            <button class="cart__bigorderbtn left">쇼핑 계속하기</button>
+            <button class="cart__bigorderbtn left" onclick="continueShopping();">쇼핑 계속하기</button>
             <button class="cart__bigorderbtn right">주문하기</button>
         </div>
     </section>
@@ -61,7 +61,7 @@
                     </tbody>
                 </table>
             </div>
-            
+
             <!-- Modal footer -->
             <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -74,12 +74,17 @@
         <jsp:include page="../common/footer.jsp"/>
     
     <script>
+
+        function continueShopping(){
+            location.href="giftShop.bo";
+        }
+
         $(function(){
             blist();
             cplist();
-            $(".count_btn").trigger("change")
+            //$(".count_btn").trigger("change")
+            //$(".check__it").trigger("change")
         })
-
 
 
     	function blist(){
@@ -112,13 +117,13 @@
                                     <input class="hiddenRefNo" type="hidden" value="` + list[i].refNo + `">
                                 </td>
                                 <td><img src="` +  list[i].filePath + `" alt="` +  list[i].giftName + `"></td>
-                                <td><a href="#">` +  list[i].userName + `</a><span class="cart__list__smartstore"> 스마트스토어</span>
-                                    <p>` +  list[i].giftName + `</p>
+                                <td><a href="giftDetail.gi?giftNo=`+ list[i].refNo + `">` +  list[i].userName + `</a><span class="cart__list__smartstore"> 스마트스토어</span>
+                                    <br><br><a class="giftDetail" onClick='enrollgift(this);'>` +  list[i].giftName + `<br></a>
                                     <span class="price">` +  list[i].giftPrice + `</span>원
                                 </td>
                                 <td class="cart__list__option" style="width: 27%; text-align: center;">
                                     <p>카테고리 : ` +  list[i].categoryItem + `</p>
-                                    수량 : <input type="number" class="count_btn" style="width: 80px;" value="` + list[i].count + `">
+                                    수량 : <input type="number" min="1" class="count_btn" style="width: 80px;" value="` + list[i].count + `">
                                 </td>
                                 <td>
                                     <span class="total_sale" style="text-decoration: line-through; color: lightgray;">` + list[i].count *  list[i].giftPrice + `</span>
@@ -146,8 +151,10 @@
                                     </tr>
                                 </tfoot>`
                     $(" form .cart__list").html(thead + value)
-                    let price = $(".price").text().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    $(".price").text(price)
+                    //let totalPrice = $(".total").text().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    //$(".total").text(totalPrice);
+                    //let price = $(".price").text().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    //$(".price").text(price)
     			},error:function(){
     				console.log("ajax 실패")
     			}
@@ -155,6 +162,9 @@
     		})
         }
     	
+        function enrollgift(e){
+            location.href="giftDetail.gi?giftNo=" + $(e).parents("tr").find(".hiddenRefNo").val();
+        }
     	function deleteBasket(){
 
             let arr = [];
@@ -211,8 +221,8 @@
                                 <td>` + list[i].startCoupon + ` ~ ` + list[i].endCoupon + `</td>
                             </tr>`
                     }
-                    console.log(value)
                     $("#coupon_list").html(value);
+
                 },error:function(){
                     console.log("쿠폰 불러오기 ajax 통신 실패")
                 }

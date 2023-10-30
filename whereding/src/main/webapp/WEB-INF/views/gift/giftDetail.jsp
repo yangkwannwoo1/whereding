@@ -368,25 +368,29 @@
                 	
                 	console.log($("#count_option").val())
                     console.log($(this).attr("id"))
+                    if($("#count_option").val() > 0){
 
-                    $.ajax({
-	                      url:"gbasket.bo",
-	                      data:{
-	                    	count:$("#count_option").val(),
-	                        refNo:'${ gift.giftNo }',
-	                        userNo:'${ loginMember.userNo }',
-	                      },success:function(data){
-                          console.log(data)
-                          if(data == 'NNNNY'){
-                            $("#notification-container p").text("장바구니에 담겼습니다.")
-                          }else{
-                            $("#notification-container p").text("잠시 후에 다시 이용해주세요.")                            
+                      $.ajax({
+                          url:"gbasket.bo",
+                          data:{
+                          count:$("#count_option").val(),
+                            refNo:'${ gift.giftNo }',
+                            userNo:'${ loginMember.userNo }',
+                          },success:function(data){
+                            console.log(data)
+                            if(data == 'NNNNY'){
+                              $("#notification-container p").text("장바구니에 담겼습니다.")
+                            }else{
+                              $("#notification-container p").text("잠시 후에 다시 이용해주세요.")                            
+                            }
+                            showNotification()
+                          },error:function(){
+                            console.log("장바구니 불러오기 ajax 요청 실패!")
                           }
-                          showNotification()
-	                      },error:function(){
-	                        console.log("장바구니 불러오기 ajax 요청 실패!")
-	                      }
-                    	})
+                        })
+                    }else{
+                      alert("장바구니에 담을 수 있는 최소 개수는 1개 입니다.")
+                    }
                   	})
                   	
                   	$(function(){
