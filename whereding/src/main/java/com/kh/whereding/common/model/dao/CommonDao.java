@@ -3,7 +3,7 @@ package com.kh.whereding.common.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.whereding.common.model.vo.Basket;
+import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.Great;
 
 @Repository

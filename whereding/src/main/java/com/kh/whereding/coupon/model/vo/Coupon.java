@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class Coupon {
 	
+	private String userNo;
 	private int couponNo;			// 쿠폰번호
 	private String couponContent;	// 쿠폰설명
 	private int couponValue;		// 할인금액

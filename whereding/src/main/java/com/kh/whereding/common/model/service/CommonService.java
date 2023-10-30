@@ -1,6 +1,6 @@
 package com.kh.whereding.common.model.service;
 
-import com.kh.whereding.common.model.vo.Basket;
+import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.Great;
 
 public interface CommonService {

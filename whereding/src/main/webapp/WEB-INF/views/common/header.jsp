@@ -332,7 +332,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 									</ul> <a href="myPage.me">마이페이지</a></li>
 								<li id="main-menu-icon">
 									<div class="header-icons">
-										<a class="shopping-cart jb-title" href="basket.ba"><i
+										<a class="shopping-cart jb-title" href="detail.ba"><i
 											class="fas fa-shopping-cart"></i></a>
 										<div class="jb-text">
 											<p>장바구니</p>
