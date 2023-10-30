@@ -145,3 +145,14 @@ cart img {
   del{
     color: red;
   }
+
+  .giftDetail{
+    font-size: 20px !important;
+    font-weight: 700;
+  }
+
+  .giftDetail:hover{
+    cursor: pointer;
+    color:limegreen !important;
+
+  }

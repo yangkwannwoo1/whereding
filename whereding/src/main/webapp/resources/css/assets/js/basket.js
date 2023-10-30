@@ -19,8 +19,8 @@ $(document).on("change",".cart__list .check__it",function(){
     var checked = $(this).prop('checked');
 
     console.log($(this).closest("tr").find(".total").text())    // 56000
-    let price = $(this).closest("tr").find(".total").text().replace(/,/g, '');  // 56,000
-    $(this).closest("tr").find(".total").text(price)
+    // let price = $(this).closest("tr").find(".total").text().replace(/\B(?=(\d{3})+(?!\d))/g, ',');  // 56,000
+    // $(this).closest("tr").find(".total").text(price)
     if(checked){
         $(this).closest("tr").css("backgroundColor", "lightgray");
     }else{
@@ -29,34 +29,32 @@ $(document).on("change",".cart__list .check__it",function(){
     let a1 = $(":checked").closest("tr").find(".total"); 
     let total = 0;
     for (var i = 0; i <a1.length; i++) {
-        total += Number(a1[i].innerHTML.replace(/,/g, ''))
+        // total += Number(a1[i].innerHTML.replace(/,/g, ''))
+        total += Number(a1[i].innerHTML)
+        console.log(total);
     }
-    totalPrice = total
-    $(".cart__list .total_price").text("총금액 : " + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원")
-})
 
-let totalPrice = 0;
-// + 버튼 클릭시
-$(document).on("change",".cart__list .count_btn",function(){  
-    let price = $(this).closest("tr").find(".price").text().replace(/,/g, '');
-    console.log(price)
-    let count = $(this).closest("tr").find(".count_btn").val();
-    console.log(count)
-    $(this).closest("tr").find(".total").text((price * count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
-    $(this).parents("tr").find(".check__it").trigger("change");
-})
-
-$(document).on("change",".cart__list .check__it",function(){
-        // console.log($(".side_schedule .basket_item:checked").length)
-    // console.log($(".side_schedule .basket_item").length)
     let checkNum = $(".cart__list .check__it:checked").length;
-    console.log("체크된개수")
-    console.log(checkNum)
     if(checkNum ==$(".check__it").length){
         $(".cart__list .all_Check").prop("checked",true)
     }else{
         $(".cart__list .all_Check").prop("checked",false)
     }
-
+    
     $(".cart__list .reservation_Total").text(checkNum +"개 선택");
+    $(".cart__list .total_price").text("총금액 : " + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원")
+    // $(".cart__list .total_price").text("총금액 : " + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원")
+})
+
+let totalPrice = 0;
+// + 버튼 클릭시
+$(document).on("change",".cart__list .count_btn",function(){  
+    // let price = $(this).closest("tr").find(".price").text().replace(/,/g, '');
+    let price = $(this).closest("tr").find(".price").text();
+    // console.log(price)
+    let count = $(this).closest("tr").find(".count_btn").val();
+    // console.log(count)
+    $(this).closest("tr").find(".total").text((price * count))
+    // $(this).closest("tr").find(".total").text((price * count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+    $(this).parents("tr").find(".check__it").trigger("change");
 })
