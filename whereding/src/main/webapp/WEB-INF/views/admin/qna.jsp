@@ -70,52 +70,38 @@
 									</div>
 								</div>
 								<!-- End F.A.Q Group 1 -->
-
+								
 							</div>
+									<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<c:choose>
+					<c:when test="${ pi.currentPage eq 1 }">
+						<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+					</c:when>     
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+					</c:otherwise>
+				</c:choose>   
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ p }">${ p }</a></li>
+				</c:forEach>    
+				<c:choose>
+					<c:when test="${ pi.currentPage eq pi.maxPage }">
+						<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
+					</c:otherwise>	
+				</c:choose>
+		  	</ul>
+		</nav><!-- End Centered Pagination -->
 						</div>
 
 					</div>
 				</div>
 		</section>
 
-		<div class="row">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12 text-center">
-							<div class="pagination-wrap">
-								<ul>
-									<c:choose>
-										<c:when test="${ pi.currentPage eq 1 }">
-											<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="qna.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
-										</c:otherwise>
-									</c:choose>
-									<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-										<li class="page-item"><a class="page-link" href="qna.ad?cpage=${ p }">${ p }</a></li>
-									</c:forEach>
-									<c:choose>
-										<c:when test="${ pi.currentPage eq pi.maxPage }">
-											<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
-										</c:when>
-										<c:otherwise>
-											<li class="page-item"><a class="page-link" href="qna.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
-										</c:otherwise>	
-									</c:choose>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
- 	<jsp:include page="../common/footer.jsp"/>
-  </footer><!-- End Footer -->
 
   <!-- Vendor JS Files -->
   <script src="resources/assets/vendor/apexcharts/apexcharts.min.js"></script>

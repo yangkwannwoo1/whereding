@@ -103,13 +103,6 @@
 
   </main><!-- End #main -->
 	
-	
-
-	<!-- ======= Footer ======= -->
-	<footer id="footer" class="footer">
-		<jsp:include page="../common/footer.jsp" />
-	</footer>
-	<!-- End Footer -->
 
 	<!-- Vendor JS Files -->
   <script src="resources/assets/vendor/apexcharts/apexcharts.min.js"></script>

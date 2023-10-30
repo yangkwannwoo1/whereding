@@ -18,7 +18,7 @@ public class AdminDao {
 
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 
-		return sqlSession.selectOne("memberMapper.selectListCount");
+		return sqlSession.selectOne("adminMapper.selectListCount");//
 	}
 
 	public ArrayList<Member> selectList(PageInfo pi, SqlSessionTemplate sqlSession) {
@@ -29,28 +29,28 @@ public class AdminDao {
 
 		RowBounds rowBounds = new RowBounds(offset, limit);
 
-		return (ArrayList) sqlSession.selectList("memberMapper.selectList", null, rowBounds);
+		return (ArrayList) sqlSession.selectList("adminMapper.selectList", null, rowBounds);//
 	}
 
 	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
 
-		return (ArrayList) sqlSession.selectList("memberMapper.selectMemberList");
+		return (ArrayList) sqlSession.selectList("adminMapper.selectMemberList");//
 	}
 	
 	public int adminQnaCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("boardMapper.adminQnaCount");
+		return sqlSession.selectOne("adminMapper.adminQnaCount");//
 	}
 	
 	public ArrayList<Qna> adminQnaList(PageInfo pi,SqlSessionTemplate sqlSession){
 		
-		return (ArrayList)sqlSession.selectList("boardMapper.adminQnaList");
+		return (ArrayList)sqlSession.selectList("adminMapper.adminQnaList");//
 		
 	}
 	
 	public int adminNoticeCount(SqlSessionTemplate sqlSession) {
 
-		return sqlSession.selectOne("boardMapper.adminNoticeCount");
+		return sqlSession.selectOne("adminMapper.adminNoticeCount");//
 	}
 
 	public ArrayList<Notice> adminnoticeList(PageInfo pi, SqlSessionTemplate sqlSession) {
@@ -61,7 +61,7 @@ public class AdminDao {
 
 		RowBounds rowBounds = new RowBounds(offset, limit);
 
-		return (ArrayList) sqlSession.selectList("boardMapper.adminnoticeList", null, rowBounds);
+		return (ArrayList) sqlSession.selectList("adminMapper.adminnoticeList", null, rowBounds);//
 	}
 	
 	public ArrayList<Gift> adminGiftList(PageInfo pi, SqlSessionTemplate sqlSession) {
@@ -72,62 +72,57 @@ public class AdminDao {
 
 		RowBounds rowBounds = new RowBounds(offset, limit);
 
-		return (ArrayList) sqlSession.selectList("giftMapper.adminGiftList", null, rowBounds); // 없음
+		return (ArrayList) sqlSession.selectList("adminMapper.adminGiftList", null, rowBounds); //
 	}
 	
 	public int adminGiftCount(SqlSessionTemplate sqlSession) {
 
-		return sqlSession.selectOne("giftMapper.adminGiftCount");
+		return sqlSession.selectOne("adminMapper.adminGiftCount");//
 	}
 	
 	public int selectOneCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("memberMapper.selectOneCount"); // 없음
+		return sqlSession.selectOne("adminMapper.selectOneCount"); //
 	}
 	
 	public int selectGiftCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("giftMapper.selectGiftCount"); // 없음
-	}
-	
-	public int selectvisitCount(SqlSessionTemplate sqlSession) {
-		
-		return sqlSession.selectOne("memberMapper.selectvisitCount"); // 없음
+		return sqlSession.selectOne("adminMapper.selectGiftCount"); // 
 	}
 	
 	public int insertVisitCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.insert("visitCountMapper.insertVisitCount"); 
+		return sqlSession.insert("adminMapper.insertVisitCount"); //없다
     }
 
     public int updateVisitCount(SqlSessionTemplate sqlSession) {
     	
-    	return sqlSession.update("visitCountMapper.updateVisitCount");
+    	return sqlSession.update("adminMapper.updateVisitCount"); //없다
     }
 
     public int selectVisitCount(SqlSessionTemplate sqlSession) {
     	
-    	return sqlSession.selectOne("visitMapper.selectvisitCount"); 
+    	return sqlSession.selectOne("adminMapper.selectvisitCount"); //
     }
     
     public int updateMember(Member m, SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.update("memberMapper.updateMember", m); // 없음
+		return sqlSession.update("adminMapper.updateMember", m);// 없다
 	}
 	
 	public int deleteMember(String userId,SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.update("memberMapper.deleteMember", userId);
+		return sqlSession.update("adminMapper.deleteMember", userId); //
 	}
 	
 	public Member adminMember(SqlSessionTemplate sqlSession,Member m) {
 			
-		return sqlSession.selectOne("memberMapper.adminMember", m);// 없음
+		return sqlSession.selectOne("adminMapper.adminMember", m);//
 	}
 	
 	public Member detailMember(int id, SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("memberMapper.detailMember", id);//없음
+		return sqlSession.selectOne("adminMapper.detailMember", id);//
 	}
 
 
