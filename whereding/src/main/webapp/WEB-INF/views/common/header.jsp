@@ -309,7 +309,6 @@ font-family: 'Open Sans Condensed', sans-serif;
 						<div class="site-logo">
 							<a href="index.jsp"> <img
 								src="resources/css/assets/img/logo.png" alt="">
-							</a>
 						</div>
 						<!-- logo -->
 

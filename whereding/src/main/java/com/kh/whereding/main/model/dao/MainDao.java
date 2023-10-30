@@ -62,10 +62,10 @@ public class MainDao {
 	
 	public void addVisit(SqlSessionTemplate sqlSession) {
 		
-		if(sqlSession.selectOne("visitMapper.selectvisitCount") == null){
-			sqlSession.insert("visitMapper.insertVisitCount");
+		if(sqlSession.selectOne("adminVisitMapper.selectvisitCount") == null){
+			sqlSession.insert("adminVisitMapper.insertVisitCount");
 		}
-		else sqlSession.update("visitMapper.updateVisitCount");
+		else sqlSession.update("adminVisitMapper.updateVisitCount");
 		
 	}
 

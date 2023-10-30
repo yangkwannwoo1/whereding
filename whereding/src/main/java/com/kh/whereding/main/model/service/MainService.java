@@ -46,7 +46,7 @@ public interface MainService {
 //	ArrayList<Studio> selectStudioList();
 	
 	// 방문자 수 증가
-	void addVisit();
+//	void addVisit();
 	
 }
 

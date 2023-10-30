@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class VisitCountVO {
+public class Visit {
 
  private String regDate;
 
