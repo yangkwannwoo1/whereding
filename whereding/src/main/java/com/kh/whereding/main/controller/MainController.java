@@ -130,12 +130,13 @@ public class MainController {
 		return new Gson().toJson(list);
 	}
 	
-	@RequestMapping("/")
-	public String Main() {
-	    //일 방문자수 ++ - 02.19
-		mnService.addVisit();		
-	    return ("common/start");
-	}
+//	@RequestMapping("/")
+//	public String Main() {
+//	    //일 방문자수 ++ - 02.19
+//		System.out.println("메인페이지 방문");
+//		mnService.addVisit();		
+//	    return ("common/main");
+//	}
 		
 
 }

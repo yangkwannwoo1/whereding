@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="adminMemberMapper">
+	<resultMap type="Member" id="memberResult">
+		<result column="user_no" property="userNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_pwd" property="userPwd"/>
+		<result column="user_name" property="userName"/>
+		<result column="birthday" property="birthDay"/>
+		<result column="gender" property="gender"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<result column="status" property="status"/>
+		<result column="grade_no" property="gradeNo"/>
+	</resultMap>
+	
+	
+	<select id="selectListCount" resultType="_int">
+		select 
+			   count(*)
+		  from member
+		 where status = 'Y'
+	</select>
+	
+	<select id="selectList" resultMap="memberResult">
+		select
+		        user_no
+		       ,user_id
+		       ,user_pwd
+		       ,user_name
+		       ,to_char(BIRTHDAY, 'YYYY-MM-DD') as "BIRTHDAY"
+		       ,gender
+		       ,phone
+		       ,email
+		       ,grade_no
+		  from member
+         where status = 'Y'
+	</select>
+	
+	<select id="selectMemberList" resultMap="memberResult">
+		select
+		        user_no
+		       ,user_id
+		       ,user_pwd
+		       ,user_name
+		       ,to_char(BIRTHDAY, 'YYYY-MM-DD') as "BIRTHDAY"
+		       ,gender
+		       ,phone
+		       ,email
+		       ,grade_no
+		  from member
+         where status = 'Y'
+	</select>
+	
+	<select id="selectOneCount" resultType="_int">
+		select 
+			   count(*)
+		  from member
+	</select>
+	
+	<select id="selectvisitCount" resultType="_int">
+		select 
+				count(*) 
+		  from visit
+	</select>
+	
+	<update id="deleteMember">
+		update member
+		   set status = 'N'
+		 WHERE user_id = #{userId}
+		  and USER_PWD = #{userPwd}
+	</update>
+	
+	<select id="adminMember" resultMap="memberResult">
+		insert
+		  into member
+		  (
+		  	 user_no
+		    ,user_id
+		    ,user_pwd
+		    ,user_name
+		    ,birthday
+		    ,gender
+		    ,phone
+		    ,email
+		    ,status
+		    ,grade_no
+		  )
+	  values
+	  (
+	  	 seq_mno.nextval
+	  	,#{userId}
+	  	,#{userPwd}
+	  	,#{userName}
+	  	,to_date(#{birthDay}, 'yyMMdd')
+	  	,#{gender}
+	  	,#{phone}
+	  	,#{email}
+	  	,'Y'
+	  	,'1'
+	  )
+	</select>
+	
+	<select id="detailMember" resultMap="memberResult">
+		select
+		        user_no
+		       ,user_id
+		       ,user_pwd
+		       ,user_name
+		       ,birthday
+		       ,gender
+		       ,phone
+		       ,email
+		       ,status
+		       ,grade_no
+		  from member
+ 		 where user_id = #{userId}
+ 		   and status = 'Y'
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
