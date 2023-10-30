@@ -72,7 +72,7 @@ public class AdminDao {
 
 		RowBounds rowBounds = new RowBounds(offset, limit);
 
-		return (ArrayList) sqlSession.selectList("giftMapper.adminGiftList", null, rowBounds);
+		return (ArrayList) sqlSession.selectList("giftMapper.adminGiftList", null, rowBounds); // 없음
 	}
 	
 	public int adminGiftCount(SqlSessionTemplate sqlSession) {
@@ -82,22 +82,22 @@ public class AdminDao {
 	
 	public int selectOneCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("memberMapper.selectOneCount");
+		return sqlSession.selectOne("memberMapper.selectOneCount"); // 없음
 	}
 	
 	public int selectGiftCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("giftMapper.selectGiftCount");
+		return sqlSession.selectOne("giftMapper.selectGiftCount"); // 없음
 	}
 	
 	public int selectvisitCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("memberMapper.selectvisitCount");
+		return sqlSession.selectOne("memberMapper.selectvisitCount"); // 없음
 	}
 	
 	public int insertVisitCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.insert("visitCountMapper.insertVisitCount");
+		return sqlSession.insert("visitCountMapper.insertVisitCount"); 
     }
 
     public int updateVisitCount(SqlSessionTemplate sqlSession) {
@@ -107,12 +107,12 @@ public class AdminDao {
 
     public int selectVisitCount(SqlSessionTemplate sqlSession) {
     	
-    	return sqlSession.selectOne("visitMapper.selectvisitCount");
+    	return sqlSession.selectOne("visitMapper.selectvisitCount"); 
     }
     
     public int updateMember(Member m, SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.update("memberMapper.updateMember", m);
+		return sqlSession.update("memberMapper.updateMember", m); // 없음
 	}
 	
 	public int deleteMember(String userId,SqlSessionTemplate sqlSession) {
@@ -122,12 +122,12 @@ public class AdminDao {
 	
 	public Member adminMember(SqlSessionTemplate sqlSession,Member m) {
 			
-		return sqlSession.selectOne("memberMapper.adminMember", m);
+		return sqlSession.selectOne("memberMapper.adminMember", m);// 없음
 	}
 	
 	public Member detailMember(int id, SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("memberMapper.detailMember", id);
+		return sqlSession.selectOne("memberMapper.detailMember", id);//없음
 	}
 
 

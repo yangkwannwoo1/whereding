@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="commonMapper">	
+	
+	<select id="checkLike" resultType="_int">
+		select 
+			   count(*)
+		  from great
+         where great_no = #{ greatNo }
+           and user_no = #{ userNo }
+	</select>
+
+	<delete id="deleteLike">
+		delete 
+		  from great
+         where great_no = #{ greatNo }
+           and user_no = #{ userNo }
+	</delete>
+	
+	<insert id="insertLike">
+		insert
+		  into great
+		  (
+		    great_no
+		  , user_no
+		  )
+		  values
+		  (
+		    #{ greatNo }
+		  , #{ userNo }
+		  )
+	</insert>
+	
+	<!-- <select id="checkGiftStock" resultType="_int">
+		select count
+  		  from gift
+ 		 where gift_no = #{ refNo }
+	</select> -->
+	
+	<select id="checkBasket" resultType="_int">
+		select count(*) from basket
+ 		 where ref_no = #{ refNo }
+   	 	   and user_no = #{ userNo }
+	</select>
+	
+	<update id="updateBasket">
+		update basket 
+		   set count = count + #{ count }
+		 where ref_no = #{ refNo }
+		   and user_no = #{ userNo }
+	</update>
+	
+	<insert id="insertBasket">
+		insert 
+		  into basket
+		  (
+		    ref_no
+		  , user_no
+		  , count
+		  )
+		  values
+		  (
+		    #{ refNo }
+		  , #{ userNo }
+		  , #{ count }
+		  )
+	</insert>
+	
+	<delete id="deleteBasket">
+		delete 
+		  from basket
+         where basket_no = #{ refNo }
+           and user_no = #{ userNo }
+	</delete>
+
+</mapper>
+
+
+
+
+
+
