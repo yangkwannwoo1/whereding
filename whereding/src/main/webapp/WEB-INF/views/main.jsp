@@ -6,6 +6,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+    .popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.popup-content {
+  position: absolute;
+  width: 400px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#closeButton{
+    cursor: pointer;
+}
+</style>
 <title>결혼은 웨어딩에서</title>
 <!-- title -->
 	<title>Fruitkha</title>
@@ -587,9 +615,36 @@
 		</div>
 	</div>
 	
-	<!-- end features list section -->
+	<div id="popup" class="popup">
+        <div class="popup-content">
+          <!-- 모달 팝업 콘텐츠 -->
+          <span class="close" id="closeButton">&times;</span>
+          <br><br>
+          <img src="resources/images/모달로 띄울 내용.png" alt="">
+          <br><br>
+          <label><input type="checkbox" id="disablePopup"> 일주일간 안보기</label>
+        </div>
+      </div>
+      
+        <script>
+            document.getElementById('closeButton').addEventListener('click', function () {
+            document.getElementById('popup').style.display = 'none';
+            });
 
+            // 일주일간 안보기를 처리
+            document.getElementById('disablePopup').addEventListener('change', function () {
+            if (this.checked) {
+                // 쿠키를 사용하여 팝업을 일주일 동안 숨깁니다.
+                // document.cookie = 'disablePopup=true; max-age=' + 60 * 60 * 24 * 7;
+            }
+            });
 
+            // 쿠키를 확인하여 팝업을 표시합니다.
+            if (document.cookie.indexOf('disablePopup=true') === -1) {
+            document.getElementById('popup').style.display = 'block';
+            }
+
+        </script>
 	
 	<jsp:include page="common/footer.jsp"/>
 
