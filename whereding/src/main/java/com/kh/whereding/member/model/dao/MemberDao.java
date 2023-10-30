@@ -88,6 +88,15 @@ public class MemberDao {
 	public int ReviewCount(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.ReviewCount", m);
 	}
+	public int createNaverMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("memberMapper.createNaverMember", m);
+	}
+	public int countCheck(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.selectOne("memberMapper.countCheck", userId);
+	}
+	public Member selectNaverUser(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.selectOne("memberMapper.loginMember", userId);
+	}
 	
 	
 }

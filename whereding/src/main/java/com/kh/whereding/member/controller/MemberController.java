@@ -2,24 +2,25 @@ package com.kh.whereding.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.kh.whereding.gift.model.vo.GiftHistory;
 import com.kh.whereding.gift.model.vo.GiftReview;
 import com.kh.whereding.gift.model.vo.GiftReviewImg;
@@ -73,6 +74,74 @@ public class MemberController {
 			session.setAttribute("loginMember", loginMember);
 		}else {
 			session.setAttribute("alertMsg", "로그인 실패하였습니다.");
+		}
+		return "redirect:/";
+	}
+	
+	//네이버 로그인
+	@RequestMapping("naverLogin.me")
+	public void naverLogin(String kakao) {
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("createState.me")
+	public String createState(HttpSession session){
+		SecureRandom random = new SecureRandom();
+		System.out.println("되냐");
+	    String state = new BigInteger(130, random).toString(32);
+	    session.setAttribute("state", state);
+		return state;
+	}
+	
+	@RequestMapping("naverEnroll.do")
+	public String naverEnroll(@RequestParam("code") String code, @RequestParam("state") String state, HttpSession session, Model model) {
+		Map<String, Object> result = mService.naverEnroll(code, state);
+		JsonNode userInfo = (JsonNode) result.get("userInfo");
+		String userId = userInfo.get("response").get("id").asText();
+		
+		
+		int countResult = mService.countCheck(userId);
+		
+		if(countResult>0) { //이미회원
+			Member loginMember = mService.selectNaverUser(userId);
+			System.out.println(loginMember+ "로그인멤버@!#!@#");
+			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("alertMsg", "로그인 되었습니다.");
+			
+		}else { // 신규회원
+			String userPwd = userId;
+			String userName = userInfo.get("response").get("name").asText();
+			String originbirthyear = userInfo.get("response").get("birthyear").asText();
+			String originbirthday = userInfo.get("response").get("birthday").asText();
+			String changebirthyear = originbirthyear.substring(2);
+			String changebirthday[] = originbirthday.split("-");
+			String birthday = changebirthyear+changebirthday[0]+changebirthday[1];
+			
+			System.out.println(changebirthyear +"연도");
+			System.out.println(birthday + " 월일");
+			
+			String gender = userInfo.get("response").get("gender").asText();
+			String phone = userInfo.get("response").get("mobile").asText();
+			String email = userInfo.get("response").get("email").asText();
+			
+			Member m = new Member();
+			m.setUserId(userId);
+			m.setUserPwd(userPwd);
+			m.setUserName(userName);
+			m.setBirthDay(birthday);
+			m.setGender(gender);
+			m.setPhone(phone);
+			m.setEmail(email);
+			
+			
+			int createResult = mService.createNaverMember(m);
+			System.out.println(createResult);
+			if(createResult >0) {
+				session.setAttribute("alertMsg", "회원가입 되었습니다.");
+			}else {
+				session.setAttribute("alertMsg", "회원가입 실패!!");
+			}
 		}
 		return "redirect:/";
 	}
