@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.Gson;
 import com.kh.whereding.gift.model.vo.GiftHistory;
 import com.kh.whereding.gift.model.vo.GiftReview;
 import com.kh.whereding.gift.model.vo.GiftReviewImg;
@@ -40,6 +44,8 @@ import com.kh.whereding.product.model.vo.Studio;
  */
 @Controller
 public class MemberController {
+	@Autowired
+	private static JavaMailSender mailSender;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -430,6 +436,62 @@ public class MemberController {
 			}
 			return changeName;
 	}
+	
+	// 회원 ID찾기 (이메일)
+	@RequestMapping("idFind.me")
+	public String idFind() {
+		return "member/idFind";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="emailCheck.me", produces = "text/html; charset=utf-8")
+	public String emailCheck(String email, Model model) {
+		Member m = mService.emailCheck(email);
+		
+		if (m == null) {
+	        return "가입된 아이디가 없습니다.";
+	    } else {
+	        if (m.getUserId() == null) {
+	            return "가입된 아이디가 없습니다.";
+	        } else {
+	            return "회원님의 아이디는 [" + m.getUserId() + "] 입니다.";
+	        }
+	    }
+		
+	} 
+	
+	@RequestMapping("sendEmail.me")
+	public void sendEmail() {
+		System.out.println("됨?");
+		try {
+			
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+		   // MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+		    MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+ 
+		    //test용 메일 내용
+		    messageHelper.setFrom("khfinalproject4@gmail.com"); // 보내는사람 이메일 여기선 google 메일서버 사용하는 아이디를 작성하면됨
+		    messageHelper.setTo("skidrow614@naver.com"); // 받는사람 이메일
+		    messageHelper.setSubject("[티켓예약] 안녕하세요 ORDER BY TICKET 입니다" ); // 메일제목
+		    //messageHelper.setText("예약하신 회원님은"+ name + last_name + "입니다."+" 연락처는 " + phone + "입니다. 입력한 Email은 " + email + "입니다."); // 메일 내용
+		    //messageHelper.setText("text/html","<div style='border: 3px solid blue'><a href='https://www.naver.com/'>message</a></div>");
+		    //로그인 폼 테스트HTML ->//messageHelper.setText("text/html","<html> <head> <meta name=\"viewport\" content=\"width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0\"> </head> <body> <header> <h2>Login</h2> </header> <form action=\"\" method=\"POST\"> <div class=\"input-box\"> <input id=\"username\" type=\"text\" name=\"username\" placeholder=\"아이디\"> <label for=\"username\">아이디</label> </div> <div class=\"input-box\"> <input id=\"password\" type=\"password\" name=\"password\" placeholder=\"비밀번호\"> <label for=\"password\">비밀번호</label> </div> <div id=\"forgot\">비밀번호 찾기</div> <input type=\"submit\" value=\"로그인\"> </form> </body> </html>");
+		    mailSender.send(mimeMessage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	//비번찾기 (이메일)
+		@RequestMapping("pwdFind")
+		public void test1() {
+		
+				try {
+					mService.sendEmail();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		
+		}
 	
 	
 	

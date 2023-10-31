@@ -97,6 +97,11 @@ public class MemberDao {
 	public Member selectNaverUser(SqlSessionTemplate sqlSession, String userId) {
 		return sqlSession.selectOne("memberMapper.loginMember", userId);
 	}
+	public Member emailCheck(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.emailCheck", email);
+
+		
+	}
 	
 	
 }

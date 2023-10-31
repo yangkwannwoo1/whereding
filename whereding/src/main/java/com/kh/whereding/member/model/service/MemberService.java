@@ -65,6 +65,8 @@ public interface MemberService {
 	// 네이버 로그인
 	Member selectNaverUser(String userId);
 	
+	// 아이디 찾기 (이메일 조회)
+	Member emailCheck(String email);
 	
 	
 }

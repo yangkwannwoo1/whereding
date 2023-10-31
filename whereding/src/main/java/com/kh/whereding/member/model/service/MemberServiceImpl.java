@@ -3,13 +3,26 @@ package com.kh.whereding.member.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.apache.commons.mail.HtmlEmail;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -33,10 +46,13 @@ import com.kh.whereding.product.model.vo.Studio;
 public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
-	MemberDao mDao;
+	private MemberDao mDao;
 	
 	@Autowired
-	SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Override
 	public Member loginMember(Member m) {
@@ -207,10 +223,47 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.selectNaverUser(sqlSession, userId);
 	}
 
+	@Override
+	public Member emailCheck(String email) {
+		return mDao.emailCheck(sqlSession, email);
+	}
 	
+	//이메일 발송 로직
+	public void sendEmail() throws Exception {
+		final String subject = "test메일입니다";
+		final String content = "메일내용";
+		final String from = "skidrow614@naver.com";
+		final String to = "kidsgk4@naver.com";
+		
+		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				final MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				
+				mailHelper.setFrom(from);
+				mailHelper.setTo(to);
+				mailHelper.setSubject(subject);
+				mailHelper.setText(content, true);
+			}
+		};
 	
-	
-
-	
+		try {
+			mailSender.send(preparator);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
