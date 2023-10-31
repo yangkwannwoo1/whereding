@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.whereding.basket.model.dao.BasketDao;
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.coupon.model.vo.Coupon;
+import com.kh.whereding.gift.model.vo.Gift;
 
 @Service
 public class BasketServiceImpl implements BasketService {
@@ -32,6 +33,11 @@ public class BasketServiceImpl implements BasketService {
 	@Override
 	public ArrayList<Coupon> selectCouponList(String userNo) {
 		return bDao.selectCouponList(sqlSession, userNo);
+	}
+
+	@Override
+	public Gift selectbasketOne(String giftNo) {
+		return bDao.selectbasketOne(sqlSession,giftNo );
 	}
 	
 }

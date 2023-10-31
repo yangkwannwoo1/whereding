@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.coupon.model.vo.Coupon;
+import com.kh.whereding.gift.model.vo.Gift;
 
 @Repository
 public class BasketDao {
@@ -21,5 +22,9 @@ public class BasketDao {
 	
 	public ArrayList<Coupon> selectCouponList(SqlSessionTemplate sqlSession, String userNo) {
 		return (ArrayList)sqlSession.selectList("basketMapper.selectCouponList", userNo);
+	}
+
+	public Gift selectbasketOne(SqlSessionTemplate sqlSession, String giftNo) {
+		return sqlSession.selectOne("basketMapper.selectbasketOne", giftNo);
 	}
 }

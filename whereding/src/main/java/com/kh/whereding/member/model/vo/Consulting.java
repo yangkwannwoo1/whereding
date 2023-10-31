@@ -24,7 +24,7 @@ public class Consulting {
 	 */
 	private int csNo;				// 상담예약 번호
 	private String productNo;		// 제품번호
-	private int userNo;				// 회원 내용
+	private int userNo;				// 회원
 	private String scContent;		// 상담내용
 	private String csDate;			// 상담일
 	private String startTime;		// 상담시작시간

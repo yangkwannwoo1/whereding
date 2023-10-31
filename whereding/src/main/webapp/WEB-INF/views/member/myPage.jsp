@@ -330,7 +330,7 @@
                                 <tr>
                                     <th>성별</th>
                                     <td>
-                                        신랑<input type="radio" id="gender_male" name="gender" value="M">
+                                        신랑<input type="radio" id="gender_male" name="gender" value="M"> <br>
                                         신부<input type="radio" id="gender_female" name="gender" value="F">
                                     </td>
                                 </tr>

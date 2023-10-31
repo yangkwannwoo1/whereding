@@ -229,13 +229,13 @@ public class MemberController {
 		ArrayList st = new ArrayList();
 		ArrayList dr = new ArrayList();
 		ArrayList mu = new ArrayList();
-	
+		System.out.println("회원번호 있나 확인용 " +cs);
 		
 		for(Consulting cst : cs) {
-			Hall hal = mService.consultingHall(cst.getProductNo());
-			Studio studi = mService.consultingStudio(cst.getProductNo());
-			Dress dres = mService.consultingDress(cst.getProductNo());
-			Makeup make = mService.consultingMakeup(cst.getProductNo());
+			Hall hal = mService.consultingHall(cst);
+			Studio studi = mService.consultingStudio(cst);
+			Dress dres = mService.consultingDress(cst);
+			Makeup make = mService.consultingMakeup(cst);
 			
 //			m.setProductNo(cst.getProductNo());
 //			int result1 = mService.ReviewCount(m);

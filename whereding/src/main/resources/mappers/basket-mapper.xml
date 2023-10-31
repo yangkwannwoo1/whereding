@@ -23,6 +23,17 @@
 		<result column="start_coupon" property="startCoupon"></result>
 		<result column="end_coupon" property="endCoupon"></result>
 	</resultMap>
+	<resultMap type="Gift" id="giftResult">
+		<result column="GIFT_NO" property="giftNo"></result>
+		<result column="GIFTCATEGORY_NO" property="categoryNo"></result>
+		<result column="GIFT_NAME" property="giftName"></result>
+		<result column="GIFT_CONTENT" property="giftContent"></result>
+		<result column="GIFT_PRICE" property="giftPrice"></result>
+		<result column="COUNT" property="count"></result>
+	
+	</resultMap>
+	
+	
 	
 		<select id="selectBasketList" resultMap="basketResultSet">
 		select
@@ -66,5 +77,15 @@
 		 where user_no = #{ userNo }
 		   and status = 'Y'
   	</select>
-  	
+  	<select id="selectbasketOne" resultMap="giftResult">
+  		select 
+		       GIFT_NO
+		     , CATEGORY_NO
+		     , GIFT_NAME
+		     , GIFT_CONTENT
+		     , GIFT_PRICE
+		  from gift
+		 where status = 'Y'
+		   and gift_no = #{giftNo}
+  	</select>
 </mapper>

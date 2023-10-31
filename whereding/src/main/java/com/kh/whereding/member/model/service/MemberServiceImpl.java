@@ -102,23 +102,23 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Hall consultingHall(String productNo) {
-		return mDao.consultingHall(sqlSession, productNo);
+	public Hall consultingHall(Consulting cs) {
+		return mDao.consultingHall(sqlSession, cs);
 	}
 
 	@Override
-	public Studio consultingStudio(String productNo) {
-		return mDao.consultingStudio(sqlSession, productNo);
+	public Studio consultingStudio(Consulting cs) {
+		return mDao.consultingStudio(sqlSession, cs);
 	}
 
 	@Override
-	public Dress consultingDress(String productNo) {
-		return mDao.consultingDress(sqlSession, productNo);
+	public Dress consultingDress(Consulting cs) {
+		return mDao.consultingDress(sqlSession, cs);
 	}
 
 	@Override
-	public Makeup consultingMakeup(String productNo) {
-		return mDao.consultingMakeup(sqlSession, productNo);
+	public Makeup consultingMakeup(Consulting cs) {
+		return mDao.consultingMakeup(sqlSession, cs);
 	}
 
 	@Override
