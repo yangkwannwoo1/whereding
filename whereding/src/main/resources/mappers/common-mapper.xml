@@ -6,12 +6,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="commonMapper">	
 	
+	<resultMap type="great" id="greatResultSet">
+		<result column="great_no" property="greatNo"></result>
+		<result column="user_no" property="userNo"></result>
+		<result column="count" property="count"></result>
+	</resultMap>
+	
 	<select id="checkLike" resultType="_int">
 		select 
 			   count(*)
 		  from great
          where great_no = #{ greatNo }
            and user_no = #{ userNo }
+	</select>
+	
+	<select id="countLike" resultType="_int">
+		select 
+			   count(*) count
+		  from great
+         where great_no = #{ greatNo }
 	</select>
 
 	<delete id="deleteLike">

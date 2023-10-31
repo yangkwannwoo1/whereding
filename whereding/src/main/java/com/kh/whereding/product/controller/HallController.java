@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +23,7 @@ import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.common.template.Pagenation;
 import com.kh.whereding.product.model.service.HallServiceImpl;
 import com.kh.whereding.product.model.vo.Hall;
+import com.kh.whereding.product.model.vo.ProductCollection;
 
 @Controller
 public class HallController {
@@ -41,7 +43,6 @@ public class HallController {
 			System.out.println(list);
 			mv.addObject("pi", pi).addObject("list", list).setViewName("product/hallListView");
 			return mv;
-			
 	}
 	
 	@RequestMapping("enrollForm.pr")
@@ -110,6 +111,7 @@ public class HallController {
 		}
 	}
 	
+	
 	public String saveFile(MultipartFile upfile, HttpSession session) {
 		String originName = upfile.getOriginalFilename();	// "flower.png"
 		
@@ -134,6 +136,30 @@ public class HallController {
 				e.printStackTrace();
 			}
 		return originName;
+	}
+	
+	
+	@RequestMapping("hDetail.bo")
+	public ModelAndView selectCollection(String hno, ModelAndView mv) {
+		
+			Hall h = HService.selectBoard(hno);
+			System.out.println(h);
+			mv.addObject("h", h).setViewName("product/hallDetailView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "deleteHall.bo")
+	public String noticeDelete(String hno, HttpSession session) {
+
+		System.out.println(hno);
+		int result = HService.deletehall(hno);
+		
+		if(result > 0) { 
+	         session.setAttribute("alertMsg", "성공적으로 글이 삭제되었습니다.");
+	      }else {
+	    	  session.setAttribute("alertMsg", "글 삭제 실패하였습니다.");
+	      }
+		return "redirect:hList.pr";
 	}
 }
 

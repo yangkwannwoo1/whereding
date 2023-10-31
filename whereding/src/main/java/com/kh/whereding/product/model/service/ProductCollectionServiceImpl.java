@@ -64,6 +64,11 @@ public class ProductCollectionServiceImpl implements ProductCollectionService {
 		return cDao.insertTag(t, sqlSession);
 	}
 
+	@Override
+	public int deleteCollection(HashMap<String, String> map) {
+		return cDao.deleteCollection(map, sqlSession);
+	}
+
 	
 	
 

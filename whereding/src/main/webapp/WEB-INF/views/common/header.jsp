@@ -307,18 +307,17 @@ font-family: 'Open Sans Condensed', sans-serif;
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.jsp"> <img
-								src="resources/css/assets/img/logo.png" alt="">
+							<a href="index.jsp"> 
+							<img src="resources/css/assets/img/logo.png" alt=""></a>
 						</div>
 						<!-- logo -->
 
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item" id="main-menu-home"><a
-									href="index.jsp">Home</a> <a href="index.jsp">홈</a></li>
-								<li id="main-menu-about"><a href="about.html">About</a> <a
-									href="about.html">회사소개</a></li>
+								<li class="current-list-item" id="main-menu-home">
+								<a href="index.jsp">Home</a> <a href="index.jsp">홈</a>
+								</li>
 								<li id="main-menu-wedding"><a href="hList.pr">Wedding Holl</a> <a
 									href="hList.pr">웨딩홀</a></li>
 								<li id="main-menu-collection"><a href="news.html">Wedding
@@ -334,7 +333,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 										<li><a>MakeUp</a>
 											<a>메이크업</a>
 										</li>
-									</ul> <a href="news.html">컬렉션</a></li>
+									</ul> <a>컬렉션</a></li>
 								<!--  <li id="main-menu-event"><a href="contact.html">Event</a> <a
 									href="contact.html">이벤트</a></li>  -->
 								<li id="main-menu-shop"><a href="shop.html">Present</a>

@@ -402,11 +402,11 @@
                   			},success:function(data){
                   				let value = "";
                   				if(data == 'NNNYY'){
-                            	  value = `<img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px;">
-                                      <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px; display: none;">`
+                            	  value = `<img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px; display: none;">
+                                      <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px;">`
                   				}else{
-                              	  value = `<img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px; display: none;">
-                                      <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px;">`	
+                              	  value = `<img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px;">
+                                      <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px; display: none;">`	
                   				}
                   				$("#like_area").html(value);
                   				console.log(data)

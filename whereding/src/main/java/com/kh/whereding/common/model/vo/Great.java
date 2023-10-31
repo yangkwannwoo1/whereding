@@ -15,5 +15,7 @@ public class Great {
 	
 	private String greatNo;
 	private String userNo;
+	private int count;
+	private String status;
 
 }

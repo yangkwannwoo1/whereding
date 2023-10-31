@@ -49,10 +49,12 @@ H_WEEK_OPEN
 	private String img2;
 	private String img3;
 	private String tag;
+	private String status;
 	
 	private String csDate;
 	private String csStartTime;
 	private int reviewNo;
 	private int csNo;
 	private String imgPath;
+	private int greatCount;
 }

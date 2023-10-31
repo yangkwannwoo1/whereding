@@ -25,6 +25,8 @@ public interface ProductCollectionService {
 		int insertFile(Attachment a);
 		
 		int insertTag(HashTag t);
+		
+		int deleteCollection(HashMap<String, String> map);
 
 
 }

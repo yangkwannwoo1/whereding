@@ -23,6 +23,11 @@ public class CommonServiceImpl implements CommonService{
 	}
 
 	@Override
+	public int countLike(Great g) {
+		return cDao.countLike(sqlSession,g);
+	}
+
+	@Override
 	public int insertLike(Great g) {
 		return cDao.insertLike(sqlSession,g);
 	}

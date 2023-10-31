@@ -18,5 +18,9 @@ public interface HallService {
 		int insertHall(Hall h);
 		
 		int insertTag(HashTag t);
+		
+		Hall selectBoard(String hno);
+		
+		int deletehall(String hno);
 
 }

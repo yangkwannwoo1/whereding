@@ -53,4 +53,8 @@ public class ProductCollectionDao {
 		return sqlSession.insert("productCollectionMapper.insertFile", a);
 	}
 
+	public int deleteCollection(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("productCollectionMapper.deleteCollection", map);
+	}
+
 }

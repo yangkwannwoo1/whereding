@@ -18,11 +18,12 @@
 		<result column="h_unit_time" property="unitTime"/>
 		<result column="h_week_open" property="weekOpen"/>
 		<result column="tag_content" property="tagContent"/>
+		<result column="status" property="status"/>
 		<result column="img_1" property="img1"/>
 		<result column="img_2" property="img2"/>
 		<result column="img_3" property="img3"/>
 		<result column="file_path" property="imgPath"/>
-		
+		<result column="great_count" property="greatCount"/>
 	</resultMap>
 	
 	<resultMap type="HashTag" id="hashTagResult">
@@ -48,9 +49,22 @@
 		     , H_RESTAURANT_SEAT
 		     , img_path || img_1 as file_path
 		     , tag_content
+             , count(great_no) great_count
 		  from hall
 		  left join product_img i on (h_code = i.product_no)
 		  left join tag t on (h_code = t.product_no)
+          left join great on (h_code = great_no)
+         where h_status = 'Y'
+          group by H_CODE
+          	  , H_ENTERPRISE
+          	  , H_ADDRESS
+          	  , H_NAME
+          	  , H_RENTAL
+          	  , H_SEAT
+          	  , H_MEAL
+          	  , H_RESTAURANT_SEAT
+          	  , img_path || img_1
+          	  , tag_content
   	</select>
   	
   	<insert id="insertHall">
@@ -126,6 +140,36 @@
 		  , #{ img3 }
 		  )
 	</insert>
+	
+	<select id="selectBoard" resultMap="hallResult">
+		select 
+			   H_CODE
+			 , H_ENTERPRISE
+			 , H_NAME
+			 , H_DETAIL
+			 , H_SEAT
+			 , H_RENTAL
+			 , H_RESTAURANT_SEAT
+			 , H_MEAL
+			 , H_START_TIME
+			 , H_END_TIME
+			 , H_PHONE
+			 , H_ADDRESS
+			 , H_UNIT_TIME
+			 , H_WEEK_OPEN
+		  from hall
+		  left join product_img i on (h_code = i.product_no) 
+		  left join tag t on (t.product_no = i.product_no) 
+		 where h_code = #{ hno }
+		   and H_STATUS = 'Y'
+	</select>
+	
+	
+	<update id="deletehall" parameterType="hashMap">
+		update hall 
+		   set h_status = 'N'
+		 where h_code = #{ hno }
+	</update>
 	
   		
 	

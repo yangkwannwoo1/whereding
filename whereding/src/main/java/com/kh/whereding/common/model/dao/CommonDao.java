@@ -9,6 +9,10 @@ import com.kh.whereding.common.model.vo.Great;
 @Repository
 public class CommonDao {
 
+	public int countLike(SqlSessionTemplate sqlSession, Great g) {
+		return sqlSession.selectOne("commonMapper.countLike", g);
+	}
+
 	public int checkLike(SqlSessionTemplate sqlSession, Great g) {
 		return sqlSession.selectOne("commonMapper.checkLike", g);
 	}

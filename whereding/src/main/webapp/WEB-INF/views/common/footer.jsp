@@ -62,7 +62,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-box pages">
 						<h2 class="widget-title">찾아오시는 길</h2>
-						<div id="map" style="width:400px;height:400px; margin-top: 20px; border: 2px solid; display: none;"></div>
+						<div id="map" style="width:400px;height:200px; margin-top: 20px; border: 2px solid; display: none;"></div>
 					</div>
 				</div>
 			</div>
@@ -106,6 +106,8 @@
 		</div>
 	</div>
 	<!-- end copyright -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3b886c1f0a0359c5d351f5484b7fce9d&libraries=services"></script>
+	
 	<script>
                                 
         // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
@@ -119,6 +121,7 @@
             mapOption = {
                 center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
                 level: 3 // 지도의 확대 레벨
+
             };  
     
             if (mapContainer.style.display === 'none') {
@@ -164,7 +167,7 @@
             // 마커에 클릭이벤트를 등록합니다
             kakao.maps.event.addListener(marker, 'click', function() {
                 // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-                infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                infowindow.setContent('<div style="padding:5px;font-size:12px; color:black;">Whereding</div>');
                 infowindow.open(map, marker);
             });
         }

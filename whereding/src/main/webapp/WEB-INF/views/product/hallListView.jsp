@@ -771,6 +771,10 @@
                 <c:forEach var="h" items="${ list }">
                     <div class="col-lg-4 col-md-6">
                         <div class="single-board">
+		                	<input type="hidden" class="hno" value="${ h.code }">
+							<p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
+								<img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%">${ h.greatCount }</span>
+							</p>
                         	<div style="text-align: center; padding: 5%">
 	                        	<img src="${ h.imgPath }" style="height: 200px;">
                         	</div>
@@ -787,11 +791,11 @@
                     				<c:set var="tag" value="${fn:split(h.tagContent,',')}" />
 									<c:forEach var="it" items="${tag}" varStatus="g">
 										# ${ it }&nbsp;
-							</c:forEach>
-                                
-                                
+									</c:forEach>
                                 </p>
-                                <a href="#" class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+                                
+                                
+                                <a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -990,6 +994,11 @@
         function submitSearch() {
             $("#searchPlace").submit();
         }
+        
+		$(".read-more-btn").click(function(){
+			let great_count = $(this).parents(".single-board").find(".great_count").text();
+			location.href = 'hDetail.bo?hno=' + $(this).parents(".single-board").find(".hno").val() + "&gc=" + great_count;
+		})
 
     </script>
 

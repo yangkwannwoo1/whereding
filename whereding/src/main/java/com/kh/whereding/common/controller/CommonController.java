@@ -2,7 +2,6 @@ package com.kh.whereding.common.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,22 +18,35 @@ public class CommonController {
 	@ResponseBody
 	@RequestMapping("chklike.bo")
 	public String ajaxchkLike(Great g) {
-		int checkLike = cService.checkLike(g);			
+		int checkLike = cService.checkLike(g);	// 있으면 1 없으면 0	
 		return checkLike > 0 ? "NNNYY" : "NNNNN";
 	}
 	
 	@ResponseBody
-	@RequestMapping("glike.bo")
-	public String ajaxLike(Great g) {
+	@RequestMapping("count.gr")
+	public int ajaxchcountLike(Great g) {
 		System.out.println(g);
-		int checkLike = cService.checkLike(g);			
+		int countLike = cService.countLike(g);	// 있으면 1 없으면 0	
+		return countLike;
+	}
+	
+	@ResponseBody
+	@RequestMapping("glike.bo")
+	public int ajaxLike(Great g) {
+		System.out.println(g);
+		int checkLike = cService.checkLike(g);	
 		int result = 0;
+		System.out.println(checkLike);
 		if(checkLike > 0) {
 			result = cService.deleteLike(g);			
 		}else {
 			result = cService.insertLike(g);			
 		}
-		return result > 0 ? "NNNNY": "NNNNN";
+		int countLike = 0;
+		if(result>0) {
+			countLike = cService.countLike(g);			
+		}
+		return countLike;
 	}
 	
 //	장바구니에 이미 담겨있을 경우 

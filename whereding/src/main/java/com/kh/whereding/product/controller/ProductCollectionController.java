@@ -66,6 +66,7 @@ public class ProductCollectionController {
 		
 //		if(result > 0) {
 			ProductCollection c = cService.selectBoard(map);
+			c.setCategory(category);
 			System.out.println(c);
 			mv.addObject("c", c).setViewName("product/collectionDetailView");
 //		}else {
@@ -175,6 +176,25 @@ public class ProductCollectionController {
 				e.printStackTrace();
 			}
 		return originName;
+	}
+	
+	@RequestMapping(value = "deleteCollection.bo")
+	public String noticeDelete(String cno, String category, HttpSession session) {
+//		System.out.println(cno);
+//		System.out.println(category);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("cno", cno);
+		map.put("category", category);
+		
+		int result = cService.deleteCollection(map);
+		
+		if(result > 0) { 
+	         session.setAttribute("alertMsg", "성공적으로 글이 삭제되었습니다.");
+	      }else {
+	    	  session.setAttribute("alertMsg", "글 삭제 실패하였습니다.");
+	      }
+		return "redirect:cList.bo?category=" + category;
+//		return "#";
 	}
 	
 }

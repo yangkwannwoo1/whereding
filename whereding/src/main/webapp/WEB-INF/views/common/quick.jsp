@@ -70,6 +70,7 @@
 	<div class="up_arrow">
 		<img src="resources/css/assets/img/up-arrow.png" alt="">
 	</div>
+	<div></div>
 	<script type="text/javascript" src="resources/css/assets/js/quick.js"></script> 
 
 	<!-- 사이드바 -->

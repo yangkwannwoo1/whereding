@@ -7,6 +7,9 @@ public interface CommonService {
 	
 	// 좋아요 체크
 	int checkLike(Great g);
+
+	// 좋아요 개수
+	int countLike(Great g);
 	
 	// 좋아요 삽입
 	int insertLike(Great g);

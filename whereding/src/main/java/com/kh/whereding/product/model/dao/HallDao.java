@@ -43,5 +43,13 @@ public class HallDao {
 	public int insertFile(Attachment a, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("hallMapper.insertFile", a);
 	}
+	
+	public Hall selectBoard(String hno, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("hallMapper.selectBoard", hno);
+	}
+	
+	public int deletehall(String hno, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("hallMapper.deletehall", hno);
+	}
 
 }

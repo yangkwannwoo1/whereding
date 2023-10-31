@@ -49,4 +49,14 @@ public class HallServiceImpl implements HallService {
 		return hDao.insertTag(t, sqlSession);
 	}
 
+	@Override
+	public Hall selectBoard(String hno) {
+		return hDao.selectBoard(hno, sqlSession);
+	}
+
+	@Override
+	public int deletehall(String hno) {
+		return hDao.deletehall(hno, sqlSession);
+	}
+
 }

@@ -338,6 +338,25 @@
 		  )
   	</insert>
   	
+  	<update id="deleteCollection">
+		update #{ category }
+ 	   <choose>
+ 	   		<when test="category eq 'Studio'">
+	  		   set s_status = 'N'
+		 	 where s_code = #{ cno }
+ 	   		</when>
+ 	   		<when test="category eq 'Dress'">
+	  		   set d_status = 'N'
+		 	 where d_code = #{ cno }
+ 	   		</when>
+ 	   		<otherwise>
+	  		   set m_status = 'N'
+		 	 where m_code = #{ cno }
+ 	   		</otherwise>
+ 	   </choose> 
+
+  	</update>
+  	
   	
 	
 </mapper>
