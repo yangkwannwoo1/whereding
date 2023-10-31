@@ -146,7 +146,7 @@
 								                    html += '<div class="col-lg-4 col-md-6 text-center">';
 								                    html += '<div class="single-product-item">';
 								                    html += '<div class="product-image">';
-								                    html += '<a href="single-product.html"> <img src="' + gift.imgPath + '/' + gift.img1 + '" alt="' + gift.img1 + '" />';
+								                    html += '<a> <img src="' + gift.imgPath + '/' + gift.img1 + '" alt="' + gift.img1 + '" />';
 								                    html += '</a>';
 								                    html += '<h3>' + gift.giftName + '</h3>';
 								                    html += '<p class="product-price">';
