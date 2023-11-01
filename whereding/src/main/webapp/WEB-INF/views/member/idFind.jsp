@@ -59,7 +59,8 @@
 			})
 			
 			$("#pwdFind").click(function(){
-				location.href="pwdFind";
+				let email = $("#email").val();
+				location.href="pwdFind?email="+email;				
 			})
 		</script>
 		

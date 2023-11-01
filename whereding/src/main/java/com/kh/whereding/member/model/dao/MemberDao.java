@@ -99,9 +99,12 @@ public class MemberDao {
 	}
 	public Member emailCheck(SqlSessionTemplate sqlSession, String email) {
 		return sqlSession.selectOne("memberMapper.emailCheck", email);
-
-		
 	}
-	
+	public Member sendEmail(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.sendEmail", email);
+	}
+	public int memberInitPwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.memberInitPwd", m);
+	}
 	
 }

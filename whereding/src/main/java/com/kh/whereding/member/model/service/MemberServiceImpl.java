@@ -12,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -26,6 +27,8 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -228,32 +231,8 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.emailCheck(sqlSession, email);
 	}
 	
-	//이메일 발송 로직
-	public void sendEmail() throws Exception {
-		final String subject = "test메일입니다";
-		final String content = "메일내용";
-		final String from = "skidrow614@naver.com";
-		final String to = "kidsgk4@naver.com";
-		
-		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-			
-			@Override
-			public void prepare(MimeMessage mimeMessage) throws Exception {
-				final MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-				
-				mailHelper.setFrom(from);
-				mailHelper.setTo(to);
-				mailHelper.setSubject(subject);
-				mailHelper.setText(content, true);
-			}
-		};
+	//--------------------------------메일발송-----------------------------
 	
-		try {
-			mailSender.send(preparator);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
 	
 }
 

@@ -296,7 +296,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where email = #{email}
 	</select>		    
 
-
+	<update id="memberInitPwd">
+		update member
+		   set user_pwd = #{userPwd}
+		 where email = #{email}
+	</update>
+	
 </mapper>
 
 

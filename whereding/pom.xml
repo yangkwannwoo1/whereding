@@ -272,11 +272,6 @@
 			<version>1.4.7</version>
 		</dependency>	
 		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>4.3.8.RELEASE</version>
-		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
 		<dependency>
@@ -286,21 +281,11 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		
-		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context-support</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
+		<!-- 메일 발송 기능을 위한 dependency 추가 END-->
 		
 	</dependencies>
 	
