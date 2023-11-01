@@ -250,30 +250,11 @@ public class AdminController {
 			if(result > 0){
 				session.setAttribute("alertMsg", "성공적으로 회원정보가 수정되었습니다.");
 				return "redirect:/mdetail.ad?userNo=" + userNo;
-				
 			}else { 
-				
 				model.addAttribute("errorMsg", "회원정보 변경 실패");
 				return "common/errorPage";
 			}
 		}
-		
-}
-			
-		
-		@RequestMapping("delete.ad")
-		public String deleteMember(String userId, HttpSession session, Model model) {
-			
-				int result = AService.deleteMember(userId);
-				
-					session.removeAttribute("loginMember");
-					
-					session.setAttribute("alertMsg", "성공적으로 탈퇴");
-					
-					return "redirect:/";
-					
-		}
-		
 		//협업업체 신청목록
 		@RequestMapping("collabo.ad")
 		public String collaboList(@RequestParam(value="cpage", defaultValue = "1" ) int currentPage, Model model) {

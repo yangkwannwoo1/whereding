@@ -131,37 +131,15 @@
                     </div>
                   </form><!-- End Profile Edit Form -->
                   
-                  <div class="modal" id="deleteForm">
-       <div class="modal-dialog">
-           <div class="modal-content">
-           
-               <!-- Modal Header -->
-               <div class="modal-header">
-               <h4 class="modal-title">회원탈퇴</h4>
-               <button type="button" class="close" data-dismiss="modal">&times;</button>
-               </div>
-               
-               <!-- Modal body -->
-               <div class="modal-body" align="center">
-               
-                   <form action="delete.ad" method="post">
-                          
-                       <button type="submit" class="btn btn-danger">추방시키기</button>
-                   </form>
-
-               </div>
-               
-           </div>
-       </div>
-   </div>
 
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- 비밀번호변경 Form -->
                   <form action="change.pw" method="post">
-
+					
                     <div class="row mb-3">
+                    <input type = "hidden" value = "${m.userNo}" name = "userNo"/>
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">새로운 비밀번호</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newpassword" type="password" class="form-control" id="newPassword">
