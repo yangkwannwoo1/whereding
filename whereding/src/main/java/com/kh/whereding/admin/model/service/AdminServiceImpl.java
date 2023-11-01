@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.whereding.admin.model.dao.AdminDao;
+import com.kh.whereding.board.model.vo.CollaboRation;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
@@ -127,7 +128,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Member detailMember(int id) {
-
+		
 		return aDao.detailMember(id, sqlSession);
 	
 	}
@@ -141,5 +142,34 @@ public class AdminServiceImpl implements AdminService {
 	public int updatePassword(HashMap<String, String> map) {
 		return aDao.updatePassword(map, sqlSession);
 	}
+
+	@Override
+	public int collaboListCount() {
+		return aDao.selectCollaboCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<CollaboRation> selectCollaboList(PageInfo pi) {
+		return aDao.selectCollaboList(sqlSession, pi);
+	}
+
+	@Override
+	public CollaboRation selectCollDetail(int cpNo) {
+		return aDao.selectCollDetail(sqlSession, cpNo);
+	}
+
+	@Override
+	public int collaboAccept(int userNo) {
+		return aDao.collaboAccept(sqlSession, userNo);
+	}
+
+	@Override
+	public int collaboDenied(int cpNo) {
+		return aDao.collaboDenied(sqlSession, cpNo);
+	}
+
+	
+
+	
 
 }

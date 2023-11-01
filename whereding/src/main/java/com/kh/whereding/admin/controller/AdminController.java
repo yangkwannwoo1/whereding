@@ -19,9 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.whereding.admin.model.service.AdminServiceImpl;
+import com.kh.whereding.board.model.vo.CollaboRation;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
@@ -258,3 +260,66 @@ public class AdminController {
 		
 }
 			
+		
+		@RequestMapping("delete.ad")
+		public String deleteMember(String userId, HttpSession session, Model model) {
+			
+				int result = AService.deleteMember(userId);
+				
+					session.removeAttribute("loginMember");
+					
+					session.setAttribute("alertMsg", "성공적으로 탈퇴");
+					
+					return "redirect:/";
+					
+		}
+		
+		//협업업체 신청목록
+		@RequestMapping("collabo.ad")
+		public String collaboList(@RequestParam(value="cpage", defaultValue = "1" ) int currentPage, Model model) {
+			int listCount = AService.selectListCount();
+			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 5);
+			ArrayList<CollaboRation> collList = AService.selectCollaboList(pi);
+			model.addAttribute("collList", collList);
+			model.addAttribute("pi", pi);
+			return "admin/collabo";
+		}
+		
+		@RequestMapping("collaboDetail.ad")
+		public String collaboDetail(@RequestParam("cpNo")int cpNo, Model model) {
+			CollaboRation coll = AService.selectCollDetail(cpNo);
+			model.addAttribute("coll", coll);
+			return "admin/collaborationDetail";
+		}
+		
+		@RequestMapping("collaboAccept.ad")
+		public String collaboAccept(@RequestParam("userNo") int userNo, HttpSession session) {
+			int result = AService.collaboAccept(userNo);
+			
+			if(result>0) {
+				session.setAttribute("alertMsg", "승인하였습니다.");
+			}else {
+				session.setAttribute("alertMsg", "승인 실패되었습니다.");
+			}
+			
+			return "redirect:/collabo.ad";
+		}
+		
+		@RequestMapping("collaboDenied.ad")
+		public String collaboDenied(@RequestParam("cpNo") int cpNo, HttpSession session) {
+			int result = AService.collaboDenied(cpNo);
+			if(result>0) {
+				session.setAttribute("alertMsg", "거절 하였습니다.");
+			}else {
+				session.setAttribute("alertMsg", "거절 실패되었습니다.");
+			}
+			return "redirect:/collabo.ad";
+		}
+		
+}
+		
+
+
+
+
+

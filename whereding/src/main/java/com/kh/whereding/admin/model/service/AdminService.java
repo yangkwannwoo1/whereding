@@ -3,6 +3,7 @@ package com.kh.whereding.admin.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.whereding.board.model.vo.CollaboRation;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
@@ -62,4 +63,18 @@ public interface AdminService {
 	
  	// 비밀번호 변경
  	int updatePassword(HashMap<String, String> map);
+ 	//collabo count
+ 	int collaboListCount();
+ 	
+ 	//collabo List
+ 	ArrayList<CollaboRation> selectCollaboList(PageInfo pi);
+ 	
+ 	//collabo detail
+ 	CollaboRation selectCollDetail(int cpNo);
+ 	
+ 	//collabo accept
+ 	int collaboAccept(int userNo);
+ 	
+ 	//collabo denied
+ 	int collaboDenied(int cpNo);
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.whereding.board.model.vo.CollaboRation;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
@@ -137,6 +138,34 @@ public class AdminDao {
 	public int updatePassword(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
 		return sqlSession.update("adminMemberMapper.updatePassword",map);
 	}
+
+	public int selectCollaboCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminCollaboMapper.selectCollaboCount");
+	}
+
+	public ArrayList<CollaboRation> selectCollaboList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+
+		int limit = pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("adminCollaboMapper.selectCollaboList", null, rowBounds);
+	}
+
+	public CollaboRation selectCollDetail(SqlSessionTemplate sqlSession, int cpNo) {
+		return sqlSession.selectOne("adminCollaboMapper.selectCollDetail", cpNo);
+	}
+
+	public int collaboAccept(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.update("adminCollaboMapper.collaboAccept", userNo);
+	}
+
+	public int collaboDenied(SqlSessionTemplate sqlSession, int cpNo) {
+		return sqlSession.update("adminCollaboMapper.collaboDenied", cpNo);
+	}
+	
+
 
 
 }
