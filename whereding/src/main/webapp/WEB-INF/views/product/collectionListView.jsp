@@ -720,6 +720,9 @@
 						<div class="single-board">
 							
 							<div class="news-text-box">
+      							<p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
+									<img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%">${ c.greatCount }</span>
+								</p>
                                 <img src="${ c.imgPath }" style="width: 300px; height: 200px; margin-bottom: 3%; border-radius: 10px;">
 								<h3><a href="#">${ c.enterprise }</a></h3>
 								<p><i class="fas fa-map-marker-alt"> ${ c.address }</i></p>

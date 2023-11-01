@@ -31,5 +31,6 @@ public class ProductCollection {
 	private String imgPath;
 	private String tag;
 	private String tagContent;
+	private int greatCount;
 
 }

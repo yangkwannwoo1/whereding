@@ -19,6 +19,7 @@
 		<result column="img_3" property="img3"/>
 		<result column="img_path" property="imgPath"/>
 		<result column="tag_content" property="tagContent"/>
+		<result column="great_count" property="greatCount"/>
 	</resultMap>
 	
 		<resultMap type="ProductCollectionReview" id="ProductCollectionReviewResult">
@@ -76,10 +77,13 @@
 					     ,s_week_open as week_open
 					     ,tag_content
 					     ,img_path || img_1 as img_path 
+					     ,count(great_no) great_count
 					  from studio
 					  left join tag t on (s_code = t.product_no)
 					  left join product_img i on (s_code = i.product_no)
+					  left join great on (s_code = great_no)
 					where s_status = 'Y'
+                    group by S_CODE, S_ENTERPRISE, S_DETAIL, S_PRICE, S_START_DATE, S_END_DATE, S_PHONE, S_ADDRESS, S_UNIT_TIME, S_WEEK_OPEN, TAG_CONTENT, IMG_PATH || IMG_1 
 	 	   		</when>
 	 	   		<when test="category eq 'Dress'">
 				    select 
@@ -339,7 +343,7 @@
   	</insert>
   	
   	<update id="deleteCollection">
-		update #{ category }
+		update studio
  	   <choose>
  	   		<when test="category eq 'Studio'">
 	  		   set s_status = 'N'
@@ -354,7 +358,6 @@
 		 	 where m_code = #{ cno }
  	   		</otherwise>
  	   </choose> 
-
   	</update>
   	
   	

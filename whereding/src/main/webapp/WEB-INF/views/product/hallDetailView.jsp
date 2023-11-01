@@ -316,6 +316,8 @@
 				<td style="padding: 0% 2%;">
 		            <div id="heart_basket_area">
 		                <div id="like_area" style="width: 50px; height: 50px;">
+                        	<span id="great_count" style="font-size:30px; vertical-align: middle; font-weight: 600; margin-left: 2%">0</span>
+		                
 		                  <img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px; display: none;">
 		                  <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px; display: none;">
 		                </div>
@@ -520,6 +522,7 @@
       			},error:function(){
       				console.log("ajax 좋아요 확인 실패")
       			}
+      			
       		})
       	})
     </script>
@@ -566,10 +569,10 @@
 		// 게시글 삭제
 		function deleteHall(){
 			if(confirm("정말로 삭제 하시겠습니까 ? ")){
-				location.href="deleteHall.bo?hno=${ h.code }"
+				location.href="deleteHall.bo" + '${ h.code }
 			}
 			
-		}
+		}}
 	
     	function selectReplyList(){ // 해당 게시글에 딸린 댓글리스트 조회용 ajax
 			$.ajax({

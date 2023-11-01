@@ -101,6 +101,28 @@
 			width: auto;
 			height: 20px;
 		}
+		
+		  /* 좋아요 바운스 */
+  @-webkit-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
+    40% {-webkit-transform: translateY(-30px) }
+    60% {-webkit-transform: translateY(-20px);}
+  } 
+  @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-30px);}
+      60% {transform: translateY(-20px);}
+  } 
+  .bounce {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-name: bounce;
+      animation-name: bounce;
+  }
+  #heart_basket_area>div{
+  	display: inline-block;
+  }
+		
 
 
 	</style>
@@ -134,7 +156,7 @@
 	<div class="main">
 		<table style="width: 1200px; border-collapse: separate;">
 			<tr>
-				<th colspan="2">
+				<th colspan="3">
 					<h2 style="padding: 0% 2%;" class="hr_style"> ${ c.category }</h2>
 				</th>
 			</tr>
@@ -163,7 +185,7 @@
 					</div>
 
 				</td>
-				<td style="padding: 0% 2%; height: 220px; border: 0px">
+				<td colspan="2" style="padding: 0% 2%; height: 220px; border: 0px">
 					<br>
 					<h2 style="font-weight: 700;">
 						${c.enterprise }
@@ -178,7 +200,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="width: 40%; padding: 0% 2%; vertical-align: text-top;">
+				<td colspan="2" style="width: 40%; padding: 0% 2%; vertical-align: text-top;">
 
 					<div style="font-size: large; margin:5% auto;">${ c.detail }</div>
 					<div id="map" style="width:100%;height:400px; border: 2px solid black; border-radius: 10px; margin: 2% auto;">
@@ -240,6 +262,18 @@
 				</td>
 			</tr>
 			<tr>
+				<td style="padding: 0% 2%;">
+				<div id="heart_basket_area">
+		                <div id="like_area" style="width: 50px; height: 50px;">
+		                  <img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px;">
+		                  <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px; display: none;">
+		                
+		                </div>
+		                <div>
+   		                  <span id="great_count" style="font-size:30px; vertical-align: middle; font-weight: 600; margin-left: 2%">0</span>
+		                </div>
+	               </div>
+				</td>
 				<td style="text-align: right; padding: 0% 2%; height: 60px;">
 					<button class="btn btn-danger" onclick="deleteCollection();"><i class="fas fa-trash"> 삭제</i></button>
 					<button class="btn btn-warning"><i class="fas fa-shopping-cart"> 장바구니</i></button>
@@ -247,7 +281,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<td colspan="3">
 					<div class="tag-section" style="padding: 1%;">
 						<ul style="margin: 0; padding: 0%;">
 							<c:set var="tag" value="${fn:split(c.tagContent,',')}" />
@@ -261,39 +295,6 @@
 
 				</td>
 
-			</tr>
-			<tr>
-				<th colspan="2">
-					<h2>
-						<div style="font-style: italic; padding-left: 1%; height: 50px;">
-							<img src="resources/css/assets/img/products/instagram.png" style="height: 30px;" alt="">
-							instagram
-						</div>
-
-					</h2>
-
-				</th>
-
-			</tr>
-			<tr>
-				<td colspan="2">
-					<div class="instaimg">
-						<div class="row">
-							<div class="col-lg-3 col-md-6">
-								<img src="resources/css/assets/img/products/slide1.png" style="height: 200px;">
-							</div>
-							<div class="col-lg-3 col-md-6">
-								<img src="resources/css/assets/img/products/slide2.png" style="height: 200px;">
-							</div>
-							<div class="col-lg-3 col-md-6">
-								<img src="resources/css/assets/img/products/slide3.png" style="height: 200px;">
-							</div>
-							<div class="col-lg-3 col-md-6">
-								<img src="resources/css/assets/img/products/slide3.png" style="height: 200px;">
-							</div>
-						</div>
-					</div>
-				</td>
 			</tr>
 			<tfoot class="review_area">
 				<tr>
@@ -396,6 +397,95 @@
 			})    			
     	}
 	</script>
+	<script>
+        element1 = document.getElementById("nn");
+        element2 = document.getElementById("yy");
+
+        element1.addEventListener("click", function(e) {
+          e.preventDefault;
+      
+          element1.classList.remove("bounce");
+      
+          element1.offsetWidth = element1.offsetWidth;
+      
+          element1.classList.add("bounce");
+        }, false);
+
+        element2.addEventListener("click", function(e) {
+          e.preventDefault;
+      
+          element2.classList.remove("bounce");
+      
+          element2.offsetWidth = element2.offsetWidth;
+      
+          element2.classList.add("bounce");
+        }, false);
+        
+		function countLike(){
+			$.ajax({
+				url:"count.gr",
+				data:{
+					greatNo:'${ c.code }'
+				},success:function(data){
+					console.log(data)
+					$("#great_count").text(data);
+				},error:function(){
+					console.log("좋아요 카운트 ajax 실패!")
+				}
+			})
+		}
+      $(document).on("click",".glike",function(){
+    	  
+        console.log($(this).attr("id"))
+    	  if($(this).attr("id")=="yy"){
+          // 좋아요 없어짐
+    		  $("#yy").css("display","none");
+    		  $("#nn").css("display","");
+    	  }else{
+          // 좋아요 생김
+    		  $("#yy").css("display","");
+    		  $("#nn").css("display","none");
+        }
+        $.ajax({
+          url:"glike.bo",
+          data:{
+            greatNo:'${ c.code }',
+            userNo:'${ loginMember.userNo }',
+          },success:function(data){
+        	  $("#great_count").text(data);
+        	  
+          },error:function(){
+            console.log("좋아요 ajax 요청 실패!")
+          }
+        })
+      })
+      
+      
+  
+      	$(document).ready(function(){
+      		$.ajax({
+      			url:"chklike.bo",
+      			data:{
+      				greatNo:'${ c.code }',
+      				userNo:'${ loginMember.userNo }'
+      			},success:function(data){
+      				let value = "";
+      				if(data == 'NNNYY'){	// 좋아요 있을때
+                	  value = `<img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px; display: none;">
+                          <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px;">`
+      				}else{	// 좋아요 없을때
+                  	  value = `<img class="glike like_off" src="resources/css/assets/img/heart_n.png" id="nn" style="height: 40px;">
+                          <img class="glike like_on bounce" src="resources/css/assets/img/heart_y.png" id="yy" style="height: 40px; display: none;">`	
+      				}
+      				$("#like_area").html(value);
+      	    		countLike();
+
+      			},error:function(){
+      				console.log("ajax 좋아요 확인 실패")
+      			}
+      		})
+      	})
+    </script>
 	
 
 
