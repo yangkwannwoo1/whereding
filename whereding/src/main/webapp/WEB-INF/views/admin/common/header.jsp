@@ -31,6 +31,14 @@
   <link href="resources/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
+
+	<c:if test="${not empty alertMsg }">
+		<script>
+				alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+
     <!-- ======= Header ======= -->
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">

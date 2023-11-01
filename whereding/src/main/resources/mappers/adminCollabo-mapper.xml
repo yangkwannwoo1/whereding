@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminCollaboMapper">
+	
+	<resultMap type="CollaboRation" id="collaboRationResult">
+		<result column="cp_no" property="cpNo"/>
+		<result column="user_no" property="userNo"/>
+		<result column="user_name" property="userName"/>
+		<result column="cp_title" property="cpTitle"/>
+		<result column="cp_content" property="cpContent"/>
+		<result column="cp_date" property="cpDate"/>
+	</resultMap>
+	
+	
+	<select id="selectCollaboCount" resultType="_int">
+		select count(*)
+		  from collaboration_cp
+	</select>
+	
+	
+	<select id="selectCollaboList" resultMap="collaboRationResult">
+		select 
+			    c.cp_no
+			   ,c.user_no
+			   ,m.grade_no
+               ,m.user_name
+			   ,c.cp_title
+			   ,c.cp_content
+			   ,to_char(c.cp_date, 'YYYY-MM-DD') as cp_date
+      from collaboration_cp c
+      join member m on c.user_no = m.user_no
+      where c.status = 'Y'
+        and m.grade_no = 1
+	</select>
+	
+	<select id="selectCollDetail" resultMap="collaboRationResult">
+		select 
+			    c.cp_no
+			   ,c.user_no
+               ,m.user_name
+			   ,c.cp_title
+			   ,c.cp_content
+			   ,to_char(c.cp_date, 'YYYY-MM-DD') as cp_date
+      from collaboration_cp c
+      join member m on c.user_no = m.user_no
+      where c.status = 'Y'
+        and c.cp_no = #{cpNo}
+	</select>
+	
+	<update id="collaboAccept">
+		update member
+		   set grade_no = 2
+		 where user_no = #{userNo}
+	</update>
+	
+	<update id="collaboDenied">
+		update collaboration_cp
+           set status = 'N'
+         where cp_no = #{cpNo}
+	</update>
+	
+</mapper>

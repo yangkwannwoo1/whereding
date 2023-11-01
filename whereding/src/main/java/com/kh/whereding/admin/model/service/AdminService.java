@@ -2,6 +2,7 @@ package com.kh.whereding.admin.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.whereding.board.model.vo.CollaboRation;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
@@ -58,4 +59,18 @@ public interface AdminService {
  	// 회원탈퇴 서비스(update)
  	int deleteMember(String userId);
 	
+ 	//collabo count
+ 	int collaboListCount();
+ 	
+ 	//collabo List
+ 	ArrayList<CollaboRation> selectCollaboList(PageInfo pi);
+ 	
+ 	//collabo detail
+ 	CollaboRation selectCollDetail(int cpNo);
+ 	
+ 	//collabo accept
+ 	int collaboAccept(int userNo);
+ 	
+ 	//collabo denied
+ 	int collaboDenied(int cpNo);
 }

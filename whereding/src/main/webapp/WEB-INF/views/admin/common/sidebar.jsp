@@ -83,6 +83,12 @@
           <i class="bi bi-envelope"></i>
           <span>답례품 목록</span>
         </a>
+        
+        <li class="nav-item">
+        <a class="nav-link collapsed" href="collabo.ad?cpage=">
+          <i class="bi bi-envelope"></i>
+          <span>협업업체 신청목록</span>
+        </a>
       </li><!-- End Contact Page Nav -->
 
     </ul><!-- End Sidebar-->

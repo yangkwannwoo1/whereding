@@ -21,6 +21,7 @@ CP_DATE
  */
 	private int cpNo;			// 신청글번호
 	private int userNo;			// 회원번호
+	private String userName;
 	private String cpTitle;		// 제목
 	private String cpContent;	// 내용
 	private String cpDate;		// 작성일

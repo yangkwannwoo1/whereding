@@ -254,7 +254,7 @@
                 </ul>
             </div>
         <div class="btn"  align="center">
-            <c:if test="${loginMember.userId eq 'admin' }">
+            <c:if test="${loginMember.gradeNo eq '1'}">
             <button id="add">글작성</button>
             </c:if>
         </div>
