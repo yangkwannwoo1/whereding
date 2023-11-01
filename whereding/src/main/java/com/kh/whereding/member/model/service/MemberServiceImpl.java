@@ -3,16 +3,32 @@ package com.kh.whereding.member.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.mail.HtmlEmail;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -33,10 +49,13 @@ import com.kh.whereding.product.model.vo.Studio;
 public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
-	MemberDao mDao;
+	private MemberDao mDao;
 	
 	@Autowired
-	SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Override
 	public Member loginMember(Member m) {
@@ -207,10 +226,23 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.selectNaverUser(sqlSession, userId);
 	}
 
+	@Override
+	public Member emailCheck(String email) {
+		return mDao.emailCheck(sqlSession, email);
+	}
 	
-	
-	
-
+	//--------------------------------메일발송-----------------------------
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+

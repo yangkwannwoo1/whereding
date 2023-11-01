@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.Gson;
 import com.kh.whereding.gift.model.vo.GiftHistory;
 import com.kh.whereding.gift.model.vo.GiftReview;
 import com.kh.whereding.gift.model.vo.GiftReviewImg;
@@ -40,6 +44,8 @@ import com.kh.whereding.product.model.vo.Studio;
  */
 @Controller
 public class MemberController {
+	@Autowired
+	private static JavaMailSender mailSender;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -431,6 +437,35 @@ public class MemberController {
 			return changeName;
 	}
 	
+	// 회원 ID찾기 (이메일)
+	@RequestMapping("idFind.me")
+	public String idFind() {
+		return "member/idFind";
+	}
 	
+	@ResponseBody
+	@RequestMapping(value="emailCheck.me", produces = "text/html; charset=utf-8")
+	public String emailCheck(String email, Model model) {
+		Member m = mService.emailCheck(email);
+		
+		if (m == null) {
+	        return "가입된 아이디가 없습니다.";
+	    } else {
+	        if (m.getUserId() == null) {
+	            return "가입된 아이디가 없습니다.";
+	        } else {
+	            return "회원님의 아이디는 [" + m.getUserId() + "] 입니다.";
+	        }
+	    }
+		
+	} 
+	
+//	//비번찾기 (이메일)
+//		@RequestMapping("pwdFind")
+//		public void mailSend() {
+//			System.out.println("되냐?");
+//			mService.mailSend();
+//		
+//		}
 	
 }

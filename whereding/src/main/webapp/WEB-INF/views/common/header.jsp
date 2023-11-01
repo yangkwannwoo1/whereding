@@ -220,11 +220,12 @@ font-family: 'Open Sans Condensed', sans-serif;
 					</form>
 						
 						
+						<!--  아이디 찾기 -->
 						<div id="remember-container">
-							<span id="idFind">아이디 찾기</span> <span id="forgotten">비번 찾기</span>
+							<a href="idFind.me"><span id="idFind">아이디 찾기</span></a> <span id="forgotten">비번 찾기</span>
 						</div>
 					
-				
+						<!--  카카오 로그인 버튼 -->
 						<button id = "kakaoLogin" onclick="kakaoLogin();">
 							<img src="https://careerly.co.kr/_next/static/images/img_symbol-kakao-b1fe6197135e5beead71b1a90f8e2b7d.png" width="100px"; height="50px";>
 						</button>
@@ -232,6 +233,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 							<input type="hidden" id="kakaoInput" name="kakaoInput"/>
 						</form>
 						
+						<!--  네이버 로그인 버튼 -->
 						<button id = "naverLogin" onclick="naverLogin();">
 							<img src="https://image.edaily.co.kr/images/Photo/files/NP/S/2014/04/PS14040100352.jpg" width="100px"; height="50px";>
 						</button>
