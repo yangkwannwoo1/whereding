@@ -26,6 +26,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where status = 'Y'
 	</select>
 	
+	<select id="selectMember" resultMap="memberResult">
+		select
+		        user_no
+		       ,user_id
+		       ,user_pwd
+		       ,user_name
+		       ,to_char(BIRTHDAY, 'YYYY-MM-DD') as "BIRTHDAY"
+		       ,gender
+		       ,phone
+		       ,email
+		       ,grade_no
+		  from member
+         where user_no = #{ userNo }
+	</select>
+	
 	<select id="selectList" resultMap="memberResult">
 		select
 		        user_no
@@ -71,8 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="deleteMember">
 		update member
 		   set status = 'N'
-		 WHERE user_id = #{userId}
-		  and USER_PWD = #{userPwd}
+		 WHERE user_no = #{userNo}
 	</update>
 	
 	<select id="adminMember" resultMap="memberResult">
@@ -101,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	,#{phone}
 	  	,#{email}
 	  	,'Y'
-	  	,'1'
+	  	,'3'
 	  )
 	</select>
 	
@@ -122,6 +136,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		   and status = 'Y'
 	</select>
 	
+	<update id="updateMember">
+		UPDATE member
+		   SET 
+		   	   BIRTHDAY = #{birthDay}
+		   	 , grade_no = #{ gradeNo }
+		     , GENDER = #{gender}
+		     , PHONE = #{phone}
+		     , EMAIL = #{email}
+		 where USER_NO = #{userNo}
+	</update>
+	
+	<update id="updatePassword">
+		UPDATE member
+		   SET 
+		   	   user_pwd = #{ encPwd }
+		 where USER_NO = #{ userNo }
+	</update>
 	
 </mapper>
 

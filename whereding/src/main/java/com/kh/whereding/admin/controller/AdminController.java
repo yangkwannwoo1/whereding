@@ -2,6 +2,7 @@ package com.kh.whereding.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,7 @@ public class AdminController {
 	
 	@Autowired
 	private AdminServiceImpl AService;
+
 	
 	@RequestMapping("admin.ad")
 	public String DaskBoardForm(Model model) {
@@ -62,13 +65,27 @@ public class AdminController {
 
 			int listCount = AService.selectListCount();
 
-			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 5);
+			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 10);
 			
 			ArrayList<Member> list = AService.selectList(pi);
 			mv.addObject("pi", pi).addObject("list", list).setViewName("admin/memberListForm");
 
 			return mv;
+	}
+	
+	
+	// 회원탈퇴
+	@RequestMapping(value = "mdelete.ad")
+	public String deleteMember(String userNo, HttpSession session, Model model) {
+		int result = AService.deleteMember(userNo);
+		if(result > 0){
+			session.setAttribute("alertMsg", "성공적으로 회원이 탈퇴되었습니다.");
+			return "redirect:mList.ad";
 			
+		}else { 
+			model.addAttribute("errorMsg", "회원정보 변경 실패");
+			return "common/errorPage";
+		}
 	}
 	
 	//회원 목록 다운로드 (excel)
@@ -135,9 +152,10 @@ public class AdminController {
 	    }
 	   
 	   @RequestMapping("mdetail.ad")
-		public String MemberInsertForm() {
-
-			return "admin/memberDetail";
+		public ModelAndView MemberInsertForm(String userNo, ModelAndView mav) {
+		   	Member m = AService.selectMember(userNo);
+		   	mav.addObject("m",m).setViewName("admin/memberDetail");
+			return mav;
 		}
  
 	   /** qna 리스트 페이지
@@ -199,36 +217,44 @@ public class AdminController {
 
 		// 회원수정
 		@RequestMapping("update.ad")
-		public String updateMember(Member m, Model model, HttpSession session) {
-			
+		public String updateMember(Member m, Model model, HttpSession session, String mno, String igrade) {
 			int result = AService.updateMember(m);
 			
 			if(result > 0){
-				session.setAttribute("adminMember", AService.adminMember(m));
-				
-				session.setAttribute("alertMsg", "성공적으로 회원정보 변경되었쏘.");
-				
-				return "redirect:memberDetail";
+				session.setAttribute("alertMsg", "성공적으로 회원정보가 수정되었습니다.");
+				return "redirect:/mdetail.ad?userNo=" + m.getUserNo();
 				
 			}else { 
 				
-				model.addAttribute("errorMsg", "회원정보 변경 실패가 되었소.");
+				model.addAttribute("errorMsg", "회원정보 변경 실패");
 				return "common/errorPage";
 			}
 		}
 		
-		
-		@RequestMapping("delete.ad")
-		public String deleteMember(String userId, HttpSession session, Model model) {
+		// 비밀번호 변경
+		@RequestMapping("change.pw")
+		public String updatePassword(String newpassword, String userNo, Model model, HttpSession session) {
+			System.out.println(newpassword);
+			System.out.println(userNo);
+			BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
+			String encPwd = bcryptPasswordEncoder.encode(newpassword);
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("userNo", userNo);
+			map.put("encPwd", encPwd);
 			
-				int result = AService.deleteMember(userId);
+			System.out.println(map);
+			int result = AService.updatePassword(map);
+			
+			if(result > 0){
+				session.setAttribute("alertMsg", "성공적으로 회원정보가 수정되었습니다.");
+				return "redirect:/mdetail.ad?userNo=" + userNo;
 				
-					session.removeAttribute("loginMember");
-					
-					session.setAttribute("alertMsg", "성공적으로 탈퇴");
-					
-					return "redirect:/";
-					
+			}else { 
+				
+				model.addAttribute("errorMsg", "회원정보 변경 실패");
+				return "common/errorPage";
+			}
 		}
+		
 }
 			

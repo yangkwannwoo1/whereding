@@ -1,11 +1,11 @@
 package com.kh.whereding.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
-import com.kh.whereding.admin.model.vo.VisitCountVO;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
 
@@ -13,6 +13,8 @@ public interface AdminService {
 	
 	// member
 	int selectListCount();
+	
+	Member selectMember(String userNo);
 	
 	ArrayList<Member> selectList(PageInfo pi);
 	
@@ -58,4 +60,6 @@ public interface AdminService {
  	// 회원탈퇴 서비스(update)
  	int deleteMember(String userId);
 	
+ 	// 비밀번호 변경
+ 	int updatePassword(HashMap<String, String> map);
 }
