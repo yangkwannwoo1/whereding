@@ -1,6 +1,7 @@
 package com.kh.whereding.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import com.kh.whereding.admin.model.dao.AdminDao;
 import com.kh.whereding.board.model.vo.Notice;
 import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
-import com.kh.whereding.admin.model.vo.VisitCountVO;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
 
@@ -112,9 +112,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int deleteMember(String userId) {
+	public int deleteMember(String userNo) {
 		
-		return aDao.deleteMember(userId, sqlSession);
+		return aDao.deleteMember(userNo, sqlSession);
 	}
 
 	@Override
@@ -130,6 +130,16 @@ public class AdminServiceImpl implements AdminService {
 
 		return aDao.detailMember(id, sqlSession);
 	
+	}
+
+	@Override
+	public Member selectMember(String userNo) {
+		return aDao.selectMember(userNo, sqlSession);
+	}
+
+	@Override
+	public int updatePassword(HashMap<String, String> map) {
+		return aDao.updatePassword(map, sqlSession);
 	}
 
 }

@@ -29,8 +29,36 @@
 
   <!-- Template Main CSS File -->
   <link href="resources/assets/css/style.css" rel="stylesheet">
+  
+  	<!-- JavaScript -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	
+  	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<style>
+.alertify .ajs-dialog {
+    max-width: 30% !important;
+}
+.ajs-dialog *{
+	background-color: #f4f4f4 !important;
+}
+</style>
 </head>
 <body>
+
+	<c:if test="${ not empty alertMsg }">
+		<script>
+			<!-- alert("${ alertMsg }"); -->
+			alertify.alert("${ alertMsg }");
+		</script>
+		<!-- session 제거를 하지 않으면 header.jsp를 포함하는 모든 메뉴에서 이 메시지가 뜬다. -->
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+	
     <!-- ======= Header ======= -->
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
@@ -211,6 +239,8 @@
     
     <!-- End Header -->
     <!-- Vendor JS Files -->
+    	<!-- jquery -->
+  <script src="resources/css/assets/js/jquery-1.11.3.min.js"></script>
   <script src="resources/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="resources/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="resources/assets/vendor/chart.js/chart.umd.js"></script>

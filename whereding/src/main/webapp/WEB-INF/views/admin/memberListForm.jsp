@@ -10,6 +10,12 @@
 
   <title>회원조회</title>
   
+  <style>
+	#member_info th, td{
+		text-align: center;
+	}
+	
+  </style>
 </head>
 
 <body>
@@ -40,11 +46,11 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">회원 전체 조회</h5>
-              <button type="button" style="border-radius: 10px; width: 100px; height: 50px;" onclick="location.href='list.ad'">엑셀로 보기</button><br><br>
+              <button type="button" class="btn btn-success btn-small" onclick="location.href='list.ad'">Excel</button><br><br>
               
               <!-- Table with stripped rows -->
               <table class="table datatable">
-                <thead>
+                <thead align="center">
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col">이름</th>
@@ -54,49 +60,66 @@
                     <th scope="col">성별</th>
                     <th scope="col">전화번호</th>
                     <th scope="col">이메일</th>
-                    <th scope="col">상세보기</th>
+                    <th scope="col">회원관리</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="member_info">
                 <c:forEach var="m" items="${ list }"> 
                   <tr>
                     <th scope="row">${ m.userNo }</th>
                     <td>${ m.userName }</td>
                     <td>${ m.userId }</td>
-                    <td>${ m.gradeNo }</td>
+                    <td>
+                    	<c:choose>
+                    		<c:when test="${ m.gradeNo eq '1' }">
+                    			회원
+                    		</c:when>
+                    		<c:when test="${ m.gradeNo eq '2' }">
+                    			협력업체
+                    		</c:when>
+                    		<c:otherwise>
+                    			관리자
+                    		</c:otherwise>
+                    	</c:choose>
+                    
+                    
+                    </td>
                     <td>${ m.birthDay }</td>
                     <td>${ m.gender }</td>
                     <td>${ m.phone }</td>
                     <td>${ m.email }</td>
-                    <td><button onclick="location.href='mdetail.ad?userNo=${m.userNo}'" type="button" style="border-radius: 10px;">상세보기</button></td>
+                    <td>
+                    <c:if test="${loginMember.userNo ne m.userNo }">
+                    <button class="btn btn-outline-info" onclick="location.href='mdetail.ad?userNo=${m.userNo}'" type="button">상세보기</button>
+                    <button class="btn btn-outline-danger" onclick="deleteFn();">추방</button>
+                    </c:if>
+                    <script>
+                    	function deleteFn(){
+                    		alertify.confirm('정말로 추방하시겠습니까?',function(){ location.href = "mdelete.ad?userNo=${m.userNo}"; });
+	                    		                    			
+                    	}
+                    </script>
+                    </td>
                   </tr>
+
                 </c:forEach>
                 </tbody>
               </table>
+              
               <!-- End Table with stripped rows -->
-						<nav aria-label="Page navigation example">
+		<!-- <nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
-				<c:choose>
-					<c:when test="${ pi.currentPage eq 1 }">
-						<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-					</c:when>     
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
-					</c:otherwise>
-				</c:choose>   
+				<li class="page-item disabled">
+					<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+				</li>
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ p }">${ p }</a></li>
 				</c:forEach>    
-				<c:choose>
-					<c:when test="${ pi.currentPage eq pi.maxPage }">
-						<li class="page-item disabled"><a class="page-link" href="">Next</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="mList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
-					</c:otherwise>	
-				</c:choose>
-		  	</ul>
-		</nav><!-- End Centered Pagination -->
+					<li class="page-item">
+						<a class="page-link" href="">Next</a>
+					</li>
+		  		</ul>
+		</nav>-->
             </div>
           </div>
 

@@ -35,15 +35,7 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center" style="margin: 150px;">
 
               <img src="resources/assets/img/slide2.png" alt="Profile" class="rounded-circle">
-              <input type="hidden" name="userNo" value="${ m.userNo }">
               <h2>${ m.userName }</h2>
-              <h3>${ m.gradeNo }</h3>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
             </div>
           </div>
 
@@ -59,29 +51,19 @@
                 <li class="nav-item">
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-edit">회원정보변경</button>
                 </li>
-
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">비밀번호변경</button>
                 </li>
-
               </ul>
               <div class="tab-content pt-2">
 
                 <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
                   <!-- Profile Edit Form -->
                   <form action="update.ad" method="post">
-                    <input type="hidden" value="userNo"/>
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">아이디</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="${ m.userId }" disabled>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="password" class="col-md-4 col-lg-3 col-form-label">비밀번호</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input type="password" value="********" class="form-control" disabled>
+                        <input name="userName" type="text" class="form-control" id="fullName" value="${ m.userId }" disabled>
                       </div>
                     </div>
 
@@ -89,6 +71,7 @@
                       <label for="name" class="col-md-4 col-lg-3 col-form-label">이름</label>
                       <div class="col-md-8 col-lg-9">
                         <input type="text" name="userName" class="form-control" value="${ m.userName }">
+                        <input type="hidden" name="userNo" class="form-control" value="${ m.userNo }">                        
                       </div>
                     </div>
 
@@ -99,16 +82,20 @@
                       </div>
                     </div>
 
-                   <label for=""> &nbsp; Gender : </label> &nbsp;&nbsp;
-                   <input type="radio" name="gender" id="Male" value="M">
-                   <label for="Male">신랑</label> &nbsp;&nbsp;
-                   <input type="radio" name="gender" id="Female" value="F">
-                   <label for="Female">신부</label><br>
-                   
+                    <div class="row mb-3">
+                      <label for="gender" class="col-md-4 col-lg-3 col-form-label">성별</label>
+                      <div class="col-md-8 col-lg-9" id="gender">
+		                   <input type="radio" name="gender" id="Male" value="M">
+		                   <label for="Male">신랑</label> &nbsp;&nbsp;
+		                   <input type="radio" name="gender" id="Female" value="F">
+		                   <label for="Female">신부</label>
+                      </div>
+                    </div>
+
                   	<c:if test="${ not empty m.gender }">
                   		<script>
                   			$(function(){
-                  				$(".form-group input[value=${ m.gender }]").attr("checked", true);
+                  				$("#gender input[value=${ m.gender }]").attr("checked", true);
                   			})
                   		</script>
                   	</c:if>
@@ -121,6 +108,17 @@
                     </div>
 
                     <div class="row mb-3">
+                      <label for="grade" class="col-md-4 col-lg-3 col-form-label">등급</label>
+                      <div class="col-md-8 col-lg-9">
+			               <select class="form-select" id="validationDefault04" name="gradeNo" required>
+			                 <option selected value="1">회원</option>
+			                 <option value="2">협력업체</option>
+			                 <option value="3">관리자</option>
+		               	</select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">이메일</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="email" type="email" class="form-control" id="Email" value="${ m.email }">
@@ -128,8 +126,8 @@
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">회원정보변경</button> &nbsp;
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteForm">회원추방</button>
+                      <button type="submit" class="btn btn-primary">회원정보수정</button> &nbsp;
+                      <!-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteForm">회원추방</button> -->
                     </div>
                   </form><!-- End Profile Edit Form -->
                   
@@ -161,31 +159,38 @@
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- 비밀번호변경 Form -->
-                  <form action="update.ad" method="post">
+                  <form action="change.pw" method="post">
 
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">현재 Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">새로운 Password</label>
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">새로운 비밀번호</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newpassword" type="password" class="form-control" id="newPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">새로운 Password를 입력해주세요.</label>
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">비밀번호 확인</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                      <span id="pwNeq" style="color:red; opacity: 0;">비밀번호가 일치하지 않습니다.</span>
                       </div>
                     </div>
+                    <script>
+                    	$("#renewPassword").keyup(function(){
+                    		$("#pwNeq").css("opacity",1);                    			
+                    		let newPw = $("#newPassword").val();
+                    		if(newPw == $(this).val()){
+	                    		$("#pwNeq").css("opacity",0);
+	                    		$("#chPWbtn").attr("disabled",false)
+                    		}else{
+	                    		$("#chPWbtn").attr("disabled","disabled")
+                    		}
+                    	})
+                    
+                    </script>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">비밀번호 변경</button>
+                      <button type="submit" class="btn btn-primary" id="chPWbtn" disabled="disabled">비밀번호 변경</button>
                     </div>
                   </form><!-- End Change Password Form -->
 

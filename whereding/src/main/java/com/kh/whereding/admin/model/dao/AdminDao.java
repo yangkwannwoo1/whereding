@@ -1,6 +1,7 @@
 package com.kh.whereding.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -114,9 +115,9 @@ public class AdminDao {
 		return sqlSession.update("adminMemberMapper.updateMember", m);//
 	}
 	
-	public int deleteMember(String userId,SqlSessionTemplate sqlSession) {
+	public int deleteMember(String userNo,SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.update("adminMemberMapper.deleteMember", userId);
+		return sqlSession.update("adminMemberMapper.deleteMember", userNo);
 	}
 	
 	public Member adminMember(SqlSessionTemplate sqlSession,Member m) {
@@ -128,7 +129,14 @@ public class AdminDao {
 		
 		return sqlSession.selectOne("adminMemberMapper.detailMember", id);
 	}
+	
+	public Member selectMember(String userNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMemberMapper.selectMember", userNo);
+	}
 
+	public int updatePassword(HashMap<String, String> map, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("adminMemberMapper.updatePassword",map);
+	}
 
 
 }
