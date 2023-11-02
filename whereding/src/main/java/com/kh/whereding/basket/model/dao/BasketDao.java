@@ -27,4 +27,16 @@ public class BasketDao {
 	public Gift selectbasketOne(SqlSessionTemplate sqlSession, String giftNo) {
 		return sqlSession.selectOne("basketMapper.selectbasketOne", giftNo);
 	}
+
+	public int deleteOrderBasket(SqlSessionTemplate sqlSession, Gift gt) {
+		return sqlSession.delete("basketMapper.deleteOrderBasket", gt);
+	}
+
+	public int insertGiftHistiry(SqlSessionTemplate sqlSession, Gift gt) {
+		return sqlSession.insert("basketMapper.insertGiftHistiry", gt);
+	}
+
+	public int insertPayment(SqlSessionTemplate sqlSession, Gift gt) {
+		return sqlSession.insert("basketMapper.insertPayment", gt);
+	}
 }

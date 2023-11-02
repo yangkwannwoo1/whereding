@@ -88,4 +88,43 @@
 		 where status = 'Y'
 		   and gift_no = #{giftNo}
   	</select>
+  	<delete id="deleteOrderBasket">
+  		delete basket
+		 where user_no = #{userNo}
+		   and ref_no = #{giftNo}
+  	</delete>
+  	<insert id="insertGiftHistiry">
+  	insert 
+	  INTO gift_history
+	     (
+	       GHIS_NO
+	     , GIFT_NO
+	     , USER_NO
+	     , BUYMETHOD_NO
+	     , PIECE
+	     )
+	values
+	     (
+	       SEQ_GHIS.nextval
+	     , #{giftNo}
+	     , #{userNo}
+	     , 1
+	     , #{orderCount}
+	     )
+  	</insert>
+  	<insert id="insertPayment">
+  		insert
+		  into payment
+		     (
+		       GHIS_NO
+		     , TOTAL_PAY
+		     , DISCOUNT
+		     )
+		values
+		     (
+		       SEQ_GHIS.CURRVAL
+		     , #{giftPrice}
+		     , 0
+		     )
+  	</insert>
 </mapper>

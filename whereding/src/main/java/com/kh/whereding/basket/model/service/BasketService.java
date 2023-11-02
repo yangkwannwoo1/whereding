@@ -1,5 +1,6 @@
 package com.kh.whereding.basket.model.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.kh.whereding.basket.model.vo.Basket;
@@ -18,5 +19,11 @@ public interface BasketService {
 	
 	// 결제 할 제품 정보 조회
 	Gift selectbasketOne(String giftNo);
+
+	int deleteOrderBasket(Gift gt);
+
+	int insertGiftHistiry(Gift gt);
+
+	void refund(String access_token) throws IOException;
 	
 }

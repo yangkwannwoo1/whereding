@@ -147,8 +147,6 @@
 		     , GIFT_NO
 		     , USER_NO
 		     , BUYMETHOD_NO
-		     , PAYMENT_NO
-		     , h.CATEGORY_NO
 		     , to_char(h.CREATE_DATE, 'YYYY-MM-DD') as "h.CREATE_DATE"
 		     , GIFT_PRICE
 		     , GIFT_NAME
@@ -162,6 +160,8 @@
 		  left JOIN product_img ON (GIFT_NO = PRODUCT_NO)
 		  left join gift_review using (GHIS_NO)
 		 where user_no = #{userNo}
+		  order 
+		  	 by GHIS_NO desc
 	</select>
 	<insert id="giftReview">
 	 INSERT 

@@ -18,19 +18,10 @@
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<!-- 아이콘찾기 -->
-<link rel="stylesheet" href="assets/css/all.min.css">
-<!-- 부트스트랩 -->
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-<!-- animate css -->
-<link rel="stylesheet" href="assets/css/animate.css">
-<!-- mean menu css -->
-<link rel="stylesheet" href="assets/css/meanmenu.min.css">
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!-- 아래 제이쿼리는 1.0이상이면 원하는 버전을 사용하셔도 무방합니다. -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <style>
 #product {
 	width: 1000px;
@@ -261,6 +252,18 @@
 .delivery {
 	position: absolute;
 }
+#paymentButton{
+	width: 100%;
+	height: 56px;
+	font-size: 26px;
+	border-width: 1px;
+	background-image: -webkit-linear-gradient(#ed2f2f, #F28213);
+	color: #fff;
+	box-sizing: border-box;
+	margin-top: 10px;
+	border-radius: 25px;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -273,8 +276,9 @@
 				<nav>
 					<h1>주문결제</h1>
 				</nav>
-				<form action="#">
+				<form action="orderCompleted.bk" method="post" id="orderCompleted">
 					<table border="0">
+						<!-- <form action="orderCompleted.bk" method="post" id="orderCompleted"> -->
 						<tr>
 							<th>답례품명</th>
 							<th>총수량</th>
@@ -283,6 +287,7 @@
 						<tr class="empty">
 							<td colspan="7">장바구니에 상품이 없습니다.</td>
 						</tr>
+						<input type="hidden" name="userNo" value="${loginMember.userNo}">
 						<c:forEach var="g" items="${gift}">
 							<tr>
 								<td><article>
@@ -295,7 +300,11 @@
 								<td>${g.orderCount }</td>
 								<td>${g.giftPrice }</td>
 							</tr>
+							<input type="hidden" name="giftNo" value="${g.giftNo}">
+							<input type="hidden" name="orderCount" value="${g.orderCount}">
+							<input type="hidden" name="giftPrice" value="${g.giftPrice}">
 						</c:forEach>
+					<!-- </form> -->
 					</table>
 					<div class="final">
 						<h2>최종결제 정보</h2>
@@ -325,33 +334,45 @@
 								<td>${totalAmount}원</td>
 							</tr>
 						</table>
-						<input type="button" value="결제" id="paymentButton">
+						<input type="button" value="결제"  id="paymentButton">
 						<script>
 						document.getElementById('paymentButton').addEventListener('click', function() {
-						    // 필수 필드 값을 가져오기
+						
+							// 필수 필드 값을 가져오기
 						    var orderer = document.getElementById('name').value;
 						    var phone = document.getElementById('phone').value;
 						    var zip = document.getElementById('Postal').value;
 						    var address = document.getElementById('address').value;
-						
+							
+							
+
 						    // 필수 필드의 누락 여부 확인
 						    if (orderer === '' || phone === '' || zip === '' || address === '') {
 						        // 필수 정보가 누락된 경우 알림 표시
 						        alert('모든 필수 정보를 입력하세요.');
 						    } else {
 						        // 모든 필수 정보가 입력된 경우 결제 진행
-						        var selectedPaymentMethod = document.querySelector('input[name="payment"]:checked').value;
-						        
+						        var selectedPaymentMethod = $('input[name="payment"]:checked').val()
+								
 						        if (selectedPaymentMethod === 'type3') {
 						            // 신용카드로 결제 시 실행하는 로직 (이 예제에서는 iamport 함수 호출)
 						            iamport();
-						        }
-						        // 다른 결제 방법에 대한 로직 추가 가능
+								}else if(selectedPaymentMethod === 'type4'){
+									
+								
+								}else{
+									alert("결제방식을 선택해주세요");
+								}
+
+						        
 						    }
 						});
 						</script>
 						<script>
 							function iamport(){
+								console.log("넘어가");
+										
+
 								//가맹점 식별코드
 								IMP.init('imp87535328');
 								IMP.request_pay({
@@ -359,38 +380,29 @@
 								    pay_method : 'card',
 								    merchant_uid : 'merchant_' + new Date().getTime(),
 								    name : '웨어딩_답례품' , //결제창에서 보여질 이름
-								    amount : ${totalAmount}, //실제 결제되는 가격
-								    buyer_email : 'iamport@siot.do',
-								    buyer_name : $("#name").val(),
-								    buyer_tel : $("#phone").val(),
-								    buyer_addr : $("#address").val(),
-								    buyer_postcode : $("#Postal").val()
-								}, function(rsp) {
-									console.log(rsp);
-									// 결제검증
-									$.ajax({
-							        	type : "POST",
-							        	url : "/verifyIamport/" + rsp.imp_uid 
-							        }).done(function(data) {
-							        	
-							        	console.log(data);
-							        	// 여기서 컨트롤러 타게 해줘야함
-							        	 // ${loginMember.userNo}와 ${gift} 데이터를 URL 매개변수로 전달
-								        var userNo = ${loginMember.userNo}; // 사용자 번호
-								        var giftData = JSON.stringify(${gift}); // ${gift} ArrayList 데이터를 JSON 문자열로 변환
-								        var redirectUrl = "orderCompleted.bk?userNo=" + userNo + "&giftData=" + encodeURIComponent(giftData);
-								        
-								        // AJAX로 페이지 이동
-								        window.location.href = redirectUrl;
-							        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
-							        	if(rsp.paid_amount == data.response.amount){
-								        	alert("결제 및 결제검증완료");
-							        	} else {
-							        		alert("결제 실패");
-							        	}
-							        });
+									amount : ${totalAmount},  //결제 가격
+									buyer_email : '${loginMember.email}',
+									buyer_name : $("#name").val(),
+									buyer_tel : $("#phone").val(),
+									buyer_addr :   $("#address").val(),
+									buyer_postcode : $("#Postal").val()
+								}, function (rsp) { // callback => 결제 성공시 실행되는 함수 rsp에는 성공여부, 결제정보, 에러 정보등등
+										console.log(rsp);
+
+										console.log(rsp.imp_uid);
+										console.log(rsp.merchant_uid);
+									
+								
+									if (rsp.success) {//결제 성공시 
+										console.log("성공")
+										
+										// $("#orderCompleted").submit();
+								
+									} else {//결제 실패시 
+										console.log("실패")
+									}
 								});
-							}
+								}
 						</script>
 
 
@@ -415,11 +427,11 @@
 						<table>
 							<tr>
 								<td>주문자</td>
-								<td><input type="text" name="orderer" id="name"></td>
+								<td><input type="text" name="orderer" id="name" value="${loginMember.userName}"></td>
 							</tr>
 							<tr>
 								<td>휴대폰</td>
-								<td><input type="text" name="hp" id="phone"> <span>- 포함
+								<td><input type="text" name="hp" id="phone" value="${loginMember.phone}"> <span>- 포함
 										입력</span></td>
 							</tr>
 							<tr>

@@ -33,4 +33,6 @@ COUNT
 	private String img3;
 	private String status;
 	private int orderCount;
+	private int userNo;
+	
 }

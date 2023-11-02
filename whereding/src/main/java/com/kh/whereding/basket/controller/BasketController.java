@@ -26,11 +26,11 @@ public class BasketController {
 	@ResponseBody
 	@RequestMapping(value = "blist.ba", produces = "application/json; charset=utf-8")
 	public String ajaxBasketList(String userNo) {
-		System.out.println(userNo);
+//		System.out.println(userNo);
 		ArrayList<Basket> list = bService.selectBasketList(userNo);
 		
 		for(Basket b : list) {
-			System.out.println(b);
+//			System.out.println(b);
 		}
 				
 		return new Gson().toJson(list);
@@ -55,11 +55,11 @@ public class BasketController {
 	@ResponseBody
 	@RequestMapping(value = "cplist.ba", produces = "application/json; charset=utf-8")
 	public String ajaxCouponList(String userNo) {
-		System.out.println(userNo);
+//		System.out.println(userNo);
 		ArrayList<Coupon> list = bService.selectCouponList(userNo);
 		
 		for(Coupon c : list) {
-			System.out.println(c);
+//			System.out.println(c);
 		}
 				
 		return new Gson().toJson(list);

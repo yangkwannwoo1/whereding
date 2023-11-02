@@ -208,9 +208,9 @@ public class MemberController {
 	// 답례품 판매내역
 	@RequestMapping(value = "giftOredrList.me")
 	public String giftOrderList(Member m, HttpSession session) {
-		System.out.println(m);
+//		System.out.println(m);
 		ArrayList<GiftHistory> gh = mService.giftHistoryList(m);
-		System.out.println(gh);
+//		System.out.println(gh);
 		
 		if(gh != null) {
 			session.setAttribute("gh",gh);

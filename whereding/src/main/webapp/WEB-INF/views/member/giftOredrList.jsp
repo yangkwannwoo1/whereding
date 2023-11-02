@@ -7,6 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원정보 변경</title>
+    
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
 
     <!-- 필요한 스타일시트 및 스크립트 링크 추가 -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -493,6 +499,12 @@
                 $(this).nextAll('.star').text("☆");
             });
         });
+    </script>
+    <button onclick="ttest();">버튼</button>
+    <script>
+        function ttest(){
+            location.href = "test.ts";
+        }
     </script>
 </body>
 </html>
