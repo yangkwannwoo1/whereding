@@ -30,6 +30,7 @@ import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.common.template.Pagenation;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
+import com.kh.whereding.member.model.vo.Review;
 
 @Controller
 public class AdminController {
@@ -303,6 +304,25 @@ public class AdminController {
 			return "redirect:/";
 		}
 		
+		@RequestMapping("hallReview.ad")
+		public String selectHallReview(Model model){
+			ArrayList<Review> reList = AService.selectHallReview();
+			ArrayList<Review> stList = AService.selectStudioReview();
+			ArrayList<Review> drList = AService.selectDressReview();
+			ArrayList<Review> maList = AService.selectMakeupReview();
+			
+			model.addAttribute("reList", reList);
+			model.addAttribute("stList", stList);
+			model.addAttribute("drList", drList);
+			model.addAttribute("maList", maList);
+			return "admin/productReview";
+		}
+		
+		@RequestMapping("deleteReview")
+		public String deleteReview(@RequestParam("reviewNo") int reviewNo) {
+			int result = AService.deleteReview(reviewNo); 
+			return "redirect:hallReview.ad";
+		}
 		
 }
 		

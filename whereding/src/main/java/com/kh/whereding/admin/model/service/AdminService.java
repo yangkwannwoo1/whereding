@@ -9,6 +9,7 @@ import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
+import com.kh.whereding.member.model.vo.Review;
 
 public interface AdminService {
 	
@@ -77,4 +78,8 @@ public interface AdminService {
  	
  	//collabo denied
  	int collaboDenied(int cpNo);
+ 	
+ 	//hall Review List
+ 	ArrayList<Review> selectHallReview();
+ 	
 }

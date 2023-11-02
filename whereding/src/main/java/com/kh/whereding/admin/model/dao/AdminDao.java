@@ -13,6 +13,7 @@ import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
+import com.kh.whereding.member.model.vo.Review;
 
 @Repository
 public class AdminDao {
@@ -163,6 +164,26 @@ public class AdminDao {
 
 	public int collaboDenied(SqlSessionTemplate sqlSession, int cpNo) {
 		return sqlSession.update("adminCollaboMapper.collaboDenied", cpNo);
+	}
+
+	public ArrayList<Review> selectHallReview(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("adminProductMapper.selectHallReview");
+	}
+
+	public ArrayList<Review> selectStudioReview(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("adminProductMapper.selectStudioReview");
+	}
+
+	public ArrayList<Review> selectDressReview(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("adminProductMapper.selectDressReview");
+	}
+
+	public ArrayList<Review> selectMakeupReview(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("adminProductMapper.selectMakeupReview");
+	}
+
+	public int deleteReview(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.delete("adminProductMapper.deleteReview", reviewNo);
 	}
 	
 
