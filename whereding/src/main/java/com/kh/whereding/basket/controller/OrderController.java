@@ -32,7 +32,7 @@ public class OrderController {
 	
 	@RequestMapping(value = "/order.bk", method = RequestMethod.POST)
 	public String processOrder(@RequestParam("userNo") int userNo, @RequestParam("selectedProducts") String selectedProductsJson, HttpSession session) throws IOException, IOException {
-	  
+		System.out.println("order탔다");
 	        // ObjectMapper를 사용하여 JSON 문자열을 Gift 객체 배열로 파싱
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        Gift[] selectedProducts = objectMapper.readValue(selectedProductsJson, Gift[].class);
@@ -55,6 +55,16 @@ public class OrderController {
 
 	        return "basket/orderListView";
 	    
+	}
+	@RequestMapping(value = "quickOrder.bk")
+	public String quickOrder(@RequestParam("giftNo")String[] giftNo,@RequestParam("count")int[] count,HttpSession session) {
+		
+		for(int i=0; i<giftNo.length;i++) {
+			System.out.println("giftNo@@@@@@@@@@"+giftNo[i]);
+			System.out.println("count@@@@@@@@@@"+count[i]);
+		}
+		
+		return"";
 	}
 	
 	@RequestMapping(value = "orderOne.bk")
