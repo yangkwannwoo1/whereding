@@ -139,10 +139,11 @@
 								                let html = "";
 								                
 								                $(".product-lists").empty();
-								                $(".product-lists").css("height", "1300px");
+								                $(".product-lists").css("height", "900px");
 								                $(".pagination").empty();
 								                for (let i = 0; i < data.length; i++) {
 								                    let gift = data[i];
+								                    
 								                    html += '<div class="col-lg-4 col-md-6 text-center">';
 								                    html += '<div class="single-product-item">';
 								                    html += '<div class="product-image">';
