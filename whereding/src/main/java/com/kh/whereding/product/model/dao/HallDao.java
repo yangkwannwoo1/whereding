@@ -10,6 +10,7 @@ import com.kh.whereding.common.model.vo.Attachment;
 import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.product.model.vo.Hall;
+import com.kh.whereding.product.model.vo.ProductCollectionReview;
 
 @Repository
 public class HallDao {
@@ -52,4 +53,7 @@ public class HallDao {
 		return sqlSession.selectOne("hallMapper.deletehall", hno);
 	}
 
+	public ArrayList<ProductCollectionReview> selectReviewList(String hno, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("hallMapper.selectReviewList", hno);
+	}
 }

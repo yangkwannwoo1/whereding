@@ -260,15 +260,16 @@
 	<select id="selectRsvList" resultMap="reservationResultSet">
 		select 
 		       company_no
-		     , s_enterprise || d_enterprise || m_enterprise as enterprise 
-		     , s_address || d_address || m_address as address
-		     , s_phone || d_phone || m_phone as phone
+		     , s_enterprise || d_enterprise || m_enterprise || h_enterprise as enterprise 
+		     , s_address || d_address || m_address || h_address as address
+		     , s_phone || d_phone || m_phone || h_phone as phone
 		     , img_path || img_1 as filepath
 		  from rsv_basket
 		  left join studio s on (company_no = s_code)
 		  left join dress d on (company_no = d_code)
 		  left join makeup m on (company_no = m_code)
 		  left join product_img on (company_no = product_no)
+          left join hall on (company_no = h_code)
 		 where user_no = #{userNo}
 	</select>
 	

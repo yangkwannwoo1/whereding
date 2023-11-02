@@ -48,4 +48,16 @@ public class CommonDao {
 	public int deleteBasket(SqlSessionTemplate sqlSession, Basket b) {
 		return sqlSession.delete("commonMapper.deleteBasket", b);
 	}
+
+	public int checkPBasket(SqlSessionTemplate sqlSession, Basket b) {
+		return sqlSession.selectOne("commonMapper.checkPBasket", b);
+	}
+	
+	public int insertPBasket(SqlSessionTemplate sqlSession, Basket b) {
+		return sqlSession.insert("commonMapper.insertPBasket", b);
+	}
+	
+	public int deletePBasket(SqlSessionTemplate sqlSession, Basket b) {
+		return sqlSession.delete("commonMapper.deletePBasket", b);
+	}
 }

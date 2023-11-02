@@ -6,6 +6,7 @@ import com.kh.whereding.common.model.vo.Attachment;
 import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.product.model.vo.Hall;
+import com.kh.whereding.product.model.vo.ProductCollectionReview;
 
 public interface HallService {
 	
@@ -22,5 +23,7 @@ public interface HallService {
 		Hall selectBoard(String hno);
 		
 		int deletehall(String hno);
+		
+		ArrayList<ProductCollectionReview> selectReviewList(String hno);
 
 }

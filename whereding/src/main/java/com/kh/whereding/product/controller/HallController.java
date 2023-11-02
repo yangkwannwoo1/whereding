@@ -14,9 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.Attachment;
 import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.common.model.vo.PageInfo;
@@ -24,6 +27,7 @@ import com.kh.whereding.common.template.Pagenation;
 import com.kh.whereding.product.model.service.HallServiceImpl;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.ProductCollection;
+import com.kh.whereding.product.model.vo.ProductCollectionReview;
 
 @Controller
 public class HallController {
@@ -161,6 +165,14 @@ public class HallController {
 	      }
 		return "redirect:hList.pr";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "hrList.bo", produces = "application/json; charset=utf-8")
+	public String ajaxcReviewList(String hno) {
+		ArrayList<ProductCollectionReview> list = HService.selectReviewList(hno);
+		return new Gson().toJson(list);
+	}
+	
 }
 
 

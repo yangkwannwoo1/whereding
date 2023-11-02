@@ -11,6 +11,7 @@ import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.product.model.dao.HallDao;
 import com.kh.whereding.product.model.vo.Hall;
+import com.kh.whereding.product.model.vo.ProductCollectionReview;
 
 
 @Service
@@ -57,6 +58,11 @@ public class HallServiceImpl implements HallService {
 	@Override
 	public int deletehall(String hno) {
 		return hDao.deletehall(hno, sqlSession);
+	}
+
+	@Override
+	public ArrayList<ProductCollectionReview> selectReviewList(String hno) {
+		return hDao.selectReviewList(hno, sqlSession);
 	}
 
 }

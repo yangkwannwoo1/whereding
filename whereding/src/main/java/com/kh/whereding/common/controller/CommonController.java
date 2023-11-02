@@ -96,4 +96,28 @@ public class CommonController {
 		}
 		return result > 0 ? "NNNNY": "NNNNN";
 	}
+	
+	@ResponseBody
+	@RequestMapping("pbasket.bo")
+	public String ajaxPBasket(Basket b) {
+		
+		System.out.println(b);
+		int result = 0;
+		String status ="";
+		// 재고조사 20
+//		int checkGiftStock = cService.checkGiftStock(b); 필요없음 오류만 난다. 구매할때 쓰자
+		
+		// 내 장바구니에 유무 체크 1 또는 0
+		int checkBasket = cService.checkPBasket(b);
+		
+		if(checkBasket > 0) {	// 장바구니에 있을때
+			
+			result = cService.deletePBasket(b);
+			return result > 0 ? "DNNNY": "NNNNN";
+		}else{	// 없을때
+			// 장바구니에 담기
+			result = cService.insertPBasket(b);
+			return result > 0 ? "INNNY": "NNNNN";
+		}
+	}
 }

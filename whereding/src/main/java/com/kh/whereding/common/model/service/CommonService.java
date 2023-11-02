@@ -32,4 +32,12 @@ public interface CommonService {
 	// 장바구니 삭제
 	int deleteBasket(Basket b);
 
+	// sdm장바구니에 있는지 체크
+	int checkPBasket(Basket b);
+	
+	// sdm장바구니 등록
+	int insertPBasket(Basket b);
+	
+	// sdm장바구니 삭제
+	int deletePBasket(Basket b);
 }

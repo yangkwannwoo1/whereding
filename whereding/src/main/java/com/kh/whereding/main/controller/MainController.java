@@ -127,6 +127,10 @@ public class MainController {
 	@RequestMapping(value="selectRsv.sb", produces = "application/json; charset=utf-8")
 	public String selectRsvList(String userNo) {
 		ArrayList<Reservation> list = mnService.selectRsvList(userNo);
+		for(Reservation r : list) {
+			System.out.println(r);
+			
+		}
 		return new Gson().toJson(list);
 	}
 	

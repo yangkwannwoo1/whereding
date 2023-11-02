@@ -85,8 +85,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<delete id="deleteBasket">
 		delete 
-		  from basket
+		  from rsv_basket
          where basket_no = #{ refNo }
+           and user_no = #{ userNo }
+	</delete>
+	
+	<select id="checkPBasket" resultType="_int">
+		select count(*) from rsv_basket
+ 		 where COMPANY_NO = #{ refNo }
+   	 	   and user_no = #{ userNo }
+	</select>
+	
+	<insert id="insertPBasket">
+		insert 
+		  into rsv_basket
+		  (
+		    COMPANY_NO
+		  , user_no
+		  )
+		  values
+		  (
+		    #{ refNo }
+		  , #{ userNo }
+		  )
+	</insert>
+	
+	<delete id="deletePBasket">
+		delete 
+		  from rsv_basket
+         where COMPANY_NO = #{ refNo }
            and user_no = #{ userNo }
 	</delete>
 

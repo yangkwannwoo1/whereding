@@ -61,4 +61,21 @@ public class CommonServiceImpl implements CommonService{
 	public int deleteBasket(Basket b) {
 		return cDao.deleteBasket(sqlSession, b);
 	}
+
+	@Override
+	public int checkPBasket(Basket b) {
+		return cDao.checkPBasket(sqlSession, b);
+
+	}
+
+	@Override
+	public int insertPBasket(Basket b) {
+		return cDao.insertPBasket(sqlSession, b);
+
+	}
+
+	@Override
+	public int deletePBasket(Basket b) {
+		return cDao.deletePBasket(sqlSession, b);
+	}
 }

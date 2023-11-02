@@ -123,6 +123,35 @@
   	display: inline-block;
   }
 		
+  /* 토스트메시지 */
+  .notification-container {
+    background: rgba(215, 79, 0, 0.85);
+    border-radius: 10px;
+    padding: 15px 20px;
+    opacity: 0;
+    visibility: none;
+    transition: all 1s ease-in-out;
+    text-align: center;
+    width: 250px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -999;
+    position: fixed;
+  }
+  
+  .notification-container.show {
+    z-index: 999;
+    opacity: 1;
+    visibility: visible;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
 
 
 	</style>
@@ -272,6 +301,9 @@
 		                <div>
    		                  <span id="great_count" style="font-size:30px; vertical-align: middle; font-weight: 600; margin-left: 2%">0</span>
 		                </div>
+   		                <div id="basket_area" style="width: 50px; height: 50px; margin-left: 20px">
+		                  <img class="gbasket basket" src="resources/css/assets/img/cart_n.png" id="basketbtn" style="height: 40px;">
+		                </div>
 	               </div>
 				</td>
 				<td style="text-align: right; padding: 0% 2%; height: 60px;">
@@ -298,7 +330,7 @@
 			</tr>
 			<tfoot class="review_area">
 				<tr>
-					<th style="padding: 5% 1% 1% 1%" colspan="2">
+					<th style="padding: 5% 1% 1% 1%" colspan="3">
 						<h3 class="comment-count-title" style=" font-weight: 700;">리뷰 (0)</h3>
 						<hr style="margin-bottom: 0; border: 1px solid black;">
 					</th>
@@ -325,7 +357,20 @@
 			</tfoot>
 		</table>
 	
+	<div class="notification-container" id="notification-container">
+		<p></p>
+	</div>
+	<script>
+const notification = document.getElementById('notification-container')
 
+// Show notification
+const showNotification = () => {
+  notification.classList.add('show')
+  setTimeout(() => {
+    notification.classList.remove('show')
+  }, 2000)
+}
+</script>
 	</div>
 
 	<hr>
@@ -363,7 +408,7 @@
 				success:function(list){
 					console.log(list);
 					let value = "";
-					
+					let $reviewHead = $(".review_area").html();
 					let sum = 0;
 					let score = 0;
 					for(let i in list){
@@ -371,7 +416,7 @@
 						console.log(score)
 						score = (Number(list[i].rvScore)/5)*100;
 						value += `<tr style="margin: 5%;">
-							<td style="padding-left: 1%;" colspan="2">
+							<td style="padding-left: 1%;" colspan="3">
 							<h4 style="font-weight: 600; padding-top: 1%; margin-bottom: 0px;">`+ list[i].userName + `<span class="comment-date">&nbsp; `+ list[i].createDate + `</span>
 							</h4>
 							<div class="rate">
@@ -380,7 +425,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td  colspan="2" style="border-bottom: 1px solid #cecece;">
+						<td  colspan="3" style="border-bottom: 1px solid #cecece;">
 							<img src="` + list[i].filePath + `" alt="1" style="float: left; margin: 1%; height:120px;">
 							<p style="margin: 1%;">`+ list[i].rvContent + `</p>
 						</td>
@@ -388,8 +433,8 @@
 					sum += score;
 					}
 					avgScore = sum / list.length;
-					$(".review_area").html(value);
-					$(".comment-count-title").text("리뷰 " + list.length)
+					$(".review_area").html($reviewHead + value);
+					$(".comment-count-title").text("리뷰 (" + list.length + ")")
 					$(".total_rate span").css("width",avgScore+"%");
 				}, error:function(){
 					console.log("댓글리스트 조회용 ajax 통신 실패!")
@@ -400,6 +445,7 @@
 	<script>
         element1 = document.getElementById("nn");
         element2 = document.getElementById("yy");
+        element3 = document.getElementById("basketbtn");
 
         element1.addEventListener("click", function(e) {
           e.preventDefault;
@@ -420,6 +466,16 @@
       
           element2.classList.add("bounce");
         }, false);
+        
+        element3.addEventListener("click", function(e) {
+            e.preventDefault;
+        
+            element3.classList.remove("bounce");
+        
+            element3.offsetWidth = element3.offsetWidth;
+        
+            element3.classList.add("bounce");
+          }, false);
         
 		function countLike(){
 			$.ajax({
@@ -459,7 +515,30 @@
           }
         })
       })
-      
+            $(document).on("click",".gbasket",function(){
+    	
+        console.log($(this).attr("id"))
+
+          $.ajax({
+              url:"pbasket.bo",
+              data:{
+                	 refNo:'${ c.code }',
+                	 userNo:'${ loginMember.userNo }',
+              		},success:function(data){
+               		 console.log(data)
+                if(data == 'INNNY'){
+                  $("#notification-container p").text("장바구니에 담겼습니다.")
+                }else if(data == 'DNNNY'){
+                  $("#notification-container p").text("장바구니에서 삭제됐습니다.")                            
+                }else{
+                  $("#notification-container p").text("잠시 후에 다시 이용해주세요.")                            
+                }
+                showNotification()
+              },error:function(){
+                console.log("장바구니 불러오기 ajax 요청 실패!")
+              }
+            })
+      	})
       
   
       	$(document).ready(function(){

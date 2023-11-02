@@ -383,7 +383,7 @@
 			</tr> -->
 			<tfoot class="review_area">
 				<tr>
-					<th style="padding: 5% 1% 1% 1%" colspan="2">
+					<th style="padding: 5% 1% 1% 1%" colspan="3">
 						<h3 class="comment-count-title" style=" font-weight: 700;">리뷰 (0)</h3>
 						<hr style="margin-bottom: 0; border: 1px solid black;">
 					</th>
@@ -410,6 +410,7 @@
 			</tfoot>
 		</table>
 		<script>
+	      
         element1 = document.getElementById("nn");
         element2 = document.getElementById("yy");
         element3 = document.getElementById("basketbtn");
@@ -476,20 +477,19 @@
       
       $(document).on("click",".gbasket",function(){
     	
-    	console.log($("#count_option").val())
         console.log($(this).attr("id"))
-        if($("#count_option").val() > 0){
 
           $.ajax({
-              url:"gbasket.bo",
+              url:"pbasket.bo",
               data:{
-              count:$("#count_option").val(),
-                refNo:'${ gift.giftNo }',
-                userNo:'${ loginMember.userNo }',
-              },success:function(data){
-                console.log(data)
-                if(data == 'NNNNY'){
+                	 refNo:'${ h.code }',
+                	 userNo:'${ loginMember.userNo }',
+              		},success:function(data){
+               		 console.log(data)
+                if(data == 'INNNY'){
                   $("#notification-container p").text("장바구니에 담겼습니다.")
+                }else if(data == 'DNNNY'){
+                  $("#notification-container p").text("장바구니에서 삭제됐습니다.")                            
                 }else{
                   $("#notification-container p").text("잠시 후에 다시 이용해주세요.")                            
                 }
@@ -498,9 +498,6 @@
                 console.log("장바구니 불러오기 ajax 요청 실패!")
               }
             })
-        }else{
-          alert("장바구니에 담을 수 있는 최소 개수는 1개 입니다.")
-        }
       	})
       	$(document).ready(function(){
       		$.ajax({
@@ -526,11 +523,21 @@
       		})
       	})
     </script>
-</div>
-<div class="notification-container" id="notification-container">
-	
-
+	<div class="notification-container" id="notification-container">
+		<p></p>
 	</div>
+</div>
+<script>
+const notification = document.getElementById('notification-container')
+
+// Show notification
+const showNotification = () => {
+  notification.classList.add('show')
+  setTimeout(() => {
+    notification.classList.remove('show')
+  }, 2000)
+}
+</script>
 
 	<hr>
 	<div class="recent-posts">
@@ -549,7 +556,9 @@
 	
 	<script>
 		$(function(){
+			console.log("시작")
     		selectReplyList();
+			console.log("끝")
     		countLike();
 
 		})
@@ -569,19 +578,19 @@
 		// 게시글 삭제
 		function deleteHall(){
 			if(confirm("정말로 삭제 하시겠습니까 ? ")){
-				location.href="deleteHall.bo" + '${ h.code }
+				location.href="deleteHall.bo" + '${ h.code }'
 			}
 			
-		}}
+		}
 	
     	function selectReplyList(){ // 해당 게시글에 딸린 댓글리스트 조회용 ajax
 			$.ajax({
-				url:"crList.bo",
-				data:{cno:'${ c.code }'},
+				url:"hrList.bo",
+				data:{hno:'${ h.code }'},
 				success:function(list){
 					console.log(list);
 					let value = "";
-					
+					let $reviewHead = $(".review_area").html();
 					let sum = 0;
 					let score = 0;
 					for(let i in list){
@@ -589,7 +598,7 @@
 						console.log(score)
 						score = (Number(list[i].rvScore)/5)*100;
 						value += `<tr style="margin: 5%;">
-							<td style="padding-left: 1%;" colspan="2">
+							<td style="padding-left: 1%;" colspan="3">
 							<h4 style="font-weight: 600; padding-top: 1%; margin-bottom: 0px;">`+ list[i].userName + `<span class="comment-date">&nbsp; `+ list[i].createDate + `</span>
 							</h4>
 							<div class="rate">
@@ -598,7 +607,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td  colspan="2" style="border-bottom: 1px solid #cecece;">
+						<td  colspan="3" style="border-bottom: 1px solid #cecece;">
 							<img src="` + list[i].filePath + `" alt="1" style="float: left; margin: 1%; height:120px;">
 							<p style="margin: 1%;">`+ list[i].rvContent + `</p>
 						</td>
@@ -606,8 +615,8 @@
 					sum += score;
 					}
 					avgScore = sum / list.length;
-					$(".review_area").html(value);
-					$(".comment-count-title").text("리뷰 " + list.length)
+					$(".review_area").html($reviewHead + value);
+					$(".comment-count-title").text("리뷰 (" + list.length + ")")
 					$(".total_rate span").css("width",avgScore+"%");
 					
 				}, error:function(){
