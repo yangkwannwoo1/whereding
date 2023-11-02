@@ -23,6 +23,32 @@
 		<result column="start_coupon" property="startCoupon"></result>
 		<result column="end_coupon" property="endCoupon"></result>
 	</resultMap>
+	<resultMap type="Gift" id="giftResult">
+		<result column="GIFT_NO" property="giftNo"></result>
+		<result column="GIFTCATEGORY_NO" property="categoryNo"></result>
+		<result column="GIFT_NAME" property="giftName"></result>
+		<result column="GIFT_CONTENT" property="giftContent"></result>
+		<result column="GIFT_PRICE" property="giftPrice"></result>
+		<result column="COUNT" property="count"></result>
+	
+	</resultMap>
+	<resultMap type="GiftHistory" id="giftHistoryResult">
+		<result column="GHIS_NO" property="ghisNo"/>
+		<result column="GIFT_NO" property="giftNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="BUYMETHOD_NO" property="butMethodNo"/>
+		<result column="PAYMENT_NO" property="paymentNo"/>
+		<result column="PIECE" property="piece"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="GIFT_NAME" property="giftName"/>
+		<result column="GIFT_CONTENT" property="giftContent"/>
+		<result column="IMG_1" property="img1"/>
+		<result column="IMG_PATH" property="imgPath"/>
+		<result column="GRIV_NO" property="grivNo"/>
+		<result column="IMP_UID" property="impUid"/>
+	</resultMap>
+	
+	
 	
 		<select id="selectBasketList" resultMap="basketResultSet">
 		select
@@ -66,5 +92,92 @@
 		 where user_no = #{ userNo }
 		   and status = 'Y'
   	</select>
-  	
+  	<select id="selectbasketOne" resultMap="giftResult">
+  		select 
+		       GIFT_NO
+		     , CATEGORY_NO
+		     , GIFT_NAME
+		     , GIFT_CONTENT
+		     , GIFT_PRICE
+		  from gift
+		 where status = 'Y'
+		   and gift_no = #{giftNo}
+  	</select>
+  	<delete id="deleteOrderBasket">
+  		delete basket
+		 where user_no = #{userNo}
+		   and ref_no = #{giftNo}
+  	</delete>
+  	<insert id="insertGiftHistiry">
+  	insert 
+	  INTO gift_history
+	     (
+	       GHIS_NO
+	     , GIFT_NO
+	     , USER_NO
+	     , BUYMETHOD_NO
+	     , PIECE
+	     , IMP_UID
+	     )
+	values
+	     (
+	       SEQ_GHIS.nextval
+	     , #{giftNo}
+	     , #{userNo}
+	     , 1
+	     , #{orderCount}
+	     , #{impUid}
+	     )
+  	</insert>
+  	<insert id="insertPayment">
+  		insert
+		  into payment
+		     (
+		       GHIS_NO
+		     , TOTAL_PAY
+		     , DISCOUNT
+		     )
+		values
+		     (
+		       SEQ_GHIS.CURRVAL
+		     , #{giftPrice}
+		     , 0
+		     )
+  	</insert>
+  	<select id="selectGift" resultMap="giftHistoryResult">
+	select
+	       GHIS_NO
+	     , GIFT_NO
+	     , USER_NO
+	     , BUYMETHOD_NO
+	     , CREATE_DATE
+	     , PIECE
+	     , IMP_UID
+	  from gift_history
+	 where GHIS_NO =#{ghisNo}
+	</select>
+	<delete id="deleteGiftHisroty">
+		DELETE gift_history
+		WHERE ghis_no = #{ghisNo}
+	</delete>
+	<update id="updateGiftCount">
+	update gift
+	   SET COUNT = COUNT + #{piece}
+	 where GIFT_NO = #{giftNo}
+	</update>
+	<update id="downDateGiftCount">
+	update gift
+	   SET COUNT = COUNT - #{orderCount}
+	 where GIFT_NO = #{giftNo}
+	</update>
+
+
+
+
+
+
+
+
+
+
 </mapper>

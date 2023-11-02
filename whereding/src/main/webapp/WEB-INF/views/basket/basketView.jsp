@@ -30,7 +30,7 @@
         </form>
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" onclick="continueShopping();">쇼핑 계속하기</button>
-            <button class="cart__bigorderbtn right">주문하기</button>
+            <button class="cart__bigorderbtn right" onclick="order();">주문하기</button>
         </div>
     </section>
     <!-- The Modal -->
@@ -72,7 +72,59 @@
     </div>
     <script src="resources/css/assets/js/basket.js"></script>
         <jsp:include page="../common/footer.jsp"/>
-    
+    <script>
+    function order() {
+    // 선택된 제품 정보 배열
+    var selectedProducts = [];
+
+    // "check__it" 클래스를 가진 모든 체크박스를 반복
+    $(".check__it").each(function () {
+        if ($(this).prop("checked")) {
+            // 체크된 체크박스의 부모 행을 가져옵니다
+            var row = $(this).closest("tr");
+
+            // 제품 ID를 가져옵니다 (행의 ID 속성을 사용)
+            var giftNo = row.attr("id");
+
+            // 클래스 "count_btn"을 가진 입력란을 찾아 수량을 가져옵니다
+            var orderCount = row.find(".count_btn").val();
+
+            // 선택한 제품 정보를 배열에 추가합니다
+            selectedProducts.push({ giftNo: giftNo, orderCount: orderCount });
+        }
+    });
+
+    if (selectedProducts.length > 0) {
+        // 선택한 제품 정보를 JSON 문자열로 변환합니다
+        var selectedProductsJSON = JSON.stringify(selectedProducts);
+
+        // 폼을 생성하고 데이터를 POST 요청으로 서버에 보냅니다
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "order.bk"; // 컨트롤러 URL
+
+        // userNo와 selectedProducts를 각각의 hidden 필드로 추가합니다
+        var userNoInput = document.createElement("input");
+        userNoInput.type = "hidden";
+        userNoInput.name = "userNo";
+        userNoInput.value = ${loginMember.userNo}; // 사용자 번호
+        form.appendChild(userNoInput);
+
+        var selectedProductsInput = document.createElement("input");
+        selectedProductsInput.type = "hidden";
+        selectedProductsInput.name = "selectedProducts";
+        selectedProductsInput.value = selectedProductsJSON;
+        form.appendChild(selectedProductsInput);
+
+        document.body.appendChild(form);
+        form.submit();
+    } else {
+        // 제품을 선택하지 않았을 경우 알림을 표시합니다
+        alert("주문할 제품을 선택하세요.");
+    }
+}
+
+    </script>
     <script>
 
         function continueShopping(){

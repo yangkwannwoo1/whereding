@@ -71,7 +71,7 @@ public class GiftShopController {
                 MultipartFile mf = upfile[i];
                 
                 String newFileName = mf.getOriginalFilename();
-                System.out.println(mf);
+//                System.out.println(mf);
                 
                 try {
                 	
@@ -90,7 +90,7 @@ public class GiftShopController {
 				}
 		}
 		
-		System.out.println(gift);
+//		System.out.println(gift);
 
 		} //파일업로드 끝
 		
@@ -101,10 +101,10 @@ public class GiftShopController {
 	
 	@RequestMapping("giftDetail.gi")
 	public String giftDetail(@RequestParam("giftNo") String giftNo, Model model) {
-		System.out.println(giftNo);
+//		System.out.println(giftNo);
 		Gift gift = gService.selectGiftDetail(giftNo);
 		model.addAttribute("gift", gift);
-		System.out.println(gift.getImgPath()+gift.getImg1());
+//		System.out.println(gift.getImgPath()+gift.getImg1());
 		return "gift/giftDetail";
 	}
 	

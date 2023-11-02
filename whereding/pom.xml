@@ -25,6 +25,10 @@
 			<id>Datanucleus</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+	  <repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	  </repository>
 	</repositories>
 	
 	
@@ -257,6 +261,27 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.16</version>
 		</dependency>
+		<!-- dependencies 안에 추가합니다 -->
+		<dependency>
+		  <groupId>com.github.iamport</groupId>
+		  <artifactId>iamport-rest-client-java</artifactId>
+		  <version>0.2.14</version>
+		</dependency>
+		
+		<!-- 10/31 제품번호와 갯수를 같이 넘길 수 있는 직렬화 어쩌구  -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.15.2</version>
+		</dependency>
+		<!-- 11/1 토큰 등록용 -->				
+		<dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-webflux</artifactId>
+          <version>2.6.3</version>
+      </dependency>
+	      
+     
 	
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>

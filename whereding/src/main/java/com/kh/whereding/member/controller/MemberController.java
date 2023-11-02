@@ -283,9 +283,9 @@ public class MemberController {
 	// 답례품 판매내역
 	@RequestMapping(value = "giftOredrList.me")
 	public String giftOrderList(Member m, HttpSession session) {
-		System.out.println(m);
+//		System.out.println(m);
 		ArrayList<GiftHistory> gh = mService.giftHistoryList(m);
-		System.out.println(gh);
+//		System.out.println(gh);
 		
 		if(gh != null) {
 			session.setAttribute("gh",gh);
@@ -304,13 +304,13 @@ public class MemberController {
 		ArrayList st = new ArrayList();
 		ArrayList dr = new ArrayList();
 		ArrayList mu = new ArrayList();
-	
+//		System.out.println("회원번호 있나 확인용 " +cs);
 		
 		for(Consulting cst : cs) {
-			Hall hal = mService.consultingHall(cst.getProductNo());
-			Studio studi = mService.consultingStudio(cst.getProductNo());
-			Dress dres = mService.consultingDress(cst.getProductNo());
-			Makeup make = mService.consultingMakeup(cst.getProductNo());
+			Hall hal = mService.consultingHall(cst);
+			Studio studi = mService.consultingStudio(cst);
+			Dress dres = mService.consultingDress(cst);
+			Makeup make = mService.consultingMakeup(cst);
 			
 //			m.setProductNo(cst.getProductNo());
 //			int result1 = mService.ReviewCount(m);
@@ -368,7 +368,7 @@ public class MemberController {
 				session.setAttribute("alertMsg", "리뷰 등록 실패");
 			}
 		}
-		return"redirect:reserveList.me?userNo="+ m.getUserNo();
+		return"redirect:giftOredrList.me?userNo="+ m.getUserNo();
 	}
 	
 	

@@ -12,7 +12,14 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Gift {
-	
+/*
+GIFT_NO
+CATEGORY_NO
+GIFT_NAME
+GIFT_CONTENT
+GIFT_PRICE
+COUNT
+ */
 	private String giftNo;
 	private int categoryNo;
 	private String categoryItem;
@@ -25,4 +32,8 @@ public class Gift {
 	private String img2;
 	private String img3;
 	private String status;
+	private int orderCount;
+	private int userNo;
+	private String impUid;
+	
 }
