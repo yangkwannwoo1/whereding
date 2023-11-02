@@ -253,8 +253,9 @@
                     	console.log(buyCount);
                     	console.log(stock);
                     	
-                    	
-                    	if(buyCount>stock){
+                    	if(buyCount==0){
+                    		$(".buy_btn").attr("disabled", true).html("구매하기");
+                    	}else if(buyCount>stock){
                     		$("#buyFalseSpan").css("display", "block");
                     		$(".buy_btn").attr("disabled", true).html("구매하기");
                     	}else{
@@ -300,9 +301,9 @@
                 })
             </script>
             
-            <div class="buy_area">
-              <form action="orderOne.bk">
+            <div class="buy_area" style="display:flex;">
                 <button onclick="back();" id="back_btn">이전으로</button>
+              <form action="orderOne.bk">
                   <input type="hidden" name="userNo" value="${loginMember.userNo}">
                   <input type="hidden" name="giftNo" value="${gift.giftNo}">
                   <input type="hidden" name="count" id="count">
