@@ -280,9 +280,9 @@
                 </div>
             </div>
             
-            <%-- <c:if test="${not empty loginMember && loginMember.gradeNo eq '3' }"> --%>
+            <c:if test="${not empty loginMember && loginMember.gradeNo eq '3' }">
             	<button id = "giftDelete" onclick="giftDelete('${gift.giftNo}');">상품삭제하기</button>
-            <%-- </c:if> --%>
+           </c:if> 
             
             <script>
 	            	function giftDelete(giftNo){

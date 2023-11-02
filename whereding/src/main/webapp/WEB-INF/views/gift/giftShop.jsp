@@ -156,7 +156,7 @@
 								                    let formattedPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(gift.giftPrice);
 								                    html += '<p>' + formattedPrice + '</p>';
 								                    html += '</p>';
-								                    html += '<a href="giftDetail.gi?giftNo='+ gift.giftNo +'" class="cart-btn"><i class="fas fa-shopping-cart"></i>상세보기</a>';
+								                    html += '<a href="giftDetail.gi?giftNo='+ gift.giftNo +'" class="cart-btn">상세보기</a>';
 								                    html += '</div>';
 								                    html += '</div>';
 								                    html += '</div>';
@@ -213,7 +213,6 @@
 									pattern="#,###원" />
 							</p>
 							<a class="cart-btn" onclick="giftDetail('${g.giftNo}');">
-								<i class="fas fa-shopping-cart"></i>
 							상세보기</a>
 						</div>
 					</div>
