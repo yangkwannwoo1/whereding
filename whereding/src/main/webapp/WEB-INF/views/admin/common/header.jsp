@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,6 +50,14 @@
 </style>
 </head>
 <body>
+	<c:if test="${empty loginMember || loginMember.gradeNo ne '3'}">
+		<script>
+				alert("접근 권한이 없습니다. 메인페이지로 이동합니다");
+				var contextPath = '<%= request.getContextPath() %>';
+				location.href=contextPath;
+		</script>
+			
+	</c:if>
 
 	<c:if test="${ not empty alertMsg }">
 		<script>
@@ -61,7 +70,7 @@
 	
     <!-- ======= Header ======= -->
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="admin.ad" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">admin 관리</span>
       </a>
@@ -207,8 +216,8 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>admin</h6>
-              <span>관리자</span>
+	              <h6>${loginMember.userName}</h6>
+	              <span>관리자</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -225,7 +234,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="adminLogout.ad">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>로그아웃</span>
               </a>
