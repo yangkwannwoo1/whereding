@@ -172,6 +172,9 @@ font-family: 'Open Sans Condensed', sans-serif;
 #kakaoLogin{
 	background:yellow;
 }
+#cuser:hover{
+	cursor: default;
+}
 </style>
 </head>
 <body>
@@ -335,7 +338,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 										<li><a>MakeUp</a>
 											<a>메이크업</a>
 										</li>
-									</ul> <a>컬렉션</a></li>
+									</ul> <a id="cuser">컬렉션</a></li>
 								<!--  <li id="main-menu-event"><a href="contact.html">Event</a> <a
 									href="contact.html">이벤트</a></li>  -->
 								<li id="main-menu-shop"><a href="shop.html">Present</a>
