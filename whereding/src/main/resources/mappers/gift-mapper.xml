@@ -36,6 +36,7 @@
 		<result column="IMG_1" property="img1"/>
 		<result column="IMG_PATH" property="imgPath"/>
 		<result column="GRIV_NO" property="grivNo"/>
+		<result column="IMP_UID" property="impUid"/>
 	</resultMap>
 	
 	
@@ -225,6 +226,23 @@
 		   set status = 'N'
 		 where gift_no = #{giftNo}
 	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
 
 

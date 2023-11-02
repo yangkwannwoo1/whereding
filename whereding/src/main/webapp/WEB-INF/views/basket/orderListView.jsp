@@ -288,6 +288,7 @@
 							<td colspan="7">장바구니에 상품이 없습니다.</td>
 						</tr>
 						<input type="hidden" name="userNo" value="${loginMember.userNo}">
+						<input type="hidden" name="imp_uid" id="imp_uid">
 						<c:forEach var="g" items="${gift}">
 							<tr>
 								<td><article>
@@ -390,13 +391,15 @@
 										console.log(rsp);
 
 										console.log(rsp.imp_uid);
-										console.log(rsp.merchant_uid);
+
+										var impUid = rsp.imp_uid;
+										// console.log(rsp.merchant_uid);
 									
 								
 									if (rsp.success) {//결제 성공시 
 										console.log("성공")
-										
-										// $("#orderCompleted").submit();
+										$("#imp_uid").val(rsp.imp_uid)
+										$("#orderCompleted").submit();
 								
 									} else {//결제 실패시 
 										console.log("실패")

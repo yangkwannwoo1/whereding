@@ -446,10 +446,11 @@
                                             </div>
                                             <button type="submit" class="cancel_btn">배송 조회</button>
                                         </form>
-	                                    <button class="cancel_btn">결제취소</button>
+	                                    <button class="cancel_btn" onclick="cansel('${gh.ghisNo}');" >결제취소</button>
 	                                </td>
 	                            </tr>
 	                        </table>
+                           
                             <c:if test="${gh.grivNo eq '0'}">
 	                        <div class="product_review">
 	                            <form action="giftReview.gf" method="post" enctype="multipart/form-data">
@@ -470,7 +471,11 @@
                             </c:if>
 	                    </div>
                     </c:forEach>
-                    
+                    <script>
+                        function cansel(ghisNo){
+                            location.href = "cancellation.bk?userNo="+${loginMember.userNo}+"&ghisNo="+ghisNo;
+                        }
+                    </script>
                 </div>
                 
             </section>

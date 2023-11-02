@@ -19,6 +19,7 @@ import com.kh.whereding.basket.model.dao.BasketDao;
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.coupon.model.vo.Coupon;
 import com.kh.whereding.gift.model.vo.Gift;
+import com.kh.whereding.gift.model.vo.GiftHistory;
 
 @Service
 public class BasketServiceImpl implements BasketService {
@@ -63,7 +64,7 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
-	public void refund(String access_token) throws IOException  {
+	public int refund(String access_token,String ImpUid) throws IOException  {
 			HttpURLConnection conn = null;
 		
 			URL url = new URL("https://api.iamport.kr/payments/cancel");
@@ -78,7 +79,7 @@ public class BasketServiceImpl implements BasketService {
 			conn.setDoOutput(true);
 			
 			JSONObject obj = new JSONObject();
-			obj.put("imp_uid","imp_799200379731");
+			obj.put("imp_uid",ImpUid);
 			obj.put("reason","테스트 결제 취소");
 			
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
@@ -88,7 +89,7 @@ public class BasketServiceImpl implements BasketService {
 			
 			int result = 0;
 			int responeseCode = conn.getResponseCode();
-			System.out.println("응답코드 : @@@"+ responeseCode);
+//			System.out.println("응답코드 : @@@"+ responeseCode);
 			if(responeseCode == 200) {
 				BufferedReader br = new  BufferedReader(new InputStreamReader(conn.getInputStream()));
 				StringBuilder sb = new StringBuilder();
@@ -97,13 +98,34 @@ public class BasketServiceImpl implements BasketService {
 					sb.append(line + "\n");
 				}
 				br.close();
-				System.out.println(""+sb.toString());
+//				System.out.println(""+sb.toString());
 				result = 1;
-				
+				return result;
 			}else {
-				System.out.println(conn.getResponseMessage());
+//				System.out.println(conn.getResponseMessage());
+				return result;
 			}
 		
+	}
+
+	@Override
+	public GiftHistory selectGift(GiftHistory g) {
+		return bDao.selectGift(sqlSession,g);
+	}
+
+	@Override
+	public int deleteGiftHisroty(GiftHistory gh) {
+		return bDao.deleteGiftHisroty(sqlSession,gh);
+	}
+
+	@Override
+	public int updateGiftCount(GiftHistory gh) {
+		return bDao.updateGiftCount(sqlSession,gh);
+	}
+
+	@Override
+	public int downDateGiftCount(Gift gt) {
+		return bDao.downDateGiftCount(sqlSession,gt);
 	}
 	
 }

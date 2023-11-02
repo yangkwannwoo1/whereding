@@ -34,5 +34,6 @@ COUNT
 	private String status;
 	private int orderCount;
 	private int userNo;
+	private String impUid;
 	
 }

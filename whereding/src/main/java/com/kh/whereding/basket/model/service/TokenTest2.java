@@ -62,7 +62,7 @@ public class TokenTest2 {
             // "response" 객체 내의 "access_token" 값을 추출하여 변수에 저장
             JSONObject responseObj = (JSONObject) jsonResponse.get("response");
             access_token = (String) responseObj.get("access_token");
-            System.out.println("Access Token: " + access_token);
+//            System.out.println("Access Token: " + access_token);
 
 
             result = 1;

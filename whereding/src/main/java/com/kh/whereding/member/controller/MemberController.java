@@ -229,7 +229,7 @@ public class MemberController {
 		ArrayList st = new ArrayList();
 		ArrayList dr = new ArrayList();
 		ArrayList mu = new ArrayList();
-		System.out.println("회원번호 있나 확인용 " +cs);
+//		System.out.println("회원번호 있나 확인용 " +cs);
 		
 		for(Consulting cst : cs) {
 			Hall hal = mService.consultingHall(cst);
@@ -293,7 +293,7 @@ public class MemberController {
 				session.setAttribute("alertMsg", "리뷰 등록 실패");
 			}
 		}
-		return"redirect:reserveList.me?userNo="+ m.getUserNo();
+		return"redirect:giftOredrList.me?userNo="+ m.getUserNo();
 	}
 	
 	

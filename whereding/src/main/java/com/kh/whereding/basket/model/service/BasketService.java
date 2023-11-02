@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.coupon.model.vo.Coupon;
 import com.kh.whereding.gift.model.vo.Gift;
+import com.kh.whereding.gift.model.vo.GiftHistory;
 
 public interface BasketService {
 	
@@ -24,6 +25,14 @@ public interface BasketService {
 
 	int insertGiftHistiry(Gift gt);
 
-	void refund(String access_token) throws IOException;
+	int refund(String access_token, String ImpUid) throws IOException;
+
+	GiftHistory selectGift(GiftHistory g);
+
+	int deleteGiftHisroty(GiftHistory gh);
+
+	int updateGiftCount(GiftHistory gh);
+
+	int downDateGiftCount(Gift gt);
 	
 }

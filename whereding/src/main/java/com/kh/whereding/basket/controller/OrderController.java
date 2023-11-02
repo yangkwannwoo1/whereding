@@ -21,6 +21,7 @@ import com.kh.whereding.basket.model.service.BasketService;
 import com.kh.whereding.basket.model.service.TokenTest2;
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.gift.model.vo.Gift;
+import com.kh.whereding.gift.model.vo.GiftHistory;
 
 @Controller
 public class OrderController {
@@ -56,21 +57,42 @@ public class OrderController {
 	    
 	}
 	
-	@RequestMapping(value = "orderCompleted.bk")
-	public String orderCompleted(@RequestParam("userNo") int userNo, @RequestParam("giftNo") String[] giftNo, @RequestParam("orderCount") int[] orderCount, @RequestParam("giftPrice") int[] giftPrice, HttpSession session) throws IOException, IOException {
+	@RequestMapping(value = "orderOne.bk")
+	public String orderOne(@RequestParam("userNo") int userNo,@RequestParam("giftNo") String giftNo,@RequestParam("count") int count, HttpSession session) {
 		
-		 System.out.println("User Number: " + userNo);
+		// 번호를 가지고 상품의 정보 조회
+		Gift gt = bService.selectbasketOne(giftNo);
+		// 상품 정보에 구매할 수량 추가
+		 gt.setOrderCount(count);
+		 
+		 // 받는 페이지에서 for문을 사용하기에 리스트 맨듬
+		 List<Gift> gtList = new ArrayList();
+		
+		 // 리스트에 정보 있는 기프트 넣어
+		gtList.add(gt);
+		
+		session.setAttribute("gift", gtList);
+		
+		 return "basket/orderListView";
+	}
+	
+	@RequestMapping(value = "orderCompleted.bk")
+	public String orderCompleted(@RequestParam("userNo") int userNo,@RequestParam("imp_uid") String imp_uid, @RequestParam("giftNo") String[] giftNo, @RequestParam("orderCount") int[] orderCount, @RequestParam("giftPrice") int[] giftPrice, HttpSession session) throws IOException, IOException {
+		
+//		 System.out.println("imp_uid: " + imp_uid);
 		 int result =1;
 		    // giftNo와 orderCount 배열의 내용을 출력
 		    for (int i = 0; i < giftNo.length; i++) {
 		    	Gift gt = new Gift();
 		    	gt.setGiftNo(giftNo[i]);
 		    	gt.setUserNo(userNo);
+		    	gt.setImpUid(imp_uid);
 		    	gt.setGiftPrice(giftPrice[i]);
 		    	gt.setOrderCount(orderCount[i]);
 		    	int result1 = bService.deleteOrderBasket(gt);
 		    	int result2 = bService.insertGiftHistiry(gt);
-		    	result += result * result1 * result2;
+		    	int result3 = bService.downDateGiftCount(gt);
+		    	result += result * result1 * result2*result3;
 //		        System.out.println("giftNo[" + i + "]: " + giftNo[i]);
 //		        System.out.println("orderCount[" + i + "]: " + orderCount[i]);
 		    }
@@ -84,13 +106,40 @@ public class OrderController {
 		
 	}
 	
-	@RequestMapping(value = "test.ts")
-	public String test() throws IOException, Throwable {
-		String access_token = TokenTest2.Token();
+	@RequestMapping(value = "cancellation.bk")
+	public String cancellation(int userNo,GiftHistory g, HttpSession session) throws IOException, ParseException {
+		GiftHistory gh = bService.selectGift(g);
 		
-		bService.refund(access_token);
+		String ImpUid = gh.getImpUid();
 		
-		return"";
+		if(ImpUid != null) {
+			String access_token = TokenTest2.Token();
+			
+			int result = bService.refund(access_token, ImpUid);
+			
+			if(result >0) { // 아직 재고 안돌려줌
+				int result1 = bService.deleteGiftHisroty(gh);
+				int result2 = bService.updateGiftCount(gh);
+				if((result1 * result2 )>0) {
+					
+					session.setAttribute("alertMsg", "주문 취소되었습니다.");
+					
+				}else {
+					session.setAttribute("alertMsg", "주문 취소는 되었으나 기록과 재고를 복원하지 않았습니다.");
+					
+				}
+		    }else {
+		    	session.setAttribute("alertMsg", "주문 취소에 실패하였습니다.");
+		    }
+		}else {
+			session.setAttribute("alertMsg", "카드결제가 아님 허나 일단 취소는 해드림");
+			int result1 = bService.deleteGiftHisroty(gh);
+		}
+		
+		return"redirect:giftOredrList.me?userNo="+userNo;
 	}
+	
+	
+	
 	
 }

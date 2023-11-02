@@ -294,10 +294,20 @@
 	            		}
 	            	}
             </script>
+            <script>
+                $("#count_option").on("change", function(){
+                  $("#count").val($("#count_option").val());
+                })
+            </script>
             
             <div class="buy_area">
+              <form action="orderOne.bk">
                 <button onclick="back();" id="back_btn">이전으로</button>
-                <button class="btn btn-secondary buy_btn" style="line-height:10px;" disabled >구매하기</button>
+                  <input type="hidden" name="userNo" value="${loginMember.userNo}">
+                  <input type="hidden" name="giftNo" value="${gift.giftNo}">
+                  <input type="hidden" name="count" id="count">
+                  <button class="btn btn-secondary buy_btn" style="line-height:10px;" disabled >구매하기</button>
+                </form>
                 
                 <script>
                 	function back(){
