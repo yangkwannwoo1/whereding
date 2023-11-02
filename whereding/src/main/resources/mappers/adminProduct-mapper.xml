@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="adminProductMapper">
+	
+	<resultMap type="AdminReview" id="reviewResult">
+		<result column="review_no" property="reviewNo"/>
+		<result column="product_no" property="productNo"/>
+		<result column="h_name" property="hName"/>
+		<result column="s_enterprise" property="sEnterprise"/>
+		<result column="d_enterprise" property="dEnterprise"/>
+		<result column="m_enterprise" property="mEnterprise"/>
+		<result column="user_name" property="userName"/>
+		<result column="rv_content" property="reviewContent"/>
+		<result column="create_date" property="createDate"/>
+	</resultMap>
+	
+											
+	<select id="selectHallReview" resultMap="reviewResult">
+		select 
+		        review_no as review_no
+		       ,product_no as product_no
+		       ,h.h_name as h_name
+		       ,user_name as user_name
+		       ,rv_content as rv_content
+		       ,to_char(create_date, 'yy-MM-dd') as create_date
+		  from review
+		  join consulting c using(cs_no)
+		  join member using(user_no)
+		  join hall h on product_no =  h.h_code
+		  order by review_no 
+	</select>
+	
+	<select id="selectStudioReview" resultMap="reviewResult">
+		select 
+		        review_no as review_no
+		       ,product_no as product_no
+		       ,s.s_enterprise as s_enterprise
+		       ,user_name as user_name
+		       ,rv_content as rv_content
+		       ,to_char(create_date, 'yy-MM-dd') as create_date
+		  from review
+		  join consulting c using(cs_no)
+		  join member using(user_no)
+		  join studio s on product_no =  s.s_code
+		  order by review_no 
+	</select>
+	
+	<select id="selectDressReview" resultMap="reviewResult">
+		select 
+		        review_no as review_no
+		       ,product_no as product_no
+		       ,d.d_enterprise as d_enterprise
+		       ,user_name as user_name
+		       ,rv_content as rv_content
+		       ,to_char(create_date, 'yy-MM-dd') as create_date
+		  from review
+		  join consulting c using(cs_no)
+		  join member using(user_no)
+		  join dress d on product_no =  d.d_code
+		  order by review_no 
+	</select>
+	
+	<select id="selectMakeupReview" resultMap="reviewResult">
+		select 
+		        review_no as review_no
+		       ,product_no as product_no
+		       ,m.m_enterprise as m_enterprise
+		       ,user_name as user_name
+		       ,rv_content as rv_content
+		       ,to_char(create_date, 'yy-MM-dd') as create_date
+		  from review
+		  join consulting c using(cs_no)
+		  join member using(user_no)
+		  join makeup m on product_no =  m.m_code
+		  order by review_no 
+	</select>
+	
+	<delete id="deleteReview">
+		delete
+		  from review
+		 where review_no = #{reviewNo}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+

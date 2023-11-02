@@ -32,6 +32,24 @@
 
   <!-- Template Main CSS File -->
   <link href="resources/assets/css/style.css" rel="stylesheet">
+<style>
+	.menu {
+  		list-style: none;
+	}
+
+
+	.sub-item {
+	  margin-left:30px;
+	  display:none;
+	}
+	.review-item:hover .sub-item{
+		display:block;
+		margin-bottom:25px;
+	}
+	.sub-item>li:hover{
+		background:red;
+	}
+</style>
 </head>
 <body>
     <!-- ======= Sidebar ======= -->
@@ -83,6 +101,7 @@
           <i class="bi bi-envelope"></i>
           <span>답례품 목록</span>
         </a>
+      </li><!-- End Contact Page Nav -->
         
         <li class="nav-item">
         <a class="nav-link collapsed" href="collabo.ad?cpage=">
@@ -90,6 +109,13 @@
           <span>협업업체 신청목록</span>
         </a>
       </li><!-- End Contact Page Nav -->
+      
+      <li class="nav-item review-item">
+        <a class="nav-link collapsed" href="hallReview.ad">
+          <i class="bi bi-envelope"></i>
+          <span>리뷰 관리</span>
+        </a>
+      
 
     </ul><!-- End Sidebar-->
     

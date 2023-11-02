@@ -14,6 +14,7 @@ import com.kh.whereding.board.model.vo.Qna;
 import com.kh.whereding.common.model.vo.PageInfo;
 import com.kh.whereding.gift.model.vo.Gift;
 import com.kh.whereding.member.model.vo.Member;
+import com.kh.whereding.member.model.vo.Review;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -166,6 +167,27 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int collaboDenied(int cpNo) {
 		return aDao.collaboDenied(sqlSession, cpNo);
+	}
+
+	@Override
+	public ArrayList<Review> selectHallReview() {
+		return aDao.selectHallReview(sqlSession);
+	}
+
+	public ArrayList<Review> selectStudioReview() {
+		return aDao.selectStudioReview(sqlSession);
+	}
+
+	public ArrayList<Review> selectDressReview() {
+		return aDao.selectDressReview(sqlSession);
+	}
+
+	public ArrayList<Review> selectMakeupReview() {
+		return aDao.selectMakeupReview(sqlSession);
+	}
+
+	public int deleteReview(int reviewNo) {
+		return aDao.deleteReview(sqlSession, reviewNo);
 	}
 
 	
