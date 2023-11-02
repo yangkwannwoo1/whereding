@@ -39,8 +39,8 @@ public class AdminController {
 
 	
 	@RequestMapping("admin.ad")
-	public String DaskBoardForm(Model model) {
-
+	public String DaskBoardForm(Model model, HttpSession session) {
+		
 		// 총 회원수
 		int count = AService.selectOneCount();
 
@@ -296,6 +296,13 @@ public class AdminController {
 			}
 			return "redirect:/collabo.ad";
 		}
+		
+		@RequestMapping("adminLogout.ad")
+		public String adminLogout(HttpSession session) {
+			session.invalidate();
+			return "redirect:/";
+		}
+		
 		
 }
 		
