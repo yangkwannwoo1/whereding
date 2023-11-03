@@ -92,7 +92,7 @@
             color: #363636;
         }
         .notice table{
-            border-top: 2px solid #f28123;
+            border-top: 2px solid #FABFC1;
             width: 100%;
             border-collapse: collapse;
         }

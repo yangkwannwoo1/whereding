@@ -40,5 +40,7 @@ D_WEEK_OPEN
 	 private int csNo;
  	 private String img1;
 	 private String imgPath;
+	 
+	private String tagContent;
 	
 }

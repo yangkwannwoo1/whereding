@@ -8197,7 +8197,7 @@
   .wrap-header {
     position: relative;
     width: 45%;
-    background: #f28123; }
+    background: #FABFC1; }
     @media (max-width: 767.98px) {
       .wrap-header {
         width: 100%;
@@ -8294,7 +8294,7 @@
     color: #fff;
     border: none; }
   .modal-content tbody td:hover:after, .modal-content .selected:after {
-      background: #f28123; }
+      background: #FABFC1; }
   
   .modal-content tbody td:active {
     -webkit-transform: scale(0.7);

@@ -5,7 +5,10 @@ import java.util.HashMap;
 
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.HashTag;
+import com.kh.whereding.main.model.vo.SearchDress;
 import com.kh.whereding.main.model.vo.SearchHall;
+import com.kh.whereding.main.model.vo.SearchMakeup;
+import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
@@ -48,6 +51,11 @@ public interface MainService {
 	// 방문자 수 증가
 //	void addVisit();
 	
+	ArrayList<Hall> searchHallList(SearchHall sh);
+	
+	ArrayList<Studio> ajaxSearchStudioList(SearchStudio ss);
+	ArrayList<Dress> ajaxSearchDressList(SearchDress sd);
+	ArrayList<Makeup> ajaxSearchMakeupList(SearchMakeup sm);
 }
 
 

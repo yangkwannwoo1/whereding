@@ -118,7 +118,7 @@
                 }
 
                 #search_title {
-                    background-color: #0073C6;
+                    background-color: #FABFC1;
                     text-align: right;
                     width: 80%;
                 }
@@ -519,14 +519,42 @@
                                                         <input class="hidden_address w" type="hidden"
                                                             name="wsAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
                                                         지역
-                                                        <span style="margin-right: 70px;"><input class="select_area w"
+                                                        <c:choose>
+                                                           <c:when test="${not empty sh.wsAddress }">
+                                                            <span style="margin-right: 70px;"><input class="select_area w"
+                                                                type="text" value="${sh.wsAddress}" placeholder="지역선택" readonly></span>
+                                                           </c:when>
+                                                           <c:otherwise>
+                                                            <span style="margin-right: 70px;"><input class="select_area w"
                                                                 type="text" placeholder="지역선택" readonly></span>
+                                                           </c:otherwise>
+                                                        </c:choose>
+                                                       
 
                                                         대관비
-                                                        <span class="minPrice"><input type="number" placeholder="0"
+                                                        <c:choose>
+                                                           <c:when test="${not empty sh.wsMinPrice }">
+	                                                           <span class="minPrice"><input type="number" placeholder="0"
+	                                                                value="${sh.wsMinPrice }" name="wsMinPrice">만원</span>~&nbsp;
+                                                           </c:when>
+                                                           <c:otherwise>
+                                                           		<span class="minPrice"><input type="number" placeholder="0"
                                                                 value="0" name="wsMinPrice">만원</span>~&nbsp;
-                                                        <span class="maxPrice"><input type="number" placeholder="100"
+                                                           </c:otherwise>
+                                                        </c:choose>
+                                                        
+                                                        <c:choose>
+                                                           <c:when test="${not empty sh.wsMaxPrice }">
+	                                                             <span class="maxPrice"><input type="number" placeholder="100"
+                                                                value="${sh.wsMaxPrice }" name="wsMaxPrice">만원</span>
+                                                           </c:when>
+                                                           <c:otherwise>
+               													  <span class="maxPrice"><input type="number" placeholder="100"
                                                                 value="100" name="wsMaxPrice">만원</span>
+                                                           </c:otherwise>
+                                                        </c:choose>
+                                                            
+                                                      
                                                     </td>
                                                 </tr>
                                                 <tr class="input_area">
@@ -539,17 +567,49 @@
                                                             <option value="3">301명 ~ 500명</option>
                                                             <option value="4">501명 ~ </option>
                                                         </select>
+                                                        <script>
+														    const wsSeat = ${sh.wsSeat}; // 서버로부터 받은 변수, 예: 1, 2, 3 등
+														
+														    // 선택한 옵션을 변경
+														    const selectElement = document.getElementById("seat_avail");
+														    selectElement.value = wsSeat; // 해당 값을 선택한 옵션으로 설정
+														</script>
+														                                                        
                                                         식대
                                                         <!-- 식대 -->
-                                                        <span class="minPrice"><input type="number" placeholder="0"
-                                                                value="0" name="EatMinPrice">만원</span>~&nbsp;
-                                                        <span class="maxPrice"><input type="number" placeholder="10"
-                                                                value="10" name="EatMaxPrice">만원</span>
+
+                                                        <c:choose>
+                                                            <c:when test="${not empty sh.eatMinPrice }">
+                                                                <span class="minPrice"><input type="number" placeholder="0"
+                                                                    value="${sh.eatMinPrice}" name="EatMinPrice">만원</span>~&nbsp;
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span class="minPrice"><input type="number" placeholder="0"
+                                                                    value="0" name="EatMinPrice">만원</span>~&nbsp;
+                                                            </c:otherwise>
+                                                         </c:choose>
+
+                                                         <c:choose>
+                                                            <c:when test="${not empty sh.eatMaxPrice }">
+                                                                <span class="maxPrice"><input type="number" placeholder="10"
+                                                                    value="${sh.eatMaxPrice}" name="EatMaxPrice">만원</span>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span class="maxPrice"><input type="number" placeholder="10"
+                                                                    value="10" name="EatMaxPrice">만원</span>
+                                                            </c:otherwise>
+                                                         </c:choose>
+
+                                                       
+                                                       
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <input class="hidden_tag w" type="hidden" name="wsTag">
                                                     <td colspan="3" class="selectTagArea">
+                                                        <c:if test="${not empty sh.wsTag}">
+                                                            <span class="taglist">${sh.wsTag}</span>
+                                                        </c:if>
                                                     </td>
                                                     <td class="find_tag w">
                                                         <button type="button"
@@ -559,7 +619,7 @@
                                                 <tr class="next_prev_area">
                                                     <td colspan="4">
                                                         <a class="btn btn-outline-warning float-right"
-                                                            onclick="nextTab(this);">다음</a>
+                                                            onclick="nextTab(this);" id="goStudio">다음</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -758,10 +818,40 @@
                     </tbody>
                 </table>
             </form>
+            <!-- <script>
+                $("#goStudio").click(function() {
+                    // 폼 데이터 가져오기
+                    var formData = $("#searchPlace").serialize();
+            
+                    // "searchStudio.mn"으로 AJAX 요청 보내기
+                    $.ajax({
+                        type: "POST",
+                        url: "searchStudio.mn",
+                        data: formData,
+                        success: function(response) {
+                            // 서버의 응답을 처리합니다.
+                            // 여기서 페이지를 업데이트하거나 응답 데이터를 처리할 수 있습니다.
+                        },
+                        error: function(error) {
+                            // 여기서 오류를 처리합니다.
+                        }
+                    });
+                });
+            </script> -->
+            <script>
+                 $("#goStudio").click(function(event) {
+                    event.preventDefault(); // 기본 동작을 막아서 링크가 바로 이동되는 것을 막음
 
+                    var formData = $("#searchPlace").serialize();
+
+                    // 쿼리 문자열을 현재 URL에 추가하면서 페이지 이동
+                    window.location.href = "searchStudio.mn?" + formData;
+                });
+            </script>
             <br>
 
             <br>
+            <c:if test="${not empty list}">
             <div id="menu5">
                 <span style="font-weight: 700; font-size: 30px;">웨딩홀</span>
                 <c:if test="${loginMember.gradeNo eq '3' and loginMember.gradeNo eq '2' }">
@@ -775,7 +865,7 @@
                         <div class="single-board">
 		                	<input type="hidden" class="hno" value="${ h.code }">
 							<p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
-								<img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%">${ h.greatCount }</span>
+								<!-- <img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%">${ h.greatCount }</span> -->
 							</p>
                         	<div style="text-align: center; padding: 5%">
 	                        	<img src="${ h.imgPath }" style="height: 200px;">
@@ -803,8 +893,46 @@
                     </div>
                 </c:forEach>
             </div>
+            </c:if>
+            <c:if test="${not empty clist}">
+                <div class="row collectionList">
+                    <c:forEach var="c" items="${clist}">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-board">
+                                
+                                <div class="news-text-box">
+                                      <p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
+                                        <!-- <img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%">${ c.greatCount }</span> -->
+                                    </p>
+                                    <img src="${ c.imgPath }" style="width: 300px; height: 200px; margin-bottom: 3%; border-radius: 10px;">
+                                    <h3><a href="#">${ c.enterprise }</a></h3>
+                                    <p><i class="fas fa-map-marker-alt"> ${ c.address }</i></p>
+                                    <p class="price_won"><i class="fas fa-won">${ c.price }</i></p>
+                                    <p class="blog-meta">
+                                        <span class="author">
+                                            <c:set var="tag" value="${fn:split(c.tagContent,',')}" />
+                                            <c:forEach var="it" items="${tag}" varStatus="g">
+                                                <c:choose>
+                                                    <c:when test="${not empty it }">
+                                                        <span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ${ it }</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span style="font-size: 14px; color: black; font-weight: 600; opacity: 1; opacity: 0;"> empty</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </span>
+                                    </p>
+                                    <a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+                                    <input class="cno" type="hidden" value="${ c.code }">
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-center">
@@ -838,7 +966,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- 목록 끝 -->

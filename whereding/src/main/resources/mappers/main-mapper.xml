@@ -22,6 +22,10 @@
 		<result column="h_address" property="address"></result>
 		<result column="h_unit_time" property="unitTime"></result>
 		<result column="h_week_open" property="weekOpen"></result>
+		<result column="TAG_CONTENT" property="tagContent"></result>
+		<!-- 
+	     , TAG_CONTENT
+		 -->
 	</resultMap>
 	<resultMap type="Studio" id="studioResultSet">
 		<result column="s_code" property="stCode"></result>
@@ -34,6 +38,7 @@
 		<result column="s_address" property="address"></result>
 		<result column="s_unit_time" property="unitTime"></result>
 		<result column="s_week_open" property="weekOpen"></result>
+		<result column="TAG_CONTENT" property="tagContent"></result>
 	</resultMap>
 	<resultMap type="Dress" id="dressResultSet">
 		<result column="d_code" property="drCode"></result>
@@ -46,6 +51,7 @@
 		<result column="d_address" property="address"></result>
 		<result column="d_unit_time" property="unitTime"></result>
 		<result column="d_week_open" property="weekOpen"></result>
+		<result column="TAG_CONTENT" property="tagContent"></result>
 	</resultMap>
 	<resultMap type="Makeup" id="makeupResultSet">
 		<result column="m_code" property="maCode"></result>
@@ -58,6 +64,7 @@
 		<result column="m_address" property="address"></result>
 		<result column="m_unit_time" property="unitTime"></result>
 		<result column="m_week_open" property="weekOpen"></result>
+		<result column="TAG_CONTENT" property="tagContent"></result>
 	</resultMap>
 	<resultMap type="Basket" id="basketResultSet">
 		<result column="user_no" property="userNo"></result>
@@ -273,6 +280,152 @@
 		  left join product_img on (company_no = product_no)
           left join hall on (company_no = h_code)
 		 where user_no = #{userNo}
+	</select>
+	<select id="searchHallList" resultMap="hallResultSet">
+	<![CDATA[
+	select
+	       H_CODE
+	     , H_ENTERPRISE
+	     , H_NAME
+	     , H_DETAIL
+	     , H_SEAT
+	     , H_RENTAL
+	     , H_RESTAURANT_SEAT
+	     , H_MEAL
+	     , H_START_TIME
+	     , H_END_TIME
+	     , H_PHONE
+	     , H_ADDRESS
+	     , H_UNIT_TIME
+	     , H_WEEK_OPEN
+	     , TAG_CONTENT
+	from hall 
+	join TAG on (H_CODE = PRODUCT_NO)
+	where H_STATUS = 'Y'
+	 and H_RENTAL >= #{wsMinPrice}
+	 and H_RENTAL <= #{wsMaxPrice}
+	 ]]>
+	 <if test="wsSeat == 1">
+	 <![CDATA[
+	 and H_SEAT <= 100
+]]>
+	 </if>
+	 <if test="wsSeat == 2">
+	 <![CDATA[
+	 and H_SEAT <= 300 
+	 and H_SEAT >= 101
+]]>
+	 </if>
+	 <if test="wsSeat == 3">
+	 <![CDATA[
+	 and H_SEAT <= 500
+	 and H_SEAT >= 301
+]]>
+	 </if>
+	 <if test="wsSeat == 4">
+	 and H_SEAT >= 500
+	 </if>
+	 <![CDATA[
+	 and H_MEAL >= #{eatMinPrice}
+	 and H_MEAL <= #{eatMaxPrice}
+	 and H_ADDRESS like '%' || #{wsAddress} || '%'
+]]>
+	<if test="wsTag != null">
+	and TAG_CONTENT like '%' || #{wsTag} || '%'
+	</if>
+	</select>
+	<select id="ajaxSearchStudioList" resultMap="studioResultSet">
+	 <![CDATA[
+ select 
+       S_CODE
+     , S_ENTERPRISE
+     , S_DETAIL
+     , S_PRICE
+     , S_START_DATE
+     , S_END_DATE
+     , S_PHONE
+     , S_ADDRESS
+     , S_UNIT_TIME
+     , S_WEEK_OPEN
+     , TAG_CONTENT
+  from studio
+  join tag on ( S_CODE = PRODUCT_NO)
+  where S_STATUS = 'Y'
+   and S_PRICE >= #{ssMinPrice}
+   and S_PRICE <= #{ssMaxPrice}
+	]]>
+	
+	<if test="ssAddress != null">
+	 and S_ADDRESS like '%' || #{ssAddress} ||'%'
+	 </if>
+	 <if test="ssTag != null">
+	and TAG_CONTENT like '%' || #{ssTag} || '%'
+	</if>
+	<if test="ssWeek != null"> 
+	and S_WEEK_OPEN = 'Y'
+	</if>
+	</select>
+	<select id="ajaxSearchDressList" resultMap="dressResultSet">
+	 <![CDATA[
+ select 
+       D_CODE
+     , D_ENTERPRISE
+     , D_DETAIL
+     , D_PRICE
+     , D_START_DATE
+     , D_END_DATE
+     , D_PHONE
+     , D_ADDRESS
+     , D_UNIT_TIME
+     , D_WEEK_OPEN
+     , TAG_CONTENT
+  from studio
+  join tag on ( D_CODE = PRODUCT_NO)
+  where D_STATUS = 'Y'
+   and D_PRICE >= #{dsMinPrice}
+   and D_PRICE <= #{dsMaxPrice}
+	]]>
+	
+	<if test="dsAddress != null">
+	 and D_ADDRESS like '%' || #{dsAddress} ||'%'
+	 </if>
+	 <if test="dsTag != null">
+	and TAG_CONTENT like '%' || #{dsTag} || '%'
+	</if>
+	<if test="dsWeek != null"> 
+	and S_WEEK_OPEN = 'Y'
+	</if>
+	</select>
+	<select id="ajaxSearchMakeupList" resultMap="makeupResultSet">
+	<![CDATA[
+ select 
+       m_CODE
+     , m_ENTERPRISE
+     , m_DETAIL
+     , m_PRICE
+     , m_START_DATE
+     , m_END_DATE
+     , m_PHONE
+     , m_ADDRESS
+     , m_UNIT_TIME
+     , m_WEEK_OPEN
+     , TAG_CONTENT
+  from studio
+  join tag on ( m_CODE = PRODUCT_NO)
+  where m_STATUS = 'Y'
+   and m_PRICE >= #{dsMinPrice}
+   and m_PRICE <= #{dsMaxPrice}
+	]]>
+	
+	<if test="msAddress != null">
+	 and m_ADDRESS like '%' || #{msAddress} ||'%'
+	 </if>
+	 <if test="msTag != null">
+	and TAG_CONTENT like '%' || #{msTag} || '%'
+	</if>
+	<if test="msWeek != null"> 
+	and m_WEEK_OPEN = 'Y'
+	</if>
 	</select>
 	
 </mapper>

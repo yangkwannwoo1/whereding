@@ -58,4 +58,5 @@ H_WEEK_OPEN
 	private String imgPath;
 	private int greatCount;
 	private int userNo;
+	
 }

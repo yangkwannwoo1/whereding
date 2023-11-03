@@ -66,7 +66,7 @@
             width: 880px; /* 배경 이미지의 너비를 설정해주세요 */
             height: 50px; /* 배경 이미지의 높이를 설정해주세요 */
             margin-top: 30px;
-            border-bottom: 2px solid #f28123;
+            border-bottom: 2px solid #FABFC1;
         }
 
         .title-3 .title {

@@ -243,7 +243,7 @@
 	                        	                $("#goodId").css("display", "inline");
 	                        	                $("#badId").css("display", "none");
 	                        	                $("#shortId").css("display", "none");
-	                        	                $(".submit_btn").css("background" , "#f28123").prop("disabled", false);
+	                        	                $(".submit_btn").css("background" , "#FABFC1").prop("disabled", false);
 	                        	                
 	                        	            }else{ // 그게아닐때임 중복임
 	                        	            	$("#badId").css("display", "inline");

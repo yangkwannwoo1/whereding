@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.HashTag;
+import com.kh.whereding.main.model.vo.SearchDress;
 import com.kh.whereding.main.model.vo.SearchHall;
+import com.kh.whereding.main.model.vo.SearchMakeup;
+import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
@@ -67,6 +70,22 @@ public class MainDao {
 		}
 		else sqlSession.update("adminVisitMapper.updateVisitCount");
 		
+	}
+
+	public ArrayList<Hall> searchHallList(SqlSessionTemplate sqlSession, SearchHall sh) {
+		return (ArrayList)sqlSession.selectList("mainMapper.searchHallList", sh);
+	}
+
+	public ArrayList<Studio> ajaxSearchStudioList(SqlSessionTemplate sqlSession, SearchStudio ss) {
+		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchStudioList", ss);
+	}
+
+	public ArrayList<Dress> ajaxSearchDressList(SqlSessionTemplate sqlSession, SearchDress sd) {
+		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchDressList", sd);
+	}
+
+	public ArrayList<Makeup> ajaxSearchMakeupList(SqlSessionTemplate sqlSession, SearchMakeup sm) {
+		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchMakeupList", sm);
 	}
 
 }

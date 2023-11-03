@@ -86,7 +86,7 @@
 		}
 	</style>
 </head>
-<body>
+<body style="background-color: white;">
 	<jsp:include page="common/header.jsp"/>
 	<!--PreLoader-->
     <div class="loader">

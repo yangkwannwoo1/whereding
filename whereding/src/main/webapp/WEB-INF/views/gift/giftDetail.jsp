@@ -262,7 +262,7 @@
                     		$(".buy_btn").attr("disabled", false);
                     		$("#buyFalseSpan").css("display", "none");
                     		let formattedPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(${gift.giftPrice}* buyCount);
-                    		$(".buy_btn").html(formattedPrice + " 원 결제하기").css("background", "#f28123");
+                    		$(".buy_btn").html(formattedPrice + " 원 결제하기").css("background", "#FABFC1");
                     	}
                     }
                     </script>

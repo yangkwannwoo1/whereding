@@ -60,7 +60,7 @@
          }
  
          main > aside > .category > li > a:hover {
-             background: #F28123;
+             background: #FABFC1;
              color: #fff;
          }
  
@@ -73,7 +73,7 @@
  
          .tab-content{
              display: none;
-             background: #F28123;
+             background: #FABFC1;
              padding: 15px;
          }
  
@@ -306,7 +306,7 @@
          border-top: 1px solid #9999994d; /* 원하는 스타일 및 색상으로 설정 */
      }
      .header_h{
-         color: #f28123;
+         color: #FABFC1;
          font-weight: bold;
          font-size: 20px;
      }
@@ -325,17 +325,17 @@
          height: 34px;
          color: rgb(52, 106, 255);
          background-color: rgb(255, 255, 255);
-         border: 1px solid #f28123;
+         border: 1px solid #FABFC1;
          cursor: pointer;
      }
    
    
      .refund_btn:hover, .cancel_btn:hover, #review_btn:hover{
-         background-color: #f28123;
+         background-color: #FABFC1;
          color: white;
      }
      h3{
-         background-color: #f28123;
+         background-color: #FABFC1;
      }
      h3>span{
          color: rgba(255, 255, 255, 0.929);

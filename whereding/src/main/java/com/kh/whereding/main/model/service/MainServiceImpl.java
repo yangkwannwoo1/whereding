@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.main.model.dao.MainDao;
+import com.kh.whereding.main.model.vo.SearchDress;
 import com.kh.whereding.main.model.vo.SearchHall;
+import com.kh.whereding.main.model.vo.SearchMakeup;
+import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
@@ -82,6 +85,30 @@ public class MainServiceImpl implements MainService {
 		return mnDao.selectRsvList(sqlSession, userNo);
 	}
 
+	@Override
+	public ArrayList<Hall> searchHallList(SearchHall sh) {
+		return mnDao.searchHallList(sqlSession, sh);
+	}
+
+	@Override
+	public ArrayList<Studio> ajaxSearchStudioList(SearchStudio ss) {
+		return mnDao.ajaxSearchStudioList(sqlSession, ss);
+	}
+
+	@Override
+	public ArrayList<Dress> ajaxSearchDressList(SearchDress sd) {
+		return mnDao.ajaxSearchDressList(sqlSession, sd);
+	}
+
+	@Override
+	public ArrayList<Makeup> ajaxSearchMakeupList(SearchMakeup sm) {
+		return mnDao.ajaxSearchMakeupList(sqlSession, sm);
+	}
+
+	
+	
+
+	
 //	@Override
 //	public void addVisit() {
 //		

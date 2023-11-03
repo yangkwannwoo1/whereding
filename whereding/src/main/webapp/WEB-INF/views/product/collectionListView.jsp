@@ -110,7 +110,7 @@
   }
 
   #search_title{
-    background-color: #F28123;
+    background-color: #FABFC1;
     text-align: right;
     width: 80%;
   }

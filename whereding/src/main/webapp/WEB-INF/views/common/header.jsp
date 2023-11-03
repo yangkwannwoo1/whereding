@@ -118,7 +118,7 @@
 	position: relative;
 	text-align: center;
 	padding: 4px 8px;
-	background: #f28123;
+	background: #FABFC1;
 	width: 80%;
 	display: block;
 	margin: 9px auto;
@@ -177,7 +177,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 }
 </style>
 </head>
-<body>
+<body style="background-color:white">
 	<jsp:include page="quick.jsp"/>
 	<!-- header -->
 	<div class="top-header-area" id="sticker">

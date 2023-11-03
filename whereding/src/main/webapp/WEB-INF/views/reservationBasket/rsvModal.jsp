@@ -19,7 +19,7 @@
             margin-top: 70px;
             margin-left: 60px;
             margin-right: 60px;
-            border-bottom: 2px solid #f28123;
+            border-bottom: 2px solid #FABFC1;
         }
         .category{
             width: 200px;
@@ -71,7 +71,7 @@
         .time{
             width: 610px;
             height: 400px;
-            border: 2px solid #f28123;
+            border: 2px solid #FABFC1;
             float: left;
             margin-top: 30px;
             padding: 10px;
@@ -86,7 +86,7 @@
             border: 2px solid rgba(128, 128, 128, 0.322);
         }
         .time_body>button.select {
-            background-color: #f28123;
+            background-color: #FABFC1;
             border: 2px solid #723d11;
             color: white;
             font-weight: 900;
@@ -99,7 +99,7 @@
         .message{
             width: 550px;
             height: 400px;
-            border: 2px solid #f28123;
+            border: 2px solid #FABFC1;
             float: left;
             margin-top: 30px;
             margin-left: 30px;
@@ -115,7 +115,7 @@
             width: 508px;
             height: 60px;
             margin-top: 10px;
-            background-color: #f28123;
+            background-color: #FABFC1;
             color: white;
             font-weight: 900;
             font-size: 30px;

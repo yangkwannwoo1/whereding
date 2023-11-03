@@ -42,4 +42,5 @@ S_WEEK_OPEN
 	private String imgPath;
 	
 	private int userNo;
+	private String tagContent;
 }

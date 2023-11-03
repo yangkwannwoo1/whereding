@@ -88,7 +88,7 @@
         }
 
         main > aside > .category > li > a:hover {
-            background: #F28123;
+            background: #FABFC1;
             color: #fff;
         }
 
@@ -101,7 +101,7 @@
 
         .tab-content{
             display: none;
-            background: #F28123;
+            background: #FABFC1;
             padding: 15px;
         }
 
