@@ -253,7 +253,9 @@
 
 
 
-    
+    <script src="resources/css/assets/js/consulting.js"></script>
+<script src="resources/css/assets/js/jquery.min.js"></script>
+
 
    	<jsp:include page="../common/footer.jsp"/>
     

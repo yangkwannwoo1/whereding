@@ -258,6 +258,8 @@
   <script src="resources/assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="resources/assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="resources/assets/vendor/php-email-form/validate.js"></script>
+  <script src="resources/css/assets/js/jquery.min.js"></script>
+  <script src="resources/css/assets/js/consulting.js"></script>
 
   <!-- Template Main JS File -->
   <script src="resources/assets/js/admin.js"></script>

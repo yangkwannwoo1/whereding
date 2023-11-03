@@ -24,7 +24,7 @@ public class ReservationBasketController {
 	}
 	
     @RequestMapping("consulting.md")
-    public String loginModal() {
+    public String consultingModal() {
     	System.out.println("오냐");
         return "reservationBasket/rsvModal";
     }
