@@ -106,5 +106,8 @@ public class MemberDao {
 	public int memberInitPwd(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.memberInitPwd", m);
 	}
+	public int deleteConsulting(SqlSessionTemplate sqlSession, Consulting cs) {
+		return sqlSession.update("memberMapper.deleteConsulting", cs);
+	}
 	
 }

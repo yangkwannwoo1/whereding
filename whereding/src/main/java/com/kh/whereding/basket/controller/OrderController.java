@@ -56,16 +56,7 @@ public class OrderController {
 	        return "basket/orderListView";
 	    
 	}
-	@RequestMapping(value = "quickOrder.bk")
-	public String quickOrder(@RequestParam("giftNo")String[] giftNo,@RequestParam("count")int[] count,HttpSession session) {
-		
-		for(int i=0; i<giftNo.length;i++) {
-			System.out.println("giftNo@@@@@@@@@@"+giftNo[i]);
-			System.out.println("count@@@@@@@@@@"+count[i]);
-		}
-		
-		return"";
-	}
+	
 	
 	@RequestMapping(value = "orderOne.bk")
 	public String orderOne(@RequestParam("userNo") int userNo,@RequestParam("giftNo") String giftNo,@RequestParam("count") int count, HttpSession session) {

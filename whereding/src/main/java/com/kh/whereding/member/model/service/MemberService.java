@@ -68,5 +68,7 @@ public interface MemberService {
 	// 아이디 찾기 (이메일 조회)
 	Member emailCheck(String email);
 	
+	// 상담취소
+	int deleteConsulting(Consulting cs);
 	
 }

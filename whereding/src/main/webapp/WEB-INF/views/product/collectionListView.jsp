@@ -706,7 +706,9 @@
 			
 			<div style="">
 				<span style="font-size: 30px; font-weight: 700; font-size: 30px">${ category }</span>	
-				<input class="enroll_collection btn btn-warning float-right" type="button" value="업체등록" style="height:40px;">		
+                <c:if test="${loginMember.gradeNo eq '3' and loginMember.gradeNo eq '2' }">
+                    <input class="enroll_collection btn btn-warning float-right" type="button" value="업체등록" style="height:40px;">		
+                </c:if>
 			</div>
 			<script>
 				$(".enroll_collection").click(function(){

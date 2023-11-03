@@ -764,7 +764,9 @@
             <br>
             <div id="menu5">
                 <span style="font-weight: 700; font-size: 30px;">웨딩홀</span>
-                <button type="button" onclick="location.href='enrollForm.pr'" id="insertposts" style="height:40px">업체등록</button>
+                <c:if test="${loginMember.gradeNo eq '3' and loginMember.gradeNo eq '2' }">
+                    <button type="button" onclick="location.href='enrollForm.pr'" id="insertposts" style="height:40px">업체등록</button>
+                </c:if>
             </div>
             <br>
             <div class="row">

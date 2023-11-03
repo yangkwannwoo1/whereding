@@ -414,7 +414,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   set user_pwd = #{userPwd}
 		 where email = #{email}
 	</update>
-	
+	<update id="deleteConsulting">
+		UPDATE consulting
+		   set status = 'N'
+		 where product_no = #{productNo}
+		   and user_no = #{userNo}
+	</update>
 </mapper>
 
 

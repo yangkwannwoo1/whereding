@@ -230,8 +230,13 @@ public class MemberServiceImpl implements MemberService{
 	public Member emailCheck(String email) {
 		return mDao.emailCheck(sqlSession, email);
 	}
-	
+
 	//--------------------------------메일발송-----------------------------
+	@Override
+	public int deleteConsulting(Consulting cs) {
+		return mDao.deleteConsulting(sqlSession,cs);
+	}
+	
 	
 	
 }

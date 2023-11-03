@@ -102,6 +102,7 @@
 			height: 20px;
 		}
 		
+		
 		  /* 좋아요 바운스 */
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
@@ -307,8 +308,10 @@
 	               </div>
 				</td>
 				<td style="text-align: right; padding: 0% 2%; height: 60px;">
-					<button class="btn btn-danger" onclick="deleteCollection();"><i class="fas fa-trash"> 삭제</i></button>
-					<button class="btn btn-warning"><i class="fas fa-shopping-cart"> 장바구니</i></button>
+					<c:if test="${loginMember.gradeNo eq '3'}">
+						<button class="btn btn-danger" onclick="deleteCollection();"><i class="fas fa-trash"> 삭제</i></button>
+					</c:if>
+					<!-- <button class="btn btn-warning"><i class="fas fa-shopping-cart"> 장바구니</i></button> -->
 
 				</td>
 			</tr>

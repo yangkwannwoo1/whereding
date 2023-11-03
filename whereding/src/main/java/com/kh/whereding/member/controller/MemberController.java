@@ -468,4 +468,40 @@ public class MemberController {
 //		
 //		}
 	
+	
+	@RequestMapping(value = "consultingCansel.me")
+	public String consultingCansel(int userNo, String code,  HttpSession session) {
+		
+		Consulting cs = new Consulting();
+		cs.setProductNo(code);
+		cs.setUserNo(userNo);
+		
+		int result = mService.deleteConsulting(cs);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "정상적으로 예약이 취소되었습니다.");
+		}else {
+			session.setAttribute("alertMsg", "예약취소에 실패하였습니다. 업체로 연락주세요.");
+		}
+		
+		return "redirect:/reserveList.me?userNo="+userNo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+

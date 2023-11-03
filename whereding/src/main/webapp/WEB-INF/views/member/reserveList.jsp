@@ -470,8 +470,8 @@
 	                                    </div>
 	                                </td>
 	                                <td class="content_td2">
-	                                    <button class="cancel_btn" onclick="cansel('${hal.phone}');">일정변경</button>
-	                                    <button class="cancel_btn">상담취소</button>
+	                                    <button class="cancel_btn" onclick="change('${hal.phone}');">일정변경</button>
+	                                    <button class="cancel_btn" onclick="cansel('${hal.code}');">상담취소</button>
 	                                    <button class="cancel_btn map-button" onclick="toggleMap('${hal.enterprise}', 'map_${hal.csNo}','${hal.enterprise}');" >지도보기</button>
 
 	                                </td>
@@ -523,8 +523,8 @@
 	                                    </div>
 	                                </td>
 	                                <td class="content_td2">
-	                                    <button class="cancel_btn" onclick="cansel('${st.phone}');">일정변경</button>
-	                                    <button class="cancel_btn">상담취소</button>
+	                                    <button class="cancel_btn" onclick="change('${st.phone}');">일정변경</button>
+	                                    <button class="cancel_btn" onclick="cansel('${st.stCode}');">상담취소</button>
                                         <button class="cancel_btn map-button" onclick="toggleMap('${st.stEnterprise}', 'map_${st.csNo}','${st.stEnterprise}');" >지도보기</button>
 	                                </td>
 	                            </tr>
@@ -573,8 +573,8 @@
 	                                    </div>
 	                                </td>
 	                                <td class="content_td2">
-	                                    <button class="cancel_btn" onclick="cansel('${dr.phone}');">일정변경</button>
-	                                    <button class="cancel_btn">상담취소</button>
+	                                    <button class="cancel_btn" onclick="change('${dr.phone}');">일정변경</button>
+	                                    <button class="cancel_btn"  onclick="cansel('${dr.drCode}');">상담취소</button>
                                         <button class="cancel_btn map-button" onclick="toggleMap('${dr.drEnterprise}', 'map_${dr.csNo}','${dr.drEnterprise}');" >지도보기</button>
 	                                </td>
 	                            </tr>
@@ -623,8 +623,8 @@
 	                                    </div>
 	                                </td>
 	                                <td class="content_td2">
-	                                    <button class="cancel_btn" onclick="cansel('${ma.phone}');">일정변경</button>
-	                                    <button class="cancel_btn">상담취소</button>
+	                                    <button class="cancel_btn" onclick="change('${ma.phone}');">일정변경</button>
+	                                    <button class="cancel_btn"  onclick="cansel('${ma.maCode}');">상담취소</button>
                                         <button class="cancel_btn map-button" onclick="toggleMap('${ma.maEnterprise}', 'map_${ma.csNo}','${ma.maEnterprise}');" >지도보기</button>
 	                                </td>
 	                            </tr>
@@ -727,9 +727,13 @@
      
     </script>
     <script>
-        function cansel(phone){
+        function change(phone){
             console.log(phone);
             alert("일정변경은 업체측으로 연락 바랍니다.  ☎"+phone);
+        }
+
+        function cansel(code){
+            location.href ="consultingCansel.me?userNo="+${loginMember.userNo} + "&code="+code ;
         }
     </script>
     
