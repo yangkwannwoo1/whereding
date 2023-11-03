@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="reservationBasketMapper">
+	
+	<resultMap type="ReservationBasket" id="ReservationBasketResultSet">
+		<result column="company_no" property="companyNo"></result>
+		<result column="enterprise" property="enterprise"></result>
+		<result column="address" property="address"></result>
+		<result column="phone" property="phone"></result>
+		<result column="file1" property="file1"></result>
+		<result column="file3" property="file2"></result>
+		<result column="file2" property="file3"></result>
+		<result column="tag_content" property="tagContent"></result>
+		<result column="h_name" property="hallName"></result>
+		<result column="h_seat" property="hallSeat"></result>
+		<result column="PRICE" property="price"></result>
+		<result column="h_meal" property="hallMeal"></result>
+		<result column="h_restaurant_seat" property="restaurantSeat"></result>
+		<result column="START_TIME" property="startTime"></result>
+		<result column="END_TIME" property="endTime"></result>
+		<result column="WEEK_OPEN" property="weekOpen"></result>
+	</resultMap>
+	
+
+	<select id="selectBasketList" resultMap="ReservationBasketResultSet">
+		select 
+		       company_no
+		     , s_enterprise || d_enterprise || m_enterprise || h_enterprise as enterprise 
+		     , s_address || d_address || m_address || h_address as address
+		     , s_phone || d_phone || m_phone || h_phone as phone
+		     , img_path || '/' || img_1 as file1
+   		     , img_path  || '/' || img_2 as file2
+		     , img_path  || '/' || img_2 as file3
+             , tag_content
+             , h_name
+             , h_seat
+             , h_rental || S_PRICE || D_PRICE || M_PRICE AS PRICE
+             , h_meal
+			 , H_START_TIME || S_START_DATE || D_START_DATE || M_START_DATE AS START_TIME
+             , H_END_TIME || S_END_DATE || D_END_DATE || M_END_DATE AS END_TIME
+             , H_RESTAURANT_SEAT
+             , H_WEEK_OPEN || S_WEEK_OPEN || D_WEEK_OPEN || M_WEEK_OPEN AS WEEK_OPEN               
+		  from rsv_basket
+		  left join studio s on (company_no = s_code)
+		  left join dress d on (company_no = d_code)
+		  left join makeup m on (company_no = m_code)
+		  left join product_img i on (company_no = i.product_no)
+          left join hall on (company_no = h_code)
+          left join tag t on (company_no = t.product_no)
+		 where user_no = #{userNo}
+	</select>
+	
+</mapper>

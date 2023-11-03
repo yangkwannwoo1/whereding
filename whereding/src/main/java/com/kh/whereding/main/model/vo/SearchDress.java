@@ -13,11 +13,11 @@ import lombok.ToString;
 @Setter
 public class SearchDress {
 
-	private String dAddress;
-	private int dMinPrice;
-	private int dMaxPrice;
-	private String dWeek;
-	private String dTag;
+	private String dsAddress;
+	private int dsMinPrice;
+	private int dsMaxPrice;
+	private String dsWeek;
+	private String dsTag;
 	
 }
 

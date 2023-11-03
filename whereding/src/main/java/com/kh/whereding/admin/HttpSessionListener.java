@@ -1,4 +1,4 @@
-package com.kh.whereding.admin;
+/*package com.kh.whereding.admin;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.kh.whereding.admin.model.service.AdminService;
-import com.kh.whereding.admin.model.vo.VisitCountVO;
+import com.kh.whereding.admin.model.vo.VisitCountVO;*/
 /*
 public class HttpSessionListener implements javax.servlet.http.HttpSessionListener {
 	private static int todayVisitCount;
