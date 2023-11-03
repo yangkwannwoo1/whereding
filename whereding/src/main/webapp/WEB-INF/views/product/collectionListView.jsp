@@ -494,20 +494,20 @@
                                     </tr> -->
                                     <tr class="input_area">
                                         <td class="address" colspan="4">
-                                            <input class="hidden_address w" type="hidden" name="wAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
+                                            <input class="hidden_address w" type="hidden" name="wsAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
                                             지역
                                             <span  style="margin-right: 70px;"><input class="select_area w" type="text" placeholder="지역선택" readonly></span>
                                             
                                             대관비
-                                            <span class="minPrice"><input type="number" placeholder="0" value="0" name="wMinPrice">만원</span>~&nbsp;
-                                            <span class="maxPrice"><input type="number" placeholder="100" value="100" name="wMaxPrice">만원</span>
+                                            <span class="minPrice"><input type="number" placeholder="0" value="0" name="wsMinPrice">만원</span>~&nbsp;
+                                            <span class="maxPrice"><input type="number" placeholder="100" value="100" name="wsMaxPrice">만원</span>
                                         </td>
                                     </tr>
                                     <tr class="input_area">
                                         <td colspan="4">
                                             좌석
                                             <!-- <span id="seat_avail" style="margin-right: 80px;"><input type="number">석</span> -->
-                                            <select id="seat_avail" name="wSeat">
+                                            <select id="seat_avail" name="wsSeat">
                                                 <option value="1">0명   ~ 100명</option>
                                                 <option value="2">101명 ~ 300명</option>
                                                 <option value="3">301명 ~ 500명</option>
@@ -520,7 +520,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <input class="hidden_tag w" type="hidden" name="wTag">
+                                        <input class="hidden_tag w" type="hidden" name="wsTag">
                                         <td colspan="3" class="selectTagArea">
                                         </td>
                                         <td class="find_tag w">

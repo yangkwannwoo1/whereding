@@ -13,11 +13,11 @@ import lombok.ToString;
 @Setter
 public class SearchHall {
 
-	private String wAddress;
-	private int wMinPrice;
-	private int wMaxPrice;
-	private int wSeat;
+	private String wsAddress;
+	private int wsMinPrice;
+	private int wsMaxPrice;
+	private int wsSeat;
 	private int eatMinPrice;
 	private int eatMaxPrice;
-	private String wTag;
+	private String wsTag;
 }
