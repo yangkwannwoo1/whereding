@@ -580,16 +580,16 @@
                                                 <tr class="input_area">
                                                     <td class="address" colspan="4">
                                                         <input class="hidden_address s" type="hidden"
-                                                            name="sAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
+                                                            name="ssAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
                                                         지역
                                                         <span style="margin-right: 70px;"><input class="select_area s"
                                                                 type="text" placeholder="지역선택" readonly></span>
 
                                                         가격
                                                         <span class="minPrice"><input type="number" placeholder="0"
-                                                                value="0" name="sMinPrice">만원</span>~&nbsp;
+                                                                value="0" name="ssMinPrice">만원</span>~&nbsp;
                                                         <span class="maxPrice"><input type="number" placeholder="100"
-                                                                value="100" name="sMaxPrice">만원</span>
+                                                                value="100" name="ssMaxPrice">만원</span>
                                                     </td>
                                                 </tr>
                                                 <tr class="input_area">
@@ -598,14 +598,14 @@
                                                             <label class="form-check-label">
                                                                 <input type="checkbox"
                                                                     class="form-check-input weekendYN"
-                                                                    style="margin-right: 0px;" name="sWeek"><span
+                                                                    style="margin-right: 0px;" name="ssWeek"><span
                                                                     style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                             </label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <input class="hidden_tag s" type="hidden" name="sTag">
+                                                    <input class="hidden_tag s" type="hidden" name="ssTag">
                                                     <td colspan="3" class="selectTagArea">
                                                     </td>
                                                     <td class="find_tag">
@@ -641,16 +641,16 @@
                                                 <tr class="input_area">
                                                     <td class="address" colspan="4">
                                                         <input class="hidden_address d" type="hidden"
-                                                            name="dAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
+                                                            name="dsAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
                                                         지역
                                                         <span style="margin-right: 70px;"><input class="select_area d"
                                                                 type="text" placeholder="지역선택" readonly></span>
 
                                                         가격
                                                         <span class="minPrice"><input type="number" placeholder="0"
-                                                                value="0" name="dMinPrice">만원</span>~&nbsp;
+                                                                value="0" name="dsMinPrice">만원</span>~&nbsp;
                                                         <span class="maxPrice"><input type="number" placeholder="100"
-                                                                value="100" name="dMaxPrice">만원</span>
+                                                                value="100" name="dsMaxPrice">만원</span>
                                                     </td>
                                                 </tr>
                                                 <tr class="input_area">
@@ -659,14 +659,14 @@
                                                             <label class="form-check-label">
                                                                 <input type="checkbox"
                                                                     class="form-check-input weekendYN"
-                                                                    style="margin-right: 0px;" name="dWeek"><span
+                                                                    style="margin-right: 0px;" name="dsWeek"><span
                                                                     style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                             </label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <input class="hidden_tag d" type="hidden" name="dTag">
+                                                    <input class="hidden_tag d" type="hidden" name="dsTag">
                                                     <td colspan="3" class="selectTagArea">
                                                     </td>
                                                     <td class="find_tag">
@@ -702,16 +702,16 @@
                                                 <tr class="input_area">
                                                     <td class="address" colspan="4">
                                                         <input class="hidden_address m" type="hidden"
-                                                            name="mAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
+                                                            name="msAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
                                                         지역
                                                         <span style="margin-right: 70px;"><input class="select_area m"
                                                                 type="text" placeholder="지역선택" readonly></span>
 
                                                         가격
                                                         <span class="minPrice"><input type="number" placeholder="0"
-                                                                value="0" name="mMinPrice">만원</span>~&nbsp;
+                                                                value="0" name="msMinPrice">만원</span>~&nbsp;
                                                         <span class="maxPrice"><input type="number" placeholder="100"
-                                                                value="100" name="mMaxPrice">만원</span>
+                                                                value="100" name="msMaxPrice">만원</span>
                                                     </td>
                                                 </tr>
                                                 <tr class="input_area">
@@ -720,14 +720,14 @@
                                                             <label class="form-check-label">
                                                                 <input type="checkbox"
                                                                     class="form-check-input weekendYN"
-                                                                    style="margin-right: 0px;" name="mWeek"><span
+                                                                    style="margin-right: 0px;" name="msWeek"><span
                                                                     style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                             </label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <input class="hidden_tag m" type="hidden" name="mTag">
+                                                    <input class="hidden_tag m" type="hidden" name="msTag">
                                                     <td colspan="3" class="selectTagArea">
                                                     </td>
                                                     <td class="find_tag">

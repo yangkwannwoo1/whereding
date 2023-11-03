@@ -129,9 +129,9 @@
 		       *    
 		  from studio
 		  left join tag on(s_code = product_no)
-		 where s_price between #{sMinPrice}*10000 and #{sMaxPrice}*10000
+		 where s_price between #{ssMinPrice}*10000 and #{ssMaxPrice}*10000
  		   <choose>
- 		   	<when test="sWeek eq 'on'">
+ 		   	<when test="ssWeek eq 'on'">
 			   and s_week_open = 'Y' 
  		   	</when>
  		   	<otherwise>
@@ -144,9 +144,9 @@
 		       *    
 		  from dress
 		  left join tag on(d_code = product_no)
-		 where d_price between #{dMinPrice}*10000 and #{dMaxPrice}*10000
+		 where d_price between #{dsMinPrice}*10000 and #{dsMaxPrice}*10000
  		   <choose>
- 		   	<when test="dWeek eq 'on'">
+ 		   	<when test="dsWeek eq 'on'">
 			   and d_week_open = 'Y' 
  		   	</when>
  		   	<otherwise>
@@ -160,9 +160,9 @@
 		       *    
 		  from makeup
 		  left join tag on(m_code = product_no)
-		 where m_price between #{mMinPrice}*10000 and #{mMaxPrice}*10000
+		 where m_price between #{msMinPrice}*10000 and #{msMaxPrice}*10000
  		   <choose>
- 		   	<when test="mWeek eq 'on'">
+ 		   	<when test="msWeek eq 'on'">
 			   and m_week_open = 'Y' 
  		   	</when>
  		   	<otherwise>
@@ -177,21 +177,21 @@
 		       *    
 		  from studio
 		  left join tag on(s_code = product_no)
-		 where s_price between #{sMinPrice}*10000 and #{sMaxPrice}*10000
+		 where s_price between #{ssMinPrice}*10000 and #{ssMaxPrice}*10000
  		   <choose>
- 		   	<when test="sWeek eq 'on'">
+ 		   	<when test="ssWeek eq 'on'">
 			   and s_week_open = 'Y' 
  		   	</when>
  		   	<otherwise>
  		   		and s_week_open = 'N' 
  		   	</otherwise>
  		   </choose>
- 		   <if test="sTag!=null and sTag neq ''">
-	 		   <foreach item="arr" collection="sTag" open="and(" close=")" separator="or">
+ 		   <if test="ssTag!=null and ssTag neq ''">
+	 		   <foreach item="arr" collection="ssTag" open="and(" close=")" separator="or">
 	                  tag_content like '%'||#{arr}||'%'
 		      </foreach>
  		   </if>
-	      <foreach item= "arr" collection="sAddress" open="and(" close=")" separator="or">
+	      <foreach item= "arr" collection="ssAddress" open="and(" close=")" separator="or">
 	      			s_address like #{arr} ||'%' 
 	      </foreach>
 	</select>
@@ -200,21 +200,21 @@
 		       *    
 		  from dress
 		  left join tag on(d_code = product_no)
-		 where d_price between #{dMinPrice}*10000 and #{dMaxPrice}*10000
+		 where d_price between #{dsMinPrice}*10000 and #{dsMaxPrice}*10000
  		   <choose>
- 		   	<when test="dWeek eq 'on'">
+ 		   	<when test="dsWeek eq 'on'">
 			   and d_week_open = 'Y' 
  		   	</when>
  		   	<otherwise>
  		   		and d_week_open = 'N' 
  		   	</otherwise>
  		   </choose>
- 		   <if test="dTag!=null and dTag neq ''">
-	 		   <foreach item="arr" collection="dTag" open="and(" close=")" separator="or">
+ 		   <if test="dsTag!=null and dsTag neq ''">
+	 		   <foreach item="arr" collection="dsTag" open="and(" close=")" separator="or">
 	                  tag_content like '%'||#{arr}||'%'
 		      </foreach>
  		   </if>
-	      <foreach item= "arr" collection="dAddress" open="and(" close=")" separator="or">
+	      <foreach item= "arr" collection="dsAddress" open="and(" close=")" separator="or">
 	      			d_address like #{arr} ||'%' 
 	      </foreach>
 	</select>
@@ -223,21 +223,21 @@
 		       *    
 		  from makeup
 		  left join tag on(m_code = product_no)
-		 where m_price between #{mMinPrice}*10000 and #{mMaxPrice}*10000
+		 where m_price between #{msMinPrice}*10000 and #{msMaxPrice}*10000
  		   <choose>
- 		   	<when test="mWeek eq 'on'">
+ 		   	<when test="msWeek eq 'on'">
 			   and m_week_open = 'Y' 
  		   	</when>
  		   	<otherwise>
  		   		and m_week_open = 'N' 
  		   	</otherwise>
  		   </choose>
- 		   <if test="mTag!=null and !mTag.equals('')">
-	 		   <foreach item="arr" collection="mTag" open="and(" close=")" separator="or">
+ 		   <if test="msTag!=null and !msTag.equals('')">
+	 		   <foreach item="arr" collection="msTag" open="and(" close=")" separator="or">
 	                  tag_content like '%'||#{arr}||'%'
 		      </foreach>
  		   </if>
-	      <foreach item= "arr" collection="mAddress" open="and(" close=")" separator="or">
+	      <foreach item= "arr" collection="msAddress" open="and(" close=")" separator="or">
 	      			m_address like #{arr} ||'%' 
 	      </foreach>
 	</select>

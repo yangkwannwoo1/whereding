@@ -363,10 +363,10 @@ font-family: 'Open Sans Condensed', sans-serif;
 										<div class="jb-text">
 											<p>장바구니</p>
 										</div>
-										<a class="mobile-hide search-bar-icon jb-title" href="basket.rs"><i
+										<a class="mobile-hide search-bar-icon jb-title" href="consulting.rs"><i
 											class="fas fa-calendar-check"></i></a>
 										<div class="jb-text">
-											<p>예약장바구니</p>
+											<p>예약하기</p>
 										</div>
 									</div>
 
@@ -401,7 +401,8 @@ font-family: 'Open Sans Condensed', sans-serif;
 	         		value += `<table><thead>
 	     				<tr>
 	     					<th>
-	     						<input class="basket_item" type="checkbox" name="checkedValue" value="` + list[i].giftNo +`">
+	     						<input class="basket_item" type="checkbox" name="checkedValue">
+	     						<input class="gift_no" type="hidden" name="giftNo" value="` + list[i].giftNo +`">
 	     					</th>
 	     					<th>
 	     						<h5>` + list[i].giftName + `</h5>						

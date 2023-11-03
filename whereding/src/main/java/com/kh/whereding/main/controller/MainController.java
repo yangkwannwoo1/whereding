@@ -45,57 +45,57 @@ public class MainController {
 
 		// studio 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		//(sAddress=서울특별시 동대문,서울특별시 중랑구, sMinPrice=0, sMaxPrice=100, sWeek=on, sTag=호텔웨딩,스몰웨딩)
+		//(ssAddress=서울특별시 동대문,서울특별시 중랑구, ssMinPrice=0, ssMaxPrice=100, ssWeek=on, ssTag=호텔웨딩,스몰웨딩)
 		ArrayList<String> salist = new ArrayList<String>();
 		ArrayList<String> stlist = new ArrayList<String>();
 		
-		salist.addAll(Arrays.asList(ss.getSAddress().split(",")));
-		stlist.addAll(Arrays.asList(ss.getSTag().split(",")));
+		salist.addAll(Arrays.asList(ss.getSsAddress().split(",")));
+		stlist.addAll(Arrays.asList(ss.getSsTag().split(",")));
 		
-		map.put("sAddress", salist);
-		if(ss.getSTag().equals("")) {
-			map.put("sTag", "");
+		map.put("ssAddress", salist);
+		if(ss.getSsTag().equals("")) {
+			map.put("ssTag", "");
 		}else {
-			map.put("sTag", stlist);
+			map.put("ssTag", stlist);
 		}
-		map.put("sMinPrice", ss.getSMinPrice());
-		map.put("sMaxPrice", ss.getSMaxPrice());
-		map.put("sWeek", ss.getSWeek());
+		map.put("ssMinPrice", ss.getSsMinPrice());
+		map.put("ssMaxPrice", ss.getSsMaxPrice());
+		map.put("ssWeek", ss.getSsWeek());
 	
 		// dress
 		ArrayList<String> dalist = new ArrayList<String>();
 		ArrayList<String> dtlist = new ArrayList<String>();
 		
-		dalist.addAll(Arrays.asList(sd.getDAddress().split(",")));
-		dtlist.addAll(Arrays.asList(sd.getDTag().split(",")));
+		dalist.addAll(Arrays.asList(sd.getDsAddress().split(",")));
+		dtlist.addAll(Arrays.asList(sd.getDsTag().split(",")));
 		
-		map.put("dAddress", dalist);
-		if(sd.getDTag().equals("")) {
-			map.put("dTag", "");
+		map.put("dsAddress", dalist);
+		if(sd.getDsTag().equals("")) {
+			map.put("dsTag", "");
 		}else {
-			map.put("dTag", dtlist);
+			map.put("dsTag", dtlist);
 		}
-		map.put("dMinPrice", sd.getDMinPrice());
-		map.put("dMaxPrice", sd.getDMaxPrice());
-		map.put("dWeek", sd.getDWeek());
+		map.put("dsMinPrice", sd.getDsMinPrice());
+		map.put("dsMaxPrice", sd.getDsMaxPrice());
+		map.put("dsWeek", sd.getDsWeek());
 		
 		
 		// makeup
 		ArrayList<String> malist = new ArrayList<String>();
 		ArrayList<String> mtlist = new ArrayList<String>();
 		
-		malist.addAll(Arrays.asList(sm.getMAddress().split(",")));
-		mtlist.addAll(Arrays.asList(sm.getMTag().split(",")));
+		malist.addAll(Arrays.asList(sm.getMsAddress().split(",")));
+		mtlist.addAll(Arrays.asList(sm.getMsTag().split(",")));
 
-		map.put("mAddress", malist);
-		if(sm.getMTag().equals("")) {
-			map.put("mTag", "");
+		map.put("msAddress", malist);
+		if(sm.getMsTag().equals("")) {
+			map.put("msTag", "");
 		}else {
-			map.put("mTag", mtlist);				
+			map.put("msTag", mtlist);				
 		}
-		map.put("mMinPrice", sm.getMMinPrice());
-		map.put("mMaxPrice", sm.getMMaxPrice());
-		map.put("mWeek", sm.getMWeek());
+		map.put("msMinPrice", sm.getMsMinPrice());
+		map.put("msMaxPrice", sm.getMsMaxPrice());
+		map.put("msWeek", sm.getMsWeek());
 
 		ArrayList<Studio> slist = mnService.searchStudioList(map);
 		ArrayList<Dress> dlist = mnService.searchDressList(map);
@@ -120,7 +120,7 @@ public class MainController {
 	public String selectBasketList(String userNo) {
 		System.out.println(userNo);
 		ArrayList<Basket> list = mnService.selectBasketList(userNo);
-		
+		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 	@ResponseBody

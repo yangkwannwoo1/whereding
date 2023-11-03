@@ -71,7 +71,7 @@
         </div>
     </div>
     <script src="resources/css/assets/js/basket.js"></script>
-        <jsp:include page="../common/footer.jsp"/>
+    <jsp:include page="../common/footer.jsp"/>
     
     <script>
 
