@@ -22,4 +22,5 @@ public class Basket {
 	private String giftContent;
 	private String categoryItem;
 	private String[] delRef;
+	private String giftNo;
 }

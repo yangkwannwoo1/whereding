@@ -104,6 +104,8 @@ public class GiftShopController {
 //		System.out.println(giftNo);
 		Gift gift = gService.selectGiftDetail(giftNo);
 		model.addAttribute("gift", gift);
+		
+		
 //		System.out.println(gift.getImgPath()+gift.getImg1());
 		return "gift/giftDetail";
 	}

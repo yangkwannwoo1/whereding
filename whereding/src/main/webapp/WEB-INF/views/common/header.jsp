@@ -404,7 +404,8 @@ font-family: 'Open Sans Condensed', sans-serif;
 	         		value += `<table><thead>
 	     				<tr>
 	     					<th>
-	     						<input class="basket_item" type="checkbox" name="checkedValue" value="` + list[i].giftNo +`">
+	     					 <input class="basket_item" type="checkbox" name="checkedValue">
+	                          <input class="gift_no" type="hidden" name="giftNo" value="` + list[i].giftNo +`">
 	     					</th>
 	     					<th>
 	     						<h5>` + list[i].giftName + `</h5>						
@@ -424,7 +425,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 	     						<td class="pCount">
 	     							수량 : 
 	     							<i class="fas fa-plus"></i>
-	     							<input type="text" value="` + list[i].count +`">
+	     							<input type="text" name="count"class="count" value="` + list[i].count +`">
 	     							<i class="fas fa-minus"></i>
 	     						</td>
 	     						
@@ -438,8 +439,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 	     			</table>
 	     			<hr>`
 	         	}
-	             value+=`			<span><h5 class="finalTotal">총금액 : 0원</h5></span><br>
-	             <button class="btn btn-outline-secondary" type="submit">구매하기</button>`
+	             value+=`			<span><h5 class="finalTotal">총금액 : 0원</h5></span><br>`
 	         	$("#submitBasket").html(value);
 	         	
 	        

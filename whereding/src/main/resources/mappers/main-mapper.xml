@@ -61,6 +61,7 @@
 	</resultMap>
 	<resultMap type="Basket" id="basketResultSet">
 		<result column="user_no" property="userNo"></result>
+		<result column="gift_No" property="giftNo"></result>
 		<result column="gift_name" property="giftName"></result>
 		<result column="gift_price" property="giftPrice"></result>
 		<result column="file_path" property="filePath"></result>
@@ -244,6 +245,7 @@
 	<select id="selectBasketList" resultMap="basketResultSet">
 		select
                user_id
+             , gift_No
              , b.user_no
              , gift_name
              , gift_price
