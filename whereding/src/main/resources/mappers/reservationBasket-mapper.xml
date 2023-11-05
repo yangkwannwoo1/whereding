@@ -22,6 +22,19 @@
 		<result column="WEEK_OPEN" property="weekOpen"></result>
 	</resultMap>
 	
+	<resultMap type="Consulting" id="consultingResult">
+		<result column="CS_NO" property="csNo"/>
+		<result column="PRODUCT_NO" property="productNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="CS_CONTENT" property="csContent"/>
+		<result column="CS_DATE" property="csDate"/>
+		<result column="START_TIME" property="startTime"/>
+		<result column="END_TIME" property="endTime"/>
+		<result column="consulting_time" property="consultingTime"/>
+		<result column="unit_time" property="unitTime"/>
+		<result column="open_time" property="openTime"/>
+		<result column="close_time" property="closeTime"/>
+	</resultMap>
 
 	<select id="selectBasketList" resultMap="ReservationBasketResultSet">
 		select 
@@ -49,6 +62,134 @@
           left join hall on (company_no = h_code)
           left join tag t on (company_no = t.product_no)
 		 where user_no = #{userNo}
+	</select>
+	<select id="selectTimeInfo" resultMap="consultingResult">
+		select 
+		<choose>
+			<when test="category eq 'hall'">
+			        h_code as product_no
+	        	  ,	h_unit_time as unit_time
+			      , h_start_time as start_time
+			      , h_end_time as end_time
+			   from hall 
+		      where h_code = #{ cno }
+			   
+			</when>
+			<when test="category eq 'studio'">
+			        s_code as product_no
+			      , s_unit_time as unit_time
+			      , s_start_date as start_time
+			      , s_end_date as end_time
+			   from studio
+		      where s_code = #{ cno }
+			</when>
+			<when test="category eq 'dress'">
+			        d_code as product_no
+			      , d_unit_time as unit_time
+			      , d_start_date as start_time
+			      , d_end_date as end_time
+			   from dress
+		      where d_code = #{ cno }
+
+			</when>
+			<otherwise>
+			        m_code as product_no
+		          ,	m_unit_time as unit_time
+			      , m_start_date as start_time
+			      , m_end_date as end_time
+			   from makeup
+   		      where m_code = #{ cno }
+			   
+			</otherwise>
+		</choose>      
+
+	</select>
+	<select id="selectReservationList" resultMap="consultingResult">
+		  select 
+		         cs_no
+		       , product_no
+		       , cs_date
+		       , start_time as consulting_time
+		  from consulting 
+		  left join hall on (product_no = h_code)
+		  left join studio on (product_no = s_code)
+		  left join dress on (product_no = d_code)
+		  left join makeup on (product_no = m_code)
+		 where product_no = #{ code }
+		   and cs_date = #{ date }
+		   and status = 'Y'
+	</select>
+	
+	<select id="selectConsulting" resultType="_int">
+		select count(*)
+		  from consulting
+		  where product_no = #{ productNo }
+		    and cs_date = #{ csDate }
+		    and start_time = #{ startTime }
+		    and status = 'Y'
+	</select>
+	
+	<insert id="insertConsulting">
+		insert 
+		  into consulting
+		  (
+		    CS_NO
+		  , PRODUCT_NO
+		  , USER_NO
+		  , CS_CONTENT
+		  , CS_DATE
+		  , START_TIME
+		  , END_TIME
+		  )
+		  values
+		  (
+		    SEQ_CSNO.NEXTVAL
+		  , #{ productNo }
+		  , #{ userNo }
+		  , #{ csContent }
+		  , #{ csDate }
+		  , #{ startTime }
+		  , #{ endTime }
+		  )
+	</insert>
+	
+	<delete id="deleteConsulting">
+		delete 
+		  from rsv_basket
+		 where company_no = #{ productNo }
+		   and user_no = #{ userNo }
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectConsultingList" resultMap="consultingResult">
+		  select 
+		         cs_no
+		       , product_no
+		       , cs_date
+		       , start_time as consulting_time
+		       , h_unit_time || s_unit_time || d_unit_time || m_unit_time as unit_time  
+		       , h_start_time || s_start_date || d_start_date || m_start_date as open_time
+		       , h_end_time || s_end_date || d_end_date || m_end_date as close_time
+		  from consulting 
+		  left join hall on (product_no = h_code)
+		  left join studio on (product_no = s_code)
+		  left join dress on (product_no = d_code)
+		  left join makeup on (product_no = m_code)
+		  where product_no = #{ companyNo }
+		    and status = 'Y'
+		    and cs_date >= sysdate
 	</select>
 	
 </mapper>

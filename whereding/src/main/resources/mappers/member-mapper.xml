@@ -22,11 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CS_NO" property="csNo"/>
 		<result column="PRODUCT_NO" property="productNo"/>
 		<result column="USER_NO" property="userNo"/>
-		<result column="CS_CONTENT" property="scContent"/>
+		<result column="CS_CONTENT" property="csContent"/>
 		<result column="CS_DATE" property="csDate"/>
 		<result column="START_TIME" property="startTime"/>
 		<result column="END_TIME" property="endTime"/>
-		
 	</resultMap>
 	<resultMap type="Hall" id="hallResult">
 		<result column="H_CODE" property="code"/>
