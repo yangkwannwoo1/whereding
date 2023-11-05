@@ -44,7 +44,8 @@ cart img {
   
 .cart td {
     padding: 15px 0px;
-    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    
   }
   
   .cart__list__detail :nth-child(3) {

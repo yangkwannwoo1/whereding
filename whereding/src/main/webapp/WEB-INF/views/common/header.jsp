@@ -217,11 +217,10 @@ font-family: 'Open Sans Condensed', sans-serif;
 					</span>
 
 					<form action="login.me" method="post">
-						<input type="text" name="userId" placeholder="id를 입력"  required> 
+						<input type="text" name="userId" placeholder="id를 입력" onclick="check();"  required> 
 						<input type="password" name="userPwd" placeholder="비밀번호 입력"  required> 
 						<button type="submit">로그인</button>
 					</form>
-						
 						
 						<!--  아이디 찾기 -->
 						<div id="remember-container">
