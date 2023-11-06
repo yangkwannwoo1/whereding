@@ -204,7 +204,9 @@
         </c:choose>
     </div>
         <div id="product_content">
-            <p style="font-size: 18px; margin-left: 20px;">Product Info<span style="font-weight: normal; font-size: 12px; color: #b2b2b2;"> 제품정보</span></p>
+            <p style="font-size: 18px; margin-left: 20px;">Product Info<span style="font-weight: normal; font-size: 12px; color: #b2b2b2;"> 제품정보</span>
+            <span style="margin-left:30px;"><img src="resources/css/assets/img/heart_y.png" width="30px;" height=30px;/> ${gift.greatCount}</span>
+            </p>
             <ul class="product_info">
                 <li>
                     <p class="product_detail">상품명 </p>

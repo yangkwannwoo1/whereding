@@ -35,5 +35,6 @@ COUNT
 	private int orderCount;
 	private int userNo;
 	private String impUid;
+	private int greatCount;
 	
 }

@@ -16,6 +16,9 @@
 		<result column="img_2" property="img2"/>
 		<result column="img_3" property="img3"/>
 		<result column="status" property="status"/>
+		<result column="great_count" property="greatCount"/>
+		
+		
 		
 	</resultMap>
 	
@@ -40,7 +43,7 @@
 	</resultMap>
 	
 	
-	<select id="selectGiftList" resultMap="giftResult">
+	<!-- <select id="selectGiftList" resultMap="giftResult">
 	select 
         gift_no
        ,category_no
@@ -63,6 +66,40 @@
 	    		and category_no = #{categoryNo}
 	    	</if>
 	    	order by gift_no desc
+	</select> -->
+	
+	<select id="selectGiftList" resultMap="giftResult">
+	SELECT
+    g.gift_no,
+    c.category_no,
+    c.category_item,
+    g.gift_name,
+    g.gift_content,
+    g.gift_price,
+    g.count AS "count",
+    p.img_path AS "img_path",
+    p.img_1 AS "img_1",
+    p.img_2 AS "img_2",
+    p.img_3 AS "img_3",
+    COUNT(t.great_no) AS great_count
+    
+	FROM
+	    gift g
+	LEFT OUTER JOIN
+	    product_img p ON g.gift_no = p.product_no
+	JOIN gift_category c ON g.category_no = c.category_no
+	LEFT OUTER JOIN
+	    great t ON g.gift_no = t.great_no
+	WHERE
+	    g.count > 0
+	    AND status = 'Y'
+	    <if test="categoryNo != 0">
+		    		and category_no = #{categoryNo}
+		</if>
+	GROUP BY
+	    g.gift_no, c.category_no, c.category_item, g.gift_name, g.gift_content, g.gift_price, g.count, p.img_path, p.img_1, p.img_2, p.img_3
+	ORDER BY
+    g.gift_no ASC
 	</select>
 	
 	
@@ -200,7 +237,7 @@
 	</insert>
 	
 	<select id="selectGiftDetail" resultMap="giftResult">
-	select 
+<!-- 	select 
         gift_no
        ,category_no
        ,category_item
@@ -218,7 +255,37 @@
       join gift_category using(category_no)
     where count>0    	
       and status='Y'
-    and gift_no = #{giftNo}
+    and gift_no = #{giftNo} -->
+    
+    SELECT
+    g.gift_no,
+    c.category_no,
+    c.category_item,
+    g.gift_name,
+    g.gift_content,
+    g.gift_price,
+    g.count AS "count",
+    p.img_path AS "img_path",
+    p.img_1 AS "img_1",
+    p.img_2 AS "img_2",
+    p.img_3 AS "img_3",
+    COUNT(t.great_no) AS great_count
+    
+	FROM
+	    gift g
+	LEFT OUTER JOIN
+	    product_img p ON g.gift_no = p.product_no
+	JOIN gift_category c ON g.category_no = c.category_no
+	LEFT OUTER JOIN
+	    great t ON g.gift_no = t.great_no
+	WHERE
+	    g.count > 0
+	    AND status = 'Y'
+	    and gift_no = #{giftNo}
+	GROUP BY
+	    g.gift_no, c.category_no, c.category_item, g.gift_name, g.gift_content, g.gift_price, g.count, p.img_path, p.img_1, p.img_2, p.img_3
+	ORDER BY
+    g.gift_no ASC
 	</select>
 	
 	<update id="deleteGift">

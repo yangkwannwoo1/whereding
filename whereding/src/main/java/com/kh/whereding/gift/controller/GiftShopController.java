@@ -37,6 +37,7 @@ public class GiftShopController {
 		
 		ArrayList<Gift> gList = gService.selectGiftList(pi,categoryNo);
 		ArrayList<GiftCategory> categoryList = gService.selectCategoryList();
+		System.out.println(gList);
 		model.addAttribute("categoryList" , categoryList); 
 		model.addAttribute("pi", pi);
 		model.addAttribute("gList", gList);
