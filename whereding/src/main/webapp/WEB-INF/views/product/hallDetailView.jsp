@@ -541,7 +541,7 @@ const showNotification = () => {
 }
 </script>
 
-	<hr>
+	<!-- <hr>
 	<div class="recent-posts">
 		<h4>최근 본 게시글</h4>
 		<ul>
@@ -552,15 +552,13 @@ const showNotification = () => {
 			<li><a href="single-news.html">kh김시연교육원 - sinse 2023 - 10 - 17</a></li>
 		</ul>
 		<hr>
-	</div>
+	</div> -->
 	<!-- end single article section -->
 	<jsp:include page="../common/footer.jsp" />
 	
 	<script>
 		$(function(){
-			console.log("시작")
     		selectReplyList();
-			console.log("끝")
     		countLike();
 
 		})
@@ -595,26 +593,39 @@ const showNotification = () => {
 					let $reviewHead = $(".review_area").html();
 					let sum = 0;
 					let score = 0;
-					for(let i in list){
-						let avgScore = 0;
-						console.log(score)
-						score = (Number(list[i].rvScore)/5)*100;
+					if(list ==""){
+						console.log("리뷰없다.")
 						value += `<tr style="margin: 5%;">
 							<td style="padding-left: 1%;" colspan="3">
-							<h4 style="font-weight: 600; padding-top: 1%; margin-bottom: 0px;">`+ list[i].userName + `<span class="comment-date">&nbsp; `+ list[i].createDate + `</span>
-							</h4>
-							<div class="rate">
-								<span style="width: `+ score +`%"></span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td  colspan="3" style="border-bottom: 1px solid #cecece;">
-							<img src="` + list[i].filePath + `" alt="1" style="float: left; margin: 1%; height:120px;">
-							<p style="margin: 1%;">`+ list[i].rvContent + `</p>
+							<br><br><br><h3 style="text-align:center; font-weight: 600; padding-top: 1%; margin-bottom: 0px;">
+							아직 등록된 리뷰가 없습니다.
+							</h3>
+							<br><br><br>
 						</td>
 					</tr>`
-					sum += score;
+					}else{
+						for(let i in list){
+							let avgScore = 0;
+							console.log(score)
+							score = (Number(list[i].rvScore)/5)*100;
+							value += `<tr style="margin: 5%;">
+								<td style="padding-left: 1%;" colspan="3">
+								<h4 style="font-weight: 600; padding-top: 1%; margin-bottom: 0px;">`+ list[i].userName + `<span class="comment-date">&nbsp; `+ list[i].createDate + `</span>
+								</h4>
+								<div class="rate">
+									<span style="width: `+ score +`%"></span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td  colspan="3" style="border-bottom: 1px solid #cecece;">
+								<img src="` + list[i].filePath + `" alt="1" style="float: left; margin: 1%; height:120px;">
+								<p style="margin: 1%;">`+ list[i].rvContent + `</p>
+							</td>
+						</tr>`
+						sum += score;
+						}
+						
 					}
 					avgScore = sum / list.length;
 					$(".review_area").html($reviewHead + value);

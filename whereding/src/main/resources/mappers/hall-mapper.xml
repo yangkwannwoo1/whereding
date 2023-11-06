@@ -40,7 +40,7 @@
 		<result column="user_name" property="userName"/>
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
-		<result column="filepath" property="filePath"/>
+		<result column="img_path" property="imgPath"/>
 	</resultMap>
 	
 	
@@ -60,7 +60,7 @@
 		     , H_SEAT
 		     , H_MEAL
 		     , H_RESTAURANT_SEAT
-		     , img_path || img_1 as file_path
+		     , img_path || img_1 as img_path
 		     , tag_content
              , count(great_no) great_count
 		  from hall
@@ -76,7 +76,7 @@
           	  , H_SEAT
           	  , H_MEAL
           	  , H_RESTAURANT_SEAT
-          	  , img_path || img_1
+          	  , img_path || img_1 
           	  , tag_content
   	</select>
   	
