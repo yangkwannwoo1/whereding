@@ -22,8 +22,8 @@ import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.ProductCollection;
 import com.kh.whereding.product.model.vo.Reservation;
-import com.kh.whereding.product.model.vo.Studio;
 
 @Controller
 public class MainController {
@@ -39,14 +39,173 @@ public class MainController {
 //		System.out.println(list); productNo=H1, tagContent=예쁨, 감성적인, 가격이 싼), HashTag(productNo=H2, tagContent=멋있는, 갬성, 찌끄리)
 		return new Gson().toJson(list);
 	};
+	
+	@RequestMapping(value="test1.mn", produces = "aplication/json; charset=utf-8")
+	public String test1(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm, HttpSession session) {
+		
+		session.setAttribute("sh", sh);
+		session.setAttribute("ss", ss);
+		session.setAttribute("sd", sd);
+		session.setAttribute("sm", sm);
+		
+		return"product/searchView";
+	};
 
+	@ResponseBody
+	@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
+	public String searchPlace(String category, HttpSession session) {
+
+		SearchHall sh = (SearchHall) session.getAttribute("sh");
+		SearchStudio ss = (SearchStudio) session.getAttribute("ss");
+		SearchDress sd = (SearchDress) session.getAttribute("sd");
+		SearchMakeup sm = (SearchMakeup) session.getAttribute("sm");
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(category.equals("웨딩")) {
+			ArrayList<String> halist = new ArrayList<String>();
+			ArrayList<String> htlist = new ArrayList<String>();
+			
+			
+			if(sh.getWsAddress().equals("")) {
+				map.put("wsAddress", "");
+			}else {
+				halist.addAll(Arrays.asList((sh.getWsAddress()).split(",")));
+				map.put("wsAddress", halist);
+			}
+			if(sh.getWsTag().equals("")) {
+				map.put("wsTag", "");
+			}else {
+				halist.addAll(Arrays.asList((sh.getWsTag()).split(",")));
+				map.put("wsTag", htlist);
+			}
+
+			map.put("wsSeat", sh.getWsSeat());
+			map.put("wsMinPrice", sh.getWsMinPrice());
+			map.put("wsMaxPrice", sh.getWsMaxPrice());
+			
+			map.put("eatMinPrice", sh.getEatMinPrice());
+			map.put("eatMaxPrice", sh.getEatMaxPrice());
+			
+			ArrayList<Hall> hlist = mnService.selectHallList(map);
+
+			System.out.println("w");
+			return new Gson().toJson(hlist);
+			
+		}else if (category.equals("스튜디오")) {
+			ArrayList<String> salist = new ArrayList<String>();
+			ArrayList<String> stlist = new ArrayList<String>();
+			
+			salist.addAll(Arrays.asList(ss.getSsAddress().split(",")));
+			stlist.addAll(Arrays.asList(ss.getSsTag().split(",")));
+			
+			if(ss.getSsAddress().equals("")) {
+				map.put("ssAddress", "");
+			}else {
+				salist.addAll(Arrays.asList((ss.getSsAddress()).split(",")));
+				map.put("ssAddress", salist);
+			}
+			if(ss.getSsTag().equals("")) {
+				map.put("ssTag", "");
+			}else {
+				map.put("ssTag", stlist);
+			}
+			map.put("ssMinPrice", ss.getSsMinPrice());
+			map.put("ssMaxPrice", ss.getSsMaxPrice());
+			map.put("ssWeek", ss.getSsWeek());
+			
+			ArrayList<ProductCollection> slist = mnService.searchStudioList(map);
+			System.out.println(slist);
+			System.out.println("s");
+
+			return new Gson().toJson(slist);
+			
+		}else if (category.equals("드레스")) {
+			ArrayList<String> salist = new ArrayList<String>();
+			ArrayList<String> stlist = new ArrayList<String>();
+			
+			salist.addAll(Arrays.asList(sd.getDsAddress().split(",")));
+			stlist.addAll(Arrays.asList(sd.getDsTag().split(",")));
+			
+			if(sd.getDsAddress().equals("")) {
+				map.put("dsAddress", "");
+			}else {
+				salist.addAll(Arrays.asList((sd.getDsAddress()).split(",")));
+				map.put("dsAddress", salist);
+			}
+			if(sd.getDsTag().equals("")) {
+				map.put("dsTag", "");
+			}else {
+				map.put("dsTag", stlist);
+			}
+			map.put("dsMinPrice", sd.getDsMinPrice());
+			map.put("dsMaxPrice", sd.getDsMaxPrice());
+			map.put("dsWeek", sd.getDsWeek());
+			System.out.println("d");
+
+			ArrayList<ProductCollection> dlist = mnService.searchDressList(map);
+
+			return new Gson().toJson(dlist);
+			
+		}else {
+			ArrayList<String> salist = new ArrayList<String>();
+			ArrayList<String> stlist = new ArrayList<String>();
+			
+			salist.addAll(Arrays.asList(sm.getMsAddress().split(",")));
+			stlist.addAll(Arrays.asList(sm.getMsTag().split(",")));
+			
+			if(sm.getMsAddress().equals("")) {
+				map.put("msAddress", "");
+			}else {
+				salist.addAll(Arrays.asList((sm.getMsAddress()).split(",")));
+				map.put("msAddress", salist);		
+			}
+			if(sm.getMsTag().equals("")) {
+				map.put("msTag", "");
+			}else {
+				map.put("msTag", stlist);
+			}
+			map.put("msMinPrice", sm.getMsMinPrice());
+			map.put("msMaxPrice", sm.getMsMaxPrice());
+			map.put("msWeek", sm.getMsWeek());
+			
+			ArrayList<ProductCollection> mlist = mnService.searchMakeupList(map);
+			System.out.println("m");
+
+			return new Gson().toJson(mlist);
+
+		}
+	
+	}
+	
+	
 //	@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
-//	public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
+//	public ModelAndView searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm, ModelAndView mv) { 
+////		ArrayList<Hall> hlist = mnService.selectHallList(sh);
 //		
-//		ArrayList<Hall> hlist = mnService.selectHallList(sh);
-//
-//		// studio 
 //		HashMap<String, Object> map = new HashMap<String, Object>();
+//		
+//		ArrayList<String> halist = new ArrayList<String>();
+//		ArrayList<String> htlist = new ArrayList<String>();
+//		
+//		halist.addAll(Arrays.asList(sh.getWsAddress().split(",")));
+//		htlist.addAll(Arrays.asList(sh.getWsTag().split(",")));
+//		
+//		map.put("wsAddress", halist);
+//		if(ss.getSsTag().equals("")) {
+//			map.put("wsTag", "");
+//		}else {
+//			map.put("wsTag", htlist);
+//		}
+//		map.put("wsSeat", sh.getWsSeat());
+//		map.put("wsMinPrice", sh.getWsMinPrice());
+//		map.put("wsMaxPrice", sh.getWsMaxPrice());
+//		
+//		map.put("eatMinPrice", sh.getEatMinPrice());
+//		map.put("eatMaxPrice", sh.getEatMaxPrice());
+//		
+//		ArrayList<Hall> hlist = mnService.selectHallList(map);
+//		
+//		// studio 
 //		//(ssAddress=서울특별시 동대문,서울특별시 중랑구, ssMinPrice=0, ssMaxPrice=100, ssWeek=on, ssTag=호텔웨딩,스몰웨딩)
 //		ArrayList<String> salist = new ArrayList<String>();
 //		ArrayList<String> stlist = new ArrayList<String>();
@@ -103,8 +262,8 @@ public class MainController {
 //		ArrayList<Dress> dlist = mnService.searchDressList(map);
 //		ArrayList<Makeup> mlist = mnService.searchMakeupList(map);
 //
-//		for(Makeup m : mlist) {
-//			System.out.println(m);			
+//		/*for(Hall h : hlist) {
+//			System.out.println(h);			
 //		}
 //		for(Studio s : slist) {
 //			System.out.println(s);
@@ -114,7 +273,9 @@ public class MainController {
 //		}
 //		for(Makeup m : mlist) {
 //			System.out.println(m);
-//		}
+//		}*/
+//		mv.addObject("hlist",hlist).addObject("slist",slist).addObject("dlist",dlist).addObject("mlist",mlist).setViewName("product/searchView");
+//		return mv;
 //	}
 
 	@ResponseBody
@@ -144,7 +305,7 @@ public class MainController {
 //	    return ("common/main");
 //	}
 	
-	@RequestMapping(value = "search.mn")
+	/*@RequestMapping(value = "search.mn")
 	public String mainSearch(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm, HttpSession session) {
 		System.out.println("검색한 홀 :  "+ sh);
 		System.out.println("검색한 스튜디오 :  "+ ss);
@@ -438,6 +599,6 @@ public class MainController {
 		session.removeAttribute("list");
 				
 		return"product/searchView";
-	}
+	}*/
 
 }

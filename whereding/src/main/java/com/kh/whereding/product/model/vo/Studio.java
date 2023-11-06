@@ -41,6 +41,7 @@ S_WEEK_OPEN
 	private String img1;
 	private String imgPath;
 	
+	private int greatCount;
 	private int userNo;
 	private String tagContent;
 }

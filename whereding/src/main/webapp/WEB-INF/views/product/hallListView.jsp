@@ -781,10 +781,10 @@
 	                        	<img src="${ h.imgPath }" style="height: 200px;">
                         	</div>
                             <div class="news-text-box">
-                                <h3><a href="#">${ h.name }</a></h3>
+                                <h3><a href="#">${ h.enterprise }</a></h3>
                                 <h3><a href="#">${ h.address }</a></h3>
                                 <p class="blog-meta">
-                                    <span class="author"><i class="fas fa-user"></i>${ h.enterprise }</span>
+                                    <span class="author"><i class="fas fa-user"></i>${ h.name }</span>
                                 </p>
                                 <p class="excerpt">대관비 : ${ h.rental }원</p>
                                 <p class="excerpt">수용인원 : ${ h.seat }석</p>

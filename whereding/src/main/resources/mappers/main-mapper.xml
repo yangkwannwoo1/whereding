@@ -23,48 +23,30 @@
 		<result column="h_unit_time" property="unitTime"></result>
 		<result column="h_week_open" property="weekOpen"></result>
 		<result column="TAG_CONTENT" property="tagContent"></result>
+		<result column="img_path" property="imgPath"></result>
+		<result column="great_count" property="greatCount"></result>
 		<!-- 
 	     , TAG_CONTENT
 		 -->
 	</resultMap>
-	<resultMap type="Studio" id="studioResultSet">
-		<result column="s_code" property="stCode"></result>
-		<result column="s_enterprise" property="stEnterprise"></result>
-		<result column="s_detail" property="stDetail"></result>
-		<result column="s_price" property="stPrice"></result>
-		<result column="s_start_time" property="stStartTime"></result>
-		<result column="s_end_time" property="stEndTime"></result>
-		<result column="s_phone" property="phone"></result>
-		<result column="s_address" property="address"></result>
-		<result column="s_unit_time" property="unitTime"></result>
-		<result column="s_week_open" property="weekOpen"></result>
-		<result column="TAG_CONTENT" property="tagContent"></result>
-	</resultMap>
-	<resultMap type="Dress" id="dressResultSet">
-		<result column="d_code" property="drCode"></result>
-		<result column="d_enterprise" property="drEnterprise"></result>
-		<result column="d_detail" property="drDetail"></result>
-		<result column="d_price" property="drPrice"></result>
-		<result column="d_start_time" property="drStartTime"></result>
-		<result column="d_end_time" property="drEndTime"></result>
-		<result column="d_phone" property="phone"></result>
-		<result column="d_address" property="address"></result>
-		<result column="d_unit_time" property="unitTime"></result>
-		<result column="d_week_open" property="weekOpen"></result>
-		<result column="TAG_CONTENT" property="tagContent"></result>
-	</resultMap>
-	<resultMap type="Makeup" id="makeupResultSet">
-		<result column="m_code" property="maCode"></result>
-		<result column="m_enterprise" property="maEnterprise"></result>
-		<result column="m_detail" property="maDetail"></result>
-		<result column="m_price" property="maPrice"></result>
-		<result column="m_start_time" property="maStartTime"></result>
-		<result column="m_end_time" property="maEndTime"></result>
-		<result column="m_phone" property="phone"></result>
-		<result column="m_address" property="address"></result>
-		<result column="m_unit_time" property="unitTime"></result>
-		<result column="m_week_open" property="weekOpen"></result>
-		<result column="TAG_CONTENT" property="tagContent"></result>
+		<resultMap type="ProductCollection" id="ProductCollectionResult">
+		<result column="code" property="code"/>
+		<result column="enterprise" property="enterprise"/>
+		<result column="detail" property="detail"/>
+		<result column="price" property="price"/>
+		<result column="start_date" property="startDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="phone" property="phone"/>
+		<result column="address" property="address"/>
+		<result column="unit_time" property="unitTime"/>
+		<result column="week_open" property="weekOpen"/>
+		<result column="status" property="status"/>
+		<result column="img_1" property="img1"/>
+		<result column="img_2" property="img2"/>
+		<result column="img_3" property="img3"/>
+		<result column="img_path" property="imgPath"/>
+		<result column="tag_content" property="tagContent"/>
+		<result column="great_count" property="greatCount"/>
 	</resultMap>
 	<resultMap type="Basket" id="basketResultSet">
 		<result column="user_no" property="userNo"></result>
@@ -110,14 +92,25 @@
 	</select>
 
 	<select id ="selectHallList" resultMap="hallResultSet">
-		select 
-			   *
+		  select 
+	             h_code
+	           , h_enterprise
+	           , h_name
+	           , h_detail
+	           , h_seat
+	           , h_rental
+	           , h_restaurant_seat
+	           , h_meal
+	           , h_phone
+	           , h_address
+	           , tag_content
+	           ,img_path || img_1 as img_path 
 		  from hall
-		  left join tag on(h_code = product_no)
+		  left join tag t on(h_code = t.product_no)
+          left join product_img i on (h_code = i.product_no)
 		 where h_rental between #{wsMinPrice}*10000 and #{wsMaxPrice}*10000
 		   and h_meal between #{eatMinPrice}*10000 and #{eatMaxPrice}*10000
-		   <!-- and h_address like #{wsAddress} || '%'
-		   and tag_content like '%' || --> 
+
 		   <if test="wsSeat == 1">
 		   	and h_seat between 1 and 100
 		   </if>
@@ -130,9 +123,22 @@
    		   <if test="wsSeat == 4">
 		   	and h_seat > 500
 		   </if>
+   		   <if test="wsTag!=null and wsTag neq ''">
+	 		   <foreach item="arr" collection="wsTag" open="and(" close=")" separator="or">
+	                  tag_content like '%'||#{arr}||'%'
+		      </foreach>
+ 		   </if>
+   		   <if test="wsAddress!=null and wsAddress neq ''">
+	      <foreach item= "arr" collection="wsAddress" open="and(" close=")" separator="or">
+	      			h_address like #{arr} ||'%' 
+	      </foreach>
+ 		   </if>
+ 		   and h_status = 'Y'
+		 group by h_CODE, h_ENTERPRISE, H_NAME ,H_DETAIL, H_SEAT, H_RENTAL, H_RESTAURANT_SEAT, H_MEAL, H_PHONE, H_ADDRESS, TAG_CONTENT, IMG_PATH || IMG_1 
+		   
 	</select>
-	<!-- 
-	<select id="selectStudioList" resultMap="studioResultSet">
+	
+	<!-- <select id="selectStudioList" resultMap="studioResultSet">
 		select 
 		       *    
 		  from studio
@@ -180,11 +186,22 @@
 	</select> -->
 	
 	
-	<select id="searchStudioList" resultMap="studioResultSet">
+	<select id="searchStudioList" resultMap="ProductCollectionResult">
 		select 
-		       *    
+		      s_code as code
+		     ,s_enterprise as enterprise
+		     ,s_detail as detail
+		     ,s_price as price
+		     ,s_phone as phone
+		     ,s_address as address
+		     ,s_week_open as week_open
+		     ,tag_content as tag_content
+		     ,img_path || img_1 as img_path 
+		     ,count(great_no) as great_count
 		  from studio
-		  left join tag on(s_code = product_no)
+		  left join tag t on (s_code = t.product_no)
+	  	  left join great on (s_code = great_no)
+  		  left join product_img i on (s_code = i.product_no)
 		 where s_price between #{ssMinPrice}*10000 and #{ssMaxPrice}*10000
  		   <choose>
  		   	<when test="ssWeek eq 'on'">
@@ -199,15 +216,32 @@
 	                  tag_content like '%'||#{arr}||'%'
 		      </foreach>
  		   </if>
-	      <foreach item= "arr" collection="ssAddress" open="and(" close=")" separator="or">
-	      			s_address like #{arr} ||'%' 
-	      </foreach>
+		   <if test="ssAddress!=null and ssAddress neq ''">
+ 		   
+		      <foreach item= "arr" collection="ssAddress" open="and(" close=")" separator="or">
+		      			s_address like #{arr} ||'%' 
+		      </foreach>
+	      </if>
+	      and s_status = 'Y'
+         group by S_CODE, S_ENTERPRISE, S_DETAIL, S_PRICE, S_START_DATE, S_END_DATE, S_PHONE, S_ADDRESS, S_UNIT_TIME, S_WEEK_OPEN, TAG_CONTENT, IMG_PATH || IMG_1 
+	      
 	</select>
-	<select id="searchDressList" resultMap="dressResultSet">
+	<select id="searchDressList" resultMap="ProductCollectionResult">
 		select 
-		       *    
+		      d_code as code
+		     ,d_enterprise as enterprise
+		     ,d_detail as detail
+		     ,d_price as price
+		     ,d_phone as phone
+		     ,d_address as address
+		     ,d_week_open as week_open
+		     ,tag_content as tag_content
+		     ,img_path || img_1 as img_path 
+		     ,count(great_no) as great_count    
 		  from dress
-		  left join tag on(d_code = product_no)
+		  left join tag t on (d_code = t.product_no)
+	  	  left join great on (d_code = great_no)
+  		  left join product_img i on (d_code = i.product_no)
 		 where d_price between #{dsMinPrice}*10000 and #{dsMaxPrice}*10000
  		   <choose>
  		   	<when test="dsWeek eq 'on'">
@@ -222,15 +256,30 @@
 	                  tag_content like '%'||#{arr}||'%'
 		      </foreach>
  		   </if>
+ 		   <if test="dsAddress!=null and dsAddress neq ''">
 	      <foreach item= "arr" collection="dsAddress" open="and(" close=")" separator="or">
 	      			d_address like #{arr} ||'%' 
 	      </foreach>
+	      </if>
+	      and d_status = 'Y'
+         group by D_CODE, D_ENTERPRISE, D_DETAIL, D_PRICE, D_START_DATE, D_END_DATE, D_PHONE, D_ADDRESS, D_UNIT_TIME, D_WEEK_OPEN, TAG_CONTENT, IMG_PATH || IMG_1 
 	</select>
-	<select id="searchMakeupList" resultMap="makeupResultSet">
+	<select id="searchMakeupList" resultMap="ProductCollectionResult">
 		select 
-		       *    
+		      m_code as code
+		     ,m_enterprise as enterprise
+		     ,m_detail as detail
+		     ,m_price as price
+		     ,m_phone as phone
+		     ,m_address as address
+		     ,m_week_open as week_open
+		     ,tag_content as tag_content
+		     ,img_path || img_1 as img_path 
+		     ,count(great_no) as great_count   
 		  from makeup
-		  left join tag on(m_code = product_no)
+		  left join tag t on (m_code = t.product_no)
+	  	  left join great on (m_code = great_no)
+  		  left join product_img i on (m_code = i.product_no)
 		 where m_price between #{msMinPrice}*10000 and #{msMaxPrice}*10000
  		   <choose>
  		   	<when test="msWeek eq 'on'">
@@ -245,9 +294,14 @@
 	                  tag_content like '%'||#{arr}||'%'
 		      </foreach>
  		   </if>
+ 		   <if test="msAddress!=null and msAddress neq ''">
+ 		   
 	      <foreach item= "arr" collection="msAddress" open="and(" close=")" separator="or">
 	      			m_address like #{arr} ||'%' 
 	      </foreach>
+	      </if>
+	      and m_status = 'Y'
+         group by M_CODE, M_ENTERPRISE, M_DETAIL, M_PRICE, M_START_DATE, M_END_DATE, M_PHONE, M_ADDRESS, M_UNIT_TIME, M_WEEK_OPEN, TAG_CONTENT, IMG_PATH || IMG_1 
 	</select>
 	<select id="selectBasketList" resultMap="basketResultSet">
 		select
@@ -281,6 +335,7 @@
           left join hall on (company_no = h_code)
 		 where user_no = #{userNo}
 	</select>
+	<!-- 
 	<select id="searchHallList" resultMap="hallResultSet">
 	<![CDATA[
 	select
@@ -426,6 +481,6 @@
 	<if test="msWeek != null"> 
 	and m_WEEK_OPEN = 'Y'
 	</if>
-	</select>
+	</select> -->
 	
 </mapper>

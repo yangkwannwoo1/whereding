@@ -10,12 +10,11 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
         
-            <c:set var="path" value="${pageContext.request.contextPath}" />
-            <!-- title -->
+	            <!-- title -->
             <title>웨딩홀 목록</title>
 
 
-
+	<!-- search style -->
             <style>
                 #menu1 {
                     /* border: 1px solid black; */
@@ -415,15 +414,23 @@
                     padding-top: 10px;
                     padding-right: 10px;
                 }
-
+				/* 좌석체크박스 */
+				#seat_avail{
+					text-align: center;
+				}
                 /* 드레스 */
                 .weekendYN {
-                    zoom: 2.5;
+                    zoom: 1.5;
                 }
 
                 .weekendYNArea {
-                    text-align: left !important;
+                    text-align: right !important;
                     padding-left: 100px;
+                }
+                
+                .form-check-label span{
+                	vertical-align: 8px;
+                	text-align: left;
                 }
 
                 /* 태그에 호버시 이벤트 */
@@ -434,13 +441,23 @@
                     color: #ffffff;
                     display: none;
                 }
-
                 .sortBtn {
                     font-size: 5px;
                     width: 150px;
                     border-radius: 15px;
                     margin: auto;
                 }
+                
+                .single-latest-news{
+                    border-radius: none;
+                    padding: 3% !important;
+                }
+
+                .news-text-box:hover{
+                    cursor: pointer;
+                    background-color: #cccccc4b;
+                }
+
             </style>
 
 </head>
@@ -449,64 +466,50 @@
     <jsp:include page="../common/header.jsp" />
 
     <!-- 목록시작 -->
+    <form action="search.mn" method="post" id="searchPlace">
 
-    <div class="latest-news mt-150 mb-150">
-        <div class="container">
-
-            <!-- start main search-->
-            <form action="search.mn" method="post" id="searchPlace">
-
-                <table id="search_table">
-                    <thead>
-                        <tr id="search_title">
-                            <th>
-                                <h5>결혼준비는 역시 Whereding</h5>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <nav id="tab_top_area">
-                                    <div class="nav nav-tabs" id="nav-tab" role="tablist" style="border: none;">
-                                        <button class="nav-link active" id="nav-wedding-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-wedding" type="button" role="tab"
-                                            aria-controls="nav-wedding" aria-selected="true">웨딩</button>
-                                        <button class="nav-link" id="nav-studio-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-studio" type="button" role="tab"
-                                            aria-controls="nav-studio" aria-selected="false">스튜디오</button>
-                                        <button class="nav-link" id="nav-dress-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-dress" type="button" role="tab"
-                                            aria-controls="nav-dress" aria-selected="false">드레스</button>
-                                        <button class="nav-link" id="nav-makeup-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-makeup" type="button" role="tab"
-                                            aria-controls="nav-makeup" aria-selected="false">메이크업</button>
-                                    </div>
-                                </nav>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="tab-content" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="nav-wedding" role="tabpanel"
-                                        aria-labelledby="nav-wedding-tab">
-                                        <table style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="4">
-                                                        <input type="hidden" class="hidden_tab_area" value="wedding">
-                                                        <h3>🤵Wedding Hall👰</h3>
-                                                    </th>
-                                                </tr>
-                                                <!-- <tr>
+        <table id="search_table">
+            <thead>
+                <tr id="search_title">
+                    <th>
+                        <h5>결혼준비는 역시 Whereding</h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <nav id="tab_top_area">
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist" style="border: none;">
+                                <button class="nav-link active" id="nav-wedding-tab" data-bs-toggle="tab" data-bs-target="#nav-wedding" type="button" role="tab" aria-controls="nav-wedding" aria-selected="true">웨딩</button>
+                                <button class="nav-link" id="nav-studio-tab" data-bs-toggle="tab" data-bs-target="#nav-studio" type="button" role="tab" aria-controls="nav-studio" aria-selected="false">스튜디오</button>
+                                <button class="nav-link" id="nav-dress-tab" data-bs-toggle="tab" data-bs-target="#nav-dress" type="button" role="tab" aria-controls="nav-dress" aria-selected="false">드레스</button>
+                                <button class="nav-link" id="nav-makeup-tab" data-bs-toggle="tab" data-bs-target="#nav-makeup" type="button" role="tab" aria-controls="nav-makeup" aria-selected="false">메이크업</button>
+                            </div>
+                        </nav>
+                    </td>
+                </tr>
+            <tr>
+                <td>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-wedding" role="tabpanel" aria-labelledby="nav-wedding-tab">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <input type="hidden" class="hidden_tab_area" value="wedding">
+                                            <h3>🤵Wedding Hall👰</h3>
+                                        </th>
+                                    </tr>
+                                    <!-- <tr>
                                         <th colspan="4">
                                             <p style="margin:10px;">***님께 딱 맞는 장소를 추천해드릴게요.</p>
                                         </th>
                                     </tr> 이원벨이 머리가 감고 댕겨라 -->
-                                            </thead>
-                                            <tbody class="mSearch wedding">
-                                                <!-- 검색 -->
-                                                <!-- <tr class="search">
+                                </thead>
+                                <tbody class="mSearch wedding">
+                                    <!-- 검색 -->
+                                    <!-- <tr class="search">
                                         <td colspan="4">
                                             <span style="width: 300px;">
                                                 <input type="text" style="width: 260px;">
@@ -514,651 +517,538 @@
                                             </span>
                                         </td>
                                     </tr> -->
-                                                <tr class="input_area">
-                                                    <td class="address" colspan="4">
-                                                        <input class="hidden_address w" type="hidden"
-                                                            name="wsAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
-                                                        지역
-                                                        <c:choose>
-                                                           <c:when test="${not empty sh.wsAddress }">
-                                                            <span style="margin-right: 70px;"><input class="select_area w"
-                                                                type="text" value="${sh.wsAddress}" placeholder="지역선택" readonly></span>
-                                                           </c:when>
-                                                           <c:otherwise>
-                                                            <span style="margin-right: 70px;"><input class="select_area w"
-                                                                type="text" placeholder="지역선택" readonly></span>
-                                                           </c:otherwise>
-                                                        </c:choose>
-                                                       
+                                    <tr class="input_area">
+                                        <td class="address" colspan="4">
+                                            <input class="hidden_address w" type="hidden" name="wsAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
+                                            지역
+                                            <span  style="margin-right: 70px;"><input class="select_area w" type="text" placeholder="지역선택" readonly></span>
+                                            
+                                            대관비
+                                            <span class="minPrice"><input type="number" placeholder="0" value="0" name="wsMinPrice">만원</span>~&nbsp;
+                                            <span class="maxPrice"><input type="number" placeholder="100" value="100" name="wsMaxPrice">만원</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="input_area">
+                                        <td colspan="4">
+                                            좌석
+                                            <!-- <span id="seat_avail" style="margin-right: 80px;"><input type="number">석</span> -->
+                                            <select id="seat_avail" name="wsSeat">
+                                                <option value="1">0명   ~ 100명</option>
+                                                <option value="2">101명 ~ 300명</option>
+                                                <option value="3">301명 ~ 500명</option>
+                                                <option value="4">501명 ~ </option>
+                                            </select>
+                                            식대
+                                            <!-- 식대 -->
+                                            <span class="minPrice"><input type="number" placeholder="0" value="0" name="EatMinPrice">만원</span>~&nbsp;
+                                            <span class="maxPrice"><input type="number" placeholder="10" value="10" name="EatMaxPrice">만원</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <input class="hidden_tag w" type="hidden" name="wsTag">
+                                        <td colspan="3" class="selectTagArea">
+                                        </td>
+                                        <td class="find_tag w">
+                                            <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="next_prev_area">
+                                        <td colspan="4">
+                                            <a class="btn btn-outline-warning float-right" onclick="nextTab(this);">다음</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-studio" role="tabpanel" aria-labelledby="nav-studio-tab">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <input type="hidden" class="hidden_tab_area" value="studio">
+                                            <h3>📸STUDIO</h3>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="mSearch studio">
+                                    <tr class="input_area">
+                                        <td class="address" colspan="4">
+                                            <input class="hidden_address s" type="hidden" name="ssAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
+                                            지역
+                                            <span  style="margin-right: 70px;"><input class="select_area s" type="text" placeholder="지역선택" readonly></span>
+                                            
+                                            가격
+                                            <span class="minPrice"><input type="number" placeholder="0" value="0" name="ssMinPrice">만원</span>~&nbsp;
+                                            <span class="maxPrice"><input type="number" placeholder="100" value="100" name="ssMaxPrice">만원</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="input_area">
+                                        <td class="weekendYNArea" colspan="4">
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="ssWeek"><span style="vertical-align:8px; width: 120px; border: none; font-size: 17px; text-align: left">주말영업여부</span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <input class="hidden_tag s" type="hidden" name="ssTag">
+                                        <td colspan="3" class="selectTagArea">
+                                        </td>
+                                        <td class="find_tag">
+                                            <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="next_prev_area">
+                                        <td colspan="2">
+                                            <a class="btn btn-outline-warning float-left" onclick="prevTab(this);">이전</a>
+                                        </td>
+                                        <td colspan="2">
+                                            <a class="btn btn-outline-warning float-right" onclick="nextTab(this);">다음</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-dress" role="tabpanel" aria-labelledby="nav-dress-tab">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <input type="hidden" class="hidden_tab_area" value="dress">
+                                            <h3>👗DRESS</h3>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="mSearch dress">
+                                    <tr class="input_area">
+                                        <td class="address" colspan="4">
+                                            <input class="hidden_address d" type="hidden" name="dsAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
+                                            지역
+                                            <span  style="margin-right: 70px;"><input class="select_area d" type="text" placeholder="지역선택" readonly></span>
+                                            
+                                            가격
+                                            <span class="minPrice"><input type="number" placeholder="0" value="0" name="dsMinPrice">만원</span>~&nbsp;
+                                            <span class="maxPrice"><input type="number" placeholder="100" value="100" name="dsMaxPrice">만원</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="input_area">
+                                        <td class="weekendYNArea" colspan="4">
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="dsWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <input class="hidden_tag d" type="hidden" name="dsTag">
+                                        <td colspan="3" class="selectTagArea">
+                                        </td>
+                                        <td class="find_tag">
+                                            <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="next_prev_area">
+                                        <td colspan="2">
+                                            <a class="btn btn-warning float-left" onclick="prevTab(this);">이전</a>
+                                        </td>
+                                        <td colspan="2">
+                                            <a class="btn btn-warning float-right" onclick="nextTab(this);">다음</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-makeup" role="tabpanel" aria-labelledby="nav-makeup-tab">
+                            <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <input type="hidden" class="hidden_tab_area" value="makeup">
+                                            <h3>💄MAKEUP</h3>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                    <tbody class="mSearch makeup">
+                                        <tr class="input_area">
+                                            <td class="address" colspan="4">
+                                                <input class="hidden_address m" type="hidden" name="msAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
+                                                지역
+                                                <span  style="margin-right: 70px;"><input class="select_area m" type="text" placeholder="지역선택" readonly></span>
+                                                
+                                                가격
+                                                <span class="minPrice"><input type="number" placeholder="0" value="0" name="msMinPrice">만원</span>~&nbsp;
+                                                <span class="maxPrice"><input type="number" placeholder="100" value="100" name="msMaxPrice">만원</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="input_area">
+                                            <td class="weekendYNArea" colspan="4">
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="msWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <input class="hidden_tag m" type="hidden" name="msTag">
+                                            <td colspan="3" class="selectTagArea">
+                                            </td>
+                                            <td class="find_tag">
+                                                <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
+                                            </td>
+                                        </tr>
+                                        <tr class="next_prev_area">
+                                            <td colspan="2">
+                                                <a class="btn btn-outline-warning float-left" onclick="prevTab(this);">이전</a>
+                                            </td>
+                                            <td colspan="2">
+                                                <a class="btn btn-outline-warning float-right" onclick="submitSearch();"><li class="fas fa-search">검색</li></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                        </div>
+                    
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 
-                                                        대관비
-                                                        <c:choose>
-                                                           <c:when test="${not empty sh.wsMinPrice }">
-	                                                           <span class="minPrice"><input type="number" placeholder="0"
-	                                                                value="${sh.wsMinPrice }" name="wsMinPrice">만원</span>~&nbsp;
-                                                           </c:when>
-                                                           <c:otherwise>
-                                                           		<span class="minPrice"><input type="number" placeholder="0"
-                                                                value="0" name="wsMinPrice">만원</span>~&nbsp;
-                                                           </c:otherwise>
-                                                        </c:choose>
-                                                        
-                                                        <c:choose>
-                                                           <c:when test="${not empty sh.wsMaxPrice }">
-	                                                             <span class="maxPrice"><input type="number" placeholder="100"
-                                                                value="${sh.wsMaxPrice }" name="wsMaxPrice">만원</span>
-                                                           </c:when>
-                                                           <c:otherwise>
-               													  <span class="maxPrice"><input type="number" placeholder="100"
-                                                                value="100" name="wsMaxPrice">만원</span>
-                                                           </c:otherwise>
-                                                        </c:choose>
-                                                            
-                                                      
-                                                    </td>
-                                                </tr>
-                                                <tr class="input_area">
-                                                    <td colspan="4">
-                                                        좌석
-                                                        <!-- <span id="seat_avail" style="margin-right: 80px;"><input type="number">석</span> -->
-                                                        <select id="seat_avail" name="wsSeat">
-                                                            <option value="1">0명 ~ 100명</option>
-                                                            <option value="2">101명 ~ 300명</option>
-                                                            <option value="3">301명 ~ 500명</option>
-                                                            <option value="4">501명 ~ </option>
-                                                        </select>
-                                                        <script>
-														    const wsSeat = ${sh.wsSeat}; // 서버로부터 받은 변수, 예: 1, 2, 3 등
-														
-														    // 선택한 옵션을 변경
-														    const selectElement = document.getElementById("seat_avail");
-														    selectElement.value = wsSeat; // 해당 값을 선택한 옵션으로 설정
-														</script>
-														                                                        
-                                                        식대
-                                                        <!-- 식대 -->
-
-                                                        <c:choose>
-                                                            <c:when test="${not empty sh.eatMinPrice }">
-                                                                <span class="minPrice"><input type="number" placeholder="0"
-                                                                    value="${sh.eatMinPrice}" name="EatMinPrice">만원</span>~&nbsp;
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <span class="minPrice"><input type="number" placeholder="0"
-                                                                    value="0" name="EatMinPrice">만원</span>~&nbsp;
-                                                            </c:otherwise>
-                                                         </c:choose>
-
-                                                         <c:choose>
-                                                            <c:when test="${not empty sh.eatMaxPrice }">
-                                                                <span class="maxPrice"><input type="number" placeholder="10"
-                                                                    value="${sh.eatMaxPrice}" name="EatMaxPrice">만원</span>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <span class="maxPrice"><input type="number" placeholder="10"
-                                                                    value="10" name="EatMaxPrice">만원</span>
-                                                            </c:otherwise>
-                                                         </c:choose>
-
-                                                       
-                                                       
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <input class="hidden_tag w" type="hidden" name="wsTag">
-                                                    <td colspan="3" class="selectTagArea">
-                                                        <c:if test="${not empty sh.wsTag}">
-                                                            <span class="taglist">${sh.wsTag}</span>
-                                                        </c:if>
-                                                    </td>
-                                                    <td class="find_tag w">
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary float-right">태그찾기</button>
-                                                    </td>
-                                                </tr>
-                                                <tr class="next_prev_area">
-                                                    <td colspan="4">
-                                                        <a class="btn btn-outline-warning float-right"
-                                                            onclick="nextTab(this);" id="goStudio">다음</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav-studio" role="tabpanel"
-                                        aria-labelledby="nav-studio-tab">
-                                        <table style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="4">
-                                                        <input type="hidden" class="hidden_tab_area" value="studio">
-                                                        <h3>📸STUDIO</h3>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="mSearch studio">
-                                                <tr class="input_area">
-                                                    <td class="address" colspan="4">
-                                                        <input class="hidden_address s" type="hidden"
-                                                            name="ssAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
-                                                        지역
-                                                        <span style="margin-right: 70px;"><input class="select_area s"
-                                                                type="text" placeholder="지역선택" readonly></span>
-
-                                                        가격
-                                                        <span class="minPrice"><input type="number" placeholder="0"
-                                                                value="0" name="ssMinPrice">만원</span>~&nbsp;
-                                                        <span class="maxPrice"><input type="number" placeholder="100"
-                                                                value="100" name="ssMaxPrice">만원</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="input_area">
-                                                    <td class="weekendYNArea" colspan="4">
-                                                        <div class="form-check-inline">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox"
-                                                                    class="form-check-input weekendYN"
-                                                                    style="margin-right: 0px;" name="ssWeek"><span
-                                                                    style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <input class="hidden_tag s" type="hidden" name="ssTag">
-                                                    <td colspan="3" class="selectTagArea">
-                                                    </td>
-                                                    <td class="find_tag">
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary float-right">태그찾기</button>
-                                                    </td>
-                                                </tr>
-                                                <tr class="next_prev_area">
-                                                    <td colspan="2">
-                                                        <a class="btn btn-outline-warning float-left"
-                                                            onclick="prevTab(this);">이전</a>
-                                                    </td>
-                                                    <td colspan="2">
-                                                        <a class="btn btn-outline-warning float-right"
-                                                            onclick="nextTab(this);">다음</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav-dress" role="tabpanel"
-                                        aria-labelledby="nav-dress-tab">
-                                        <table style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="4">
-                                                        <input type="hidden" class="hidden_tab_area" value="dress">
-                                                        <h3>👗DRESS</h3>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="mSearch dress">
-                                                <tr class="input_area">
-                                                    <td class="address" colspan="4">
-                                                        <input class="hidden_address d" type="hidden"
-                                                            name="dsAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
-                                                        지역
-                                                        <span style="margin-right: 70px;"><input class="select_area d"
-                                                                type="text" placeholder="지역선택" readonly></span>
-
-                                                        가격
-                                                        <span class="minPrice"><input type="number" placeholder="0"
-                                                                value="0" name="dsMinPrice">만원</span>~&nbsp;
-                                                        <span class="maxPrice"><input type="number" placeholder="100"
-                                                                value="100" name="dsMaxPrice">만원</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="input_area">
-                                                    <td class="weekendYNArea" colspan="4">
-                                                        <div class="form-check-inline">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox"
-                                                                    class="form-check-input weekendYN"
-                                                                    style="margin-right: 0px;" name="dsWeek"><span
-                                                                    style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <input class="hidden_tag d" type="hidden" name="dsTag">
-                                                    <td colspan="3" class="selectTagArea">
-                                                    </td>
-                                                    <td class="find_tag">
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary float-right">태그찾기</button>
-                                                    </td>
-                                                </tr>
-                                                <tr class="next_prev_area">
-                                                    <td colspan="2">
-                                                        <a class="btn btn-warning float-left"
-                                                            onclick="prevTab(this);">이전</a>
-                                                    </td>
-                                                    <td colspan="2">
-                                                        <a class="btn btn-warning float-right"
-                                                            onclick="nextTab(this);">다음</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav-makeup" role="tabpanel"
-                                        aria-labelledby="nav-makeup-tab">
-                                        <table style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="4">
-                                                        <input type="hidden" class="hidden_tab_area" value="makeup">
-                                                        <h3>💄MAKEUP</h3>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="mSearch makeup">
-                                                <tr class="input_area">
-                                                    <td class="address" colspan="4">
-                                                        <input class="hidden_address m" type="hidden"
-                                                            name="msAddress"><!-- 서울특별시 강남구, 서울특별시 영등포구... -->
-                                                        지역
-                                                        <span style="margin-right: 70px;"><input class="select_area m"
-                                                                type="text" placeholder="지역선택" readonly></span>
-
-                                                        가격
-                                                        <span class="minPrice"><input type="number" placeholder="0"
-                                                                value="0" name="msMinPrice">만원</span>~&nbsp;
-                                                        <span class="maxPrice"><input type="number" placeholder="100"
-                                                                value="100" name="msMaxPrice">만원</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="input_area">
-                                                    <td class="weekendYNArea" colspan="4">
-                                                        <div class="form-check-inline">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox"
-                                                                    class="form-check-input weekendYN"
-                                                                    style="margin-right: 0px;" name="msWeek"><span
-                                                                    style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <input class="hidden_tag m" type="hidden" name="msTag">
-                                                    <td colspan="3" class="selectTagArea">
-                                                    </td>
-                                                    <td class="find_tag">
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary float-right">태그찾기</button>
-                                                    </td>
-                                                </tr>
-                                                <tr class="next_prev_area">
-                                                    <td colspan="2">
-                                                        <a class="btn btn-outline-warning float-left"
-                                                            onclick="prevTab(this);">이전</a>
-                                                    </td>
-                                                    <td colspan="2">
-                                                        <a class="btn btn-outline-warning float-right"
-                                                            onclick="submitSearch();">
-                                                            <li class="fas fa-search">검색</li>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <!-- <script>
-                $("#goStudio").click(function() {
-                    // 폼 데이터 가져오기
-                    var formData = $("#searchPlace").serialize();
-            
-                    // "searchStudio.mn"으로 AJAX 요청 보내기
-                    $.ajax({
-                        type: "POST",
-                        url: "searchStudio.mn",
-                        data: formData,
-                        success: function(response) {
-                            // 서버의 응답을 처리합니다.
-                            // 여기서 페이지를 업데이트하거나 응답 데이터를 처리할 수 있습니다.
-                        },
-                        error: function(error) {
-                            // 여기서 오류를 처리합니다.
-                        }
-                    });
-                });
-            </script> -->
-            <script>
-                 $("#goStudio").click(function(event) {
-                    event.preventDefault(); // 기본 동작을 막아서 링크가 바로 이동되는 것을 막음
-
-                    var formData = $("#searchPlace").serialize();
-
-                    // 쿼리 문자열을 현재 URL에 추가하면서 페이지 이동
-                    window.location.href = "searchStudio.mn?" + formData;
-                });
-            </script>
-            <br>
-
-            <br>
-            <c:if test="${not empty list}">
-            <div id="menu5">
-                <span style="font-weight: 700; font-size: 30px;">웨딩홀</span>
-                <c:if test="${loginMember.gradeNo eq '3' and loginMember.gradeNo eq '2' }">
-                    <button type="button" onclick="location.href='enrollForm.pr'" id="insertposts" style="height:40px">업체등록</button>
-                </c:if>
+    <div class="latest-news mt-150 mb-150" style="margin-top: 0px;">
+        <div class="container content_area">
+            <div style="margin-bottom: 20px;">
+                <span style="font-size: 30px; font-weight: 800; font-size: 50px;" class="search_category"></span>	
             </div>
-            <br>
             <div class="row">
-                <c:forEach var="h" items="${ list }">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-board">
-		                	<input type="hidden" class="hno" value="${ h.code }">
-							<p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
-								<!-- <img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%">${ h.greatCount }</span> -->
-							</p>
-                        	<div style="text-align: center; padding: 5%">
-	                        	<img src="${ h.imgPath }" style="height: 200px;">
-                        	</div>
-                            <div class="news-text-box">
-                                <h3><a href="#">${ h.name }</a></h3>
-                                <h3><a href="#">${ h.address }</a></h3>
-                                <p class="blog-meta">
-                                    <span class="author"><i class="fas fa-user"></i>${ h.enterprise }</span>
-                                </p>
-                                <p class="excerpt">대관비 : ${ h.rental }원</p>
-                                <p class="excerpt">수용인원 : ${ h.seat }석</p>
-                                <p class="excerpt">1인당 식비 : ${ h.meal }원</p>
-                                <p class="excerpt">
-                    				<c:set var="tag" value="${fn:split(h.tagContent,',')}" />
-									<c:forEach var="it" items="${tag}" varStatus="g">
-										# ${ it }&nbsp;
-									</c:forEach>
-                                </p>
-                                
-                                
-                                <a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-            </c:if>
-            <c:if test="${not empty clist}">
-                <div class="row collectionList">
-                    <c:forEach var="c" items="${clist}">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-board">
-                                
-                                <div class="news-text-box">
-                                      <p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
-                                        <!-- <img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%">${ c.greatCount }</span> -->
-                                    </p>
-                                    <img src="${ c.imgPath }" style="width: 300px; height: 200px; margin-bottom: 3%; border-radius: 10px;">
-                                    <h3><a href="#">${ c.enterprise }</a></h3>
-                                    <p><i class="fas fa-map-marker-alt"> ${ c.address }</i></p>
-                                    <p class="price_won"><i class="fas fa-won">${ c.price }</i></p>
-                                    <p class="blog-meta">
-                                        <span class="author">
-                                            <c:set var="tag" value="${fn:split(c.tagContent,',')}" />
-                                            <c:forEach var="it" items="${tag}" varStatus="g">
-                                                <c:choose>
-                                                    <c:when test="${not empty it }">
-                                                        <span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ${ it }</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span style="font-size: 14px; color: black; font-weight: 600; opacity: 1; opacity: 0;"> empty</span>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:forEach>
-                                        </span>
-                                    </p>
-                                    <a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
-                                    <input class="cno" type="hidden" value="${ c.code }">
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-            </c:if>
 
-            <!-- <div class="row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <div class="pagination-wrap">
-                                <ul>
-                                    <c:choose>
-                                        <c:when test="${ pi.currentPage eq 1 }">
-                                            <li class="page-item disabled"><a class="page-link" href="">Previous</a>
-                                            </li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <li class="page-item"><a class="page-link"
-                                                    href="hList.pr?cpage=${ pi.currentPage - 1 }">Previous</a></li>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                                        <li class="page-item"><a class="page-link" href="hList.pr?cpage=${ p }">${ p
-                                                }</a></li>
-                                    </c:forEach>
-                                    <c:choose>
-                                        <c:when test="${ pi.currentPage eq pi.maxPage }">
-                                            <li class="page-item disabled"><a class="page-link" href="">Next</a></li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <li class="page-item"><a class="page-link"
-                                                    href="hList.pr?cpage=${ pi.currentPage + 1 }">Next</a></li>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
+            </div>
+            <div class="null_msg_area">
+                
+            </div>
+                    
     </div>
-    <!-- 목록 끝 -->
-    <!-- STUDIO modal -->
-    <div class="md md1">
-        <button class="close_tab"></button>
-        <div class="tab-area">
-
-            <h3>지역선택</h3>
-            <div class="ltab">
-                <button class="ltablinks Seoul" onclick="openCity(event, 'Seoul');" id="defaultOpen">서울</button>
-                <button class="ltablinks Gyeonggi" onclick="openCity(event, 'Gyeonggi')">경기도</button>
-                <button class="ltablinks" onclick="openCity(event, 'Incheon')">인천</button>
-                <button class="ltablinks" onclick="openCity(event, 'Busan')">부산</button>
-                <button class="ltablinks" onclick="openCity(event, 'Daegu')">대구</button>
-                <button class="ltablinks" onclick="openCity(event, 'gwangju')">광주</button>
-                <button class="ltablinks" onclick="openCity(event, 'Daejeon')">대전</button>
-                <button class="ltablinks" onclick="openCity(event, 'Ulsan')">울산</button>
-                <button class="ltablinks" onclick="openCity(event, 'Sejong')">세종</button>
-                <button class="ltablinks" onclick="openCity(event, 'Gangwon')">강원도</button>
-                <button class="ltablinks" onclick="openCity(event, 'NChungcheong')">충청북도</button>
-                <button class="ltablinks" onclick="openCity(event, 'SChungcheong')">충청남도</button>
-                <button class="ltablinks" onclick="openCity(event, 'NJeolla')">전라북도</button>
-                <button class="ltablinks" onclick="openCity(event, 'SJeolla')">전라남도</button>
-                <button class="ltablinks" onclick="openCity(event, 'NGyeongsang')">경상북도</button>
-                <button class="ltablinks" onclick="openCity(event, 'SGyeongsang')">경상남도</button>
-                <button class="ltablinks" onclick="openCity(event, 'Jeju')">제주도</button>
-            </div>
-
-            <div id="Seoul" class="ltabcontent area">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">종로구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">중구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">용산구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">성동구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">광진구</button></td>
-                        </tr>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">동대문</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">중랑구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">용산구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">강북구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">도봉구</button></td>
-                        </tr>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">노원구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">은평구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">성북구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">서대문</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">마포구</button></td>
-                        </tr>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">양천구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">강서구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">구로구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">금천구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">영등포</button></td>
-                        </tr>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">동작구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">관악구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">서초구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">강남구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">송파구</button></td>
-                        </tr>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">강동구</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="Gyeonggi" class="ltabcontent area">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">수원시</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">성남시</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">고양시</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">안양시</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">부천시</button></td>
-                        </tr>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">광명시</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">평택시</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="Incheon" class="ltabcontent area">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">남구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">남동구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">동구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">부평구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">서구</button></td>
-                        </tr>
-                        <tr>
-                            <td><button class="selectCity" onclick="clickCity(event)">연수구</button></td>
-                            <td><button class="selectCity" onclick="clickCity(event)">중구</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="confirm_city">
-                <button class="btn btn-outline-warning" onclick="submitCity()">확인</button>
-            </div>
-
-        </div>
     </div>
-    <div class="md md2">
-        <button class="close_tab"></button>
-        <div class="tab_area">
-            <h3>태그</h3>
-            <div class="allTag_area">
-                <!-- <button class="btn btn-outline-secondary"># 호텔웨딩</button>
-                <button class="btn btn-outline-secondary"># 스몰웨딩</button>
-                <button class="btn btn-outline-secondary"># 일반웨딩</button>
-                <button class="btn btn-outline-secondary"># 하우스웨딩</button>
-                <button class="btn btn-outline-secondary"># 전통혼례</button>
-                <button class="btn btn-outline-secondary"># 호텔웨딩</button>
-                <button class="btn btn-outline-secondary"># 스몰웨딩</button>
-                <button class="btn btn-outline-secondary"># 일반웨딩</button>
-                <button class="btn btn-outline-secondary"># 하우스웨딩</button>
-                <button class="btn btn-outline-secondary"># 전통혼례</button>
-                <button class="btn btn-outline-secondary"># 호텔웨딩</button>
-                <button class="btn btn-outline-secondary"># 스몰웨딩</button>
-                <button class="btn btn-outline-secondary"># 일반웨딩</button>
-                <button class="btn btn-outline-secondary"># 하우스웨딩</button>
-                <button class="btn btn-outline-secondary"># 전통혼례</button> -->
-            </div>
-            <div class="confirm_tag">
-                <button class="btn btn-outline-warning" onclick="submitTag()">확인</button>
-            </div>
-
-        </div>
-    </div>
-    <!-- End STUDIO Modal -->
-
-    <!-- end main search-->
 
 
+	
 
-
-
-
-
-
-
+    
     <script>
-        function submitSearch() {
-            $("#searchPlace").submit();
-        }
+	$(function(){
+        $("#nav-wedding-tab").click();
         
-		$(".read-more-btn").click(function(){
-			let great_count = $(this).parents(".single-board").find(".great_count").text();
-			location.href = 'hDetail.bo?hno=' + $(this).parents(".single-board").find(".hno").val() + "&gc=" + great_count;
-		})
+	})
+    $(".nav-tabs .nav-link").click(function(){
+        let category = ""
+        category = $(this).text()
+        console.log(category)
+        
+        let condition = "";
+        let html = "";
+        if(category == "웨딩"){
+            html = "WEDDING"
+            condition = '${ sh }'
+        }else if(category == "스튜디오") {
+            html = "STUDIO"
+            condition = '${ ss }'
+        }else if(category == "드레스"){
+            html = "DRESS"
+            condition = '${ sd }'
+        }else{
+            html = "MAKEUP"
+            condition = '${ sm }'
+        }
+        $(".content_area .search_category").text(html)
+        searchResult(category)
+    })
 
+    function searchResult(e){
+        $.ajax({
+            url:"search.mn",
+            data:{
+                category:e
+            },
+            success:function(list){
+                $(".content_area .null_msg_area").html("")
+                // code가 h1 일경우 웨딩 나머지는 스드메 , 비어있을경우 검색된 결과가 없습니다.
+                $(".content_area .row").html() // 여기에 넣어야함
+                let category = "";
+                if(list == ""){
+                    category = 'N';
+                    $(".content_area .null_msg_area").html("<br><br><br><div><h3 style='text-align:center'>조회된 검색 결과가 없습니다.</h3></div><br><br><br>")
+                }else{
+                    category = (list[0].code).substr(0,1)
+                }
+                
+                let value = "";
+                for(let i in list){
+                    if(category == 'H'){  // 홀일때
+                        console.log(list[i])
+                        value +=`
+                                 <div class="col-lg-4 col-md-6">
+                                <div class="single-board">
+                                    <div class="news-text-box">
+                                    <p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
+                                        <img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%;">` + list[i].greatCount + `</span>
+                                    </p>
+                                    <img src="` + list[i].imgPath + `" style="width: 300px; height: 200px; margin-bottom: 3%; border-radius: 10px;">
+
+                                    <h3><a href="#">`+ list[i].enterprise +`</a></h3>
+                                    <p class="blog-meta">
+                                        <span class="author"><i class="fas fa-user"></i> ` + list[i].name + `</span>
+                                    </p>
+                                    <p><i class="fas fa-map-marker-alt"> ` + list[i].address + `</i></p>
+
+                                    <p><i class="fas fa-phone fa-flip-horizontal"></i> ` + list[i].phone + `</p>
+                                    <p class="price_won"> <i class="fas fa-won"></i>` + (list[i].rental).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</p>
+                                    <p class="seat_avail"> <i class="fas fa-chair"></i> ` + list[i].seat + `석</p>
+                                    <p class="price_won"> <i class="fas fa-utensils"></i> ` + (list[i].meal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `원</p>
+                                    
+                                    <p class="blog-meta">
+                                        <span class="author">`;
+                                            
+                                            let tag = list[i].tagContent;
+                                            console.log("zzzz" + tag)
+                                            if(typeof tag != "undefined"){
+                                                tagArr = tag.split(",")
+                                                for(let j in tagArr){
+                                                    value += `<span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ` + tagArr[j] + `</span>`
+                                                 }
+
+                                            }else{
+                                                value += `<span style="font-size: 14px; color: black; font-weight: 600; opacity: 1; opacity: 0;"> empty</span>`
+                                            }
+             
+                                    value += `</span>
+                                                </p>
+                                                <a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+                                                <input class="cno" type="hidden" value="` + list[i].code + `">
+                                                        </div>
+                                                    </div>
+                                                </div>`
+                    }else if(category == 'N'){
+                        console.log("NULL")
+                    }else{
+                        value +=`
+                                 <div class="col-lg-4 col-md-6">
+                                <div class="single-board">
+                                    <div class="news-text-box">
+                                    <p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
+                                        <img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%;">` + list[i].greatCount + `</span>
+                                    </p>
+                                    <img src="` + list[i].imgPath + `" style="width: 300px; height: 200px; margin-bottom: 3%; border-radius: 10px;">
+
+                                    <h3><a href="#">`+ list[i].enterprise +`</a></h3>
+                                    <p><i class="fas fa-map-marker-alt"> ` + list[i].address + `</i></p>
+                                    <p><i class="fas fa-phone fa-flip-horizontal"></i> ` + list[i].phone + `</p>
+                                    <p class="price_won"><i class="fas fa-won"> ` + (list[i].price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</i></p>
+                                    <p class="blog-meta">
+                                        <span class="author">`;
+                                            
+                                            let tag = list[i].tagContent;
+                                            if(typeof tag != "undefined"){
+                                                tagArr = tag.split(",")
+                                                for(let j in tagArr){
+                                                    value += `<span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ` + tagArr[j] + `</span>`
+                                                 }
+
+                                            }else{
+                                                value += `<span style="font-size: 14px; color: black; font-weight: 600; opacity: 1; opacity: 0;"> empty</span>`
+                                            }
+             
+                                    value += `</span>
+                                                </p>
+                                                <a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+                                                <input class="cno" type="hidden" value="` + list[i].code + `">
+                                                        </div>
+                                                    </div>
+                                                </div>`
+
+
+                                  
+                    }
+                }
+                $(".content_area .row").html(value);
+
+                console.log("성공")
+                console.log(list);
+            },error:function(){
+                console.log("ajax 통신 실패!!")
+            }
+        })
+    }
     </script>
+    <script>
+        $(document).on("click",".news-text-box",function(){
+            
+            console.log($(this).find(".cno").val())
+            let category = $(this).closest(".row").prev().find(".search_category").text().toLowerCase().replace(/^[a-z]/, char => char.toUpperCase());
+            console.log(($(this).find(".cno").val()).substr(0,1))
+            if(($(this).find(".cno").val()).substr(0,1) == "H"){
+                location.href="hDetail.bo?hno=" +  $(this).find(".cno").val() + "&gc=" + $(this).find(".great_count").text()
+            }else{
+                location.href="cDetail.bo?category=" + category + "&cno=" + $(this).find(".cno").val()
+            }
+
+        })
+    </script>
+    
+    <script>
+       	function submitSearch(){
+       		$("#searchPlace").submit();
+       	}
+       	
+    </script>
+        <!-- STUDIO modal -->
+        <div class="md md1">
+            <button class="close_tab"></button>
+            <div class="tab-area">
+                
+                <h3>지역선택</h3>
+                <div class="ltab">
+                    <button class="ltablinks Seoul" onclick="openCity(event, 'Seoul');" id="defaultOpen">서울</button>
+                    <button class="ltablinks Gyeonggi" onclick="openCity(event, 'Gyeonggi')">경기도</button>
+                    <button class="ltablinks" onclick="openCity(event, 'Incheon')">인천</button>
+                    <button class="ltablinks" onclick="openCity(event, 'Busan')">부산</button>
+                    <button class="ltablinks" onclick="openCity(event, 'Daegu')">대구</button>
+                    <button class="ltablinks" onclick="openCity(event, 'gwangju')">광주</button>
+                    <button class="ltablinks" onclick="openCity(event, 'Daejeon')">대전</button>
+                    <button class="ltablinks" onclick="openCity(event, 'Ulsan')">울산</button>
+                    <button class="ltablinks" onclick="openCity(event, 'Sejong')">세종</button>
+                    <button class="ltablinks" onclick="openCity(event, 'Gangwon')">강원도</button>
+                    <button class="ltablinks" onclick="openCity(event, 'NChungcheong')">충청북도</button>
+                    <button class="ltablinks" onclick="openCity(event, 'SChungcheong')">충청남도</button>
+                    <button class="ltablinks" onclick="openCity(event, 'NJeolla')">전라북도</button>
+                    <button class="ltablinks" onclick="openCity(event, 'SJeolla')">전라남도</button>
+                    <button class="ltablinks" onclick="openCity(event, 'NGyeongsang')">경상북도</button>
+                    <button class="ltablinks" onclick="openCity(event, 'SGyeongsang')">경상남도</button>
+                    <button class="ltablinks" onclick="openCity(event, 'Jeju')">제주도</button>
+                </div>
+                
+                <div id="Seoul" class="ltabcontent area">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">종로구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">중구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">용산구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">성동구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">광진구</button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">동대문</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">중랑구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">용산구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">강북구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">도봉구</button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">노원구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">은평구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">성북구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">서대문</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">마포구</button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">양천구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">강서구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">구로구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">금천구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">영등포</button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">동작구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">관악구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">서초구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">강남구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">송파구</button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">강동구</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="Gyeonggi" class="ltabcontent area">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">수원시</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">성남시</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">고양시</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">안양시</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">부천시</button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">광명시</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">평택시</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="Incheon" class="ltabcontent area">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">남구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">남동구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">동구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">부평구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">서구</button></td>
+                            </tr>
+                            <tr>
+                                <td><button class="selectCity" onclick="clickCity(event)">연수구</button></td>
+                                <td><button class="selectCity" onclick="clickCity(event)">중구</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="confirm_city">
+                    <button class="btn btn-outline-warning" onclick="submitCity()">확인</button>
+                </div>
+    
+            </div>
+        </div>
+        <div class="md md2">
+            <button class="close_tab"></button>
+            <div class="tab_area">
+                <h3>태그</h3>
+                <div class="allTag_area">
+                    <!-- <button class="btn btn-outline-secondary"># 호텔웨딩</button>
+                    <button class="btn btn-outline-secondary"># 스몰웨딩</button>
+                    <button class="btn btn-outline-secondary"># 일반웨딩</button>
+                    <button class="btn btn-outline-secondary"># 하우스웨딩</button>
+                    <button class="btn btn-outline-secondary"># 전통혼례</button>
+                    <button class="btn btn-outline-secondary"># 호텔웨딩</button>
+                    <button class="btn btn-outline-secondary"># 스몰웨딩</button>
+                    <button class="btn btn-outline-secondary"># 일반웨딩</button>
+                    <button class="btn btn-outline-secondary"># 하우스웨딩</button>
+                    <button class="btn btn-outline-secondary"># 전통혼례</button>
+                    <button class="btn btn-outline-secondary"># 호텔웨딩</button>
+                    <button class="btn btn-outline-secondary"># 스몰웨딩</button>
+                    <button class="btn btn-outline-secondary"># 일반웨딩</button>
+                    <button class="btn btn-outline-secondary"># 하우스웨딩</button>
+                    <button class="btn btn-outline-secondary"># 전통혼례</button> -->
+                </div>
+                <div class="confirm_tag">
+                    <button class="btn btn-outline-warning" onclick="submitTag()">확인</button>
+                </div>
+    
+            </div>
+        </div>
+     
+
+   
+	<script src="resources/css/assets/js/search.js"></script>
+
 
     <jsp:include page="../common/footer.jsp" />
-
-    <!-- jquery -->
-    <script src="resources/css/assets/js/jquery-1.11.3.min.js"></script>
-    <!-- bootstrap -->
-    <script src="resources/css/assets/bootstrap/js/bootstrap.min.js"></script>
-    <!-- count down -->
-    <script src="resources/css/assets/js/jquery.countdown.js"></script>
-    <!-- isotope -->
-    <script src="resources/css/assets/js/jquery.isotope-3.0.6.min.js"></script>
-    <!-- waypoints -->
-    <script src="resources/css/js/waypoints.js"></script>
-    <!-- owl carousel -->
-    <script src="resources/css/js/owl.carousel.min.js"></script>
-    <!-- magnific popup -->
-    <script src="resources/css/assets/js/jquery.magnific-popup.min.js"></script>
-    <!-- mean menu -->
-    <script src="resources/css/assets/js/jquery.meanmenu.min.js"></script>
-    <!-- sticker js -->
-    <script src="resources/css/assets/js/sticker.js"></script>
-    <!-- main js -->
-    <script src="resources/css/assets/js/main.js"></script>
-    <!-- search js -->
-    <script src="resources/css/assets/js/search.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
 
 </body>
 

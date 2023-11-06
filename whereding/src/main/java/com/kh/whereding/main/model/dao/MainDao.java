@@ -15,6 +15,7 @@ import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.ProductCollection;
 import com.kh.whereding.product.model.vo.Reservation;
 import com.kh.whereding.product.model.vo.Studio;
 
@@ -25,8 +26,8 @@ public class MainDao {
 		return (ArrayList)sqlSession.selectList("mainMapper.selectTagList", category);
 	}
 	
-	public ArrayList<Hall> selectHallList(SqlSessionTemplate sqlSession, SearchHall sh){
-		return (ArrayList)sqlSession.selectList("mainMapper.selectHallList", sh);
+	public ArrayList<Hall> selectHallList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
+		return (ArrayList)sqlSession.selectList("mainMapper.selectHallList", map);
 	}
 
 //	public ArrayList<Studio> selectStudioList(SqlSessionTemplate sqlSession, SearchStudio ss){
@@ -45,13 +46,13 @@ public class MainDao {
 		return (ArrayList)sqlSession.selectList("mainMapper.selectSearchList", map);
 	}
 
-	public ArrayList<Studio> searchStudioList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
+	public ArrayList<ProductCollection> searchStudioList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
 		return (ArrayList)sqlSession.selectList("mainMapper.searchStudioList", map);
 	}
-	public ArrayList<Dress> searchDressList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
+	public ArrayList<ProductCollection> searchDressList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
 		return (ArrayList)sqlSession.selectList("mainMapper.searchDressList", map);
 	}
-	public ArrayList<Makeup> searchMakeupList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
+	public ArrayList<ProductCollection> searchMakeupList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
 		return (ArrayList)sqlSession.selectList("mainMapper.searchMakeupList", map);
 	}
 	
@@ -63,29 +64,29 @@ public class MainDao {
 		return (ArrayList)sqlSession.selectList("mainMapper.selectRsvList", userNo);
 	}
 	
-	public void addVisit(SqlSessionTemplate sqlSession) {
-		
-		if(sqlSession.selectOne("adminVisitMapper.selectvisitCount") == null){
-			sqlSession.insert("adminVisitMapper.insertVisitCount");
-		}
-		else sqlSession.update("adminVisitMapper.updateVisitCount");
-		
-	}
-
-	public ArrayList<Hall> searchHallList(SqlSessionTemplate sqlSession, SearchHall sh) {
-		return (ArrayList)sqlSession.selectList("mainMapper.searchHallList", sh);
-	}
-
-	public ArrayList<Studio> ajaxSearchStudioList(SqlSessionTemplate sqlSession, SearchStudio ss) {
-		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchStudioList", ss);
-	}
-
-	public ArrayList<Dress> ajaxSearchDressList(SqlSessionTemplate sqlSession, SearchDress sd) {
-		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchDressList", sd);
-	}
-
-	public ArrayList<Makeup> ajaxSearchMakeupList(SqlSessionTemplate sqlSession, SearchMakeup sm) {
-		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchMakeupList", sm);
-	}
+//	public void addVisit(SqlSessionTemplate sqlSession) {
+//		
+//		if(sqlSession.selectOne("adminVisitMapper.selectvisitCount") == null){
+//			sqlSession.insert("adminVisitMapper.insertVisitCount");
+//		}
+//		else sqlSession.update("adminVisitMapper.updateVisitCount");
+//		
+//	}
+//
+//	public ArrayList<Hall> searchHallList(SqlSessionTemplate sqlSession, SearchHall sh) {
+//		return (ArrayList)sqlSession.selectList("mainMapper.searchHallList", sh);
+//	}
+//
+//	public ArrayList<Studio> ajaxSearchStudioList(SqlSessionTemplate sqlSession, SearchStudio ss) {
+//		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchStudioList", ss);
+//	}
+//
+//	public ArrayList<Dress> ajaxSearchDressList(SqlSessionTemplate sqlSession, SearchDress sd) {
+//		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchDressList", sd);
+//	}
+//
+//	public ArrayList<Makeup> ajaxSearchMakeupList(SqlSessionTemplate sqlSession, SearchMakeup sm) {
+//		return (ArrayList)sqlSession.selectList("mainMapper.ajaxSearchMakeupList", sm);
+//	}
 
 }

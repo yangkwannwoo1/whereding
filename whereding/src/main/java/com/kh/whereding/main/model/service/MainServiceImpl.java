@@ -10,13 +10,8 @@ import org.springframework.stereotype.Service;
 import com.kh.whereding.basket.model.vo.Basket;
 import com.kh.whereding.common.model.vo.HashTag;
 import com.kh.whereding.main.model.dao.MainDao;
-import com.kh.whereding.main.model.vo.SearchDress;
-import com.kh.whereding.main.model.vo.SearchHall;
-import com.kh.whereding.main.model.vo.SearchMakeup;
-import com.kh.whereding.main.model.vo.SearchStudio;
-import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
-import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.ProductCollection;
 import com.kh.whereding.product.model.vo.Reservation;
 import com.kh.whereding.product.model.vo.Studio;
 
@@ -35,8 +30,8 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	@Override
-	public ArrayList<Hall> selectHallList(SearchHall sh) {
-		return mnDao.selectHallList(sqlSession, sh);
+	public ArrayList<Hall> selectHallList(HashMap<String, Object> map) {
+		return mnDao.selectHallList(sqlSession, map);
 	}
 
 //	@Override
@@ -61,17 +56,17 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public ArrayList<Studio> searchStudioList(HashMap<String, Object> map) {
+	public ArrayList<ProductCollection> searchStudioList(HashMap<String, Object> map) {
 		return mnDao.searchStudioList(sqlSession, map);
 	}
 
 	@Override
-	public ArrayList<Dress> searchDressList(HashMap<String, Object> map) {
+	public ArrayList<ProductCollection> searchDressList(HashMap<String, Object> map) {
 		return mnDao.searchDressList(sqlSession, map);
 	}
 
 	@Override
-	public ArrayList<Makeup> searchMakeupList(HashMap<String, Object> map) {
+	public ArrayList<ProductCollection> searchMakeupList(HashMap<String, Object> map) {
 		return mnDao.searchMakeupList(sqlSession, map);
 	}
 
@@ -85,25 +80,25 @@ public class MainServiceImpl implements MainService {
 		return mnDao.selectRsvList(sqlSession, userNo);
 	}
 
-	@Override
-	public ArrayList<Hall> searchHallList(SearchHall sh) {
-		return mnDao.searchHallList(sqlSession, sh);
-	}
-
-	@Override
-	public ArrayList<Studio> ajaxSearchStudioList(SearchStudio ss) {
-		return mnDao.ajaxSearchStudioList(sqlSession, ss);
-	}
-
-	@Override
-	public ArrayList<Dress> ajaxSearchDressList(SearchDress sd) {
-		return mnDao.ajaxSearchDressList(sqlSession, sd);
-	}
-
-	@Override
-	public ArrayList<Makeup> ajaxSearchMakeupList(SearchMakeup sm) {
-		return mnDao.ajaxSearchMakeupList(sqlSession, sm);
-	}
+//	@Override
+//	public ArrayList<Hall> searchHallList(SearchHall sh) {
+//		return mnDao.searchHallList(sqlSession, sh);
+//	}
+//
+//	@Override
+//	public ArrayList<Studio> ajaxSearchStudioList(SearchStudio ss) {
+//		return mnDao.ajaxSearchStudioList(sqlSession, ss);
+//	}
+//
+//	@Override
+//	public ArrayList<Dress> ajaxSearchDressList(SearchDress sd) {
+//		return mnDao.ajaxSearchDressList(sqlSession, sd);
+//	}
+//
+//	@Override
+//	public ArrayList<Makeup> ajaxSearchMakeupList(SearchMakeup sm) {
+//		return mnDao.ajaxSearchMakeupList(sqlSession, sm);
+//	}
 
 	
 	
