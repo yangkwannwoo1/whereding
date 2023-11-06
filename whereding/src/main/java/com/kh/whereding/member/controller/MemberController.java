@@ -300,17 +300,17 @@ public class MemberController {
 	@RequestMapping(value = "reserveList.me")
 	public String reserveListView(Member m, HttpSession session) {
 		ArrayList<Consulting> cs = mService.consultingList(m);
-		ArrayList ha = new ArrayList();
-		ArrayList st = new ArrayList();
-		ArrayList dr = new ArrayList();
-		ArrayList mu = new ArrayList();
+		ArrayList<Hall> ha = new ArrayList();
+		ArrayList<Studio> st = new ArrayList();
+		ArrayList<Dress> dr = new ArrayList();
+		ArrayList<Makeup> mu = new ArrayList();
 //		System.out.println("회원번호 있나 확인용 " +cs);
 		
 		for(Consulting cst : cs) {
-			Hall hal = mService.consultingHall(cst);
-			Studio studi = mService.consultingStudio(cst);
-			Dress dres = mService.consultingDress(cst);
-			Makeup make = mService.consultingMakeup(cst);
+			ArrayList<Hall> hal = mService.consultingHall(cst);
+			ArrayList<Studio> studi = mService.consultingStudio(cst);
+			ArrayList<Dress> dres = mService.consultingDress(cst);
+			ArrayList<Makeup> make = mService.consultingMakeup(cst);
 			
 //			m.setProductNo(cst.getProductNo());
 //			int result1 = mService.ReviewCount(m);
@@ -319,16 +319,16 @@ public class MemberController {
 //				
 //			}
 			if(hal != null) {
-				ha.add(hal);
+				ha.addAll(hal);
 			}
 			if(studi != null) {
-				st.add(studi);
+				st.addAll(studi);
 			}
 			if(dres != null) {
-				dr.add(dres);
+				dr.addAll(dres);
 			}
 			if(make != null) {
-				mu.add(make);
+				mu.addAll(make);
 			}
 		}
 

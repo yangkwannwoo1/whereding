@@ -211,7 +211,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        left join consulting c on (H_CODE = c.PRODUCT_NO) 
 	        left join review using (cs_no) 
 	        left join PRODUCT_IMG im on (H_CODE = im.PRODUCT_NO) 
-	        where h_code = #{productNo}
+	        where cs_No = #{csNo}
 	        and H_STATUS = 'Y' 
 	        and user_no = #{userNo}
 	</select>
@@ -237,7 +237,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   left join consulting c on (s_CODE = c.PRODUCT_NO) 
 	   left join review using (cs_no) 
 	   left join PRODUCT_IMG im on (s_CODE = im.PRODUCT_NO) 
-	  WHERE S_CODE = #{productNo}
+	  WHERE cs_No = #{csNo}
 	    AND S_STATUS = 'Y' 
 	    and user_no = #{userNo}
 	</select>
@@ -263,7 +263,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   left join consulting c on (d_CODE = c.PRODUCT_NO) 
 	   left join review using (cs_no) 
 	   left join PRODUCT_IMG im on (d_CODE = im.PRODUCT_NO) 
-	  WHERE D_CODE = #{productNo}
+	  WHERE cs_No = #{csNo}
 	    AND D_STATUS = 'Y' 
 	    and user_no = #{userNo}
 	</select>
@@ -291,7 +291,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 left join PRODUCT_IMG im on (m_CODE = im.PRODUCT_NO) 
 	 WHERE M_CODE = #{productNo} 
 	 AND M_STATUS = 'Y' 
-	 and user_no = #{userNo}
+	 and cs_No = #{csNo}
 	 </select>
 	<insert id="consultingReview"> 
 	insert 

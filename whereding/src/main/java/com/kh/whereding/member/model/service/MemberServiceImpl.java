@@ -131,22 +131,22 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Hall consultingHall(Consulting cs) {
+	public ArrayList<Hall> consultingHall(Consulting cs) {
 		return mDao.consultingHall(sqlSession, cs);
 	}
 
 	@Override
-	public Studio consultingStudio(Consulting cs) {
+	public ArrayList<Studio> consultingStudio(Consulting cs) {
 		return mDao.consultingStudio(sqlSession, cs);
 	}
 
 	@Override
-	public Dress consultingDress(Consulting cs) {
+	public ArrayList<Dress> consultingDress(Consulting cs) {
 		return mDao.consultingDress(sqlSession, cs);
 	}
 
 	@Override
-	public Makeup consultingMakeup(Consulting cs) {
+	public ArrayList<Makeup> consultingMakeup(Consulting cs) {
 		return mDao.consultingMakeup(sqlSession, cs);
 	}
 

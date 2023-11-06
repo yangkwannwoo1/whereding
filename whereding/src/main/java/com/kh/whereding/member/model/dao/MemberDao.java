@@ -61,17 +61,17 @@ public class MemberDao {
 	}
 	
 	
-	public Hall consultingHall(SqlSessionTemplate sqlSession, Consulting cs) {
-		return sqlSession.selectOne("memberMapper.consultingHall", cs);
+	public ArrayList<Hall> consultingHall(SqlSessionTemplate sqlSession, Consulting cs) {
+		return (ArrayList)sqlSession.selectList("memberMapper.consultingHall", cs);
 	}
-	public Studio consultingStudio(SqlSessionTemplate sqlSession, Consulting cs) {
-		return sqlSession.selectOne("memberMapper.consultingStudio", cs);
+	public ArrayList<Studio> consultingStudio(SqlSessionTemplate sqlSession, Consulting cs) {
+		return (ArrayList)sqlSession.selectList("memberMapper.consultingStudio", cs);
 	}
-	public Dress consultingDress(SqlSessionTemplate sqlSession, Consulting cs) {
-		return sqlSession.selectOne("memberMapper.consultingDress", cs);
+	public ArrayList<Dress> consultingDress(SqlSessionTemplate sqlSession, Consulting cs) {
+		return (ArrayList)sqlSession.selectList("memberMapper.consultingDress", cs);
 	}
-	public Makeup consultingMakeup(SqlSessionTemplate sqlSession, Consulting cs) {
-		return sqlSession.selectOne("memberMapper.consultingMakeup", cs);
+	public ArrayList<Makeup> consultingMakeup(SqlSessionTemplate sqlSession, Consulting cs) {
+		return (ArrayList)sqlSession.selectList("memberMapper.consultingMakeup", cs);
 	}
 	
 	
