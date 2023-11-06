@@ -364,6 +364,10 @@
                 .mSearch .hover {
                     cursor: pointer;
                 }
+                
+                .single-board:hover{
+                	cursor:pointer;
+                }
 
                 /* .tab-content table{
   width: 100%;
@@ -997,10 +1001,12 @@
             $("#searchPlace").submit();
         }
         
-		$(".read-more-btn").click(function(){
-			let great_count = $(this).parents(".single-board").find(".great_count").text();
-			location.href = 'hDetail.bo?hno=' + $(this).parents(".single-board").find(".hno").val() + "&gc=" + great_count;
-		})
+        $(".single-board").click(function(){
+			let great_count = $(this).find(".great_count").text();
+			location.href = 'hDetail.bo?hno=' + $(this).find(".hno").val() + "&gc=" + great_count;
+        	
+        })     
+
 
     </script>
 
