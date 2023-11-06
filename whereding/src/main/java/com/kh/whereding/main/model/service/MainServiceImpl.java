@@ -35,8 +35,8 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	@Override
-	public ArrayList<Hall> selectHallList(SearchHall sh) {
-		return mnDao.selectHallList(sqlSession, sh);
+	public ArrayList<Hall> selectHallList(HashMap<String, Object> map) {
+		return mnDao.selectHallList(sqlSession, map);
 	}
 
 //	@Override
@@ -85,25 +85,25 @@ public class MainServiceImpl implements MainService {
 		return mnDao.selectRsvList(sqlSession, userNo);
 	}
 
-	@Override
-	public ArrayList<Hall> searchHallList(SearchHall sh) {
-		return mnDao.searchHallList(sqlSession, sh);
-	}
-
-	@Override
-	public ArrayList<Studio> ajaxSearchStudioList(SearchStudio ss) {
-		return mnDao.ajaxSearchStudioList(sqlSession, ss);
-	}
-
-	@Override
-	public ArrayList<Dress> ajaxSearchDressList(SearchDress sd) {
-		return mnDao.ajaxSearchDressList(sqlSession, sd);
-	}
-
-	@Override
-	public ArrayList<Makeup> ajaxSearchMakeupList(SearchMakeup sm) {
-		return mnDao.ajaxSearchMakeupList(sqlSession, sm);
-	}
+//	@Override
+//	public ArrayList<Hall> searchHallList(SearchHall sh) {
+//		return mnDao.searchHallList(sqlSession, sh);
+//	}
+//
+//	@Override
+//	public ArrayList<Studio> ajaxSearchStudioList(SearchStudio ss) {
+//		return mnDao.ajaxSearchStudioList(sqlSession, ss);
+//	}
+//
+//	@Override
+//	public ArrayList<Dress> ajaxSearchDressList(SearchDress sd) {
+//		return mnDao.ajaxSearchDressList(sqlSession, sd);
+//	}
+//
+//	@Override
+//	public ArrayList<Makeup> ajaxSearchMakeupList(SearchMakeup sm) {
+//		return mnDao.ajaxSearchMakeupList(sqlSession, sm);
+//	}
 
 	
 	

@@ -130,9 +130,18 @@
    		   <if test="wsSeat == 4">
 		   	and h_seat > 500
 		   </if>
+   		   <if test="wsTag!=null and wsTag neq ''">
+	 		   <foreach item="arr" collection="wsTag" open="and(" close=")" separator="or">
+	                  tag_content like '%'||#{arr}||'%'
+		      </foreach>
+ 		   </if>
+	      <foreach item= "arr" collection="wsAddress" open="and(" close=")" separator="or">
+	      			h_address like #{arr} ||'%' 
+	      </foreach>
+		   
 	</select>
-	<!-- 
-	<select id="selectStudioList" resultMap="studioResultSet">
+	
+	<!-- <select id="selectStudioList" resultMap="studioResultSet">
 		select 
 		       *    
 		  from studio
@@ -281,6 +290,7 @@
           left join hall on (company_no = h_code)
 		 where user_no = #{userNo}
 	</select>
+	<!-- 
 	<select id="searchHallList" resultMap="hallResultSet">
 	<![CDATA[
 	select
@@ -426,6 +436,6 @@
 	<if test="msWeek != null"> 
 	and m_WEEK_OPEN = 'Y'
 	</if>
-	</select>
+	</select> -->
 	
 </mapper>

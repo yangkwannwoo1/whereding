@@ -21,7 +21,7 @@ public interface MainService {
 	ArrayList<HashTag> selectTagList(String category);
 	
 	// 메인에서 홀 검색
-	ArrayList<Hall> selectHallList(SearchHall sh);
+	ArrayList<Hall> selectHallList(HashMap<String, Object> map);
 //	// 메인에서 스튜디오 검색
 //	ArrayList<Studio> selectStudioList(SearchStudio ss);
 //	// 메인에서 드레스 검색
@@ -51,11 +51,11 @@ public interface MainService {
 	// 방문자 수 증가
 //	void addVisit();
 	
-	ArrayList<Hall> searchHallList(SearchHall sh);
-	
-	ArrayList<Studio> ajaxSearchStudioList(SearchStudio ss);
-	ArrayList<Dress> ajaxSearchDressList(SearchDress sd);
-	ArrayList<Makeup> ajaxSearchMakeupList(SearchMakeup sm);
+//	ArrayList<Hall> searchHallList(SearchHall sh);
+//	
+//	ArrayList<Studio> ajaxSearchStudioList(SearchStudio ss);
+//	ArrayList<Dress> ajaxSearchDressList(SearchDress sd);
+//	ArrayList<Makeup> ajaxSearchMakeupList(SearchMakeup sm);
 }
 
 

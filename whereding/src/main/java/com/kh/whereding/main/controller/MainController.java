@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.whereding.basket.model.vo.Basket;
@@ -40,82 +39,105 @@ public class MainController {
 		return new Gson().toJson(list);
 	};
 
-//	@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
-//	public void searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm) { 
-//		
+	@RequestMapping(value = "search.mn", produces = "aplication/json; charset=utf-8")
+	public ModelAndView searchPlace(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm, ModelAndView mv) { 
 //		ArrayList<Hall> hlist = mnService.selectHallList(sh);
-//
-//		// studio 
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		//(ssAddress=서울특별시 동대문,서울특별시 중랑구, ssMinPrice=0, ssMaxPrice=100, ssWeek=on, ssTag=호텔웨딩,스몰웨딩)
-//		ArrayList<String> salist = new ArrayList<String>();
-//		ArrayList<String> stlist = new ArrayList<String>();
-//		
-//		salist.addAll(Arrays.asList(ss.getSsAddress().split(",")));
-//		stlist.addAll(Arrays.asList(ss.getSsTag().split(",")));
-//		
-//		map.put("ssAddress", salist);
-//		if(ss.getSsTag().equals("")) {
-//			map.put("ssTag", "");
-//		}else {
-//			map.put("ssTag", stlist);
-//		}
-//		map.put("ssMinPrice", ss.getSsMinPrice());
-//		map.put("ssMaxPrice", ss.getSsMaxPrice());
-//		map.put("ssWeek", ss.getSsWeek());
-//	
-//		// dress
-//		ArrayList<String> dalist = new ArrayList<String>();
-//		ArrayList<String> dtlist = new ArrayList<String>();
-//		
-//		dalist.addAll(Arrays.asList(sd.getDsAddress().split(",")));
-//		dtlist.addAll(Arrays.asList(sd.getDsTag().split(",")));
-//		
-//		map.put("dsAddress", dalist);
-//		if(sd.getDsTag().equals("")) {
-//			map.put("dsTag", "");
-//		}else {
-//			map.put("dsTag", dtlist);
-//		}
-//		map.put("dsMinPrice", sd.getDsMinPrice());
-//		map.put("dsMaxPrice", sd.getDsMaxPrice());
-//		map.put("dsWeek", sd.getDsWeek());
-//		
-//		
-//		// makeup
-//		ArrayList<String> malist = new ArrayList<String>();
-//		ArrayList<String> mtlist = new ArrayList<String>();
-//		
-//		malist.addAll(Arrays.asList(sm.getMsAddress().split(",")));
-//		mtlist.addAll(Arrays.asList(sm.getMsTag().split(",")));
-//
-//		map.put("msAddress", malist);
-//		if(sm.getMsTag().equals("")) {
-//			map.put("msTag", "");
-//		}else {
-//			map.put("msTag", mtlist);				
-//		}
-//		map.put("msMinPrice", sm.getMsMinPrice());
-//		map.put("msMaxPrice", sm.getMsMaxPrice());
-//		map.put("msWeek", sm.getMsWeek());
-//
-//		ArrayList<Studio> slist = mnService.searchStudioList(map);
-//		ArrayList<Dress> dlist = mnService.searchDressList(map);
-//		ArrayList<Makeup> mlist = mnService.searchMakeupList(map);
-//
-//		for(Makeup m : mlist) {
-//			System.out.println(m);			
-//		}
-//		for(Studio s : slist) {
-//			System.out.println(s);
-//		}
-//		for(Dress d : dlist) {
-//			System.out.println(d);
-//		}
-//		for(Makeup m : mlist) {
-//			System.out.println(m);
-//		}
-//	}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		ArrayList<String> halist = new ArrayList<String>();
+		ArrayList<String> htlist = new ArrayList<String>();
+		
+		halist.addAll(Arrays.asList(sh.getWsAddress().split(",")));
+		htlist.addAll(Arrays.asList(sh.getWsTag().split(",")));
+		
+		map.put("wsAddress", halist);
+		if(ss.getSsTag().equals("")) {
+			map.put("wsTag", "");
+		}else {
+			map.put("wsTag", htlist);
+		}
+		map.put("wsSeat", sh.getWsSeat());
+		map.put("wsMinPrice", sh.getWsMinPrice());
+		map.put("wsMaxPrice", sh.getWsMaxPrice());
+		
+		map.put("eatMinPrice", sh.getEatMinPrice());
+		map.put("eatMaxPrice", sh.getEatMaxPrice());
+		
+		ArrayList<Hall> hlist = mnService.selectHallList(map);
+		
+		// studio 
+		//(ssAddress=서울특별시 동대문,서울특별시 중랑구, ssMinPrice=0, ssMaxPrice=100, ssWeek=on, ssTag=호텔웨딩,스몰웨딩)
+		ArrayList<String> salist = new ArrayList<String>();
+		ArrayList<String> stlist = new ArrayList<String>();
+		
+		salist.addAll(Arrays.asList(ss.getSsAddress().split(",")));
+		stlist.addAll(Arrays.asList(ss.getSsTag().split(",")));
+		
+		map.put("ssAddress", salist);
+		if(ss.getSsTag().equals("")) {
+			map.put("ssTag", "");
+		}else {
+			map.put("ssTag", stlist);
+		}
+		map.put("ssMinPrice", ss.getSsMinPrice());
+		map.put("ssMaxPrice", ss.getSsMaxPrice());
+		map.put("ssWeek", ss.getSsWeek());
+	
+		// dress
+		ArrayList<String> dalist = new ArrayList<String>();
+		ArrayList<String> dtlist = new ArrayList<String>();
+		
+		dalist.addAll(Arrays.asList(sd.getDsAddress().split(",")));
+		dtlist.addAll(Arrays.asList(sd.getDsTag().split(",")));
+		
+		map.put("dsAddress", dalist);
+		if(sd.getDsTag().equals("")) {
+			map.put("dsTag", "");
+		}else {
+			map.put("dsTag", dtlist);
+		}
+		map.put("dsMinPrice", sd.getDsMinPrice());
+		map.put("dsMaxPrice", sd.getDsMaxPrice());
+		map.put("dsWeek", sd.getDsWeek());
+		
+		
+		// makeup
+		ArrayList<String> malist = new ArrayList<String>();
+		ArrayList<String> mtlist = new ArrayList<String>();
+		
+		malist.addAll(Arrays.asList(sm.getMsAddress().split(",")));
+		mtlist.addAll(Arrays.asList(sm.getMsTag().split(",")));
+
+		map.put("msAddress", malist);
+		if(sm.getMsTag().equals("")) {
+			map.put("msTag", "");
+		}else {
+			map.put("msTag", mtlist);				
+		}
+		map.put("msMinPrice", sm.getMsMinPrice());
+		map.put("msMaxPrice", sm.getMsMaxPrice());
+		map.put("msWeek", sm.getMsWeek());
+
+		ArrayList<Studio> slist = mnService.searchStudioList(map);
+		ArrayList<Dress> dlist = mnService.searchDressList(map);
+		ArrayList<Makeup> mlist = mnService.searchMakeupList(map);
+
+		/*for(Hall h : hlist) {
+			System.out.println(h);			
+		}
+		for(Studio s : slist) {
+			System.out.println(s);
+		}
+		for(Dress d : dlist) {
+			System.out.println(d);
+		}
+		for(Makeup m : mlist) {
+			System.out.println(m);
+		}*/
+		mv.addObject("hlist",hlist).addObject("slist",slist).addObject("dlist",dlist).addObject("mlist",mlist).setViewName("product/searchView");
+		return mv;
+	}
 
 	@ResponseBody
 	@RequestMapping(value="selectBasket.sb", produces = "application/json; charset=utf-8")
@@ -144,7 +166,7 @@ public class MainController {
 //	    return ("common/main");
 //	}
 	
-	@RequestMapping(value = "search.mn")
+	/*@RequestMapping(value = "search.mn")
 	public String mainSearch(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm, HttpSession session) {
 		System.out.println("검색한 홀 :  "+ sh);
 		System.out.println("검색한 스튜디오 :  "+ ss);
@@ -438,6 +460,6 @@ public class MainController {
 		session.removeAttribute("list");
 				
 		return"product/searchView";
-	}
+	}*/
 
 }

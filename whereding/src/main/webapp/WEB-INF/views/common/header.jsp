@@ -316,10 +316,15 @@ font-family: 'Open Sans Condensed', sans-serif;
 						</div>
 						<!-- logo -->
 
+						<script>
+
+						
+						</script>
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item" id="main-menu-home">
+								<!-- class="current-list-item" -->
+								<li id="main-menu-home">
 								<a href="index.jsp">Home</a> <a href="index.jsp">홈</a>
 								</li>
 								<li id="main-menu-wedding"><a href="hList.pr">Wedding Holl</a> <a

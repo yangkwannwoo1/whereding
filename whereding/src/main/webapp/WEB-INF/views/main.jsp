@@ -16,7 +16,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 9999; /* 높은 우선 순위 값 */
-}
+}	
 
 
 .popup-content {
@@ -250,7 +250,7 @@
                                         <td class="weekendYNArea" colspan="4">
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="ssWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="ssWeek" checked><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                 </label>
                                             </div>
                                         </td>
@@ -300,7 +300,7 @@
                                         <td class="weekendYNArea" colspan="4">
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="dsWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="dsWeek" checked><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                 </label>
                                             </div>
                                         </td>
@@ -350,7 +350,7 @@
                                             <td class="weekendYNArea" colspan="4">
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="msWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                        <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="msWeek" checked><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                     </label>
                                                 </div>
                                             </td>
