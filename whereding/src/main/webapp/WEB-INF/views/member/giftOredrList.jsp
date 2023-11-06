@@ -309,7 +309,7 @@
          border-top: 1px solid #9999994d; /* 원하는 스타일 및 색상으로 설정 */
      }
      .header_h{
-         color: #FABFC1;
+         color: #F98973;
          font-weight: bold;
          font-size: 20px;
      }
@@ -508,7 +508,7 @@
     <button onclick="ttest();">버튼</button>
     <script>
         function ttest(){
-            location.href = "test.ts";
+           alert("이스터에그당! 어케 찾았누~")
         }
     </script>
 </body>

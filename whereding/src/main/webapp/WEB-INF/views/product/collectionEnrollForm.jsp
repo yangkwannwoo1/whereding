@@ -126,9 +126,9 @@
                         <tr>
                             <th>예약시간 구분</th>
                             <td colspan="2">
-                                <input id="unit_time_1" name="unitTime" type="radio" value="1">
+                                <input id="unit_time_1" name="unitTime" type="radio" value="60">
                                 <label for="unit_time_1">1시간</label>
-                                <input id="unit_time_2" name="unitTime" type="radio" value="0.3">
+                                <input id="unit_time_2" name="unitTime" type="radio" value="30">
                                 <label for="unit_time_2">30분</label>
                             </td>
                             <th>주말/공휴일 영업</th>
