@@ -215,7 +215,7 @@
         <div class="outer">
             <div class="id_pwd_input">
                 <div class="id_input">
-                    <img src="../resorces/이미지자료/로그인.png" id="newMember_img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI1jGs6wZNtKLknaeQINTLGATFkgI3ysc59w&usqp=CAU" id="newMember_img">
                         <input type="text" id="new_user" class="new_userId" name="userId" placeholder="아이디" required>
                         
                         <span id="goodId">멋진 아이디네요!</span>
@@ -270,11 +270,11 @@
                 </div>
                 
                 <div class="line">
-                    <img src="../resorces/이미지자료/비밀번호.png" id="newMember_img">
+                    <img src="https://w7.pngwing.com/pngs/975/821/png-transparent-password-manager-computer-icons-password-strength-password-safe-chang-miscellaneous-password-strength-password-safe-thumbnail.png" id="newMember_img">
                         <input type="password" id="new_user" class="new_userPwd" name="userPwd" placeholder="비밀번호" required>
                 </div>
                 <div class="email_input">
-                    <img src="../resorces/이미지자료/이메일2.png" id="newMember_img">
+                    <img src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-email-vector-icon-png-image_4279324.jpg" id="newMember_img">
                     <input type="email" id="new_user" name="email" placeholder="이메일">
                 </div>
             </div>
@@ -283,20 +283,20 @@
             </div>
             <div class="info_input">
                 <div class="name_input">
-                    <img src="../resorces/이미지자료/로그인.png" id="newMember_img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6135/6135267.png" id="newMember_img">
                         <input type="text" id="new_user" class="new_user_name" name="userName" placeholder="이름" required>
                 </div>
                 <div class="line">
-                    <img src="../resorces/이미지자료/달력3.PNG" id="newMember_img">
+                    <img src="https://cdn.icon-icons.com/icons2/2070/PNG/512/birthday_cake_icon_125873.png" id="newMember_img">
                         <input type="text" id="new_user_pwd" name="birthDay" placeholder="생년월일 8자리 [ex)230824]" required>
                 </div>
                 <div class="phone_input">
-                    <img src="../resorces/이미지자료/폰.png" id="newMember_img">
+                    <img src="https://cdn.icon-icons.com/icons2/1525/PNG/512/976604-appliances-cell-phone-cellphone-mobile-mobilephone-phone-smartphone_106569.png" id="newMember_img">
                         <input type="text" id="new_user" class="new_user_phone" name="phone" placeholder="휴대폰 번호 [010-1234-5678]" onKeyup = "addHypen(this);" required>
                 </div>
                 
                 <div class="line">
-                <img src="../resorces/이미지자료/폰.png" id="newMember_img">
+                <img src="https://img.freepik.com/premium-vector/icon-people-in-abstract-style-flat-black-line-icon-man-and-woman-abstract-vector-illustration_352905-763.jpg" id="newMember_img">
                 <h3></h3>&nbsp; <span id="gender_input">신랑/신부</span>
                     <select name="gender">
                         <option selected>선택하세요</option>

@@ -99,7 +99,7 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>고마운 사람에게 특별한 마음을 전해부러</p>
+						<p>고마운 사람에게 특별한 마음을 전하세요</p>
 						<h1>답례품</h1>
 					</div>
 				</div>
