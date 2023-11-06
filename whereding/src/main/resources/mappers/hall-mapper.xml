@@ -22,7 +22,7 @@
 		<result column="img_1" property="img1"/>
 		<result column="img_2" property="img2"/>
 		<result column="img_3" property="img3"/>
-		<result column="file_path" property="imgPath"/>
+		<result column="img_path" property="imgPath"/>
 		<result column="great_count" property="greatCount"/>
 	</resultMap>
 	
@@ -170,6 +170,10 @@
 			 , H_ADDRESS
 			 , H_UNIT_TIME
 			 , H_WEEK_OPEN
+		     , IMG_1
+             , IMG_2
+             , IMG_3
+             , IMG_PATH
 		  from hall
 		  left join product_img i on (h_code = i.product_no) 
 		  left join tag t on (t.product_no = i.product_no) 
