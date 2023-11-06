@@ -130,7 +130,7 @@
 
 
 	<!-- start main search-->
-    <form action="search.mn" method="post" id="searchPlace">
+    <form action="test1.mn" method="post" id="searchPlace">
 
         <table id="search_table">
             <thead>

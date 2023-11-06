@@ -327,13 +327,15 @@
 							</c:forEach>
 						</ul>
 					</div>
+					<button class="btn btn-warning float-right" style="margin-right: 2%" onclick="deleteCollection();"><i class="fas fa-list"> 목록으로</i></button>
+					
 
 				</td>
 
 			</tr>
 			<tfoot class="review_area">
 				<tr>
-					<th style="padding: 5% 1% 1% 1%" colspan="3">
+					<th style="padding: 2% 1% 1% 1%" colspan="3">
 						<h3 class="comment-count-title" style=" font-weight: 700;">리뷰 (0)</h3>
 						<hr style="margin-bottom: 0; border: 1px solid black;">
 					</th>
@@ -376,7 +378,7 @@ const showNotification = () => {
 </script>
 	</div>
 
-	<hr>
+	<!-- <hr>
 	<div class="recent-posts">
 		<h4>최근 본 게시글</h4>
 		<ul>
@@ -387,7 +389,7 @@ const showNotification = () => {
 			<li><a href="single-news.html">kh김시연교육원 - sinse 2023 - 10 - 17</a></li>
 		</ul>
 		<hr>
-	</div>
+	</div> -->
 	<!-- end single article section -->
 	<jsp:include page="../common/footer.jsp" />
 	
@@ -414,6 +416,12 @@ const showNotification = () => {
 					let $reviewHead = $(".review_area").html();
 					let sum = 0;
 					let score = 0;
+					let nullHtml = "";
+					
+					if(list == ""){
+						console.log("리뷰없습니다.");
+						nullHtml = "<tr style='text-align:center;'><th colspan='3'><br><br><br><h3>아직 등록된 리뷰가 없습니다.</h3><br><br></th></tr>"
+					}
 					for(let i in list){
 						let avgScore = 0;
 						console.log(score)
@@ -436,7 +444,7 @@ const showNotification = () => {
 					sum += score;
 					}
 					avgScore = sum / list.length;
-					$(".review_area").html($reviewHead + value);
+					$(".review_area").html($reviewHead + value + nullHtml);
 					$(".comment-count-title").text("리뷰 (" + list.length + ")")
 					$(".total_rate span").css("width",avgScore+"%");
 				}, error:function(){

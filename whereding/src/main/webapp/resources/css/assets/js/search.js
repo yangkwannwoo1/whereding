@@ -131,7 +131,7 @@ function submitTag(){
 
 }
   $("#tab_top_area #nav-tab > .nav-link").click(function(){
-    console.log("메뉴클릭")
+    //console.log("메뉴클릭")
     $(".ltabcontent button").attr("class","selectCity");
     $(".allTag_area button").attr("class","btn btn-outline-secondary");
 })
@@ -195,7 +195,7 @@ function nextTab(e){
   console.log(e)  
   // console.log($(e).closest("table").closest("table").find("#tab_top_area").find("#nav-" + nextStr + "-tab"))
   $(e).closest("table").parent().closest("table").find("#tab_top_area").find("#nav-" + nextStr + "-tab").click();//.attr("class","nav-link active");
-  console.log($(".hidden_tag").val())
+  //console.log($(".hidden_tag").val())
   // $(e).closest("table").parent().attr("class","tab-pane fade");
   // $(e).closest("table").parent().next().attr("class","tab-pane fade active show");
   // class="tab-pane fade active show"

@@ -414,15 +414,23 @@
                     padding-top: 10px;
                     padding-right: 10px;
                 }
-
+				/* 좌석체크박스 */
+				#seat_avail{
+					text-align: center;
+				}
                 /* 드레스 */
                 .weekendYN {
-                    zoom: 2.5;
+                    zoom: 1.5;
                 }
 
                 .weekendYNArea {
-                    text-align: left !important;
+                    text-align: right !important;
                     padding-left: 100px;
+                }
+                
+                .form-check-label span{
+                	vertical-align: 8px;
+                	text-align: left;
                 }
 
                 /* 태그에 호버시 이벤트 */
@@ -433,12 +441,21 @@
                     color: #ffffff;
                     display: none;
                 }
-
                 .sortBtn {
                     font-size: 5px;
                     width: 150px;
                     border-radius: 15px;
                     margin: auto;
+                }
+                
+                .single-latest-news{
+                    border-radius: none;
+                    padding: 3% !important;
+                }
+
+                .news-text-box:hover{
+                    cursor: pointer;
+                    background-color: #cccccc4b;
                 }
             </style>
 
@@ -568,7 +585,7 @@
                                         <td class="weekendYNArea" colspan="4">
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="ssWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="ssWeek"><span style="vertical-align:8px; width: 120px; border: none; font-size: 17px; text-align: left">주말영업여부</span>
                                                 </label>
                                             </div>
                                         </td>
@@ -700,34 +717,138 @@
             </tbody>
         </table>
     </form>
-    
-    <div>하이루</div>
 
+    <div class="latest-news mt-150 mb-150" style="margin-top: 0px;">
+        <div class="container content_area">
+            <div style="margin-bottom: 20px;">
+                <span style="font-size: 30px; font-weight: 800; font-size: 50px;" class="search_category"></span>	
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="null_msg_area">
+                
+            </div>
+                    
+    </div>
+    </div>
+
+
+	
+
+    
     <script>
-        $(function(){
-            $.ajax({
-                url:"test.mn",
-                data:{
-                    sh:${ hlist },
-                    ss:${ slist },
-                    sd:${ dlist }
-                },success:function(data){
-                    console.log(data)
-                }, error:function(){
-                    console.log("통실실패!")
+	$(function(){
+        $("#nav-wedding-tab").click();
+        
+	})
+    $(".nav-tabs .nav-link").click(function(){
+        let category = ""
+        category = $(this).text()
+        console.log(category)
+        
+        let condition = "";
+        let html = "";
+        if(category == "웨딩"){
+            html = "WEDDING"
+            condition = '${ sh }'
+        }else if(category == "스튜디오") {
+            html = "STUDIO"
+            condition = '${ ss }'
+        }else if(category == "드레스"){
+            html = "DRESS"
+            condition = '${ sd }'
+        }else{
+            html = "MAKEUP"
+            condition = '${ sm }'
+        }
+        $(".content_area .search_category").text(html)
+        searchResult(category)
+    })
+
+    function searchResult(e){
+        $.ajax({
+            url:"search.mn",
+            data:{
+                category:e
+            },
+            success:function(list){
+                $(".content_area .null_msg_area").html("")
+                // code가 h1 일경우 웨딩 나머지는 스드메 , 비어있을경우 검색된 결과가 없습니다.
+                $(".content_area .row").html() // 여기에 넣어야함
+                let category = "";
+                if(list == ""){
+                    category = 'N';
+                    $(".content_area .null_msg_area").html("<br><br><br><div><h3 style='text-align:center'>조회된 검색 결과가 없습니다.</h3></div><br><br><br>")
+                }else{
+                    category = (list[0].code).substr(0,1)
                 }
-            })
+                
+                let value = "";
+                for(let i in list){
+                    if(category == 'H'){  // 홀일때
+                        console.log(list[i])
+                    }else if(category == 'N'){
+                        console.log("NULL")
+                    }else{
+                        value +=`
+                                 <div class="col-lg-4 col-md-6">
+                                <div class="single-board">
+                                    <div class="news-text-box">
+                                    <p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
+                                        <img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%;">` + list[i].greatCount + `</span>
+                                    </p>
+                                    <img src="` + list[i].imgPath + `" style="width: 300px; height: 200px; margin-bottom: 3%; border-radius: 10px;">
+
+                                    <h3><a href="#">`+ list[i].enterprise +`</a></h3>
+                                    <p><i class="fas fa-map-marker-alt"> ` + list[i].address + `</i></p>
+                                    <p><i class="fas fa-phone fa-flip-horizontal"></i> ` + list[i].phone + `</p>
+                                    <p class="price_won"><i class="fas fa-won"> ` + (list[i].price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</i></p>
+                                    <p class="blog-meta">
+                                        <span class="author">`;
+                                            
+                                            let tag = list[i].tagContent;
+                                            console.log("zzzz" + tag)
+                                            if(typeof tag != "undefined"){
+                                                tagArr = tag.split(",")
+                                                for(let j in tagArr){
+                                                    value += `<span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ` + tagArr[j] + `</span>`
+                                                 }
+
+                                            }else{
+                                                value += `<span style="font-size: 14px; color: black; font-weight: 600; opacity: 1; opacity: 0;"> empty</span>`
+                                            }
+             
+                                    value += `</span>
+                                                </p>
+                                                <a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+                                                <input class="cno" type="hidden" value="` + list[i].code + `">
+                                                        </div>
+                                                    </div>
+                                                </div>`
+
+
+                                  
+                    }
+                }
+                $(".content_area .row").html(value);
+
+                console.log("성공")
+                console.log(list);
+            },error:function(){
+                console.log("ajax 통신 실패!!")
+            }
+        })
+    }
+    </script>
+    <script>
+        $(document).on("click",".news-text-box",function(){
+            console.log($(this).find(".cno").val())
+            let category = $(this).closest(".row").prev().find(".search_category").text().toLowerCase().replace(/^[a-z]/, char => char.toUpperCase());
+            location.href="cDetail.bo?category=" + category + "&cno=" + $(this).find(".cno").val()
+
         })
     </script>
-    <table>
-        
-        <c:forEach var="b" items="${ hlist }">
-        <tr>
-            <td>${ b.phone }</td>
-            <td>
-        </tr>
-    </c:forEach>
-    </table>
     
     <script>
        	function submitSearch(){

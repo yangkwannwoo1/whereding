@@ -2099,7 +2099,10 @@ span.comment-date {
 }
 
 .tag-section ul li a {
-  background-color: #ddd;
+  font-size: 25px !important;
+  background-color: none;
+  font-weight : 800;
+  color: #4e4949 !important;
   padding: 3px 10px;
   display: block;
   border-radius: 5px;

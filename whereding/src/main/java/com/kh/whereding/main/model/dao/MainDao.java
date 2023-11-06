@@ -15,6 +15,7 @@ import com.kh.whereding.main.model.vo.SearchStudio;
 import com.kh.whereding.product.model.vo.Dress;
 import com.kh.whereding.product.model.vo.Hall;
 import com.kh.whereding.product.model.vo.Makeup;
+import com.kh.whereding.product.model.vo.ProductCollection;
 import com.kh.whereding.product.model.vo.Reservation;
 import com.kh.whereding.product.model.vo.Studio;
 
@@ -45,13 +46,13 @@ public class MainDao {
 		return (ArrayList)sqlSession.selectList("mainMapper.selectSearchList", map);
 	}
 
-	public ArrayList<Studio> searchStudioList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
+	public ArrayList<ProductCollection> searchStudioList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
 		return (ArrayList)sqlSession.selectList("mainMapper.searchStudioList", map);
 	}
-	public ArrayList<Dress> searchDressList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
+	public ArrayList<ProductCollection> searchDressList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
 		return (ArrayList)sqlSession.selectList("mainMapper.searchDressList", map);
 	}
-	public ArrayList<Makeup> searchMakeupList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
+	public ArrayList<ProductCollection> searchMakeupList(SqlSessionTemplate sqlSession, HashMap<String, Object> map){
 		return (ArrayList)sqlSession.selectList("mainMapper.searchMakeupList", map);
 	}
 	
