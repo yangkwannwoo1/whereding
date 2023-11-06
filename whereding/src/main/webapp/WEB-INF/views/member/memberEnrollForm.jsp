@@ -209,7 +209,7 @@
 </head>
 <body>
   <div class="logo_div">
-        <a href="#"><img src="resources/css/assets/img/logo.png" id="logo" alt=""></a>
+        <a href="<%=request.getContextPath()%>/"><img src="resources/css/assets/img/logo.png" id="logo" alt=""></a>
     </div>
     <form action="createMember" method="post">
         <div class="outer">
