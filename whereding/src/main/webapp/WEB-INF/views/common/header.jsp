@@ -175,6 +175,26 @@ font-family: 'Open Sans Condensed', sans-serif;
 #cuser:hover{
 	cursor: default;
 }
+#kakaoLogin{
+	margin-right:30px;
+	margin-top:10px;
+	background:#fae100;
+	border:none;
+}
+#naverLogin{
+	margin-right:30px;
+	margin-top:3px;
+	background:#ffffff;
+	border:none;
+}
+#naverLogin>img{
+	background:white;
+	box-sizing:border-box;
+}
+#idFind{
+	color:white;
+	font-weight:bold;
+}
 </style>
 </head>
 <body style="background-color:white">
@@ -211,7 +231,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 					
 				<!-- 로그인모달~!@#!@#!@#!@# -->
 				<div id="login_container">
-					<h1>로그인 하쇼</h1>
+					<h1>Whereding Login</h1>
 					<span class="close-btn"> <img
 						src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
 					</span>
@@ -219,17 +239,17 @@ font-family: 'Open Sans Condensed', sans-serif;
 					<form action="login.me" method="post">
 						<input type="text" name="userId" placeholder="id를 입력" onclick="check();"  required> 
 						<input type="password" name="userPwd" placeholder="비밀번호 입력"  required> 
-						<button type="submit">로그인</button>
+						<button type="submit">웨어딩 회원 로그인</button>
 					</form>
 						
 						<!--  아이디 찾기 -->
 						<div id="remember-container">
-							<a href="idFind.me"><span id="idFind">아이디 찾기</span></a> <span id="forgotten">비번 찾기</span>
+							<a id="idFind" href="idFind.me"><span id="idFind" style="margin-right:30px;">ID/PW 찾기</span></a>
 						</div>
 					
 						<!--  카카오 로그인 버튼 -->
 						<button id = "kakaoLogin" onclick="kakaoLogin();">
-							<img src="https://careerly.co.kr/_next/static/images/img_symbol-kakao-b1fe6197135e5beead71b1a90f8e2b7d.png" width="100px"; height="50px";>
+							<img src="resources/css/assets/img/kakaologin.png" width="100px"; height="50px";>
 						</button>
 						<form action="kakaoLogin.me" method="post" id="kakaoCheck">
 							<input type="hidden" id="kakaoInput" name="kakaoInput"/>
@@ -237,7 +257,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 						
 						<!--  네이버 로그인 버튼 -->
 						<button id = "naverLogin" onclick="naverLogin();">
-							<img src="https://image.edaily.co.kr/images/Photo/files/NP/S/2014/04/PS14040100352.jpg" width="100px"; height="50px";>
+							<img id="naverImg" src="resources/css/assets/img/naverlogin.png" width="100px;" height="50px;">
 						</button>
 						
 						<script>
