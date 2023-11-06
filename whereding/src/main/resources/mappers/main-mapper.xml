@@ -23,6 +23,8 @@
 		<result column="h_unit_time" property="unitTime"></result>
 		<result column="h_week_open" property="weekOpen"></result>
 		<result column="TAG_CONTENT" property="tagContent"></result>
+		<result column="img_path" property="imgPath"></result>
+		<result column="great_count" property="greatCount"></result>
 		<!-- 
 	     , TAG_CONTENT
 		 -->
@@ -90,14 +92,25 @@
 	</select>
 
 	<select id ="selectHallList" resultMap="hallResultSet">
-		select 
-			   *
+		  select 
+	             h_code
+	           , h_enterprise
+	           , h_name
+	           , h_detail
+	           , h_seat
+	           , h_rental
+	           , h_restaurant_seat
+	           , h_meal
+	           , h_phone
+	           , h_address
+	           , tag_content
+	           ,img_path || img_1 as img_path 
 		  from hall
-		  left join tag on(h_code = product_no)
+		  left join tag t on(h_code = t.product_no)
+          left join product_img i on (h_code = i.product_no)
 		 where h_rental between #{wsMinPrice}*10000 and #{wsMaxPrice}*10000
 		   and h_meal between #{eatMinPrice}*10000 and #{eatMaxPrice}*10000
-		   <!-- and h_address like #{wsAddress} || '%'
-		   and tag_content like '%' || --> 
+
 		   <if test="wsSeat == 1">
 		   	and h_seat between 1 and 100
 		   </if>
@@ -120,6 +133,8 @@
 	      			h_address like #{arr} ||'%' 
 	      </foreach>
  		   </if>
+ 		   and h_status = 'Y'
+		 group by h_CODE, h_ENTERPRISE, H_NAME ,H_DETAIL, H_SEAT, H_RENTAL, H_RESTAURANT_SEAT, H_MEAL, H_PHONE, H_ADDRESS, TAG_CONTENT, IMG_PATH || IMG_1 
 		   
 	</select>
 	

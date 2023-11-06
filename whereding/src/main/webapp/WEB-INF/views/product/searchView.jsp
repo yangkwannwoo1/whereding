@@ -457,6 +457,7 @@
                     cursor: pointer;
                     background-color: #cccccc4b;
                 }
+
             </style>
 
 </head>
@@ -788,6 +789,48 @@
                 for(let i in list){
                     if(category == 'H'){  // 홀일때
                         console.log(list[i])
+                        value +=`
+                                 <div class="col-lg-4 col-md-6">
+                                <div class="single-board">
+                                    <div class="news-text-box">
+                                    <p class="excerpt" style="text-align: right; padding: 3% 5% 0% 0%">
+                                        <img src="resources/css/assets/img/heart_y.png" style="height: 30px; right:0"><span class="great_count" style="font-size:20px; vertical-align: middle; font-weight: 600; margin-left: 2%;">` + list[i].greatCount + `</span>
+                                    </p>
+                                    <img src="` + list[i].imgPath + `" style="width: 300px; height: 200px; margin-bottom: 3%; border-radius: 10px;">
+
+                                    <h3><a href="#">`+ list[i].enterprise +`</a></h3>
+                                    <p class="blog-meta">
+                                        <span class="author"><i class="fas fa-user"></i> ` + list[i].name + `</span>
+                                    </p>
+                                    <p><i class="fas fa-map-marker-alt"> ` + list[i].address + `</i></p>
+
+                                    <p><i class="fas fa-phone fa-flip-horizontal"></i> ` + list[i].phone + `</p>
+                                    <p class="price_won"> <i class="fas fa-won"></i>` + (list[i].rental).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</p>
+                                    <p class="seat_avail"> <i class="fas fa-chair"></i> ` + list[i].seat + `석</p>
+                                    <p class="price_won"> <i class="fas fa-utensils"></i> ` + (list[i].meal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `원</p>
+                                    
+                                    <p class="blog-meta">
+                                        <span class="author">`;
+                                            
+                                            let tag = list[i].tagContent;
+                                            console.log("zzzz" + tag)
+                                            if(typeof tag != "undefined"){
+                                                tagArr = tag.split(",")
+                                                for(let j in tagArr){
+                                                    value += `<span style="font-size: 14px; color: black; font-weight: 600; opacity: 1;"># ` + tagArr[j] + `</span>`
+                                                 }
+
+                                            }else{
+                                                value += `<span style="font-size: 14px; color: black; font-weight: 600; opacity: 1; opacity: 0;"> empty</span>`
+                                            }
+             
+                                    value += `</span>
+                                                </p>
+                                                <a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+                                                <input class="cno" type="hidden" value="` + list[i].code + `">
+                                                        </div>
+                                                    </div>
+                                                </div>`
                     }else if(category == 'N'){
                         console.log("NULL")
                     }else{
@@ -808,7 +851,6 @@
                                         <span class="author">`;
                                             
                                             let tag = list[i].tagContent;
-                                            console.log("zzzz" + tag)
                                             if(typeof tag != "undefined"){
                                                 tagArr = tag.split(",")
                                                 for(let j in tagArr){
@@ -843,9 +885,15 @@
     </script>
     <script>
         $(document).on("click",".news-text-box",function(){
+            
             console.log($(this).find(".cno").val())
             let category = $(this).closest(".row").prev().find(".search_category").text().toLowerCase().replace(/^[a-z]/, char => char.toUpperCase());
-            location.href="cDetail.bo?category=" + category + "&cno=" + $(this).find(".cno").val()
+            console.log(($(this).find(".cno").val()).substr(0,1))
+            if(($(this).find(".cno").val()).substr(0,1) == "H"){
+                location.href="hDetail.bo?hno=" +  $(this).find(".cno").val() + "&gc=" + $(this).find(".great_count").text()
+            }else{
+                location.href="cDetail.bo?category=" + category + "&cno=" + $(this).find(".cno").val()
+            }
 
         })
     </script>
