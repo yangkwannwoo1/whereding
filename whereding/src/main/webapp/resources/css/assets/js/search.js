@@ -162,10 +162,20 @@ function submitTag(){
   $(document).on("click",".allTag_area .active",function(){  
      $(this).attr('class','btn btn-outline-secondary')
   })
-  $(document).on("click",".taglist",function(){  
-    $(this).remove()
-    console.log($(this))
-  })
+  // 태그를 클릭했을경우
+    $(document).on("click",".taglist",function(){ 
+     let removeStr = $(this).text().slice(2) 
+     let tmpArr = ($(this).closest("table").find(".hidden_tag").val()).split(',')
+     console.log(tmpArr)
+     for(let i = 0; i < tmpArr.length; i++) {
+	    if (tmpArr[i] === removeStr) {
+	        tmpArr.splice(i, 1);
+	    }
+	}
+	$(this).closest("table").find(".hidden_tag").val(tmpArr.join(','))
+   $(this).remove()
+
+})
 
 // 좌측탭
 function openCity(evt, cityName) {

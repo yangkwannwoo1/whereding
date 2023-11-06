@@ -130,7 +130,7 @@
 
 
 	<!-- start main search-->
-    <form action="test1.mn" method="post" id="searchPlace">
+    <form action="intoService.mn" method="post" id="searchPlace">
 
         <table id="search_table">
             <thead>
@@ -209,10 +209,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <input class="hidden_tag w" type="hidden" name="wsTag">
+                                        
                                         <td colspan="3" class="selectTagArea">
                                         </td>
                                         <td class="find_tag w">
+                                            <input class="hidden_tag w" type="hidden" name="wsTag">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
                                         </td>
                                     </tr>
@@ -256,10 +257,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <input class="hidden_tag s" type="hidden" name="ssTag">
+                                        
                                         <td colspan="3" class="selectTagArea">
                                         </td>
                                         <td class="find_tag">
+                                            <input class="hidden_tag s" type="hidden" name="ssTag">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
                                         </td>
                                     </tr>
@@ -306,10 +308,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <input class="hidden_tag d" type="hidden" name="dsTag">
+                                        
                                         <td colspan="3" class="selectTagArea">
                                         </td>
                                         <td class="find_tag">
+                                            <input class="hidden_tag d" type="hidden" name="dsTag">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
                                         </td>
                                     </tr>
@@ -356,10 +359,10 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <input class="hidden_tag m" type="hidden" name="msTag">
                                             <td colspan="3" class="selectTagArea">
                                             </td>
                                             <td class="find_tag">
+                                                <input class="hidden_tag m" type="hidden" name="msTag">
                                                 <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
                                             </td>
                                         </tr>
@@ -386,7 +389,7 @@
        	function submitSearch(){
        		$("#searchPlace").submit();
        	}
-       	
+
     </script>
 
     

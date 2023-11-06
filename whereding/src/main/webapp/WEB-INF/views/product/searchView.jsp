@@ -458,6 +458,10 @@
                     background-color: #cccccc4b;
                 }
 
+                .selectTagArea span{
+                    border: none !important;
+                }
+
             </style>
 
 </head>
@@ -466,7 +470,7 @@
     <jsp:include page="../common/header.jsp" />
 
     <!-- 목록시작 -->
-    <form action="search.mn" method="post" id="searchPlace">
+    <form action="intoService.mn" method="post" id="searchPlace">
 
         <table id="search_table">
             <thead>
@@ -545,10 +549,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <input class="hidden_tag w" type="hidden" name="wsTag">
-                                        <td colspan="3" class="selectTagArea">
+                                        <td colspan="3" class="selectTagArea" style="padding: 1% 2%;">
                                         </td>
                                         <td class="find_tag w">
+                                            <input class="hidden_tag w" type="hidden" name="wsTag">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
                                         </td>
                                     </tr>
@@ -586,16 +590,16 @@
                                         <td class="weekendYNArea" colspan="4">
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="ssWeek"><span style="vertical-align:8px; width: 120px; border: none; font-size: 17px; text-align: left">주말영업여부</span>
+                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="ssWeek" checked><span style="vertical-align:8px; width: 120px; border: none; font-size: 17px; text-align: left">주말영업여부</span>
                                                 </label>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <input class="hidden_tag s" type="hidden" name="ssTag">
-                                        <td colspan="3" class="selectTagArea">
+                                        <td colspan="3" class="selectTagArea" style="padding: 1% 2%;">
                                         </td>
-                                        <td class="find_tag">
+                                        <td class="find_tag s">
+                                            <input class="hidden_tag s" type="hidden" name="ssTag">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
                                         </td>
                                     </tr>
@@ -636,16 +640,16 @@
                                         <td class="weekendYNArea" colspan="4">
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="dsWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                    <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="dsWeek" checked><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                 </label>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <input class="hidden_tag d" type="hidden" name="dsTag">
-                                        <td colspan="3" class="selectTagArea">
+                                        <td colspan="3" class="selectTagArea" style="padding: 1% 2%;">
                                         </td>
-                                        <td class="find_tag">
+                                        <td class="find_tag d">
+                                            <input class="hidden_tag d" type="hidden" name="dsTag">
                                             <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
                                         </td>
                                     </tr>
@@ -686,16 +690,16 @@
                                             <td class="weekendYNArea" colspan="4">
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="msWeek"><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
+                                                        <input type="checkbox" class="form-check-input weekendYN" style="margin-right: 0px;" name="msWeek" checked><span style="vertical-align:10px; width: 120px; border: none; font-size: 17px;">주말영업여부</span>
                                                     </label>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <input class="hidden_tag m" type="hidden" name="msTag">
-                                            <td colspan="3" class="selectTagArea">
+                                            <td colspan="3" class="selectTagArea" style="padding: 1% 2%;">
                                             </td>
-                                            <td class="find_tag">
+                                            <td class="find_tag m">
+                                                <input class="hidden_tag m" type="hidden" name="msTag">
                                                 <button type="button" class="btn btn-outline-secondary float-right">태그찾기</button>
                                             </td>
                                         </tr>
@@ -762,23 +766,68 @@
         $(".select_area.d").val(parseAddress('${ sd.dsAddress }'.split(',')))
         $(".select_area.m").val(parseAddress('${ sm.msAddress }'.split(',')))
 
-        $("input[name=wsMinPrice]").val('${ sh.wsMinPrice }')
-        $("input[name=wsMaxPrice]").val('${ sh.wsMaxPrice }')
+        $("input[name=wsMinPrice]").val(Number('${ sh.wsMinPrice }'))
+        $("input[name=wsMaxPrice]").val(Number('${ sh.wsMaxPrice }'))
         
         $('#seat_avail').val('${ sh.wsSeat }').prop("selected",true)
-        $("input[name=EatMinPrice]").val('${ sh.eatMinPrice }')
-        $("input[name=EatMaxPrice]").val('${ sh.eatMaxPrice }')
+        $("input[name=EatMinPrice]").val(Number('${ sh.eatMinPrice }'))
+        $("input[name=EatMaxPrice]").val(Number('${ sh.eatMaxPrice }'))
         
-        $("input[name=ssMinPrice]").val('${ ss.MinPrice }')
-        $("input[name=ssMinPrice]").val('${ ss.MinPrice }')
+        $("input[name=ssMinPrice]").val(Number('${ ss.ssMinPrice }'))
+        $("input[name=ssMaxPrice]").val(Number('${ ss.ssMaxPrice }'))
+        
+        console.log('${ s.ssMinPrice }')
+        $("input[name=dsMinPrice]").val(Number('${ sd.dsMinPrice }'))
+        $("input[name=dsMaxPrice]").val(Number('${ sd.dsMaxPrice }'))
+        
+        $("input[name=msMinPrice]").val(Number('${ sm.msMinPrice }'))
+        $("input[name=msMaxPrice]").val(Number('${ sm.msMaxPrice }'))
+        
 
-        $("input[name=sdMinPrice]").val('${ sd.MinPrice }')
-        $("input[name=sdMinPrice]").val('${ sd.MinPrice }')
         
-        $("input[name=smMinPrice]").val('${ sm.MinPrice }')
-        $("input[name=smMinPrice]").val('${ sm.MinPrice }')
+        if("${ss.ssWeek}" !="on"){
+            $("input[name=ssWeek]").attr("checked",false)            
+        }
+        if("${ds.dsWeek}" !="on"){
+            $("input[name=dsWeek]").attr("checked",false)            
+        }
+        if("${ms.msWeek}" !="on"){
+            $("input[name=msWeek]").attr("checked",false)            
+        }
         
-        console.log('${ sh.wsSeat }')
+        let htagArr = ("${ sh.wsTag }").split(',')
+              
+        $(".hidden_tag.w").val("${ sh.wsTag }");
+        if(htagArr != ""){
+            for(let i in htagArr){
+                $(".find_tag.w").closest("tr").find(".selectTagArea").append("<span class='taglist'># " + htagArr[i] + "</span>")
+            }
+        }
+        let stagArr = ("${ ss.ssTag }").split(',')
+        console.log(stagArr)
+        $(".hidden_tag.s").val("${ ss.ssTag }");
+        if(htagArr != ""){
+
+        for(let i in stagArr){
+            $(".find_tag.s").closest("tr").find(".selectTagArea").append("<span class='taglist'># " + stagArr[i] + "</span>")
+        }}
+        let dtagArr = ("${ sd.dsTag }").split(',')
+        console.log(dtagArr)
+        $(".hidden_tag.d").val("${ sd.dsTag }");
+        if(htagArr != ""){
+
+        for(let i in dtagArr){
+            $(".find_tag.d").closest("tr").find(".selectTagArea").append("<span class='taglist'># " + dtagArr[i] + "</span>")
+        }}
+        let mtagArr = ("${ sm.msTag }").split(',')
+        console.log(mtagArr)
+        $(".hidden_tag.m").val("${ sm.msTag }");
+        if(htagArr != ""){
+
+        for(let i in mtagArr){
+            $(".find_tag.m").closest("tr").find(".selectTagArea").append("<span class='taglist'># " + mtagArr[i] + "</span>")
+        }}
+
        
         
 	})
@@ -923,6 +972,7 @@
     }
     </script>
     <script>
+
         $(document).on("click",".news-text-box",function(){
             
             console.log($(this).find(".cno").val())

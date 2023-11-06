@@ -40,9 +40,13 @@ public class MainController {
 		return new Gson().toJson(list);
 	};
 	
-	@RequestMapping(value="test1.mn", produces = "aplication/json; charset=utf-8")
-	public String test1(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm, HttpSession session) {
+	@RequestMapping(value="intoService.mn", produces = "aplication/json; charset=utf-8")
+	public String intoService(SearchHall sh, SearchStudio ss, SearchDress sd, SearchMakeup sm, HttpSession session) {
 		
+		System.out.println(sh);
+		System.out.println(ss);
+		System.out.println(sd);
+		System.out.println(sm);
 		session.setAttribute("sh", sh);
 		session.setAttribute("ss", ss);
 		session.setAttribute("sd", sd);
