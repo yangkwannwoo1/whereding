@@ -52,13 +52,13 @@ public interface MemberService {
 	int consultingReviewImg(ConsultingReviewImg rvi);
 	
 	// hall 상품 담아오는
-	Hall consultingHall(Consulting cs);
+	ArrayList<Hall> consultingHall(Consulting cs);
 	// Studio 상품 담아오는
-	Studio consultingStudio(Consulting cs);
+	ArrayList<Studio> consultingStudio(Consulting cs);
 	// Dress 상품 담아오는
-	Dress consultingDress(Consulting cs);
+	ArrayList<Dress> consultingDress(Consulting cs);
 	// Makeup 상품 담아오는
-	Makeup consultingMakeup(Consulting cs);
+	ArrayList<Makeup> consultingMakeup(Consulting cs);
 	
 	int ReviewCount(Member m);
 	
