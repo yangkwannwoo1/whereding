@@ -160,6 +160,15 @@
                     $(" form .cart__list").html("");
     				let value = "";
     				
+    				if(list == ""){
+    					value= `<tbody class="cart__list__tbody">
+    							<tr class="cart__list__detail">
+    							<td colspan="5">
+    							<h3 style="margin:20px">
+                        			장바구니가 비어있습니다.
+    							</h3>
+                        		</td></tr>`
+    				}
     				
                     for(let i in list){
                         value += `<tbody class="cart__list__tbody">`+

@@ -192,6 +192,14 @@
                     transform: translate(-50%, -50%);
 
                 }
+                
+                .cart__info *{
+                	font-size: 10px;
+                }
+                .address_area *{
+                	font-size: large;
+                	font-weight: 600;
+                }
             </style>
         </head>
 
@@ -346,6 +354,7 @@
                         let studio = "";
                         let dress = "";
                         let makeup = "";
+                        let null_rs= "";
                         for (let i in list) {
                             let value = "";
                             value += `<table class="cart__list">
@@ -357,7 +366,7 @@
                                                         </colgroup>
                                                         <tbody class="cart__list__tbody">
                                                             <tr class="cart__list__detail">
-                                                                <td rowspan="3" class="cart_detail_img">
+                                                                <td rowspan="4" class="cart_detail_img">
                                                                     <div id="demo" class="carousel slide" data-ride="carousel">
                                                                         
                                                                         <ul class="carousel-indicators">
@@ -387,17 +396,21 @@
                                                                     </div>
                                                                 </td> 
                                                                 <td style="padding: 15px 2%;" colspan="2">
-                                                                    <h2>` + list[i].enterprise + `</h2>
+                                                                    <h3>` + list[i].enterprise + `</h3>
                                                                 </td>
-                                                                <td rowspan="2" style="border-left: 1px solid lightgrey; padding: 15px;">
+                                                                <td rowspan="3" style="border-left: 1px solid lightgrey; padding: 15px;">
                                                                     <input type="hidden" class="hiddenAddress" value="` + list[i].address + `">
                                                                     <div id="map` + i + `" style="width:260px;height:230px; margin-top: 20px; border: 2px solid; display: none;"></div>
 
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="cart__info" style="padding: 15px 2%;">
+                                                            	<td colspan="2" style="padding: 15px 2%;" class="address_area">
                                                                     <p><i class="fas fa-map-marker-alt"></i> ` + list[i].address + `</p>
+                                                            	</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="cart__info" style="padding: 15px 2%;">
                                                                     <p style="text-align: left;"><i class="fas fa-phone fa-flip-horizontal"></i> ` + list[i].phone + `</p>
                                                                     <p style="text-align: left;"><i class="fas fa-calendar-alt"></i> open ` + list[i].startTime + `:00 / ` + list[i].endTime + `:00</p>
                                                                 </td>
@@ -467,6 +480,9 @@
                         $(".cart").html(html);
                     } else {
                         console.log("장바구니가 비어있습니다.")
+                        null_rs = "<div><br><br><br><h3 style='text-align:center'>장바구니가 비어있습니다.</h3></div>"
+                        	let tmp = $(".cart").html()
+                    		$(".cart").html(tmp + null_rs);
                     }
                     
                     for(let i in list){
