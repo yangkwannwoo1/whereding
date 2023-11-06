@@ -518,6 +518,8 @@ a.boxed-btn, a.bordered-btn, a.cart-btn {
   background-color: #07212e;
   z-index: -1;
   opacity: 0.8;
+  background-image: url('../img/giftBanner.png');
+  background-repeat: no-repeat;
 }
 
 /* -----------------------------------------------------------------------------

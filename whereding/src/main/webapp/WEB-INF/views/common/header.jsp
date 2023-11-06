@@ -184,11 +184,11 @@ font-family: 'Open Sans Condensed', sans-serif;
 #naverLogin{
 	margin-right:30px;
 	margin-top:3px;
-	background:#ffffff;
+	background:#03c75a;
 	border:none;
 }
 #naverLogin>img{
-	background:white;
+	background:#03c75a;
 	box-sizing:border-box;
 }
 #idFind{
@@ -249,7 +249,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 					
 						<!--  카카오 로그인 버튼 -->
 						<button id = "kakaoLogin" onclick="kakaoLogin();">
-							<img src="resources/css/assets/img/kakaologin.png" width="100px"; height="50px";>
+							<img src="resources/css/assets/img/kakaoLogin.png" width="100px"; height="50px";>
 						</button>
 						<form action="kakaoLogin.me" method="post" id="kakaoCheck">
 							<input type="hidden" id="kakaoInput" name="kakaoInput"/>
@@ -257,7 +257,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 						
 						<!--  네이버 로그인 버튼 -->
 						<button id = "naverLogin" onclick="naverLogin();">
-							<img id="naverImg" src="resources/css/assets/img/naverlogin.png" width="100px;" height="50px;">
+							<img id="naverImg" src="resources/css/assets/img/naverLogin.png" width="100px;" height="50px;">
 						</button>
 						
 						<script>
