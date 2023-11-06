@@ -739,8 +739,47 @@
 
     
     <script>
+        /* "서울 노원구, 서울 강서구" 를 노원구, 강서구로 변환하는 함수 */
+        function parseAddress(arr){
+            let tmpArr = [];
+            let tmpArr2 = [];
+            let tmpStr = "";
+            for(let i in arr){
+                tmpArr.push(arr[i].split(' '))
+                /*
+                    0 : (2) ['서울', '노원구']
+                    1 : (2) ['서울', '강서구']
+                */
+                tmpArr2.push(tmpArr[i][1])
+            }
+            return tmpArr2.join(', ');
+        }
 	$(function(){
         $("#nav-wedding-tab").click();
+        //페이지 로딩시 검색조건 띄워줌
+        $(".select_area.w").val(parseAddress('${ sh.wsAddress }'.split(',')))
+        $(".select_area.s").val(parseAddress('${ ss.ssAddress }'.split(',')))
+        $(".select_area.d").val(parseAddress('${ sd.dsAddress }'.split(',')))
+        $(".select_area.m").val(parseAddress('${ sm.msAddress }'.split(',')))
+
+        $("input[name=wsMinPrice]").val('${ sh.wsMinPrice }')
+        $("input[name=wsMaxPrice]").val('${ sh.wsMaxPrice }')
+        
+        $('#seat_avail').val('${ sh.wsSeat }').prop("selected",true)
+        $("input[name=EatMinPrice]").val('${ sh.eatMinPrice }')
+        $("input[name=EatMaxPrice]").val('${ sh.eatMaxPrice }')
+        
+        $("input[name=ssMinPrice]").val('${ ss.MinPrice }')
+        $("input[name=ssMinPrice]").val('${ ss.MinPrice }')
+
+        $("input[name=sdMinPrice]").val('${ sd.MinPrice }')
+        $("input[name=sdMinPrice]").val('${ sd.MinPrice }')
+        
+        $("input[name=smMinPrice]").val('${ sm.MinPrice }')
+        $("input[name=smMinPrice]").val('${ sm.MinPrice }')
+        
+        console.log('${ sh.wsSeat }')
+       
         
 	})
     $(".nav-tabs .nav-link").click(function(){
@@ -805,7 +844,7 @@
                                     <p><i class="fas fa-map-marker-alt"> ` + list[i].address + `</i></p>
 
                                     <p><i class="fas fa-phone fa-flip-horizontal"></i> ` + list[i].phone + `</p>
-                                    <p class="price_won"> <i class="fas fa-won"></i>` + (list[i].rental).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</p>
+                                    <p class="price_won"> <i class="fas fa-won"></i> ` + (list[i].rental).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</p>
                                     <p class="seat_avail"> <i class="fas fa-chair"></i> ` + list[i].seat + `석</p>
                                     <p class="price_won"> <i class="fas fa-utensils"></i> ` + (list[i].meal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `원</p>
                                     

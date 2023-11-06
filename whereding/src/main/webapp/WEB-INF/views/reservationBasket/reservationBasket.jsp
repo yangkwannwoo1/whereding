@@ -217,9 +217,14 @@
                 <!-- 여기에 ajax로 데이터 뿌려준다 -->
             </section>
             <div class="cart__mainbtns">
-                <button class="cart__bigorderbtn left">이전으로 가기</button>
-                <button class="cart__bigorderbtn right">홈으로 가기</button>
+                <button class="cart__bigorderbtn left" onclick="history_back()">이전으로 가기</button>
+                <button class="cart__bigorderbtn right" onclick="location.href='index.jsp'">홈으로 가기</button>
             </div>
+            <script>
+				function history_back(){
+					history.back()
+				}
+            </script>
             <!-- The Modal -->
 
             <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
