@@ -180,8 +180,8 @@
                     position: absolute;
                     width: 770px;
                     height: 430px;
-                    left: 30px;
-                    top: 160px;
+                    left: 570px;
+                    top: 300px;
                     background: lightgray;
                     color: white;
                     border-radius: 5px;
@@ -224,8 +224,8 @@
                     position: absolute;
                     width: 770px;
                     height: 430px;
-                    left: 30px;
-                    top: 160px;
+                    left: 570px;
+                    top: 300px;
                     background: lightgray;
                     color: white;
                     border-radius: 5px;
