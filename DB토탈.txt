@@ -1,0 +1,935 @@
+    BEGIN
+        FOR C IN (SELECT TABLE_NAME FROM USER_TABLES) LOOP
+        EXECUTE IMMEDIATE ('DROP TABLE '||C.TABLE_NAME||' CASCADE CONSTRAINTS');
+        END LOOP;
+    END;
+    /
+    --접속유저의 모든 시퀀스 삭제
+    BEGIN
+    FOR C IN (SELECT * FROM USER_SEQUENCES) LOOP
+      EXECUTE IMMEDIATE 'DROP SEQUENCE '||C.SEQUENCE_NAME;
+    END LOOP;
+    END;
+    /
+    --접속유저의 모든 뷰 삭제
+    BEGIN
+    FOR C IN (SELECT * FROM USER_VIEWS) LOOP
+      EXECUTE IMMEDIATE 'DROP VIEW '||C.VIEW_NAME;
+    END LOOP;
+    END;
+    /
+    --접속유저의 모든 트리거 삭제
+    BEGIN
+    FOR C IN (SELECT * FROM USER_TRIGGERS) LOOP
+      EXECUTE IMMEDIATE 'DROP TRIGGER '||C.TRIGGER_NAME;
+    END LOOP;
+    END;
+    /
+    
+    --시퀀스 추가
+    CREATE SEQUENCE SEQ_RVNO NOCACHE;   -- REVIEW 테이블 시퀀스
+    CREATE SEQUENCE SEQ_CSNO NOCACHE;    -- CONSULTING 테이블 시퀀스
+    CREATE SEQUENCE SEQ_CPNO NOCACHE;    -- COLLABORATION_CP 테이블 시퀀스
+    --CREATE SEQUENCE SEQ_MGNO NOCACHE;  -- MEMBER_GRADE 테이블 시퀀스
+    CREATE SEQUENCE SEQ_NBO NOCACHE;   -- NOTICE 테이블 시퀀스
+    
+    CREATE SEQUENCE SEQ_QBO NOCACHE;  -- QNA 테이블 시퀀스 (확실하지 않음)
+    CREATE SEQUENCE SEQ_ENO NOCACHE; -- EVENT_BOARD 테이블 시퀀스 (확실하지않음)
+    
+    CREATE SEQUENCE SEQ_DNO NOCACHE; -- DRESS 테이블 시퀀스
+    CREATE SEQUENCE SEQ_SNO NOCACHE; -- STUDIO 테이블 시퀀스
+    CREATE SEQUENCE SEQ_MKNO NOCACHE; -- MAKEUP 테이블 시퀀스
+    
+    CREATE SEQUENCE SEQ_MNO NOCACHE; -- member 테이블 시퀀스
+    
+    CREATE SEQUENCE SEQ_HNO NOCACHE; -- HALL 테이블 시퀀스
+    CREATE SEQUENCE SEQ_IMG NOCACHE; -- PRODUCT_IMG 테이블 시퀀스
+    CREATE SEQUENCE SEQ_GRIV NOCACHE;   -- GIFT REVIEW 테이블 시퀀스
+    CREATE SEQUENCE SEQ_GBO NOCACHE;   -- GIFT 테이블 시퀀스
+    CREATE SEQUENCE SEQ_GHIS NOCACHE;   -- GIFT HISTORY 테이블 시퀀스
+    CREATE SEQUENCE SEQ_CNO NOCACHE;  -- COUPON 테이블 시퀀스
+    
+    --관우 테이블 추가
+    CREATE TABLE VISIT (REG_DATE DATE, VISIT_COUNT NUMBER);
+    INSERT INTO VISIT VALUES(SYSDATE , 30);
+
+
+    CREATE TABLE PRODUCT_IMG(
+        IMG_NO NUMBER PRIMARY KEY,
+        PRODUCT_NO VARCHAR2(20),
+        IMG_1 VARCHAR2(100),
+        IMG_2 VARCHAR2(100),
+        IMG_3 VARCHAR2(100),
+        IMG_PATH VARCHAR2(100)
+    );
+    
+    CREATE TABLE DRESS(
+        D_CODE VARCHAR2(20) PRIMARY KEY,
+    D_ENTERPRISE VARCHAR2(100) NOT NULL,
+    D_DETAIL VARCHAR2(2000),
+    D_PRICE NUMBER,
+    D_START_DATE VARCHAR2(100),
+    D_END_DATE VARCHAR2(100),
+    D_PHONE VARCHAR2(13),
+    D_ADDRESS VARCHAR2(100),
+    D_UNIT_TIME NUMBER,
+    D_WEEK_OPEN VARCHAR2(1) CHECK (D_WEEK_OPEN IN ('Y', 'N')),
+    D_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK(D_STATUS IN('Y'))
+    );
+    
+    CREATE TABLE HALL(
+        H_CODE VARCHAR2(20) PRIMARY KEY,
+        H_ENTERPRISE VARCHAR2(100) NOT NULL,
+        H_NAME VARCHAR2(100) NOT NULL,
+        H_DETAIL VARCHAR2(2000),
+        H_SEAT NUMBER,
+        H_RENTAL NUMBER,
+        H_RESTAURANT_SEAT NUMBER,
+        H_MEAL NUMBER,
+        H_START_TIME VARCHAR2(100),
+        H_END_TIME VARCHAR2(100),
+        H_PHONE VARCHAR2(30),
+        H_ADDRESS VARCHAR2(100),
+        H_UNIT_TIME NUMBER,
+        H_WEEK_OPEN VARCHAR2(1) CHECK(H_WEEK_OPEN IN('Y','N')),
+        H_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK(H_STATUS IN('Y'))
+    );
+    
+    CREATE TABLE MAKEUP(
+        M_CODE VARCHAR2(20) PRIMARY KEY,
+        M_ENTERPRISE VARCHAR2(100) NOT NULL,
+        M_DETAIL VARCHAR2(2000),
+        M_PRICE NUMBER,
+        M_START_DATE VARCHAR2(100),
+        M_END_DATE VARCHAR2(100),
+        M_PHONE VARCHAR2(30),
+        M_ADDRESS VARCHAR2(100),
+        M_UNIT_TIME NUMBER,
+        M_WEEK_OPEN VARCHAR2(1) CHECK(M_WEEK_OPEN IN('Y','N')),
+        M_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK(M_STATUS IN('Y'))
+    );
+    
+    CREATE TABLE STUDIO(
+        S_CODE VARCHAR2(20) PRIMARY KEY,
+        S_ENTERPRISE VARCHAR2(100) NOT NULL,
+        S_DETAIL VARCHAR2(2000),
+        S_PRICE NUMBER,
+        S_START_DATE VARCHAR2(100),
+        S_END_DATE VARCHAR2(100),
+        S_PHONE VARCHAR2(30),
+        S_ADDRESS VARCHAR2(100),
+        S_UNIT_TIME NUMBER,
+        S_WEEK_OPEN VARCHAR2(1) CHECK(S_WEEK_OPEN IN('Y','N')),
+        S_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK(S_STATUS IN('Y'))
+    );
+    
+    CREATE TABLE RSV_BASKET(
+        COMPANY_NO VARCHAR2(20),
+        USER_NO NUMBER
+    );
+    
+    --재성 테이블-----------------------------------------------------------
+    ---------------- 테이블 생성 ---------------------
+    -- 공지사항 테이블
+    CREATE TABLE NOTICE
+          (
+            NOTICE_NO NUMBER PRIMARY KEY
+          , USER_NO NUMBER
+          , NOTICE_TITLE VARCHAR2(300) NOT NULL
+          , NOTICE_CONTENT VARCHAR2(2000) NOT NULL
+          , COUNT NUMBER DEFAULT '0'
+          , NOTICE_DATE DATE DEFAULT SYSDATE
+          , STATUS VARCHAR2(1) DEFAULT 'Y'        
+          );
+          
+    
+    -- QNA 테이블
+    CREATE TABLE QNA
+         (
+           QNA_NO NUMBER PRIMARY KEY
+         , USER_NO NUMBER
+         , QNA_TITLE VARCHAR2(300) NOT NULL
+         , QNA_CONTENT VARCHAR2(2000) NOT NULL
+         , QNA_ANSWER VARCHAR2(2000)
+         , QNA_DATE DATE DEFAULT SYSDATE
+         , STATUS VARCHAR2(1) DEFAULT 'Y'
+         );
+         
+    --  유저쿠폰 테이블
+    CREATE TABLE USER_COUPON
+         (
+           COUPON_NO NUMBER
+         , USER_NO NUMBER
+         , STATUS VARCHAR2(1) DEFAULT 'Y'
+         );
+         
+    -- 쿠폰
+    CREATE TABLE COUPON
+          (
+            COUPON_NO NUMBER PRIMARY KEY
+          , COUPON_CONTENT VARCHAR2(2000) NOT NULL
+          , COUPON_VALUE NUMBER NOT NULL
+          , START_COUPON DATE DEFAULT SYSDATE
+          , END_COUPON DATE
+          );
+          
+    -- 이벤트 게시판
+    CREATE TABLE EVENT_BOARD
+         (
+           EVENT_NO NUMBER PRIMARY KEY
+         , COUPON_NO NUMBER
+         , EVENT_TITLE VARCHAR2(300) NOT NULL
+         , EVENT_CONTENT VARCHAR2(2000) NOT NULL
+         , CREATE_DATE DATE DEFAULT SYSDATE
+         , START_EVENT DATE DEFAULT SYSDATE
+         , END_EVENT DATE
+         , STATUS VARCHAR2(1) DEFAULT 'Y'
+         );
+    
+    --현우테이블--------------------------
+    -- 좋아요
+    CREATE TABLE GREAT
+        (
+          GREAT_NO varchar2(100) NOT NULL
+        , USER_NO NUMBER
+        );    
+    -- 장바구니
+    CREATE TABLE BASKET
+        (
+          REF_NO VARCHAR2(100) NOT NULL
+        , USER_NO NUMBER
+        , COUNT NUMBER DEFAULT 0
+        );
+    -- 답례품 리뷰
+    CREATE TABLE GIFT_REVIEW
+        (
+          GRIV_NO NUMBER PRIMARY KEY
+        , GHIS_NO NUMBER -- 
+        , GRIV_CONTENT VARCHAR2(2000) NOT NULL
+        , GRIV_GRADE NUMBER DEFAULT 1
+        , CREATE_DATE DATE DEFAULT SYSDATE
+        );
+    -----------------------
+    -- 답례품
+    CREATE TABLE GIFT
+        (
+          GIFT_NO VARCHAR2(100) PRIMARY KEY
+        , CATEGORY_NO NUMBER --
+        , GIFT_NAME VARCHAR2(100) NOT NULL
+        , GIFT_CONTENT VARCHAR2(2000) NOT NULL
+        , GIFT_PRICE VARCHAR2(100) NOT NULL
+        , COUNT NUMBER DEFAULT 0
+        , STATUS VARCHAR2(1) CHECK(STATUS IN('Y', 'N'))
+        );
+    
+    -- 답례품 카테고리
+    CREATE TABLE GIFT_CATEGORY
+        (
+          CATEGORY_NO NUMBER PRIMARY KEY
+        , CATEGORY_ITEM VARCHAR2(100) NOT NULL
+        );
+        
+    -----------------------  
+    
+    -- 답례품 리뷰 사진
+    CREATE TABLE GIFT_IMG
+        (
+          REVIEW_NO NUMBER --
+        , G_ORIGIN_NAME VARCHAR2(500) NOT NULL 
+        , G_CHANGE_NAME VARCHAR2(500) NOT NULL
+        , G_FILE_PATH VARCHAR2(2000)
+        );
+    
+    CREATE TABLE consulting_img 
+        (
+          REVIEW_NO NUMBER --
+        , cs_ORIGIN_NAME VARCHAR2(500) NOT NULL 
+        , cs_CHANGE_NAME VARCHAR2(500) NOT NULL
+        , cs_FILE_PATH VARCHAR2(2000)
+        );
+    -----------------------     
+    -- 답례품 결재내역
+    CREATE TABLE GIFT_HISTORY
+        (
+          GHIS_NO NUMBER PRIMARY KEY
+        , GIFT_NO VARCHAR2(100) --
+        , USER_NO NUMBER
+        , BUYMETHOD_NO NUMBER --
+        , CREATE_DATE DATE DEFAULT SYSDATE
+        , piece number default 1
+        , imp_uid varchar2(100) default null
+        );
+    -- 결재금액
+    CREATE TABLE PAYMENT
+        (
+          GHIS_NO NUMBER PRIMARY KEY
+        , TOTAL_PAY NUMBER NOT NULL
+        , DISCOUNT NUMBER
+        );
+    -- 구매방식
+    CREATE TABLE BUY_METHOD
+        (
+          BUYMETHOD_NO NUMBER DEFAULT 1 PRIMARY KEY 
+        , BUY_METHOD varchar2(50)
+        );
+    ---------------------------------------
+    --원종테이블---------------------------
+    
+    -- 사용자 테이블 생성
+    CREATE TABLE MEMBER(
+        USER_NO NUMBER PRIMARY KEY,
+        USER_ID VARCHAR2(300) NOT NULL UNIQUE,
+        USER_PWD VARCHAR2(200) NOT NULL,
+        USER_NAME VARCHAR2(30) NOT NULL,
+        BIRTHDAY DATE,
+        GENDER VARCHAR2(1) CHECK(GENDER IN('M','F')),
+        PHONE VARCHAR2(13),
+        EMAIL VARCHAR2(30),
+        STATUS VARCHAR2(1) DEFAULT 'Y' CHECK(STATUS IN('Y','N')),
+        GRADE_NO NUMBER
+    );
+    
+    -- 예약리뷰 테이블 생성
+    CREATE TABLE REVIEW(
+        REVIEW_NO NUMBER PRIMARY KEY,
+        CS_NO NUMBER NOT NULL,
+        RV_CONTENT VARCHAR2(200) NOT NULL,
+        RV_SCORE NUMBER NOT NULL,
+        CREATE_DATE DATE DEFAULT SYSDATE
+    );
+    
+    -- 상담예약 테이블 생성
+    CREATE TABLE CONSULTING(
+        CS_NO NUMBER PRIMARY KEY,
+        PRODUCT_NO VARCHAR2(20) NOT NULL,
+        USER_NO NUMBER NOT NULL,
+        CS_CONTENT VARCHAR2(2000) NOT NULL,
+        CS_DATE DATE NOT NULL,
+        START_TIME VARCHAR2(10) NOT NULL,
+        END_TIME VARCHAR2(10) NOT NULL,
+        STATUS VARCHAR2(1) DEFAULT 'Y' CHECK(STATUS IN('Y', 'N'))
+    );
+    
+    -- 협력업체 신청 테이블
+    CREATE TABLE COLLABORATION_CP(
+        CP_NO NUMBER PRIMARY KEY,
+        USER_NO NUMBER NOT NULL,
+        CP_TITLE VARCHAR2(100) NOT NULL,
+        CP_CONTENT VARCHAR2(4000) NOT NULL,
+        CP_DATE DATE NOT NULL,
+        STATUS VARCHAR2(1) DEFAULT 'Y' CHECK(STATUS IN('Y','N'))
+    );
+    
+    -- 회원등급 테이블
+    CREATE TABLE MEMBER_GRADE(
+        GRADE_NO NUMBER PRIMARY KEY,
+        GRADE_NAME VARCHAR2(50) NOT NULL
+    );
+    
+    CREATE TABLE TAG(
+       PRODUCT_NO VARCHAR2(20),
+       TAG_CONTENT VARCHAR2(100) NOT NULL
+    );
+    
+    --코멘트 추가
+    COMMENT ON COLUMN TAG.PRODUCT_NO IS '제품번호';
+    COMMENT ON COLUMN TAG.TAG_CONTENT IS '태그내용';
+    COMMENT ON COLUMN REVIEW.REVIEW_NO IS '리뷰번호';
+    COMMENT ON COLUMN REVIEW.CS_NO IS '상담예약번호';
+    COMMENT ON COLUMN REVIEW.RV_CONTENT IS '내용';
+    COMMENT ON COLUMN REVIEW.RV_SCORE IS '평점';
+    COMMENT ON COLUMN REVIEW.CREATE_DATE IS '작성일';
+    COMMENT ON COLUMN CONSULTING.CS_NO IS '상담예약번호';
+    COMMENT ON COLUMN CONSULTING.PRODUCT_NO IS '제품번호';
+    COMMENT ON COLUMN CONSULTING.USER_NO IS '회원번호';
+    COMMENT ON COLUMN CONSULTING.CS_CONTENT IS '상담내용';
+    COMMENT ON COLUMN CONSULTING.CS_DATE IS '상담일';
+    COMMENT ON COLUMN CONSULTING.START_TIME IS '상담시작시간';
+    COMMENT ON COLUMN CONSULTING.END_TIME IS '상담종료시간';
+    COMMENT ON COLUMN CONSULTING.STATUS IS '상태';
+    COMMENT ON COLUMN COLLABORATION_CP.CP_NO IS '신청글번호';
+    COMMENT ON COLUMN COLLABORATION_CP.USER_NO IS '회원번호';
+    COMMENT ON COLUMN COLLABORATION_CP.CP_TITLE IS '제목';
+    COMMENT ON COLUMN COLLABORATION_CP.CP_CONTENT IS '내용';
+    COMMENT ON COLUMN COLLABORATION_CP.CP_DATE IS '작성일';
+    COMMENT ON COLUMN COLLABORATION_CP.STATUS IS '상태';
+    COMMENT ON COLUMN MEMBER_GRADE.GRADE_NO IS '회원등급';
+    COMMENT ON COLUMN MEMBER_GRADE.GRADE_NAME IS '회원등급명';
+    COMMENT ON COLUMN MEMBER.USER_NO IS '회원번호';
+    COMMENT ON COLUMN MEMBER.USER_ID IS '아이디';
+    COMMENT ON COLUMN MEMBER.USER_PWD IS '비밀번호';
+    COMMENT ON COLUMN MEMBER.USER_NAME IS '이름';
+    COMMENT ON COLUMN MEMBER.BIRTHDAY IS '생년월일';
+    COMMENT ON COLUMN MEMBER.GENDER IS '신랑신부';
+    COMMENT ON COLUMN MEMBER.PHONE IS '전화번호';
+    COMMENT ON COLUMN MEMBER.EMAIL IS '이메일';
+    COMMENT ON COLUMN MEMBER.STATUS IS '삭제여부';
+    COMMENT ON COLUMN MEMBER.GRADE_NO IS '회원등급';
+    COMMENT ON COLUMN EVENT_BOARD.EVENT_NO IS  '이벤트게시판 번호';
+    COMMENT ON COLUMN EVENT_BOARD.COUPON_NO IS  '쿠폰 번호';
+    COMMENT ON COLUMN EVENT_BOARD.EVENT_TITLE IS  '이벤트게시판 제목';
+    COMMENT ON COLUMN EVENT_BOARD.EVENT_CONTENT IS  '이벤트게시판 내용';
+    COMMENT ON COLUMN EVENT_BOARD.CREATE_DATE IS  '작성일';
+    COMMENT ON COLUMN EVENT_BOARD.START_EVENT IS  '시작일';
+    COMMENT ON COLUMN EVENT_BOARD.END_EVENT IS  '종료일';
+    COMMENT ON COLUMN EVENT_BOARD.STATUS IS  '삭제여부';
+    
+    COMMENT ON COLUMN COUPON.COUPON_NO IS  '쿠폰 번호';
+    COMMENT ON COLUMN COUPON.COUPON_CONTENT IS  '쿠폰 설명';
+    COMMENT ON COLUMN COUPON.COUPON_VALUE IS  '할인 금액';
+    COMMENT ON COLUMN COUPON.START_COUPON IS  '쿠폰 시작일';
+    COMMENT ON COLUMN COUPON.END_COUPON IS  '쿠폰 종료일';
+    
+    COMMENT ON COLUMN USER_COUPON.COUPON_NO IS  '쿠폰 번호';
+    COMMENT ON COLUMN USER_COUPON.USER_NO IS  '회원 번호';
+    COMMENT ON COLUMN USER_COUPON.STATUS IS  '삭제여부';
+         
+    COMMENT ON COLUMN QNA.QNA_NO IS  'QNA 번호';    
+    COMMENT ON COLUMN QNA.USER_NO IS  '회원 번호';    
+    COMMENT ON COLUMN QNA.QNA_TITLE IS  'QNA 제목';    
+    COMMENT ON COLUMN QNA.QNA_CONTENT IS  'QNA 내용';    
+    COMMENT ON COLUMN QNA.QNA_ANSWER IS  'QNA 답변';    
+    COMMENT ON COLUMN QNA.QNA_DATE IS  '작성일';    
+    COMMENT ON COLUMN QNA.STATUS IS  '삭제여부';
+    
+    COMMENT ON COLUMN NOTICE.NOTICE_NO IS  '공지사항 번호';
+    COMMENT ON COLUMN NOTICE.USER_NO IS  '회원 번호';
+    COMMENT ON COLUMN NOTICE.NOTICE_TITLE IS  '공지사항 제목';
+    COMMENT ON COLUMN NOTICE.NOTICE_CONTENT IS  '공지사항 내용';
+    COMMENT ON COLUMN NOTICE.COUNT IS  '조회수';
+    COMMENT ON COLUMN NOTICE.NOTICE_DATE IS  '작성일';
+    COMMENT ON COLUMN NOTICE.STATUS IS  '삭제여부';
+    COMMENT ON COLUMN STUDIO.S_CODE IS '스튜디오제품번호';
+    COMMENT ON COLUMN STUDIO.S_ENTERPRISE IS '스튜디오업체이름';
+    COMMENT ON COLUMN STUDIO.S_DETAIL IS '스튜디오상세내용';
+    COMMENT ON COLUMN STUDIO.S_PRICE IS '스튜디오가격';
+    COMMENT ON COLUMN STUDIO.S_START_DATE IS '업체시작시간';
+    COMMENT ON COLUMN STUDIO.S_END_DATE IS '업체종료시간';
+    COMMENT ON COLUMN STUDIO.S_PHONE IS '업체전화번호';
+    COMMENT ON COLUMN STUDIO.S_ADDRESS IS '업체주소';
+    COMMENT ON COLUMN STUDIO.S_UNIT_TIME IS '예약시간구분';
+    COMMENT ON COLUMN STUDIO.S_WEEK_OPEN IS '주말영업여부';
+    COMMENT ON COLUMN MAKEUP.M_CODE IS '메이크업제품번호';
+    COMMENT ON COLUMN MAKEUP.M_ENTERPRISE IS '메이크업업체이름';
+    COMMENT ON COLUMN MAKEUP.M_DETAIL IS '메이크업상세내용';
+    COMMENT ON COLUMN MAKEUP.M_PRICE IS '메이크업가격';
+    COMMENT ON COLUMN MAKEUP.M_START_DATE IS '업체시작시간';
+    COMMENT ON COLUMN MAKEUP.M_END_DATE IS '업체종료시간';
+    COMMENT ON COLUMN MAKEUP.M_PHONE IS '업체전화번호';
+    COMMENT ON COLUMN MAKEUP.M_ADDRESS IS '업체주소';
+    COMMENT ON COLUMN MAKEUP.M_UNIT_TIME IS '예약시간구분';
+    COMMENT ON COLUMN MAKEUP.M_WEEK_OPEN IS '주말영업여부';
+    COMMENT ON COLUMN HALL.H_CODE IS '웨딩홀제품번호';
+    COMMENT ON COLUMN HALL.H_ENTERPRISE IS '웨딩홀업체이름';
+    COMMENT ON COLUMN HALL.H_DETAIL IS '웨딩홀상세내용';
+    COMMENT ON COLUMN HALL.H_SEAT IS '웨딩홀좌석수';
+    COMMENT ON COLUMN HALL.H_RENTAL IS '웨딩홀대관비';
+    COMMENT ON COLUMN HALL.H_RESTAURANT_SEAT IS '식당좌석수';
+    COMMENT ON COLUMN HALL.H_MEAL IS '식대';
+    COMMENT ON COLUMN HALL.H_START_TIME IS '업체시작시간';
+    COMMENT ON COLUMN HALL.H_END_TIME IS '업체종료시간';
+    COMMENT ON COLUMN HALL.H_PHONE IS '업체전화번호';
+    COMMENT ON COLUMN HALL.H_ADDRESS IS '업체주소';
+    COMMENT ON COLUMN HALL.H_UNIT_TIME IS '예약시간구분';
+    COMMENT ON COLUMN HALL.H_WEEK_OPEN IS '주말영업여부';
+    COMMENT ON COLUMN DRESS.D_CODE IS '드레스제품번호';
+    COMMENT ON COLUMN DRESS.D_ENTERPRISE IS '드레스업체이름';
+    COMMENT ON COLUMN DRESS.D_DETAIL IS '드레스상세내용';
+    COMMENT ON COLUMN DRESS.D_PRICE IS '드레스가격';
+    COMMENT ON COLUMN DRESS.D_START_DATE IS '업체시작시간';
+    COMMENT ON COLUMN DRESS.D_END_DATE IS '업체종료시간';
+    COMMENT ON COLUMN DRESS.D_PHONE IS '업체전화번호';
+    COMMENT ON COLUMN DRESS.D_ADDRESS IS '업체주소';
+    COMMENT ON COLUMN DRESS.D_UNIT_TIME IS '예약시간구분';
+    COMMENT ON COLUMN DRESS.D_WEEK_OPEN IS '주말영업여부';
+    COMMENT ON COLUMN RSV_BASKET.COMPANY_NO IS '업체번호';
+    COMMENT ON COLUMN RSV_BASKET.USER_NO IS '회원번호';
+    
+    COMMENT ON COLUMN PRODUCT_IMG.IMG_NO IS '사진번호';
+    COMMENT ON COLUMN PRODUCT_IMG.PRODUCT_NO IS '제품번호';
+    COMMENT ON COLUMN PRODUCT_IMG.IMG_1 IS '3번사진';
+    COMMENT ON COLUMN PRODUCT_IMG.IMG_2 IS '2번사진';
+    COMMENT ON COLUMN PRODUCT_IMG.IMG_3 IS '1번사진';
+    COMMENT ON COLUMN PRODUCT_IMG.IMG_PATH IS '저장경로';
+    COMMENT ON COLUMN BASKET.REF_NO IS '제품번호';
+    COMMENT ON COLUMN BASKET.USER_NO IS '회원번호';
+    COMMENT ON COLUMN BASKET.COUNT IS '수량';
+    COMMENT ON COLUMN BUY_METHOD.BUYMETHOD_NO IS '구매방식번호';
+    COMMENT ON COLUMN BUY_METHOD.BUY_METHOD IS '구매방식';
+    COMMENT ON COLUMN BUY_METHOD.BUY_METHOD IS '구매방식';
+    COMMENT ON COLUMN GIFT.GIFT_NO IS '답례품번호';
+    COMMENT ON COLUMN GIFT.CATEGORY_NO IS '카테고리번호';
+    COMMENT ON COLUMN GIFT.GIFT_NAME IS '제품명';
+    COMMENT ON COLUMN GIFT.GIFT_CONTENT IS '제품설명';
+    COMMENT ON COLUMN GIFT.GIFT_PRICE IS '제품가격';
+    COMMENT ON COLUMN GIFT.COUNT IS '수량';
+    COMMENT ON COLUMN GIFT.STATUS IS '등록상태';
+    COMMENT ON COLUMN GIFT_CATEGORY.CATEGORY_NO IS '답례품카테고리번호';
+    COMMENT ON COLUMN GIFT_CATEGORY.CATEGORY_ITEM IS '카테고리품목';
+    COMMENT ON COLUMN GIFT_HISTORY.GHIS_NO IS '결제내역번호';
+    COMMENT ON COLUMN GIFT_HISTORY.GIFT_NO IS '답례품번호';
+    COMMENT ON COLUMN GIFT_HISTORY.USER_NO IS '회원번호';
+    COMMENT ON COLUMN GIFT_HISTORY.BUYMETHOD_NO IS '구매방식번호';
+    COMMENT ON COLUMN GIFT_HISTORY.CREATE_DATE IS '결제일자';
+    COMMENT ON COLUMN GIFT_HISTORY.piece IS '갯수';
+    COMMENT ON COLUMN GIFT_HISTORY.imp_uid IS '카드승인번호';
+    COMMENT ON COLUMN GIFT_IMG.REVIEW_NO IS '리뷰번호';
+    COMMENT ON COLUMN GIFT_IMG.G_ORIGIN_NAME IS '원본파일명';
+    COMMENT ON COLUMN GIFT_IMG.G_CHANGE_NAME IS '수정파일명';
+    COMMENT ON COLUMN GIFT_IMG.G_FILE_PATH IS '이미지경로';
+    COMMENT ON COLUMN GIFT_REVIEW.GRIV_NO IS '리뷰번호';
+    COMMENT ON COLUMN GIFT_REVIEW.GHIS_NO IS '결제내역번호';
+    COMMENT ON COLUMN GIFT_REVIEW.GRIV_CONTENT IS '내용';
+    COMMENT ON COLUMN GIFT_REVIEW.GRIV_GRADE IS '평점';
+    COMMENT ON COLUMN GIFT_REVIEW.CREATE_DATE IS '작성일';
+    COMMENT ON COLUMN GREAT.GREAT_NO IS '제품번호';
+    COMMENT ON COLUMN GREAT.USER_NO IS '회원번호';
+    COMMENT ON COLUMN PAYMENT.GHIS_NO IS '결제번호';
+    COMMENT ON COLUMN PAYMENT.TOTAL_PAY IS '결제총금액';
+    COMMENT ON COLUMN PAYMENT.DISCOUNT IS '할인금액';
+    -----------------------------------------------------
+    
+    --제약조건 추가
+    ALTER TABLE MEMBER ADD FOREIGN KEY(GRADE_NO) REFERENCES MEMBER_GRADE(GRADE_NO);
+    ALTER TABLE REVIEW ADD FOREIGN KEY(CS_NO) REFERENCES CONSULTING(CS_NO);
+    ALTER TABLE CONSULTING ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    ALTER TABLE COLLABORATION_CP ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    ALTER TABLE GREAT ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    ALTER TABLE BASKET ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    --ALTER TABLE GIFT_REVIEW ADD FOREIGN KEY(GHIS_NO) REFERENCES GIFT_HISTORY(GHIS_NO);
+    ALTER TABLE GIFT_HISTORY ADD FOREIGN KEY(GIFT_NO) REFERENCES GIFT(GIFT_NO);
+    ALTER TABLE GIFT_HISTORY ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    ALTER TABLE GIFT_HISTORY ADD FOREIGN KEY(BUYMETHOD_NO) REFERENCES BUY_METHOD(BUYMETHOD_NO);
+    --ALTER TABLE GIFT_HISTORY ADD FOREIGN KEY(GHIS_NO) REFERENCES PAYMENT(GHIS_NO);
+    ALTER TABLE GIFT ADD FOREIGN KEY(CATEGORY_NO) REFERENCES GIFT_CATEGORY(CATEGORY_NO);
+    ALTER TABLE USER_COUPON ADD FOREIGN KEY(COUPON_NO) REFERENCES COUPON(COUPON_NO);
+    ALTER TABLE USER_COUPON ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    ALTER TABLE QNA ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    ALTER TABLE NOTICE ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    ALTER TABLE RSV_BASKET ADD FOREIGN KEY(USER_NO) REFERENCES MEMBER(USER_NO);
+    
+    
+    --회원등급
+    INSERT 
+      INTO MEMBER_GRADE
+         (GRADE_NO, GRADE_NAME)
+    VALUES
+         (1, '일반회원');
+    INSERT 
+      INTO MEMBER_GRADE
+         (GRADE_NO, GRADE_NAME)
+    VALUES
+         (2, '협업업체 관리자');
+    INSERT
+     INTO MEMBER_GRADE
+         (GRADE_NO, GRADE_NAME)
+    VALUES
+         (3, '관리자');
+    
+    -- 사용자 테이블 샘플DB 생성
+    INSERT INTO MEMBER(USER_NO, USER_ID, USER_PWD, USER_NAME, BIRTHDAY, GENDER, PHONE, EMAIL, STATUS, GRADE_NO) 
+    VALUES (SEQ_MNO.NEXTVAL, 'admin', '$2a$10$E0/ga2NH3UybxC63hOs5g.B5L.LcUpL1dwFq/373e5YNBcUyMxXD6', '관리자', TO_DATE('1990-01-01', 'YYYY-MM-DD'), 'M', '010-1234-6789', 'admin@kh.com', 'Y', 3);
+    INSERT INTO MEMBER(USER_NO, USER_ID, USER_PWD, USER_NAME, BIRTHDAY, GENDER, PHONE, EMAIL, STATUS, GRADE_NO) 
+    VALUES (SEQ_MNO.NEXTVAL, 'user01', '$2a$10$E0/ga2NH3UybxC63hOs5g.B5L.LcUpL1dwFq/373e5YNBcUyMxXD6', '양관우', TO_DATE('1991-01-11', 'YYYY-MM-DD'), 'M', '010-1111-6789', 'sample1@kh.com', 'Y', 1);
+    INSERT INTO MEMBER(USER_NO, USER_ID, USER_PWD, USER_NAME, BIRTHDAY, GENDER, PHONE, EMAIL, STATUS, GRADE_NO) 
+    VALUES (SEQ_MNO.NEXTVAL, 'user02', '$2a$10$E0/ga2NH3UybxC63hOs5g.B5L.LcUpL1dwFq/373e5YNBcUyMxXD6', '이원종', TO_DATE('1992-02-21', 'YYYY-MM-DD'), 'M', '010-2222-6789', 'sample2@kh.com', 'N', 1);
+    INSERT INTO MEMBER(USER_NO, USER_ID, USER_PWD, USER_NAME, BIRTHDAY, GENDER, PHONE, EMAIL, STATUS, GRADE_NO) 
+    VALUES (SEQ_MNO.NEXTVAL, 'user03', '$2a$10$E0/ga2NH3UybxC63hOs5g.B5L.LcUpL1dwFq/373e5YNBcUyMxXD6', '윤재성', TO_DATE('1993-03-11', 'YYYY-MM-DD'), 'M', '010-3333-6789', 'sample3@kh.com', 'Y', 1);
+ 
+    -- 협력업체 신청 테이블 샘플DB 생성
+    INSERT INTO COLLABORATION_CP (CP_NO, USER_NO, CP_TITLE, CP_CONTENT, CP_DATE, STATUS) 
+    VALUES (SEQ_CPNO.NEXTVAL, 1, '샘플 협력 업체 제목 1', '샘플 협력 업체 내용 1', TO_DATE('2021-06-21', 'YYYY-MM-DD'), 'Y');
+    INSERT INTO COLLABORATION_CP (CP_NO, USER_NO, CP_TITLE, CP_CONTENT, CP_DATE, STATUS) 
+    VALUES (SEQ_CPNO.NEXTVAL, 1, '샘플 협력 업체 제목 2', '샘플 협력 업체 내용 2', TO_DATE('2022-06-21', 'YYYY-MM-DD'), 'Y');
+    INSERT INTO COLLABORATION_CP (CP_NO, USER_NO, CP_TITLE, CP_CONTENT, CP_DATE, STATUS) 
+    VALUES (SEQ_CPNO.NEXTVAL, 1, '샘플 협력 업체 제목 3', '샘플 협력 업체 내용 3', TO_DATE('2023-06-21', 'YYYY-MM-DD'), 'Y');
+    INSERT INTO COLLABORATION_CP (CP_NO, USER_NO, CP_TITLE, CP_CONTENT, CP_DATE, STATUS) 
+    VALUES (SEQ_CPNO.NEXTVAL, 1, '샘플 협력 업체 제목 4', '샘플 협력 업체 내용 4', TO_DATE('2023-07-21', 'YYYY-MM-DD'), 'Y');
+    INSERT INTO COLLABORATION_CP (CP_NO, USER_NO, CP_TITLE, CP_CONTENT, CP_DATE, STATUS) 
+    VALUES (SEQ_CPNO.NEXTVAL, 1, '샘플 협력 업체 제목 5', '샘플 협력 업체 내용 5', TO_DATE('2023-08-21', 'YYYY-MM-DD'), 'Y');
+    
+    
+    -- 구매방식
+    INSERT INTO BUY_METHOD(BUYMETHOD_NO, BUY_METHOD)VALUES(1, '신용카드');
+    INSERT INTO BUY_METHOD(BUYMETHOD_NO, BUY_METHOD)VALUES(2, '계좌이체');
+    
+    
+    -- 답례품 카테고리
+    INSERT INTO GIFT_CATEGORY(CATEGORY_NO, CATEGORY_ITEM)VALUES(1, '와인');
+    INSERT INTO GIFT_CATEGORY(CATEGORY_NO, CATEGORY_ITEM)VALUES(2, '접시');
+    INSERT INTO GIFT_CATEGORY(CATEGORY_NO, CATEGORY_ITEM)VALUES(3, '푸드');
+    INSERT INTO GIFT_CATEGORY(CATEGORY_NO, CATEGORY_ITEM)VALUES(4, '생활용품');
+    
+    -- 공지사항 예시
+    INSERT 
+      INTO NOTICE
+         ( NOTICE_NO ,USER_NO ,NOTICE_TITLE ,NOTICE_CONTENT ,COUNT ,NOTICE_DATE ,STATUS)
+    values
+         ( seq_nbo.nextval ,1 ,'공지사항1' ,'공지사항 내용1' ,DEFAULT ,DEFAULT ,DEFAULT);
+    INSERT 
+      INTO NOTICE
+         ( NOTICE_NO ,USER_NO ,NOTICE_TITLE ,NOTICE_CONTENT ,COUNT ,NOTICE_DATE ,STATUS)
+    values
+         ( seq_nbo.nextval ,1 ,'공지사항2' ,'공지사항 내용2' ,DEFAULT ,DEFAULT ,DEFAULT);
+    INSERT 
+      INTO NOTICE
+         ( NOTICE_NO ,USER_NO ,NOTICE_TITLE ,NOTICE_CONTENT ,COUNT ,NOTICE_DATE ,STATUS)
+    values
+         ( seq_nbo.nextval ,1 ,'공지사항3' ,'공지사항 내용3' ,DEFAULT ,DEFAULT ,DEFAULT);
+    INSERT 
+      INTO NOTICE
+         ( NOTICE_NO ,USER_NO ,NOTICE_TITLE ,NOTICE_CONTENT ,COUNT ,NOTICE_DATE ,STATUS)
+    values
+         ( seq_nbo.nextval ,1 ,'공지사항4' ,'공지사항 내용4' ,DEFAULT ,DEFAULT ,DEFAULT);
+    INSERT 
+      INTO NOTICE
+         ( NOTICE_NO ,USER_NO ,NOTICE_TITLE ,NOTICE_CONTENT ,COUNT ,NOTICE_DATE ,STATUS)
+    values
+         ( seq_nbo.nextval ,1 ,'공지사항5' ,'공지사항 내용5' ,DEFAULT ,DEFAULT ,DEFAULT);
+    
+    
+    -- qna 인서트
+    INSERT 
+      INTO QNA
+         (QNA_NO ,USER_NO ,QNA_TITLE ,QNA_CONTENT ,QNA_ANSWER ,QNA_DATE ,STATUS) 
+    VALUES
+         ( seq_qbo.nextval, 1, 'QNA1' ,'QNA 내용1' ,'QNA답변1' ,DEFAULT ,DEFAULT );
+    INSERT 
+      INTO QNA
+         (QNA_NO ,USER_NO ,QNA_TITLE ,QNA_CONTENT ,QNA_ANSWER ,QNA_DATE ,STATUS) 
+    VALUES
+         ( seq_qbo.nextval, 1, 'QNA2' ,'QNA 내용2' ,'QNA답변1' ,DEFAULT ,DEFAULT );
+    INSERT 
+      INTO QNA
+         (QNA_NO ,USER_NO ,QNA_TITLE ,QNA_CONTENT ,QNA_ANSWER ,QNA_DATE ,STATUS) 
+    VALUES
+         ( seq_qbo.nextval, 1, 'QNA3' ,'QNA 내용3' ,'QNA답변1' ,DEFAULT ,DEFAULT );
+    INSERT 
+      INTO QNA
+         (QNA_NO ,USER_NO ,QNA_TITLE ,QNA_CONTENT ,QNA_ANSWER ,QNA_DATE ,STATUS) 
+    VALUES
+         ( seq_qbo.nextval, 1, 'QNA4' ,'QNA 내용4' ,'QNA답변1' ,DEFAULT ,DEFAULT );
+    INSERT 
+      INTO QNA
+         (QNA_NO ,USER_NO ,QNA_TITLE ,QNA_CONTENT ,QNA_ANSWER ,QNA_DATE ,STATUS) 
+    VALUES
+         ( seq_qbo.nextval, 1, 'QNA5' ,'QNA 내용5' ,'QNA답변1' ,DEFAULT ,DEFAULT );
+    
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@답례품 DB @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+INSERT INTO GIFT VALUES('G'||SEQ_GBO.NEXTVAL,1,'와인','결혼식자리를 빛내주신 하객분들께 답례품으로, 세상에 하나뿐인 특별한 와인을 선물해보세요!','35000',200,'Y');
+INSERT INTO GIFT VALUES('G'||SEQ_GBO.NEXTVAL,2,'접시','각종 메인요리, 파스타, 샐러드 등의 다양한 요리를 담아내기 적당한 사이즈로 평범한 식탁을 고급스러운 레스토랑으로 만들어줍니다.','22000',125,'Y');
+INSERT INTO GIFT VALUES('G'||SEQ_GBO.NEXTVAL,3,'답례떡','단아하지만 보기좋게 색조합으로 기분 좋아지는 결혼답례떡 맛집','3400',200,'Y');
+INSERT INTO GIFT VALUES('G'||SEQ_GBO.NEXTVAL,4,'수건','고급수건으로 제작되어 욕실걸이에 두고 사용하시면 고급스러운 분위기가 연출됩니다.','5000',250,'Y');
+INSERT INTO GIFT VALUES('G'||SEQ_GBO.NEXTVAL,4,'텀블러','더 세련되고 예뻐진 텀블러로 고마운 마음을 전하세요','8000',203,'Y');
+INSERT INTO GIFT VALUES('G'||SEQ_GBO.NEXTVAL,3,'쿠키','고마운 분들께 감사의 인사를 전해야 할 경우, 적당한 가격에 품위까지 있는 , 달콤한 쿠키입니다.','6000',310,'Y');
+--1와인 2접시 3푸드 4생활용품
+
+INSERT INTO PRODUCT_IMG VALUES(seq_img.nextval,'G1','ricecake.jpg','ricecake2.jpg'   ,'ricecake3.jpg',   'resources/css/assets/img/products');
+INSERT INTO PRODUCT_IMG VALUES(seq_img.nextval,'G2',   'towel.jpg'   ,'towel3.jpg'   ,'towl.jpg',   'resources/css/assets/img/products');
+INSERT INTO PRODUCT_IMG VALUES(seq_img.nextval,'G3'   ,'wine1.jpg'   ,'wine2.jpg'   ,'wine3.jpg',   'resources/css/assets/img/products');
+INSERT INTO PRODUCT_IMG VALUES(seq_img.nextval,'G4',   'jub.jpg',   'jub.png',   'jub3.png',   'resources/css/assets/img/products');
+INSERT INTO PRODUCT_IMG VALUES(seq_img.nextval,'G5',   'tumb2.jpg',   'tumb3.jpg',   'tumb11.jpg',   'resources/css/assets/img/products');
+INSERT INTO PRODUCT_IMG VALUES(seq_img.nextval,'G6',   'cooki3.jpg',   'cookie1.jpg',   'cookie2.jpg',   'resources/css/assets/img/products');
+
+
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@홀 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Insert 
+into HALL 	(H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS)
+ values
+	 ('H'||SEQ_HNO.NEXTVAL,'노블발렌티 삼성점','노블발렌티','꿈꿔왔던 그 이상의 웨딩 노블발렌티.
+영국의 대저택 컨셉의 노블발렌티는 빅토리아 양식의 웅장하고 클래식한 느낌의 세리머니홀과 모던 클래식 컨셉의 개별 공간,
+프라이빗하고 싱그러운 가든으로 구성되어 있습니다.
+주인공은 물론이고 게스트 역시 소중한 날의 가치를 공유할 수 있는 소통의 공간, 바로 노블발렌티가 추구하는 채플웨딩입니다.
+세상에 단 하나 뿐인 나만의 웨딩
+세레머니 홀 내에는 노블발렌티의 심볼인 대형 ''종''이 달려있어 축복의 의미를 담아 예식 시작을 성스럽게 울려줍니다.
+한국 최초의 메뉴 선택형 웨딩프로그램
+식사 위주의 결혼식 문화에서 탈피하여 다양한 컨텐츠의 유럽식 정통 채플웨딩 스타일을 한국의 정서에 맞추어 기획합니다.
+신문화에 대한 고객의 부담감을 배려한 다양하고 합리적인 프로그램을 제시하여 세련된 감각의 채플웨딩 스타일을 완성합니다.',200,5000000,300,85000,'10:00','19:00','02-540-0711','서울 강남구 봉은사로 637',1,'N','Y');
+
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values 
+('H'||SEQ_HNO.NEXTVAL,'더휴웨딩홀','더휴웨딩홀','[더휴웨딩홀] Romantic & Private Wedding 반짝이는 당신의 행복한 순간을 가장 아름답게 남겨드리겠습니다.',300,3000000,550,66000,'10:00','18:00','02-6188-0188','삼성동 141-31',0.3,'N','Y');
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values 
+('H'||SEQ_HNO.NEXTVAL,'웨딩피에스타귀족 강남','노블리홀','고급스럽고 웅장한 저희 웨딩홀에서 아름다운 결혼 도와드리겠습니다.',150,0,300,60000,'09:00','18:00','02-501-7000','서울 강남구 테헤란로 406 샹제리제센터 A동',0.3,'Y','Y');
+
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values
+ ('H'||SEQ_HNO.NEXTVAL,'포포인츠 바이 쉐라톤 조선 서울 명동','포포인츠 바이 쉐라톤','서울의 상징인 시청 맞은편에 자리잡아 최적의 위치조건을 자랑합니다. 서울 시내에서 가장 특급 호텔에서 특급결혼하세요.',200,0,200,100000,'09:00','18:00','02-771-2200','서울 중구 소공로 119',1,'N','Y');
+
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values
+ ('H'||SEQ_HNO.NEXTVAL,'롯데호텔 월드','크리스탈볼룸','송파구 잠실에 위치한 롯데월드 호텔에서 최고급 결혼을 하세요.
+롯데호텔월드는 1988년 9월 16일 개관, 477개의 객실과 5개 식음업장, 6개 연회장, 피트니스 클럽, 비즈니스 센터, 면세점, 클리닉 등의 부대시설이 있습니다. ',200,0,400,105000,'21:00','18:00','82-2-411-7575','서울 송파구 올림픽로 240',1,'N','Y');
+
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values ('H'||SEQ_HNO.NEXTVAL,'아펠가모 잠실','아펠가모','쏟아지는 환호, 반짝이는 행복, 두 사람의 힘찬 첫 걸음.
+아펠가모는 버진로드 위를 함께 걷는 두 사람의 결혼 행진을 뜻합니다.
+품격 있는 채플 웨딩 스타일을 선도해 온 아펠가모.
+단순한 웨딩 홀의 개념을 넘어 경건하고 성스러운 예식의 가치에 오감을 만족시킬 미식과 품격 있는 스타일을 더해 삶 속에서 가장 빛나는 순간을 선사하겠습니다.',500,6300000,750,69000,'09:00','18:00','02-2144-0230','서울 송파구 올림픽로35길 137 한국광고문화회관 2층',1,'N','Y');
+
+Insert into HALL 
+(H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values ('H'||SEQ_HNO.NEXTVAL,'서울웨딩타워예식장','서울웨딩타워','* 주차 하객 3시간 무료주차 * 서울 최대 크기의 고급스러운 호텔예식 단독홀 * 스카이라운지 레스토랑에서 즐기는 피로연
+',350,8000000,500,70000,'09:00','19:00','02-463-5000','서울 송파구 양재대로 932 2층',0.3,'Y','Y');
+
+
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values ('H'||SEQ_HNO.NEXTVAL,'SW컨벤션센터','SW컨벤션','고급스럽고 우아한 SW컨벤션에서 생에 한번뿐인 행사를 준비하세요. 최고의 서비스로 모시겠습니다.',100,1500000,230,55000,'09:00','19:00','02-3673-5000','서울 종로구 지봉로 19 11층',0.3,'N','Y');
+
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values ('H'||SEQ_HNO.NEXTVAL,'연세플라자','연세동문회관','연세대학교 동문회에서 운영하는 웨딩홀입니다. 동문 기부금 50만원 별도로 발생합니다.',240,4000000,1000,39000,'09:00','18:00','0507-1320-4760','서울 서대문구 연세로 50 연세동문화관 3층 연세플라자 웨딩홀',0.3,'N','Y');
+
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values ('H'||SEQ_HNO.NEXTVAL,'HW컨벤션센터.웨딩홀','그랜','감각적인 플라워 아트에 아름다운 선율의 음악이 더해져
+호텔 이상의 감동을 전해 주는 HW컨센션센터의 자랑인 그랜드볼룸은
+300명 ~ 700명까지 모실 수 있는 대규모 웨딩 공간으로
+3시간의 여유로운 호텔형 동시 예식이 가능합니다.
+
+높은 천장에 차분하고 장중한 분위기의 그랜드볼룸은
+깔끔하고 고급스러운 블랙 컬러의 인테리어로
+우아하고 격조 높은 분위기를 자아냅니다.',300,6000000,720,70000,'09:00','19:00','0507-1429-7021','서울 종로구 자하문로 255 HW컨벤션센터 하림각',0.3,'Y','Y');
+
+Insert into HALL (H_CODE,H_ENTERPRISE,H_NAME,H_DETAIL,H_SEAT,H_RENTAL,H_RESTAURANT_SEAT,H_MEAL,H_START_TIME,H_END_TIME,H_PHONE,H_ADDRESS,H_UNIT_TIME,H_WEEK_OPEN,H_STATUS) values ('H'||SEQ_HNO.NEXTVAL,'오펠리스웨딩홀','라비제홀','화사한 화이트 무드에
+자연의 싱그러움을 담은
+감성 웨딩 베뉴
+가장 아름답게 빛날
+당신의 웨딩 Day
+세상 가장 따스한 빛과
+화이트 쉬폰커튼으로 둘러싸인
+티 없이 맑은 화이트 무드에
+볼륨감 넘치는 수많은 샹들리에와
+트렌디한 감성의 그리너리한
+플라워 데코레이션이 더해져
+상상만으로도 아름답고
+성스러움이 와 닿는 이곳에서
+신랑, 신부의 혼인 서약이 이뤄집니다.',150,2500000,500,88000,'09:00','18:00','02-2130-2300','서울 중구 세종대로9길 41 퍼시픽타워 20층',0.3,'N','Y');
+
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@스튜디오 DB @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+ 
+
+   COMMENT ON COLUMN "STUDIO"."S_CODE" IS '스튜디오제품번호';
+   COMMENT ON COLUMN "STUDIO"."S_ENTERPRISE" IS '스튜디오업체이름';
+   COMMENT ON COLUMN "STUDIO"."S_DETAIL" IS '스튜디오상세내용';
+   COMMENT ON COLUMN "STUDIO"."S_PRICE" IS '스튜디오가격';
+   COMMENT ON COLUMN "STUDIO"."S_START_DATE" IS '업체시작시간';
+   COMMENT ON COLUMN "STUDIO"."S_END_DATE" IS '업체종료시간';
+   COMMENT ON COLUMN "STUDIO"."S_PHONE" IS '업체전화번호';
+   COMMENT ON COLUMN "STUDIO"."S_ADDRESS" IS '업체주소';
+   COMMENT ON COLUMN "STUDIO"."S_UNIT_TIME" IS '예약시간구분';
+   COMMENT ON COLUMN "STUDIO"."S_WEEK_OPEN" IS '주말영업여부';
+REM INSERTING into STUDIO
+SET DEFINE OFF;
+
+
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'드레스시네마','드레스시네마는 다양한 유럽풍 컨셉의 셀프공간이 마련되어 다양한 색상의 드레스중 원하는 드레스를 선택후 본인의 카메라는 물론 전문가 촬영까지 가능한 곳입니다.',1500000,'10:00','20:00','02-318-4223','서울 중구 명동2길 49',30,'Y','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'뉴일무이',' 유일무이는 용산구에 있는 웨딩사진 전문 스튜디오입니다.
+인생에 단 한번뿐인 웨딩 유일무이한 사진을 남겨드리겠습니다.
+
+세미웨딩,기념사진,커플사진,웨딩사진,해방촌사진관,뉴일무이,후암동사진관,남산,플레인노트',2000000,'11:00','17:00','070-7779-6111','서울 용산구 두텁바위로40길 28-16 3층',60,'N','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'소르아',' 숙대입구역 웨딩촬영 전문 소르아입니다.
+아름다운 웨딩 영원히 간직할 수 있게 해드리겠습니다.
+
+STUDIO SORRA
+
+- 모든 촬영은 100% 예약제입니다.
+- 촬영 문의와 예약은 홈페이지를 통해 가능합니다.
+- 일반 (증명/여권) 사진 촬영 불가합니다',1500000,'09:00','18:00','010-5726-0900','서울 용산구 두텁바위로 47',30,'Y','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'헤아','웨딩사진전문 헤아에서 아름다은 추억 남기세요.',3500000,'10:00','18:00','0507-1376-0110','서울 서대문구 성산로 573-54 303호',60,'N','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'스튜디오 고유','고급스럽고 안락한 고유 스튜디오에서 프리미엄을 경험하세요.
+커스텀 웨딩사진 전문 업체!',4500000,'10:00','22:00','0507-1323-7353','서울 마포구 마포대로 8-1 1402호',60,'Y','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'스튜디오 아이즈',' 저희 아이즈는 서울 강남구 역삼동에 위치하여 접근이 용이합니다.
+ 또 웨딩사진만을 진행하는 웨딩 스튜디오로 전문적인 서비스를 이용하실 수 있습니다.
+오랫동안 간직할 멋진 사진 도와드리겠습니다.',1700000,'09:00','18:00','02-538-7955','서울 강남구 역삼로5길 8-1 스튜디오 아이즈',30,'Y','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'메이스튜디오',' 메이스튜디오입니다^^ 
+압구정로데오역(분당선) 6번 출구로 나와서 150m가량 직진하셔서 오시면 [evezary codisen(이부자리)]라는 침구세트 파는 가게가 있습니다. 
+그 가게를 끼고 좌회전 후 미니스톱 편의점을 지나 200m정도 직진하시면 [HAUS 0 101010 1]이라는 회색건물이 있는 사거리로 오시게됩니다. 
+사거리 왼편에 테라스가 있는 [더 키친(The Kitchen]이라는 레스토랑이 있는데 그 건물 4층으로 오시면 됩니다. 
+
+',3000000,'09:30','19:30','02-543-2887','서울 강남구 언주로164길 29 영안빌딩',60,'N','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'달빛스쿠터','살롱드룬 아티스트그룹의 가장 대표적인 브랜드
+''달빛스쿠터'' 가 변화를 위해
+semia.N (세미앙)이란 이름으로
+새로운 도약을 합니다
+
+트렌드를 선도했던 감각과 실험성,
+
+로맨틱한 무드속에 빛나는 독보적인 스타일,
+자유로운 감성과 유니크함
+그럼에도 잃지 않은 클래식 헤리티지와
+은은하게 비춰지는 모던 럭셔리
+
+semia.N
+
+살롱드룬 그룹의 이름을 걸고
+''세미앙''의 이름아래 새롭게 기록될
+romantic, chic, stylish
+
+세미앙의 이름으로 그려질
+저희들만의 감성을 지켜봐주세요.',5500000,'10:00','18:30','0507-1339-9486','서울 강남구 강남대로128길 67 NSH빌딩',60,'Y','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'비마이스튜디오','원하던 것들이 이루어지는 나만의 스튜디오
+Be my studio
+.
+가장 아름다워야 할 두 분의 소중한 시간
+두 분의 사랑을 표현하고 싶은 공간에서
+원하던 것들이 이루어지는 순간을 함께 합니다.',4000000,'10:00','19:00','0507-1343-6537','서울 강남구 역삼로38길 6 4층, 5층',30,'N','Y');
+Insert into STUDIO (S_CODE,S_ENTERPRISE,S_DETAIL,S_PRICE,S_START_DATE,S_END_DATE,S_PHONE,S_ADDRESS,S_UNIT_TIME,S_WEEK_OPEN,S_STATUS) values ('S'||seq_sno.nextval,'미모아스튜디오 바오밥 라운지','''미:모아''는 ''아름다움을 모은다''라는 의미로 고객만의 자연스러운 포트레이트를 완성해드립니다.
+
+ 역삼동에 위치한 미모아는 하우스 컨셉으로 프라이빗한 촬영과 함께 세련된 공간과 심플하면서 모던한 배경 및 자연 속에서 편안하고 자연스러운 모습을 담아냅니다.',3000002,'09:30','18:30','02-518-6566','서울 강남구 테헤란로13길 35',30,'N','Y');
+
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@드레스 DB @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Insert into DRESS (D_CODE,D_ENTERPRISE,D_DETAIL,D_PRICE,D_START_DATE,D_END_DATE,D_PHONE,D_ADDRESS,D_UNIT_TIME,D_WEEK_OPEN,D_STATUS) values ('D'||seq_dno.nextval,'모드니드레스','''모든사람을 아우르다'' 라는 순 우리말인 모드니(MODENY)는
+모든 여성의 특별한 순간을 함께할 핸드메이드 드레스를 제작하고 있습니다.
+자연스러움 속의 특별함을 추구하는 이들에게 모드니(MODENY)만의 감성을 제공합니다.
+''모든사람을 아우르다'' 라는 순 우리말인 모드니(MODENY)는
+모든 여성의 특별한 순간을 함께할 핸드메이드 드레스를 제작하고 있습니다.
+자연스러움 속의 특별함을 추구하는 이들에게 모드니(MODENY)만의 감성을 제공합니다.
+
+- 모드니 운영 시간
+오후12시-오후7시(오후6시가 마지막 피팅 타임)- 모드니 운영 시간
+오후12시-오후7시(오후6시가 마지막 피팅 타임)',3499998,'00:00','19:00','507-1301-7968','서울 서초구 서초대로 141-11 많은물소리주택 1층',60,'N','Y');
+Insert into DRESS (D_CODE,D_ENTERPRISE,D_DETAIL,D_PRICE,D_START_DATE,D_END_DATE,D_PHONE,D_ADDRESS,D_UNIT_TIME,D_WEEK_OPEN,D_STATUS) values ('D'||seq_dno.nextval,'포마이시스','Designer Wedding Dress Brand
+instagram @formysis_
+
+운영시간
+(매주 화요일, 일요일 휴무일자)
+평일 12:30-19:30
+(피팅 첫 타임 1시, 마지막 타임 7시)
+ 토요일 및 공휴일 10:30-15:30
+(피팅 첫 타임 11시, 마지막 타임 3시)
+
+피팅룸은 100% 예약제로 운영되고 있습니다.',800000,'00:00','20:00','02-6013-2336','서울 강남구 학동로38길 47 이소빌딩 4층',60,'Y','Y');
+Insert into DRESS (D_CODE,D_ENTERPRISE,D_DETAIL,D_PRICE,D_START_DATE,D_END_DATE,D_PHONE,D_ADDRESS,D_UNIT_TIME,D_WEEK_OPEN,D_STATUS) values ('D'||seq_dno.nextval,'아워스페셜데이','포토그래퍼와 디자이너 듀오가 만든
+사진이 잘나오는 ''촬영 드레스'' 전문
+
+웨딩스냅 & 연주드레스
+
+**연주자를 위한 샘플세일 11월',5200000,'17:00','22:00','507-1346-5372','서울 서초구 양재천로15길 28 B1 Ourspecialday',30,'Y','Y');
+Insert into DRESS (D_CODE,D_ENTERPRISE,D_DETAIL,D_PRICE,D_START_DATE,D_END_DATE,D_PHONE,D_ADDRESS,D_UNIT_TIME,D_WEEK_OPEN,D_STATUS) values ('D'||seq_dno.nextval,'클라라웨딩','여러차례 상담 과정을 거쳐 최적의 디자인을 선택하고 신부의 얼굴형과 체형은 물론 신랑의 분위기, 예식장소까지 세심하게 고려하는 클라라 웨딩에서 아름다운 신부의 꿈을 준비하세요!',3300000,'10:00','22:00','02-514-7600','서울 강남구 언주로170길 25',30,'N','Y');
+Insert into DRESS (D_CODE,D_ENTERPRISE,D_DETAIL,D_PRICE,D_START_DATE,D_END_DATE,D_PHONE,D_ADDRESS,D_UNIT_TIME,D_WEEK_OPEN,D_STATUS) values ('D'||seq_dno.nextval,'펠리스 노비아','Feliz Novia 는 스페인어로 Feliz는 ‘행복한, 행복을 낳는’, Novia는 ‘신부, 여자친구’라는 
+의미로 단순히 웨딩드레스만 대여하는 곳이 아닌 신부님들의 전반적인 스타일링을 
+해주는 곳으로, 예식을 위한 드레스, 촬영, 메이크업 이라기 보다 신부님 한분 한분의 
+소중한 날을 위한 스타일에 맞는 bridal styling에 중점을 두는 곳입니다.',3800000,'10:00','20:00','02-512-5960','서울 강남구 선릉로145길 13 3층',60,'N','Y');
+Insert into DRESS (D_CODE,D_ENTERPRISE,D_DETAIL,D_PRICE,D_START_DATE,D_END_DATE,D_PHONE,D_ADDRESS,D_UNIT_TIME,D_WEEK_OPEN,D_STATUS) values ('D'||seq_dno.nextval,'마샬브라이드','마샬 브라이드에서는 웨딩드레스 및 예복의 구매 혹은 렌탈을 진행하고 있습니다.
+고급스럽고 우아한 드레스 마샬에서 만나보세요',130000,'10:00','19:00','010-8590-6942','서울 종로구 자하문로24길 41-36',30,'N','Y');
+Insert into DRESS (D_CODE,D_ENTERPRISE,D_DETAIL,D_PRICE,D_START_DATE,D_END_DATE,D_PHONE,D_ADDRESS,D_UNIT_TIME,D_WEEK_OPEN,D_STATUS) values ('D'||seq_dno.nextval,'브라이드영','브라이드영에서 우하하고 고급스런 드레스를 만나세요',2500000,'10:00','20:00','02-543-4729','서울 강남구 언주로150길 43 제이빌딩 5층',60,'Y','Y');
+
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@메이크업 DB @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Insert into MAKEUP (M_CODE,M_ENTERPRISE,M_DETAIL,M_PRICE,M_START_DATE,M_END_DATE,M_PHONE,M_ADDRESS,M_UNIT_TIME,M_WEEK_OPEN,M_STATUS) values ('M'||seq_mkno.nextval,'아나뷰티','신사동에 위치한 토탈 뷰티샵 아나뷰티 입니다. 웨딩메이크업헤어, 리허설 헤어변형과 출장메이크업으로도 만족도가 높은 샵입니다.',80000,'09:30','18:00','0507-1415-0160','서울 강남구 도산대로37길 13 2층',60,'Y','Y');
+Insert into MAKEUP (M_CODE,M_ENTERPRISE,M_DETAIL,M_PRICE,M_START_DATE,M_END_DATE,M_PHONE,M_ADDRESS,M_UNIT_TIME,M_WEEK_OPEN,M_STATUS) values ('M'||seq_mkno.nextval,'메이크업가든','MAKE, UP GARDEN premium
+도심 속 힐링,
+
+정성을 담은 터치
+보통의 날을 특별하게,
+나만의 색과 분위기를 찾는 곳,
+
+- 한 타임 한 신부 예약제 스페셜 웨딩케어
+- 감각적인 디자이너의 맞춤형 헤어 & 메이크업
+- 충분한 니즈파악을 통한 섬세한 스타일링
+- 분리형 인테리어
+- 커피맛집 ! (모카 or 헤이즐넛 )
+
+고객이 만족할 떄 까지, 아티스트와 고객이 함께 행복한 샵
+섬세한 가든 터치로 완벽한 하루를 선물해 드리겠습니다 :)',150000,'10:00','20:00','0507-1321-2666','서울 강남구 논현로 631 4층',60,'Y','Y');
+Insert into MAKEUP (M_CODE,M_ENTERPRISE,M_DETAIL,M_PRICE,M_START_DATE,M_END_DATE,M_PHONE,M_ADDRESS,M_UNIT_TIME,M_WEEK_OPEN,M_STATUS) values ('M'||seq_mkno.nextval,'케이트뷰티','소중하고 아름다운, 특별한 하루의 빛나는 나를 만나는 케이트뷰티입니다.
+
+아늑하고 따뜻한 분위기의 인테리어를 마치고 새로운 샵으로 이전한 케이트뷰티입니다.
+
+일상 속 특별해지고 싶은 하루엔 자연스럽게 데일리 메이크업/헤어
+
+행복한 가정의 첫걸음, 축복 가득한 결혼식엔 웨딩메이크업/헤어
+
+지적이고 전문적인, 때로는 발랄하고 우아하기도한 직업에 어울리는 맞춤 메이크업/헤어
+
+기념일부터 면접, 파티, 모임, 공연, 프로필촬영 등 모든 날에 특별한 나를 만나는 케이트뷰티가 되겠습니다.
+
+모두가 똑같은 스타일링에서 벗어나 개인의 개성과 피부에 맞는 컬러를 찾고 장점을 돋보이게 하는 나만의 느낌을 찾아드려요.
+
+이가자헤어비스(압구정점)원장, mbc아카데미.업스타일강사8년, 구)살롱6청담 원장 등 30년경력의 다양한 노하우로 강경아원장님만의 감각을 느낄수 있는 케이트뷰티에서 빛나는 나의 하루를 시작하세요.
+
+소중한 날, 더욱 특별해진 당신과 함께하길 바랍니다.',300000,'10:00','18:00','0507-1389-7024','서울 강남구 봉은사로22길 40 살롱6더하우스 2층 케이트뷰티',60,'Y','Y');
+Insert into MAKEUP (M_CODE,M_ENTERPRISE,M_DETAIL,M_PRICE,M_START_DATE,M_END_DATE,M_PHONE,M_ADDRESS,M_UNIT_TIME,M_WEEK_OPEN,M_STATUS) values ('M'||seq_mkno.nextval,'소망끌로에킴','안녕하세요 소망드레스입니다.연주드레스,각종드레스 피팅,대여문의,판매문의 헤어메이크업예약을 도와드립니다 많은관심 부탁드립니다.',220000,'10:00','20:00','0507-1343-8199','서울 서대문구 신촌로 203 핀란드타워 102호 소망끌로에킴',30,'N','Y');
+Insert into MAKEUP (M_CODE,M_ENTERPRISE,M_DETAIL,M_PRICE,M_START_DATE,M_END_DATE,M_PHONE,M_ADDRESS,M_UNIT_TIME,M_WEEK_OPEN,M_STATUS) values ('M'||seq_mkno.nextval,'프롬 헤어메이크업','''FROM.'' 의 모든 작품들은 고객님과 디자이너와의 충분한 카운셀링을 통해 단하나뿐인 고객님만을 위한 작품을 선물해드립니다.
+
+※ 저희 ''FROM.'' 에서는 근무시간 이외의 시간에 예약이 ''가능'' 합니다.
+만약 고객님께서 중요한 일정이 있으시다면 선생님의 프로필에 기재되어있는 SNS로 미리 연락해세요!
+저희 선생님들은 고객님의 스케줄에 최대한 맞춰드립니다. :)',120000,'10:30','20:00','0507-1339-4069','서울 강남구 선릉로157길 13-3 로건빌딩 3층 프롬헤어메이크업',60,'Y','Y');
+Insert into MAKEUP (M_CODE,M_ENTERPRISE,M_DETAIL,M_PRICE,M_START_DATE,M_END_DATE,M_PHONE,M_ADDRESS,M_UNIT_TIME,M_WEEK_OPEN,M_STATUS) values ('M'||seq_mkno.nextval,'KJ 스타일','*예약/상담 문의 010-7277-6351*
+10시이전 예약은 위 번호로 문의 부탁드립니다
+
+*예약 후 예약금 문자 발송됩니다^^
+
+압구정 셀럽들의 선택.
+KJSTYLE은 압구정로데오 중심에 위치한
+프리미엄 토탈 헤어&amp;메이크업샵 입니다.
+
+드라마,CF,화보,촬영,웨딩,혼주,프로필,특수분장 등 모든 분야에서 활동하는 경력 10년 이상의 아티스트들이 고객님의 니즈에 맞는 메이크업을 연출 해드립니다.',165000,'10:00','19:00','0507-1357-6351','서울 강남구 압구정로50길 18 3층',60,'Y','Y');
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@태그 DB @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S1','아기자기,실내촬영,웨딩촬영전문');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S2','고급,우아,꽃');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S3','드레스,셀프웨딩,웨딩촬영,드레스대여');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S4','해방촌사진관,세미웨딩,후암동사진관,플레인노트,야외촬영');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S5','숙대입구,반려동물동반,주차,웨딩촬영,세미웨딩,브랜딩');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S6','본식스냅,웨딩스냅,셀프웨딩');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S7','프리미엄,커스텀');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S8','웨딩사진,인물중심');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('S9','웨딩촬영,웨딩컨설팅,역삼돔,장애인편의시설');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('D1','셀프웨딩,가성비,수수한');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('D2','발레파킹,우아,고급,청순');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('D3','셀프드레스,웨딩드레스');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('D4','셀프웨딩드레스,스몰웨딩드레스,스몰웨딩,하우스웨딩');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('D5','연주드레스,웨딩드레스,드레스대여,스튜디오');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('D6','강남웨딩드레스,청담웨딩드레스,맞춤예복,스드메');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('D7','웨딩드레스투어,강남웨딩드레스,청담웨딩드레스,본식웨딩');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('M1','메이크업,강남메이크업,웨딩메이크업');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('M2','혼주프로필사진원데이클래스,올림머리,헤어');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('M3','웨딩메이크업,혼주메이크업,헤어변형');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('M4','메이크업,퍼스널메이크업,프로필메이크업');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('M5','메이크업,업스타일,신부,스타일링');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('M6','출장메이크업,웨딩드레스,웨딩메이크업');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('H1','고급,깔금,우아');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('H2','프리미엄,꽃');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('H3','엘레강스,아름다움');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('H4','가성비,높은층고');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('H5','깔끔,화려');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('H6','화려,웅장');
+Insert into TAG (PRODUCT_NO,TAG_CONTENT) values ('H7','단아,수려');
+
+
+--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@사진 DB @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S1','스튜디오_시네마1.jpg','스튜디오_시네마2.jpg','스튜디오_시네마3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S2','스튜디오_유일1.jpg','스튜디오_유일2.jpg','스튜디오_유일3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S3','스튜디오_소르아.jpg','스튜디오_소르아2.jpg','스튜디오_소르아3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S4','스튜디오_헤아1.jpg','스튜디오_헤아2.jpg','스튜디오_헤아3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S5','유스튜디오_고유1.jpg','유스튜디오_고유2.jpg','유스튜디오_고유3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S6','유스튜디오_달빛3.jpg','유스튜디오_달빛2.jpg','유스튜디오_달빛1.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S7','유스튜디오_비아미.jpg','유스튜디오_비아미2.jpg','유스튜디오_비아미3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S8','유스튜디오_미모아1.jpg','유스튜디오_미모아2.jpg','유스튜디오_미모아3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S9','스튜디오_아이즈1.jpg','스튜디오_아이즈2.jpg','스튜디오_아이즈3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'S10','스튜디오_메이1.jpg','스튜디오_메이2.jpg','스튜디오_메이3.jpg','resources/css/assets/img/products/');
+
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'D1','드레스_마샬1.jpg','드레스_마샬2.jpg','드레스_마샬3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'D2','드레스_브라이드1.jpg','드레스_브라이드2.jpg','드레스_브라이드3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'D3','드레스_모드니1.jpg','드레스_모드니2.jpg','드레스_모드니3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'D4','드레스_포미1.jpg','드레스_포미2.jpg','드레스_포미3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'D5','드레스_아워1.jpg','드레스_아워2.jpg','드레스_아워3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'D6','드레스_클라라1.jpg','드레스_클라라2.jpg','드레스_클라라3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'D7','드레스_펠리스1.jpg','드레스_펠리스2.jpg','드레스_펠리스3.jpg','resources/css/assets/img/products/');
+
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'M1','프롬1.jpg','프롬2.jpg','프롬3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'M2','스타일3.jpg','스타일2.jpg','스타일1.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'M3','아나1.jpg','아나2.jpg','아나3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'M4','가든1.jpg','가든2.jpg','가등3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'M5','케이트2.jpg','케이트1.jpg','케이트3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'M6','소망.jpg','소망2.jpg','소망3.jpg','resources/css/assets/img/products/');
+
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H1','웨딩홀_노블발렌티1.jpg','웨딩홀_노블발렌티2.jpg','웨딩홀_노블발렌티3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H2','웨딩홀_더휴웨딩홀1.jpg','웨딩홀_더휴웨딩홀2.jpg','웨딩홀_더휴웨딩홀3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H3','피에스타1.jpg','피에스타2.jpg','피에스타3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H4','웨딩홀_포포인츠1.jpg','웨딩홀_포포인츠2.jpg','웨딩홀_포포인츠3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H5','웨딩홀_롯데호텔1.jpg','웨딩홀_롯데호텔2.jpg','웨딩홀_롯데호텔3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H6','웨딩홀_아펠가모1.jpg','웨딩홀_아펠가모2.jpg','웨딩홀_아펠가모3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H7','웨딩홀_서울웨딩타워1.jpg','웨딩홀_서울웨딩타워2.jpg','웨딩홀_서울웨딩타워3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H9','웨딩홀_연세동문1.jpg','웨딩홀_연세동문2.jpg','웨딩홀_연세동문3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H8','웨딩홀_SW컨벤션1.jpg','웨딩홀_SW컨벤션2.jpg','웨딩홀_SW컨벤션3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H10','웨딩홀_그랜드볼룸1.jpg','웨딩홀_그랜드볼룸2.jpg','웨딩홀_그랜드볼룸3.jpg','resources/css/assets/img/products/');
+Insert into PRODUCT_IMG (IMG_NO,PRODUCT_NO,IMG_1,IMG_2,IMG_3,IMG_PATH) values (SEQ_IMG.NEXTVAL,'H11','웨딩홀_라비제홀1.jpg','웨딩홀_라비제홀2.jpg','웨딩홀_라비제홀3.jpg','resources/css/assets/img/products/');
+
+
+
+
+    COMMIT;
