@@ -41,6 +41,8 @@
 		<result column="origin_name" property="originName"/>
 		<result column="change_name" property="changeName"/>
 		<result column="img_path" property="imgPath"/>
+		<result column="file_path" property="filePath"/>
+		
 	</resultMap>
 	
 	
@@ -197,7 +199,7 @@
 			 , to_char(create_date,'YYYY-MM-DD') as "create_date"
              , user_name
              , cs_change_name as change_name
-             , cs_file_path || cs_origin_name as filepath
+             , cs_file_path || '/' ||cs_change_name as file_path
           from review r
           join consulting c on (r.cs_no = c.cs_no)
           join member m on (c.user_no = m.user_no)

@@ -177,8 +177,8 @@
                                     <input class="check__it" type="checkbox">
                                     <input class="hiddenRefNo" type="hidden" value="` + list[i].refNo + `">
                                 </td>
-                                <td><img src="` +  list[i].filePath + `" alt="` +  list[i].giftName + `"></td>
-                                <td><a href="giftDetail.gi?giftNo=`+ list[i].refNo + `">` +  list[i].userName + `</a><span class="cart__list__smartstore"> 스마트스토어</span>
+                                <td style='width:130px'><img src="` +  list[i].filePath + `" alt="` +  list[i].giftName + `" style='width:300px; height:auto'></td>
+                                <td><a href="giftDetail.gi?giftNo=`+ list[i].refNo + `"></a>
                                     <br><br><a class="giftDetail" onClick='enrollgift(this);'>` +  list[i].giftName + `<br></a>
                                     <span class="price">` +  list[i].giftPrice + `</span>원
                                 </td>

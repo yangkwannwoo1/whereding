@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="REVIEW_NO" property="reviewNo"/>
 		<result column="cs_no" property="csNo"/>
 		<result column="IMG_1" property="img1"/>
-		<result column="IMG_PATH" property="imhPath"/>
+		<result column="IMG_PATH" property="imgPath"/>
 	</resultMap>
 	<resultMap type="Dress" id="dressResult">
 		<result column="D_CODE" property="drCode"/>
@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="REVIEW_NO" property="reviewNo"/>
 		<result column="cs_no" property="csNo"/>
 		<result column="IMG_1" property="img1"/>
-		<result column="IMG_PATH" property="imhPath"/>
+		<result column="IMG_PATH" property="imgPath"/>
 	</resultMap>
 	<resultMap type="Makeup" id="makeupResult">
 		<result column="M_CODE" property="maCode"/>
@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="REVIEW_NO" property="reviewNo"/>
 		<result column="cs_no" property="csNo"/>
 		<result column="IMG_1" property="img1"/>
-		<result column="IMG_PATH" property="imhPath"/>
+		<result column="IMG_PATH" property="imgPath"/>
 	</resultMap>
 	
 

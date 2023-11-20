@@ -436,9 +436,11 @@ const showNotification = () => {
 						</td>
 					</tr>
 					<tr>
-						<td  colspan="3" style="border-bottom: 1px solid #cecece;">
-							<img src="` + list[i].filePath + `" alt="1" style="float: left; margin: 1%; height:120px;">
-							<p style="margin: 1%;">`+ list[i].rvContent + `</p>
+						<td  colspan="3" style="border-bottom: 1px solid #cecece;">`
+					if(list[i].filePath != '/'){
+						value += `<img src="` + list[i].filePath + `" alt="1" style="float: left; margin: 1%; height:120px;">`								
+					}
+					value += `<p style="margin: 1%;">`+ list[i].rvContent + `</p>
 						</td>
 					</tr>`
 					sum += score;
