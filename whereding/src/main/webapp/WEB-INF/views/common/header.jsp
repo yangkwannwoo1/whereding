@@ -508,7 +508,7 @@ font-family: 'Open Sans Condensed', sans-serif;
 						<tbody>
 							<tr>
 								<td rowspan="3" class="pImg_area">
-									<img src="` + list[i].filepath + `">
+									<img src="` + list[i].filePath + `">
 								</td>
 								<td style="padding-left: 10px;">
 									<h5>` + list[i].enterprise + `</h5>						

@@ -744,8 +744,8 @@
                                         </c:forEach>
                                     </span>
 								</p>
-								<a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
-								<input class="cno" type="hidden" value="${ c.code }">
+									<a class="read-more-btn">상세보기 <i class="fas fa-angle-right"></i></a>
+									<input class="cno" type="hidden" value="${ c.code }">
 							</div>
 						</div>
 					</div>
@@ -762,7 +762,11 @@
 
 
 	        		$(".collectionList .single-board").click(function(){
-	        			location.href = 'cDetail.bo?category=${ category }&cno=' + $(this).parent().find(".cno").val();
+	        			if("${loginMember}" == ""){
+	        				alert("로그인 한 회원만 상세정보를 확인 할 수 있습니다.")
+	        			}else{
+	        				location.href = 'cDetail.bo?category=${ category }&cno=' + $(this).parent().find(".cno").val();
+	        			}
 	        		})
 	        	})
 			</script>

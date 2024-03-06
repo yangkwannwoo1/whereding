@@ -29,13 +29,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>회원정보조회</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">회원</li>
-          <li class="breadcrumb-item active">회원정보조회</li>
-        </ol>
-      </nav>
+      <h1>리뷰관리</h1>
     </div><!-- End Page Title -->
 
       <div class="row">

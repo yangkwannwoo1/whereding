@@ -251,7 +251,6 @@ public class MemberController {
 	//소셜회원가입@!#@!#
 	@RequestMapping(value = "socialEnroll.do")
 	public String socialEnroll(String kakaoId, String kakaoNickname, String kakaoEmail, HttpSession session) {
-		System.out.println("여기 되긴되냐?");
 		String id = kakaoId;
 		System.out.println(id);
 		

@@ -85,7 +85,7 @@ import com.kh.whereding.member.model.vo.Member;
 	 
 			    //test용 메일 내용
 			    messageHelper.setFrom("khfinalproject4@gmail.com"); // 보내는사람 이메일 여기선 google 메일서버 사용하는 아이디를 작성하면됨
-			    messageHelper.setTo("skidrow614@naver.com"); // 받는사람 이메일
+			    messageHelper.setTo(email); // 받는사람 이메일
 			    messageHelper.setSubject("웨어딩 임시 비밀번호 입니다." ); // 메일제목
 			    messageHelper.setText("회원님의 임시 비밀번호는 [" + password + "] 입니다.", true); // true는 HTML 형식으로 설정함을 나타냅니다.
 			    //messageHelper.setText("예약하신 회원님은"+ name + last_name + "입니다."+" 연락처는 " + phone + "입니다. 입력한 Email은 " + email + "입니다."); // 메일 내용

@@ -121,7 +121,7 @@
                             <th>전화번호 (-포함)</th>
                             <td colspan="2"><input type="text" class="inp1" name="phone" id="phone" placeholder="032-456-7891" style="width:100%"></td>
                             <th>주소</th>
-                            <td colspan="2"><input type="text" class="inp1" name="address" id="address" placeholder="경기도 성남시 머시동 머시깽이구 123-2 2층" style="width:100%"></td>
+                            <td colspan="2"><input type="text" class="inp1" name="address" id="address" placeholder="경기도 성남시 디지털로22 2층" style="width:100%"></td>
                         </tr>
                         <tr>
                             <th>예약시간 구분</th>

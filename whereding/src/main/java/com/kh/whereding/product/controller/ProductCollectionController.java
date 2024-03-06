@@ -38,7 +38,7 @@ public class ProductCollectionController {
 	public ModelAndView selectStudioList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, String category, ModelAndView mv) {
 		
 		int listCount = cService.selectListCount(category);
-		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 6);
+		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 3);
 		
 		ArrayList<ProductCollection> clist = cService.selectCollectionList(pi, category);
 		

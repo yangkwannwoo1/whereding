@@ -261,17 +261,6 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fas fa-laptop" data-tab="tab-2"></i> my 혜택
-                                </i>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="#" style="color: white;">쿠폰 보유내역</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
                             <a href="myPage.me">
                                 <i class="fas fa-utensils" data-tab="tab-4"></i> my정보
                                 </i>

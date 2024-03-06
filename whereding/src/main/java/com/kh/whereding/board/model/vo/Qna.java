@@ -14,7 +14,7 @@ import lombok.ToString;
 public class Qna {
 
 	private int qnaNo;
-	private int usrNo;
+	private int userNo;
 	private String qnaTitle;
 	private String qnaContent;
 	private String qnaAnswer;

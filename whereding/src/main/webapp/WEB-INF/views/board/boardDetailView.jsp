@@ -210,8 +210,6 @@
                 <li><a href="notice.bo" >공지사항</a></li>
                 <li><a href="qna.bo">Q&A</a></li>
                 <li><a href="collabo.bo">협업업체 신청</a></li>
-                <li><a href="#">환불규정</a></li>
-                <li><a href="#" >배송규정</a></li>
             </ul>
         </div>
     </div>

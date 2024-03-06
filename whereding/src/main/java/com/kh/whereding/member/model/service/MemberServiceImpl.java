@@ -205,7 +205,6 @@ public class MemberServiceImpl implements MemberService{
 	          "https://openapi.naver.com/v1/nid/me", HttpMethod.GET, entity, JsonNode.class);
 	      
 	      JsonNode userInfo = userInfoResponseEntity.getBody();
-	      System.out.println(userInfo+"리스폰스asdasdasd");
 	      Map<String, Object> responseMap = new HashMap();
 	      responseMap.put("accessToken", accessToken);
 	      responseMap.put("userInfo", userInfo);

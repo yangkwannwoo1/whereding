@@ -41,7 +41,7 @@ public class HallController {
 			
 			int listCount = HService.selectListCount();
 
-			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 6);
+			PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 3);
 			
 			ArrayList<Hall> list = HService.selectList(pi);
 			System.out.println(list);

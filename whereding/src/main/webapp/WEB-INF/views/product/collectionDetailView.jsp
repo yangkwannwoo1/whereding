@@ -327,8 +327,12 @@
 							</c:forEach>
 						</ul>
 					</div>
-					<button class="btn btn-warning float-right" style="margin-right: 2%" onclick="deleteCollection();"><i class="fas fa-list"> 목록으로</i></button>
-					
+					<button class="btn btn-warning float-right" style="margin-right: 2%" onclick="listCollection();"><i class="fas fa-list"> 목록으로</i></button>
+					<script>
+						function listCollection(){
+							location.href = "cList.bo?category=${ c.category }";
+						}
+					</script>
 
 				</td>
 

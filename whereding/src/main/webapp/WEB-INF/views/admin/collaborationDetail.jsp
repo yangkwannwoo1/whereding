@@ -64,7 +64,7 @@
                     <div class="row mb-3">
                       <label for="birthday" class="col-md-4 col-lg-3 col-form-label">신청내용</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea cols="92" rows="20" style="resize:none;">${coll.cpContent}</textarea>
+                        <textarea cols="71" rows="20" style="resize:none;">${coll.cpContent}</textarea>
                       </div>
                     </div>
 

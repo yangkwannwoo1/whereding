@@ -32,12 +32,17 @@
 				</a>
 			</li>
 			<hr>
-			<li>
+			<li class="li_top quick_qna">
 				<a href="#">
 					<i class="fa fa-pencil-alt" aria-hidden="true"></i><br>
 					<span>Q/A</span>
 				</a>
 			</li>
+			<script>
+				$(".li_top.quick_qna").click(function(){
+					location.href="qna.bo"
+				})
+			</script>
 			<hr>
 			<li class="quick_kakao">
 				<a href="#" target="_blank">

@@ -70,6 +70,7 @@
 		  from qna q
 		  join member using(user_no)
 		 where q.STATUS = 'Y'
+		 order by qna_no desc
   	</select>
   	<select id="selectCollaboList" resultMap="collaboResult">
   		select 

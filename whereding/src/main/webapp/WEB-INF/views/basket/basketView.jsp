@@ -200,9 +200,7 @@
                                         <td colspan="6">
                                             <input class="all_Check" type="checkbox"> 
                                             <button type="button" class="cart__list__optionbtn" onclick="deleteBasket();">선택상품 삭제</button>
-                                            <button type="button" class="cart__list__optionbtn" onclick="cplist();" data-toggle="modal" data-target="#myModal">
-                                                쿠폰
-                                            </button>
+                   
                                             <span class="float-right total_price" style="margin-right: 3%;">총금액 : 0원</span>
                                             <span class="float-right reservation_Total" style="margin-right: 3%;">0개 선택</span>
                                         </td>
